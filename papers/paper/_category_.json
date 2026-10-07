@@ -1,0 +1,10 @@
+{
+  "label": "논문리뷰",
+  "position": 2,
+  "collapsed": false,
+  "link": {
+    "type": "generated-index",
+    "slug": "/paper",
+    "description": "논문 내용과 리뷰."
+  }
+}
