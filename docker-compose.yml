@@ -1,0 +1,10 @@
+services:
+  site:
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./papers:/app/papers
+    environment:
+      CHOKIDAR_USEPOLLING: "true"
+      WATCHPACK_POLLING: "true"
