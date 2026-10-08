@@ -1,6 +1,21 @@
 # Dustin's Papers
 
-로컬 사이트: `docker compose up --build` 후 http://localhost:3000
+주소는 http://localhost:3000
+
+## 실행
+
+```bash
+npm ci
+npm start
+```
+
+## 도커
+
+```bash
+docker compose up --build -d
+```
+
+글(`papers/`)만 고치면 다시 빌드하지 않아도 된다. `src/`나 설정을 고치면 위 명령을 다시 실행한다.
 
 `main`에 푸시하면 GitHub Actions가 GitHub Pages로 배포한다.
 
