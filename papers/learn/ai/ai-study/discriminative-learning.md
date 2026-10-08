@@ -1,6 +1,6 @@
 ---
 title: 판별 학습 (discriminative learning)
-sidebar_position: 5
+sidebar_position: 8
 ---
 
 그림 하나가 3인지 8인지를 맞힐 때, 모델을 만드는 질문이 두 가지다.

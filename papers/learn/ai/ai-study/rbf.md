@@ -1,6 +1,6 @@
 ---
 title: RBF (radial basis function)
-sidebar_position: 10
+sidebar_position: 22
 ---
 
 분류기의 마지막 층은 “이 입력이 클래스 \(i\)와 얼마나 먼가”를 수로 내야 한다. 한 가지 방법은 앞 층이 만든 벡터를, 클래스마다 미리 잡아 둔 기준 벡터와 비교하는 것이다. 기준에 가까우면 그 클래스일 가능성이 크고, 멀면 벌점이 크다. 방사 기저 함수(radial basis function, RBF)의 출력은 그 거리의 제곱합이다.

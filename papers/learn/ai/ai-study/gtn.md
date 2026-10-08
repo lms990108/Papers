@@ -1,6 +1,6 @@
 ---
 title: 그래프 변환 신경망 (graph transformer network, GTN)
-sidebar_position: 18
+sidebar_position: 30
 ---
 
 여기의 GTN은 어텐션 트랜스포머가 아니다.

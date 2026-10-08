@@ -1,6 +1,6 @@
 ---
 title: 용량과 정칙화 (capacity, regularization)
-sidebar_position: 4
+sidebar_position: 7
 ---
 
 [경사하강법](./gradient-descent.md)이 줄이는 것은 학습에 넣은 쌍의 손실이다. 그 손실이 0에 가깝다고 해서, 넣지 않은 그림에서도 맞힌다는 뜻은 아니다. 파라미터를 충분히 많이 주면, 학습 쌍의 답을 그냥 외우는 함수도 만들 수 있다. 그 함수는 학습 손실이 작지만, 새 그림의 픽셀이 조금 다르면 답이 없다.

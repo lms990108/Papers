@@ -1,6 +1,6 @@
 ---
 title: MNIST
-sidebar_position: 11
+sidebar_position: 23
 ---
 
 방법 둘의 오류를 나란히 적으면, 어느 쪽이 나은지처럼 보인다. 시험에 쓴 그림이 다르면 그 비교는 성립하지 않는다. 한쪽은 쉬운 글씨만 맞고, 다른 쪽은 어려운 글씨에서 틀렸을 수 있다. 같은 학습 집합과 같은 시험 집합이 있어야, 오류 차이를 방법의 차이로 읽을 수 있다. MNIST는 그 공통 집합으로 만든 Modified NIST(Modified National Institute of Standards and Technology)다.
