@@ -1,6 +1,6 @@
 ---
 title: TF-IDF (term frequency–inverse document frequency)
-sidebar_position: 23
+sidebar_position: 24
 ---
 
 [단어 주머니](./bag-of-words.md)는 한 문장 안의 횟수다. 문서가 여러 개면, 모든 문서에 나오는 단어는 문서를 가르지 못한다. `날씨`만 모은 글에서 `날씨`의 횟수는 크고, 긍정과 부정의 차이는 `좋다`와 `나쁘다`에 있다. 한 문서 안에서의 횟수는 키우고, 많은 문서에 나오는 단어는 깎는 가중치가 TF-IDF다. term frequency, inverse document frequency와 같은 말이다.

@@ -1,6 +1,6 @@
 ---
 title: 장단기 메모리 (LSTM)
-sidebar_position: 31
+sidebar_position: 32
 ---
 
 [순환 신경망](./rnn.md)의 상태는 매 자리 가중치가 곱해진 뒤 \(\tanh\)를 지난다. 긴 문장에서 앞 단어의 수가 사라진다. 장단기 메모리는 상태 옆에 통로를 하나 더 두고, 그 통로에서는 곱하는 값이 0과 1 사이의 문만 연다. Long Short-Term Memory, LSTM과 같은 말이다.

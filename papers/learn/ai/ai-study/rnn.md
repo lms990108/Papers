@@ -1,6 +1,6 @@
 ---
 title: 순환 신경망 (recurrent neural network, RNN)
-sidebar_position: 30
+sidebar_position: 31
 ---
 
 [엔그램](./ngram.md)은 앞의 정해진 개수만 본다. 문장이 길어져도 상태의 크기를 일정하게 두고, 그 상태를 단어마다 갱신할 수 있다. 직전 상태와 지금 토큰을 받아 다음 상태를 만드는 망을 순환 신경망이라고 한다. recurrent neural network, RNN과 같은 말이다.
@@ -103,6 +103,29 @@ for name, x in xs.items():
 순환은 그림으로 그리면 자기 자신으로 돌아오는 화살표 하나지만, 문장 길이가 정해지면 같은 상자를 \(T\)번 이어 붙인 것과 같다. 이것을 펼친다(unroll)고 한다. 펼친 망은 깊이가 \(T\)인 일반 망이고, 모든 상자가 같은 \(W_h\), \(W_x\)를 쓴다는 점만 다르다([가중치 공유](./weight-sharing.md)). 그러므로 학습은 [역전파](./backpropagation.md)를 그대로 쓰되, 같은 가중치가 여러 자리에서 쓰였으므로 각 자리에서 나온 기울기를 모두 더한다. 펼친 망에 역전파를 하는 이 절차를 시간 펼침 역전파라고 한다. backpropagation through time, BPTT와 같은 말이다.
 
 가장 작은 경우로 따라가 보자. 위 예의 첫 칸만 떼어 내 상태를 수 하나로 두면 \(h_t = \tanh(w\,h_{t-1} + x_t)\)이고, \(w = 0.5\), 입력은 오늘, 날씨, 좋다의 첫 칸인 \(1,\ 0,\ 1\)이다. 상태는 \(h_1 \approx 0.762\), \(h_2 \approx 0.363\), \(h_3 \approx 0.828\)이다. 손실을 마지막 상태 자체로 두면 \(\partial L / \partial h_3 = 1\)이다.
+
+<figure>
+
+<svg viewBox="0 0 680 300" role="img" aria-label="순환 신경망 상태의 첫 칸. 오늘 0.762, 날씨 0.363, 좋다 0.828." style="width:100%;max-width:680px;height:auto;display:block">
+<line x1="64" y1="28" x2="64" y2="252" stroke="currentColor" stroke-opacity="0.45"/>
+<line x1="64" y1="252" x2="620" y2="252" stroke="currentColor" stroke-opacity="0.45"/>
+
+<polyline points="64.0,81.3 342.0,170.7 620.0,66.5" fill="none" stroke="#c2410c" stroke-width="2"/>
+<circle cx="64.0" cy="81.3" r="4.5" fill="#c2410c"/>
+<circle cx="342.0" cy="170.7" r="4.5" fill="#c2410c"/>
+<circle cx="620.0" cy="66.5" r="4.5" fill="#c2410c"/>
+<g fill="currentColor" font-size="13">
+<text x="620" y="280">토큰 순서</text>
+<text x="8" y="20">상태 첫 칸</text>
+<text x="64.0" y="71.3" text-anchor="start">오늘 0.762</text>
+<text x="342.0" y="160.7" text-anchor="middle">날씨 0.363</text>
+<text x="620.0" y="56.5" text-anchor="end">좋다 0.828</text>
+</g>
+</svg>
+
+<figcaption>오늘의 0.762는 날씨에서 0.363으로 줄었다가, 좋다에서 0.828 안에 섞인다.</figcaption>
+
+</figure>
 
 \(a_t = w\,h_{t-1} + x_t\)라고 하면 \(\tanh\)의 기울기는 \(1 - h_t^2\)이므로, 자리 \(t\)에서 앞으로 한 칸 거슬러 갈 때는 두 수가 곱해진다.
 

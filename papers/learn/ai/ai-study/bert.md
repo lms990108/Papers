@@ -1,6 +1,6 @@
 ---
 title: 버트 (BERT)
-sidebar_position: 35
+sidebar_position: 36
 ---
 
 [다음 토큰](./next-token.md)은 각 자리가 자기보다 앞만 보고, 다음에 있던 단어를 맞힌다. 버트는 가운데를 가리고, 앞과 뒤를 모두 보고 그 칸을 맞힌다. Bidirectional Encoder Representations from Transformers, BERT와 같은 말이다. 블록은 [트랜스포머](./transformer.md)의 앞뒤를 다 보는 쪽이다. 문장을 이어 쓰는 모델처럼 뒤를 가리지 않는다.

@@ -1,6 +1,6 @@
 ---
 title: 합성곱 신경망 (convolutional neural network, CNN)
-sidebar_position: 37
+sidebar_position: 38
 ---
 
 완전 연결인 첫 [층](./layer.md)은 픽셀을 번호 매긴 수들의 목록으로 본다. 1번 픽셀과 400번 픽셀이 그림에서 맞붙어 있는지는 구조에 없다. 픽셀을 고정된 방식으로 뒤섞어 넣어도, 망은 그 차이를 모른다. 학습 결과는 같다.

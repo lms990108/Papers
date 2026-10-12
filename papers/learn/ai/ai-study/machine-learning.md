@@ -99,6 +99,32 @@ s = w_1 x_1 + w_2 x_2
 
 “연기가 좋다”가 두 번인 리뷰는 \((2,\ 0)\)이라 점수가 2다. 1일 때와 같이 0보다 커서 긍정이다. 횟수가 커져도 칸은 그대로고, 점수의 크기만 커진다. 그 크기를 0과 1 사이의 비율로 누르는 계산은 [로지스틱 회귀](./logistic-regression.md)다.
 
+<figure>
+
+<svg viewBox="0 0 680 280" role="img" aria-label="리뷰 네 개의 점수. 1, -1, 0, 2." style="width:100%;max-width:680px;height:auto;display:block">
+<line x1="56" y1="36" x2="56" y2="210" stroke="currentColor" stroke-opacity="0.45"/>
+<line x1="56" y1="152.0" x2="640" y2="152.0" stroke="currentColor" stroke-opacity="0.45"/>
+<rect x="105.0" y="94.0" width="48.0" height="58.0" fill="#c2410c"/>
+<rect x="251.0" y="152.0" width="48.0" height="58.0" fill="#c2410c"/>
+<rect x="397.0" y="152.0" width="48.0" height="1.5" fill="#c2410c"/>
+<rect x="543.0" y="36.0" width="48.0" height="116.0" fill="#c2410c"/>
+<g fill="currentColor" font-size="13">
+<text x="8" y="22">점수</text>
+<text x="129.0" y="86.0" text-anchor="middle">1</text>
+<text x="129.0" y="232" text-anchor="middle">연기가 좋다</text>
+<text x="275.0" y="140" text-anchor="middle">-1</text>
+<text x="275.0" y="232" text-anchor="middle">결말이 나쁘다</text>
+<text x="421.0" y="144.0" text-anchor="middle">0</text>
+<text x="421.0" y="232" text-anchor="middle">나쁘지 않다</text>
+<text x="567.0" y="28.0" text-anchor="middle">2</text>
+<text x="567.0" y="232" text-anchor="middle">좋다 두 번</text>
+</g>
+</svg>
+
+<figcaption>0보다 크면 긍정이다. 나쁘지 않다는 0이라 긍정이 아니고, 좋다가 두 번이면 2다.</figcaption>
+
+</figure>
+
 가중치를 \((1,\ -1)\)이 아니라 \((0,\ 0)\)으로 두면 어떤 리뷰도 점수가 0이다. 빈칸을 채우지 않으면 쌍을 줘도 함수는 답을 구분하지 않는다. 채운 뒤의 1과 -1이, 이 두 쌍에 대해서는 긍정과 부정을 가른다.
 
 ## 코드로 확인

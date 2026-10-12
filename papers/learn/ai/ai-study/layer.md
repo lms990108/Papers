@@ -1,6 +1,6 @@
 ---
 title: 층 (layer)
-sidebar_position: 8
+sidebar_position: 9
 ---
 
 [신경망](./neural-network.md)은 수 목록을 받아 수 목록을 내는 기계다. 그 기계를 짧은 단계로 나눈 것 하나가 층이다. layer와 같은 말이다. 어느 칸이 어느 칸을 보는지는 [신경망의 구조](./structure.md)가 정한다. 손으로 쓴 7을, 픽셀에서 곧바로 “7이다”가 나오는 식 하나로 적기는 어렵다. 그래서 단계를 나눈다.

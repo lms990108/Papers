@@ -1,6 +1,6 @@
 ---
 title: 언어 모델 (language model)
-sidebar_position: 26
+sidebar_position: 27
 ---
 
 문장 “오늘 날씨 좋다”가 얼마나 그럴듯한지를 하나의 비율로 두고 싶다. 그 비율을 내는 모델을 언어 모델이라고 한다. language model과 같은 말이다. [엔그램](./ngram.md)은 횟수로 이 비율을 만들고, [다음 토큰](./next-token.md)은 신경망의 점수로 만든다. 둘 다 아래의 곱으로 문장 비율을 만든다.
@@ -78,6 +78,29 @@ P(w_1, \dots, w_T) = \prod_{t=1}^{T} P(w_t \mid w_1, \dots, w_{t-1})
 ## 다른 문장
 
 같은 세 줄에서 “오늘 날씨 나쁘다”는 앞의 두 비율이 같고, 마지막만 \(1/3\)이다. 곱은 \(1/3\)이다. 단어 세 개의 퍼플렉서티는 \(3^{1/3} \approx 1.442\)다. “오늘 날씨 좋다”의 1.145보다 크다. 정답 비율 \(1/3\)이 \(2/3\)보다 작아서다.
+
+<figure>
+
+<svg viewBox="0 0 680 280" role="img" aria-label="세 문장 자리의 퍼플렉서티. 좋다 1.145, 나쁘다 1.442, 네 단어 균등 4." style="width:100%;max-width:680px;height:auto;display:block">
+<line x1="56" y1="36" x2="56" y2="210" stroke="currentColor" stroke-opacity="0.45"/>
+<line x1="56" y1="210.0" x2="640" y2="210.0" stroke="currentColor" stroke-opacity="0.45"/>
+<rect x="129.3" y="160.2" width="48.0" height="49.8" fill="#c2410c"/>
+<rect x="324.0" y="147.3" width="48.0" height="62.7" fill="#c2410c"/>
+<rect x="518.7" y="36.0" width="48.0" height="174.0" fill="#c2410c"/>
+<g fill="currentColor" font-size="13">
+<text x="8" y="22">퍼플렉서티</text>
+<text x="153.3" y="152.2" text-anchor="middle">1.145</text>
+<text x="153.3" y="232" text-anchor="middle">좋다</text>
+<text x="348.0" y="139.3" text-anchor="middle">1.442</text>
+<text x="348.0" y="232" text-anchor="middle">나쁘다</text>
+<text x="542.7" y="28.0" text-anchor="middle">4</text>
+<text x="542.7" y="232" text-anchor="middle">균등</text>
+</g>
+</svg>
+
+<figcaption>오늘 날씨 좋다는 1.145, 오늘 날씨 나쁘다는 1.442다. 네 단어를 균등하게 고르면 4다.</figcaption>
+
+</figure>
 
 마지막 비율이 0이면 곱도 0이다. \(-\log 0\)은 정의되지 않고, 퍼플렉서티로 넘기면 값이 한없이 커진다. [엔그램](./ngram.md)이 횟수에 1을 더하면 `오늘` 다음 날씨는 \((3+1)/(3+4) = 4/7\)이고, `날씨` 다음 좋다는 \(3/7\), 나쁘다는 \(2/7\)가 된다. 스무딩한 뒤 “오늘 날씨 나쁘다”의 곱은 \(1 \times \frac{4}{7} \times \frac{2}{7} = \frac{8}{49}\)이다. `날씨` 다음에 한 번도 못 본 오늘이 오는 “오늘 날씨 오늘”도 \(1 \times \frac{4}{7} \times \frac{1}{7} = \frac{4}{49}\)로 0이 아니다. `날씨` 다음 네 단어의 \(3/7 + 2/7 + 1/7 + 1/7\)은 1이라, 어느 단어가 오든 그 비율은 0과 1 사이이고 전부 더하면 1이 된다. 그래야 모델이 다음 단어에 대한 비율의 분포가 된다.
 

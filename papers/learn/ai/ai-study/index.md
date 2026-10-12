@@ -12,6 +12,7 @@ title: AI Study
 
 - [머신러닝 (machine learning)](./machine-learning.md)
 - [지도 학습 (supervised learning)](./supervised-learning.md)
+- [회귀 (regression)](./regression.md)
 - [선형 회귀 (linear regression)](./linear-regression.md)
 - [로지스틱 회귀 (logistic regression)](./logistic-regression.md)
 - [소프트맥스 (softmax)](./softmax.md)

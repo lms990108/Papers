@@ -1,6 +1,6 @@
 ---
 title: 소프트맥스 (softmax)
-sidebar_position: 5
+sidebar_position: 6
 ---
 
 점수 1과 0이 있으면, 1이 0보다 크다는 것까지는 알 수 있다. 학습 손실은 그 순서가 아니라 비율을 쓴다. 칸마다 0 이상이고, 전부 더하면 1이어야 한다. 점수 목록을 그런 비율로 바꾸는 함수가 소프트맥스다. softmax와 같은 말이다.
@@ -101,6 +101,42 @@ p_i = \frac{e^{s_i}}{\sum_j e^{s_j}}
 | 2 | \((1,\ 0.5,\ 0)\) | 0.506, 0.307, 0.186 |
 
 \(T\)가 작으면 큰 칸에 몰리고, 크면 칸 사이가 평평해진다. 다음 단어를 뽑을 때 \(T\)를 낮추면 가장 높은 단어에 가깝게 답하고, 높이면 여러 단어가 뽑힌다. 이름의 맥스는 가장 큰 칸 하나만 1로 만드는 함수가 아니라, 그 함수를 부드럽게 만든 꼴이라는 뜻이다.
+
+<figure>
+
+<svg viewBox="0 0 680 280" role="img" aria-label="온도 0.5, 1, 2에서 세 칸의 비율. 온도가 낮으면 큰 칸에 몰린다." style="width:100%;max-width:680px;height:auto;display:block">
+<line x1="70" y1="36" x2="70" y2="210" stroke="currentColor" stroke-opacity="0.45"/>
+<line x1="70" y1="210" x2="640" y2="210" stroke="currentColor" stroke-opacity="0.45"/>
+
+<rect x="120" y="59.1" width="28" height="150.9" fill="#c2410c" fill-opacity="1"/>
+<rect x="160" y="189.6" width="28" height="20.4" fill="currentColor" fill-opacity="0.45"/>
+<rect x="200" y="207.2" width="28" height="2.8" fill="currentColor" fill-opacity="0.45"/>
+<rect x="300" y="94.3" width="28" height="115.7" fill="#c2410c" fill-opacity="1"/>
+<rect x="340" y="167.4" width="28" height="42.6" fill="currentColor" fill-opacity="0.45"/>
+<rect x="380" y="194.3" width="28" height="15.7" fill="currentColor" fill-opacity="0.45"/>
+<rect x="480" y="122.0" width="28" height="88.0" fill="#c2410c" fill-opacity="1"/>
+<rect x="520" y="156.6" width="28" height="53.4" fill="currentColor" fill-opacity="0.45"/>
+<rect x="560" y="177.6" width="28" height="32.4" fill="currentColor" fill-opacity="0.45"/>
+<g fill="currentColor" font-size="12">
+<text x="8" y="22">비율</text>
+<text x="134" y="53.1" text-anchor="middle">0.867</text>
+<text x="174" y="183.6" text-anchor="middle">0.117</text>
+<text x="214" y="201.2" text-anchor="middle">0.016</text>
+<text x="168" y="232" text-anchor="middle">T=0.5</text>
+<text x="314" y="88.3" text-anchor="middle">0.665</text>
+<text x="354" y="161.4" text-anchor="middle">0.245</text>
+<text x="394" y="188.3" text-anchor="middle">0.090</text>
+<text x="348" y="232" text-anchor="middle">T=1</text>
+<text x="494" y="116.0" text-anchor="middle">0.506</text>
+<text x="534" y="150.6" text-anchor="middle">0.307</text>
+<text x="574" y="171.6" text-anchor="middle">0.186</text>
+<text x="528" y="232" text-anchor="middle">T=2</text>
+</g>
+</svg>
+
+<figcaption>막대 셋이 한 온도다. 주황이 가장 큰 칸이다. 온도가 0.5에서 2로 오르면 0.867이 0.506으로 줄고 나머지 칸이 커진다.</figcaption>
+
+</figure>
 
 ## 손실과 기울기
 

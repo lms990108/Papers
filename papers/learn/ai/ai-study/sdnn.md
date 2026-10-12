@@ -1,6 +1,6 @@
 ---
 title: 공간 이동 신경망 (space displacement neural network, SDNN)
-sidebar_position: 50
+sidebar_position: 51
 ---
 
 [휴리스틱 과분할](./over-segmentation.md)은 자를 후보를 여전히 사람이 만든다. 그 후보에 맞는 경계가 없으면, 뒤의 점수 계산은 그 경계를 만들어 내지 못한다. 다른 방법은 절단 후보를 두지 않고, 문자열 영상 위를 인식기가 한 칸씩 지나가게 하는 것이다. 가운데에 글자가 있으면 그 클래스를 내고, 없으면 공백이나 거부를 낸다. 가능한 자리를 다 보므로, 사람이 만든 자르는 규칙이 필요 없다.

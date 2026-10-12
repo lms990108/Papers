@@ -7,3 +7,5 @@ Yann LeCun, Léon Bottou, Yoshua Bengio, Patrick Haffner. *Proceedings of the IE
 [원문 PDF](http://yann.lecun.com/exdb/publis/pdf/lecun-98.pdf)
 
 [내용](../content/lecun-1998.md)
+
+ㄹ ㅣ ㅂ ㅠ ㅇ ㅓ ㄴ ㅈ ㅔ ㅎ ㅏ ㅈ ㅣ ㅇ

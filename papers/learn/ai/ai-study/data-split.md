@@ -1,6 +1,6 @@
 ---
 title: 데이터 분리 (train, validation, test)
-sidebar_position: 15
+sidebar_position: 16
 ---
 
 리뷰가 열 개 있고, 각각에 긍정 또는 부정이 붙어 있다. 열 개 전부로 빈칸을 채운 뒤 그 열 개에 다시 점수를 매기면, 함수가 문장을 외워도 맞힌 것처럼 보인다. “연기가 좋다”에만 맞게 가중치를 키우면 그 문장은 맞히고, 학습에 없는 “대사가 좋다”는 틀린다. 학습이 보지 않은 리뷰가 있어야, 새 문장에서 얼마나 틀리는지 잴 수 있다.
@@ -114,6 +114,29 @@ for p, n in [(0.5, 2), (0.5, 10), (0.01, 100), (0.01, 10000), (0.05, 10000)]:
 ## 학습 오류가 0일 때
 
 여섯 문장을 모두 맞히면 학습 오류는 0이다. 그 수는 가중치를 움직인 문장에서 잰 것이라, 새 문장에서의 오류가 아니다. 검증 둘이 둘 다 틀리면 검증 오류는 1이다. 학습 0과 검증 1이 같이 나오면, 빈칸이 여섯 문장에 붙어 검증을 놓친 것이다. 이때 보고할 수는 학습 0이 아니라 검증 1 쪽이다.
+
+<figure>
+
+<svg viewBox="0 0 680 280" role="img" aria-label="학습 오류 0, 검증 오류 1, 하나만 맞히면 0.5." style="width:100%;max-width:680px;height:auto;display:block">
+<line x1="56" y1="36" x2="56" y2="210" stroke="currentColor" stroke-opacity="0.45"/>
+<line x1="56" y1="210.0" x2="640" y2="210.0" stroke="currentColor" stroke-opacity="0.45"/>
+<rect x="129.3" y="210.0" width="48.0" height="1.5" fill="#c2410c"/>
+<rect x="324.0" y="36.0" width="48.0" height="174.0" fill="#c2410c"/>
+<rect x="518.7" y="123.0" width="48.0" height="87.0" fill="#c2410c"/>
+<g fill="currentColor" font-size="13">
+<text x="8" y="22">오류</text>
+<text x="153.3" y="202.0" text-anchor="middle">0</text>
+<text x="153.3" y="232" text-anchor="middle">학습 6</text>
+<text x="348.0" y="28.0" text-anchor="middle">1</text>
+<text x="348.0" y="232" text-anchor="middle">검증, 둘 다 틀림</text>
+<text x="542.7" y="115.0" text-anchor="middle">0.5</text>
+<text x="542.7" y="232" text-anchor="middle">검증, 하나만</text>
+</g>
+</svg>
+
+<figcaption>여섯을 모두 맞혀도 학습 오류 0은 새 문장의 오류가 아니다. 검증 둘이 둘 다 틀리면 오류는 1이다.</figcaption>
+
+</figure>
 
 검증에서 하나만 맞히면 오류는 0.5다. 학습 오류가 0인 가중치와, 학습 오류가 \(1/6\)인 이전 가중치 가운데 검증이 더 낮은 쪽을 남긴다. 시험 둘은 그 선택에 들어가지 않는다. 선택을 끝낸 뒤에 시험 오류를 적는다. 시험이 0이어도 문장이 두 개라, 리뷰 하나의 맞고 틀림이 0.5를 움직인다. 10,000장에서 100장을 틀린 1%와 같은 안정은 이 둘에는 없다.
 

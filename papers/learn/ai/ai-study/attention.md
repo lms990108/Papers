@@ -1,6 +1,6 @@
 ---
 title: 어텐션 (attention)
-sidebar_position: 32
+sidebar_position: 33
 ---
 
 [그래프 변환 신경망](./gtn.md)은 그래프를 받아 그래프를 내는 모듈이다. 어텐션은 그 상자와 다른 계산이다. 토큰마다 있는 수 목록이, 다른 토큰의 목록을 얼마만큼 섞어 읽을지를 정한다. attention과 같은 말이다.

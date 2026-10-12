@@ -1,6 +1,6 @@
 ---
 title: 개체명 인식 (named entity recognition)
-sidebar_position: 36
+sidebar_position: 37
 ---
 
 [자연어 처리](./nlp.md)에서 단어마다 레이블을 붙이는 일 중, 사람·장소·기관처럼 이름이 가리키는 대상을 찾는 것을 개체명 인식이라고 한다. named entity recognition, NER과 같은 말이다. 이 레이블을 표지라고 한다. 문장 전체의 긍정·부정과 달리 출력이 토큰 수만큼 있다.

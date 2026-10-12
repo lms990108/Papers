@@ -1,6 +1,6 @@
 ---
 title: 기울기 소실 (vanishing gradient)
-sidebar_position: 13
+sidebar_position: 14
 ---
 
 [역전파](./backpropagation.md)는 출력의 기울기를 앞 층으로 곱해 온다. 층마다 1보다 작은 수가 곱해지면, 앞 층의 기울기는 층 수만큼 작아진다. 앞 가중치가 거의 움직이지 않는 일을 기울기 소실이라고 한다. vanishing gradient와 같은 말이다. 1보다 큰 수가 반복해서 곱해지면 기울기가 커져 갱신이 뛴다. 이것을 기울기 폭주라고 한다. exploding gradient와 같은 말이다.
@@ -75,6 +75,31 @@ for factor in [0.25, 0.5, 1.0, 2.0]:
 </svg>
 
 <figcaption>왼쪽이 출력 쪽 기울기 1이다. 앞 층으로 갈수록 0.25가 곱해진다.</figcaption>
+
+</figure>
+
+<figure>
+
+<svg viewBox="0 0 680 300" role="img" aria-label="기울기가 층마다 0.25배씩 줄어드는 곡선." style="width:100%;max-width:680px;height:auto;display:block">
+<line x1="64" y1="28" x2="64" y2="252" stroke="currentColor" stroke-opacity="0.45"/>
+<line x1="64" y1="252" x2="620" y2="252" stroke="currentColor" stroke-opacity="0.45"/>
+
+<polyline points="64.0,38.7 203.0,198.7 342.0,238.7 481.0,248.7 620.0,251.2" fill="none" stroke="#c2410c" stroke-width="2"/>
+<circle cx="64.0" cy="38.7" r="4.5" fill="#c2410c"/>
+<circle cx="203.0" cy="198.7" r="4.5" fill="#c2410c"/>
+<circle cx="481.0" cy="248.7" r="4.5" fill="#c2410c"/>
+<circle cx="620.0" cy="251.2" r="4.5" fill="#c2410c"/>
+<g fill="currentColor" font-size="13">
+<text x="620" y="280">앞쪽으로 몇 층</text>
+<text x="8" y="20">기울기</text>
+<text x="64.0" y="28.7" text-anchor="start">1</text>
+<text x="203.0" y="188.7" text-anchor="start">0.25</text>
+<text x="481.0" y="238.7" text-anchor="middle">0.0156</text>
+<text x="620.0" y="241.2" text-anchor="end">0.0039</text>
+</g>
+</svg>
+
+<figcaption>출력 쪽 1이 네 층 뒤에는 0.0039다. 뒤의 점은 가로축에 붙는다.</figcaption>
 
 </figure>
 

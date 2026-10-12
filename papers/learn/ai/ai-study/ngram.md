@@ -1,6 +1,6 @@
 ---
 title: 엔그램 (n-gram)
-sidebar_position: 25
+sidebar_position: 26
 ---
 
 다음 단어의 비율을, 신경망 없이 횟수만으로 만들 수 있다. 바로 앞의 몇 단어만 보고 그 다음에 뭐가 왔는지를 센다. 단어 \(n\)개의 묶음을 엔그램이라고 한다. n-gram과 같은 말이다. 다음 단어의 비율을 곱해 문장 비율을 내는 모델이 [언어 모델](./language-model.md)이다. language model과 같은 말이다. 신경망으로 같은 비율을 내는 학습은 [다음 토큰](./next-token.md)이다.

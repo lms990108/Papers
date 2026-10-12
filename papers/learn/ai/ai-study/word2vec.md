@@ -1,6 +1,6 @@
 ---
 title: 워드투벡터 (Word2Vec)
-sidebar_position: 28
+sidebar_position: 29
 ---
 
 [원-핫 인코딩](./one-hot.md)에서 좋다와 나쁘다의 곱은 0이다. 같이 쓰이는 말과 한 번도 같이 쓰이지 않는 말이 같은 거리다. 워드투벡터는 짧은 목록을 학습해서, 주변 단어가 비슷한 단어의 목록이 가까워지게 만든다. Word2Vec과 같은 말이다. [임베딩](./embedding.md) 표의 행이 이 학습의 결과로 채워질 수 있다.
@@ -56,6 +56,29 @@ for window in (1, 2):
 | 자동차 | 0, 1 | 0 |
 
 오늘과 좋다는 날씨 옆에 있어서 곱이 크고, 이 문장에 없는 자동차는 0이다. [코사인 유사도](./cosine-similarity.md)로 재면 길이 차이를 빼고 같은 순서를 본다. 학습은 곱이 이렇게 되는 쪽으로 목록을 조금 옮긴다. 날씨 \([1,\ 0]\)과 좋다의 곱을 더 키우려면 좋다의 첫 칸을 1에 가깝게 올린다. 자동차의 곱을 줄이려면 자동차 목록을 날씨와 겹치지 않는 쪽으로 옮긴다.
+
+<figure>
+
+<svg viewBox="0 0 680 280" role="img" aria-label="날씨 목록과의 곱. 좋다 0.8, 오늘 0.6, 자동차 0." style="width:100%;max-width:680px;height:auto;display:block">
+<line x1="56" y1="36" x2="56" y2="210" stroke="currentColor" stroke-opacity="0.45"/>
+<line x1="56" y1="210.0" x2="640" y2="210.0" stroke="currentColor" stroke-opacity="0.45"/>
+<rect x="129.3" y="36.0" width="48.0" height="174.0" fill="#c2410c"/>
+<rect x="324.0" y="79.5" width="48.0" height="130.5" fill="#c2410c"/>
+<rect x="518.7" y="210.0" width="48.0" height="1.5" fill="#c2410c"/>
+<g fill="currentColor" font-size="13">
+<text x="8" y="22">날씨와의 곱</text>
+<text x="153.3" y="28.0" text-anchor="middle">0.8</text>
+<text x="153.3" y="232" text-anchor="middle">좋다</text>
+<text x="348.0" y="71.5" text-anchor="middle">0.6</text>
+<text x="348.0" y="232" text-anchor="middle">오늘</text>
+<text x="542.7" y="202.0" text-anchor="middle">0</text>
+<text x="542.7" y="232" text-anchor="middle">자동차</text>
+</g>
+</svg>
+
+<figcaption>같이 나온 좋다와 오늘은 곱이 남아 있고, 이 문장에 없는 자동차는 0이다.</figcaption>
+
+</figure>
 
 <figure>
 

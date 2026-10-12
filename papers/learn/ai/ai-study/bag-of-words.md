@@ -1,6 +1,6 @@
 ---
 title: 단어 주머니 (bag of words)
-sidebar_position: 22
+sidebar_position: 23
 ---
 
 문장 전체에 레이블 하나를 붙이는 일은, 단어가 몇 번 나왔는지만으로 시작할 수 있다. 나온 횟수를 칸에 담은 목록을 단어 주머니라고 한다. bag of words와 같은 말이다. 순서는 목록에 없다. “날씨 좋다”와 “좋다 날씨”는 같은 주머니다.
@@ -74,6 +74,29 @@ s = w \cdot x
 ## 횟수가 두 번
 
 “날씨 나쁘다 날씨”는 날씨가 둘이라 \([0,\ 2,\ 0,\ 1]\)이다. 점수는 \(0.2 \times 2 + 1 \times 1 = 1.4\)다. “날씨 나쁘다”의 1.2보다 0.2가 더 크다. 날씨가 한 번 더 나온 것만으로 불만 점수가 올라간다. 순서를 “나쁘다 날씨 날씨”로 바꿔도 목록이 같아서 점수도 1.4다.
+
+<figure>
+
+<svg viewBox="0 0 680 280" role="img" aria-label="단어 주머니 점수. 날씨 좋다 -0.8, 날씨 나쁘다 1.2, 날씨가 두 번이면 1.4." style="width:100%;max-width:680px;height:auto;display:block">
+<line x1="56" y1="36" x2="56" y2="210" stroke="currentColor" stroke-opacity="0.45"/>
+<line x1="56" y1="146.7" x2="640" y2="146.7" stroke="currentColor" stroke-opacity="0.45"/>
+<rect x="129.3" y="146.7" width="48.0" height="63.3" fill="#c2410c"/>
+<rect x="324.0" y="51.8" width="48.0" height="94.9" fill="#c2410c"/>
+<rect x="518.7" y="36.0" width="48.0" height="110.7" fill="#c2410c"/>
+<g fill="currentColor" font-size="13">
+<text x="8" y="22">불만 점수</text>
+<text x="153.3" y="138" text-anchor="middle">-0.8</text>
+<text x="153.3" y="232" text-anchor="middle">날씨 좋다</text>
+<text x="348.0" y="43.8" text-anchor="middle">1.2</text>
+<text x="348.0" y="232" text-anchor="middle">날씨 나쁘다</text>
+<text x="542.7" y="28.0" text-anchor="middle">1.4</text>
+<text x="542.7" y="232" text-anchor="middle">날씨 두 번</text>
+</g>
+</svg>
+
+<figcaption>0보다 위가 불만 쪽이다. 날씨가 한 번 더 있으면 1.2가 1.4가 된다.</figcaption>
+
+</figure>
 
 1.2는 \(0.2 + 1\)이다. 날씨 횟수와 나쁘다 횟수를 곱한 항은 없다. 두 단어가 같이 있을 때만 점수를 올리고 싶어도, 이 가중치로는 각각을 더할 뿐이다. 날씨만 있는 문장도 0.2가 더해지고, 나쁘다만 있는 문장도 1이 더해진다. 같이 있는 문장만 따로 보려면 그 쌍의 칸을 하나 더 만들어야 한다. 쌍을 칸으로 두는 것이 뒤의 [엔그램](./ngram.md)의 생각이다.
 

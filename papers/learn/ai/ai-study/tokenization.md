@@ -1,6 +1,6 @@
 ---
 title: 토큰화 (tokenization)
-sidebar_position: 18
+sidebar_position: 19
 ---
 
 신경망은 글자 자체를 더하지 못한다. 문장을 먼저 조각으로 나누고, 조각마다 번호를 붙인다. 이 나누기를 토큰화라고 한다. tokenization과 같은 말이다. 조각 하나가 토큰이다. token과 같은 말이다. 번호를 수 목록으로 바꾸는 표는 [임베딩](./embedding.md)이다. 여기서는 어디를 자를지만 본다.

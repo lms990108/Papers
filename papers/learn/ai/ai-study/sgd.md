@@ -1,6 +1,6 @@
 ---
 title: 확률적 경사하강법 (SGD)
-sidebar_position: 11
+sidebar_position: 12
 ---
 
 [경사하강법](./gradient-descent.md)에서 손실은 학습 쌍 전체의 평균이다. 그 평균의 기울기를 구하려면 쌍을 전부 보고 나서야 파라미터를 한 번 고친다. 쌍이 6만 개면, 갱신 한 번에 6만 개의 기울기를 더해야 한다.

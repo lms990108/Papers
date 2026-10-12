@@ -1,6 +1,6 @@
 ---
 title: 패딩 (padding)
-sidebar_position: 29
+sidebar_position: 30
 ---
 
 리뷰 두 개를 한 번에 넣으려면 목록의 길이가 같아야 한다. 곱하는 가중치 줄의 길이가 문장마다 달라지면, 같은 칸이 같은 단어를 가리키지 않는다. “날씨 좋다”는 토큰이 둘이고, “오늘 날씨 정말 좋다”는 넷이다. 짧은 쪽에 빈 칸을 붙여 넷으로 맞춘다. 이 빈 칸을 패딩이라고 한다. padding과 같은 말이다. 빈 칸은 사전 안의 어떤 단어와도 겹치지 않는 별도의 표시로 둔다. 아래 그림과 식에서는 그 표시를 0으로 적는다.
@@ -58,6 +58,26 @@ sidebar_position: 29
 ## 평균에 들어가는 빈 칸
 
 네 칸 중 둘은 0이다. 자리마다 손실을 구해 넷으로 나누면, 나누는 수에 빈 칸이 들어간다. 날씨와 좋다의 손실이 각각 0.3이고, 0을 단어로 맞히지 못해 그 자리 손실이 1이라고 하면 평균은 \((0.3 + 0.3 + 1 + 1) / 4 = 0.65\)다. 0 자리를 빼면 나누는 수가 2이고 평균은 0.3이다. 빈 칸을 넣은 평균은 실제 단어의 기울기를 \(1/4\)로 나누고, 뺀 평균은 \(1/2\)로 나눈다. 같은 0.3이라도 빈 칸을 빼야 그 단어의 가중치가 두 배로 움직인다.
+
+<figure>
+
+<svg viewBox="0 0 680 280" role="img" aria-label="패딩을 평균에 넣으면 손실 0.65, 빼면 0.3." style="width:100%;max-width:680px;height:auto;display:block">
+<line x1="56" y1="36" x2="56" y2="210" stroke="currentColor" stroke-opacity="0.45"/>
+<line x1="56" y1="210.0" x2="640" y2="210.0" stroke="currentColor" stroke-opacity="0.45"/>
+<rect x="178.0" y="36.0" width="48.0" height="174.0" fill="#c2410c"/>
+<rect x="470.0" y="129.7" width="48.0" height="80.3" fill="#c2410c"/>
+<g fill="currentColor" font-size="13">
+<text x="8" y="22">평균 손실</text>
+<text x="202.0" y="28.0" text-anchor="middle">0.65</text>
+<text x="202.0" y="232" text-anchor="middle">빈 칸 포함</text>
+<text x="494.0" y="121.7" text-anchor="middle">0.3</text>
+<text x="494.0" y="232" text-anchor="middle">빈 칸 제외</text>
+</g>
+</svg>
+
+<figcaption>같은 단어 손실 0.3인데, 빈 칸 둘의 손실 1을 평균에 넣으면 0.65가 된다.</figcaption>
+
+</figure>
 
 마스크 \(m_i\)를 쓰면 빈 칸을 뺀 평균은 한 식이다. 자리별 손실을 \(\ell_i\)라고 할 때 다음과 같다.
 

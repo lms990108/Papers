@@ -1,6 +1,6 @@
 ---
 title: 자연어 처리 (natural language processing, NLP)
-sidebar_position: 17
+sidebar_position: 18
 ---
 
 사람이 쓴 글을 입력으로 받고, 그 글에 대한 답을 수로 내는 문제들을 자연어 처리라고 한다. natural language processing, NLP와 같은 말이다. 자연어는 사람이 쓰는 말이다. 빈칸을 예로 채우는 방법은 [머신러닝](./machine-learning.md)이고, 자연어 처리는 그 방법의 이름이 아니라 입력이 글인 문제의 이름이다. 그림의 밝기와 달리, 글은 길이가 문장마다 다르고 칸의 밝기 같은 수가 아니다.
