@@ -2,6 +2,10 @@
 title: 작업공간
 ---
 
+- [42maru 솔루션 이해하기](http://solution-docs.42maru.ai/docs/guide/05-legacy-integration
+)
+
+
 작업을 하면서 배운 것과, 그 과정에서 겪은 일을 적는다. 만든 것의 목록만 남기지 않는다.
 
 - [NAS 파일 게이트웨이](./file-gateway.md)

@@ -281,6 +281,12 @@ export default function Root({children}) {
               <textarea
                 value={question}
                 onChange={(event) => setQuestion(event.target.value)}
+                onKeyDown={(event) => {
+                  if (event.key !== 'Enter' || event.shiftKey || event.nativeEvent.isComposing) return;
+                  event.preventDefault();
+                  if (busyId || (!question.trim() && !quote)) return;
+                  event.currentTarget.form.requestSubmit();
+                }}
                 placeholder="질문"
                 rows={3}
               />
