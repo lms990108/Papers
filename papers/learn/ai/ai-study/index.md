@@ -2,39 +2,60 @@
 title: AI Study
 ---
 
-위에서부터 읽으면 된다. 신경망이 뭔지부터 보고, 비워 둔 수를 어떻게 채우는지 본 다음, 문장을 어떻게 자르고 세는지와 같은 기계로 다음 단어를 맞히는 법을 본다. 숫자 그림에 맞춘 배선과, 길이가 매번 다른 입력을 그래프로 다루는 방법은 그 다음이다. 사람이 고른 답으로 다시 맞추는 계산은 아직 없다.
+위에서부터 읽으면 된다. 예와 정답으로 빈칸을 채우는 일이 머신러닝이고, 그 함수를 곱과 덧셈으로 만든 것이 신경망이다. 입력이 글인 문제는 자연어 처리다. 숫자 그림에 맞춘 배선과, 길이가 매번 다른 입력을 그래프로 다루는 방법은 그 다음이다. 사람이 고른 답으로 다시 맞추는 계산은 아직 없다.
 
-## 1. 신경망
+같은 주제를 코드 실습까지 다루는 공개 교재로 위키독스의 [딥 러닝을 이용한 자연어 처리 입문](https://wikidocs.net/book/2155)이 있다. 여기 글은 그 목차의 개념을 계산 예로 다시 적은 것이고, 교재의 문장을 옮겨 둔 것은 아니다.
 
-넣는 것은 밝기 같은 수 목록이고, 나오는 것도 수 목록이다. 기계를 짧은 단계로 나눈 것이 층이고, 어느 수가 어느 수에 곱해지는지가 구조다.
+## 1. 머신러닝
+
+규칙을 문장으로 적지 않고, 입력과 정답의 쌍으로 함수의 빈칸을 채운다. 정답이 칸이면 분류이고 연속된 수면 회귀다. 직선으로 수를 맞히고, 그 수를 비율로 바꾼 뒤, 부호만 보는 칸 하나에서 막히는 지점까지 본다.
+
+- [머신러닝 (machine learning)](./machine-learning.md)
+- [지도 학습 (supervised learning)](./supervised-learning.md)
+- [선형 회귀 (linear regression)](./linear-regression.md)
+- [로지스틱 회귀 (logistic regression)](./logistic-regression.md)
+- [소프트맥스 (softmax)](./softmax.md)
+- [퍼셉트론 (perceptron)](./perceptron.md)
+
+## 2. 신경망
+
+넣는 것은 수 목록이고, 나오는 것도 수 목록이다. 기계를 짧은 단계로 나눈 것이 층이고, 어느 수가 어느 수에 곱해지는지가 구조다. 빈칸은 오차를 줄이는 기울기로 고친다. 용량을 본 뒤에, 학습에 넣은 리뷰와 시험 리뷰를 가른다.
 
 - [신경망 (neural network)](./neural-network.md)
 - [층 (layer)](./layer.md)
 - [신경망의 구조 (neural network)](./structure.md)
-
-## 2. 빈칸을 채우는 방법
-
-맞히고 싶은 출력과 실제 출력의 차이를 하나의 수로 만들고, 가중치를 고쳐 그 수를 줄인다. 기울기는 그 수가 어느 방향으로 커지는지다. 데이터를 전부 평균하기 전에 갱신할 수도 있고, 학습에 넣은 쌍에서만 좋아지는 문제도 따로 있다.
-
 - [경사하강법 (gradient descent)](./gradient-descent.md)
 - [확률적 경사하강법 (SGD)](./sgd.md)
 - [역전파 (backpropagation)](./backpropagation.md)
+- [기울기 소실 (vanishing gradient)](./gradient-vanishing.md)
 - [용량과 정칙화 (capacity, regularization)](./capacity.md)
+- [데이터 분리 (train, validation, test)](./data-split.md)
 - [판별 학습 (discriminative learning)](./discriminative-learning.md)
 
 ## 3. 자연어
 
-글은 길이가 문장마다 다르고, 밝기 같은 수가 아니다. 문장에 표지를 붙이거나, 다음 단어를 맞히는 일부터 본다. 횟수로 시작한 뒤, 단어를 수 목록으로 바꿔 신경망에 넣는다. 점수는 합이 1인 비율로 바꾸고, 각 단어는 자기보다 앞만 본다. 그 계산을 블록으로 쌓아, 다음에 있던 단어의 비율로 손실을 만든다.
+글은 길이가 문장마다 다르고, 밝기 같은 수가 아니다. 자르고 센 뒤 다음 단어의 비율을 만든다. 단어를 짧은 목록으로 바꾸고 문장 길이를 맞춘 다음, 상태를 한 칸씩 넘긴다. 그 망 다음에, 자리를 한꺼번에 보는 블록이 온다.
 
 - [자연어 처리 (natural language processing, NLP)](./nlp.md)
 - [토큰화 (tokenization)](./tokenization.md)
+- [어간 추출 (stemming, lemmatization)](./stemming.md)
+- [불용어 (stopword)](./stopword.md)
+- [원-핫 인코딩 (one-hot encoding)](./one-hot.md)
 - [단어 주머니 (bag of words)](./bag-of-words.md)
+- [TF-IDF (term frequency–inverse document frequency)](./tf-idf.md)
+- [코사인 유사도 (cosine similarity)](./cosine-similarity.md)
 - [엔그램 (n-gram)](./ngram.md)
-- [소프트맥스 (softmax)](./softmax.md)
+- [언어 모델 (language model)](./language-model.md)
 - [임베딩 (embedding)](./embedding.md)
+- [워드투벡터 (Word2Vec)](./word2vec.md)
+- [패딩 (padding)](./padding.md)
+- [순환 신경망 (recurrent neural network, RNN)](./rnn.md)
+- [장단기 메모리 (LSTM)](./lstm.md)
 - [어텐션 (attention)](./attention.md)
 - [트랜스포머 (transformer)](./transformer.md)
 - [다음 토큰 (next-token prediction)](./next-token.md)
+- [버트 (BERT)](./bert.md)
+- [개체명 인식 (named entity recognition)](./ner.md)
 
 ## 4. 그림의 배선
 
