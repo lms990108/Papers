@@ -24,10 +24,10 @@ const config = {
     },
     preprocessor: ({fileContent}) =>
       fileContent
-        .replaceAll('\\[', '$$')
-        .replaceAll('\\]', '$$')
-        .replaceAll('\\(', '$')
-        .replaceAll('\\)', '$'),
+        .replaceAll('\\[', () => '$$')
+        .replaceAll('\\]', () => '$$')
+        .replaceAll('\\(', () => '$')
+        .replaceAll('\\)', () => '$'),
   },
   presets: [
     [

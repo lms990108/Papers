@@ -2,7 +2,7 @@
 title: AI Study
 ---
 
-위에서부터 읽으면 된다. 예와 정답으로 빈칸을 채우는 일이 머신러닝이고, 그 함수를 곱과 덧셈으로 만든 것이 신경망이다. 입력이 글인 문제는 자연어 처리다. 숫자 그림에 맞춘 배선과, 길이가 매번 다른 입력을 그래프로 다루는 방법은 그 다음이다. 사람이 고른 답으로 다시 맞추는 계산은 아직 없다.
+위에서부터 읽으면 된다. 예와 정답으로 빈칸을 채우는 일이 머신러닝이고, 그 함수를 곱과 덧셈으로 만든 것이 신경망이다. 입력이 글인 문제는 자연어 처리다. 다음 토큰을 모든 자리에서 맞히는 모델이 LLM이고, 사람이 고른 답으로 다시 맞추는 계산은 그 다음이다. 숫자 그림에 맞춘 배선과, 길이가 매번 다른 입력을 그래프로 다루는 방법은 그 뒤에 있다. 같은 모델을 요청 여러 개와 GPU 여러 장에서 돌리는 계산이 마지막이다.
 
 같은 주제를 코드 실습까지 다루는 공개 교재로 위키독스의 [딥 러닝을 이용한 자연어 처리 입문](https://wikidocs.net/book/2155)이 있다. 여기 글은 그 목차의 개념을 계산 예로 다시 적은 것이고, 교재의 문장을 옮겨 둔 것은 아니다.
 
@@ -35,7 +35,7 @@ title: AI Study
 
 ## 3. 자연어
 
-글은 길이가 문장마다 다르고, 밝기 같은 수가 아니다. 자르고 센 뒤 다음 단어의 비율을 만든다. 단어를 짧은 목록으로 바꾸고 문장 길이를 맞춘 다음, 상태를 한 칸씩 넘긴다. 그 망 다음에, 자리를 한꺼번에 보는 블록이 온다.
+글은 길이가 문장마다 다르고, 밝기 같은 수가 아니다. 자르고 센 뒤 다음 단어의 비율을 만든다. 단어를 짧은 목록으로 바꾸고 문장 길이를 맞춘 다음, 상태를 한 칸씩 넘긴다. 그 망 다음에, 자리를 한꺼번에 보는 블록이 온다. 개체명 인식까지가 그 블록으로 읽는 과제다. 그 뒤는 앞만 보고 글을 잇는 LLM이고, 블록 한 층과 prefill, 사람이 고른 답이다.
 
 - [자연어 처리 (natural language processing, NLP)](./nlp.md)
 - [토큰화 (tokenization)](./tokenization.md)
@@ -57,16 +57,22 @@ title: AI Study
 - [다음 토큰 (next-token prediction)](./next-token.md)
 - [버트 (BERT)](./bert.md)
 - [개체명 인식 (named entity recognition)](./ner.md)
+- [LLM (large language model)](./llm.md)
+- [Decoder block](./block.md)
+- [Prefill, decode](./prefill-decode.md)
+- [Post-training](./post-training.md)
 
 ## 4. 그림의 배선
 
-픽셀을 번호 매긴 목록으로만 보면, 같은 획을 위치마다 다시 배운다. 가까운 칸만 보고 같은 검출기를 여러 위치에 쓰면, 그 반복을 배선이 맡는다. 먼저 볼 예는 작은 합성곱망이다.
+픽셀을 번호 매긴 목록으로만 보면, 같은 획을 위치마다 다시 배운다. 가까운 칸만 보고 같은 검출기를 여러 위치에 쓰면, 그 반복을 배선이 맡는다. 먼저 볼 예는 작은 합성곱망이다. 그 다음에, 그림 조각을 글과 같은 목록으로 만드는 계산과, 잡음에서 데이터로 가는 속도가 있다.
 
 - [합성곱 신경망 (convolutional neural network, CNN)](./cnn.md)
 - [가중치 공유 (weight sharing)](./weight-sharing.md)
 - [서브샘플링 (subsampling)](./subsampling.md)
 - [LeNet-5](./lenet-5.md)
 - [RBF (radial basis function)](./rbf.md)
+- [Multimodal](./multimodal.md)
+- [Diffusion, flow](./generation.md)
 
 ## 5. 다른 방법과 비교
 
@@ -86,3 +92,11 @@ title: AI Study
 - [휴리스틱 과분할 (heuristic over-segmentation)](./over-segmentation.md)
 - [그래프 변환 신경망 (graph transformer network, GTN)](./gtn.md)
 - [공간 이동 신경망 (space displacement neural network, SDNN)](./sdnn.md)
+
+## 7. 모델을 돌리기
+
+같은 블록이라도 토큰을 한꺼번에 읽을 때와 한 칸만 이어 쓸 때 시간이 가는 곳이 다르다. 요청을 한 번의 가중치 읽기에 넣고, 행렬과 기울기를 GPU 여러 장에 나눈 뒤, 맞은 횟수를 뽑기 횟수와 같이 읽는다.
+
+- [Continuous batching](./serving.md)
+- [Parallelism](./parallel.md)
+- [Evaluation](./evaluation.md)
