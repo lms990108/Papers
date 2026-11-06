@@ -14,7 +14,7 @@ LLM은 긴 글의 모든 자리에서 다음 토큰을 맞히고, 그 \(-\log p\
 - 그 평균의 지수가 퍼플렉서티입니다. 약 1.677입니다. 네 단어를 균등하게 고르면 4입니다.
 - 블록을 더 쌓거나 hidden size를 키워도 손실 식은 \(-\log p\) 그대로입니다. Large는 그 크기를 뜻할 뿐, 다른 목적이 아닙니다.
 
-먼저 읽을 것은 [다음 토큰](./next-token.md), [버트](./bert.md), [언어 모델](./language-model.md)입니다. 블록 한 층의 수는 [Decoder block](./block.md)에서, 학습 뒤에 답을 고치는 계산은 [Post-training](./post-training.md)에서 봅니다.
+먼저 읽을 것은 [다음 토큰](./next-token.md), [버트](./bert.md), [언어 모델](./language-model.md)입니다. 블록 한 층의 수는 [Decoder block](./block.md)에서, 학습 뒤에 답을 고치는 계산은 [Post-training](./post-training.md)에서 봅니다. 학습에 없는 문서를 찾아 붙인 뒤 답을 잇는 흐름은 [RAG](../rag/)에서 봅니다.
 :::
 
 ## 자기회귀
