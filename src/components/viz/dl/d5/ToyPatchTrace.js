@@ -88,7 +88,7 @@ export default function ToyPatchTrace() {
         ))}
       </Controls>
       <div className={s.two}>
-        <svg viewBox="0 0 220 220" className={s.svg} role="img" aria-label="4×4 이미지. 칸의 값은 0 또는 1이고, 2×2 패치 네 개로 나뉩니다.">
+        <svg viewBox="0 0 220 220" className={s.svg} style={{maxWidth: 300}} role="img" aria-label="4×4 이미지. 칸의 값은 0 또는 1이고, 2×2 패치 네 개로 나뉩니다.">
           {cells}
           {step >= 1 ? frames : null}
           {step >= 1 ? labels : null}

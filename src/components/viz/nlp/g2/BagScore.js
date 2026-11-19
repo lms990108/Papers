@@ -92,7 +92,7 @@ export default function BagScore() {
         </tbody>
       </table>
 
-      <svg viewBox="0 0 400 54" className={s.svg} role="img" aria-label={`불만 점수 ${fmt(score, 3)}. 0보다 위이면 불만 쪽.`}>
+      <svg viewBox="0 0 400 54" className={s.svg} style={{maxWidth: 560}} role="img" aria-label={`불만 점수 ${fmt(score, 3)}. 0보다 위이면 불만 쪽.`}>
         <line x1="20" y1="22" x2="380" y2="22" stroke="var(--ifm-color-emphasis-300)" strokeWidth="2" />
         <line x1="200" y1="12" x2="200" y2="32" stroke="var(--ifm-color-emphasis-700)" strokeWidth="2" />
         <rect x={Math.min(200, pos)} y="16" width={Math.abs(pos - 200)} height="12" fill={score >= 0 ? 'var(--vb)' : 'var(--va)'} />

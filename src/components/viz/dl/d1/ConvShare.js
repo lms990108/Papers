@@ -39,7 +39,7 @@ export default function ConvShare() {
       <Controls>
         <Slider label="창 위치" min={0} max={cells - 1} value={p} onChange={setPos} format={(v) => `${v + 1} / ${cells}`} />
       </Controls>
-      <svg className={s.canvas} viewBox={`0 0 ${SIZE} ${SIZE}`} role="img" aria-label={`그림 ${n}×${n}에서 ${k}×${k} 창이 ${r + 1}행 ${c + 1}열 자리에 놓인 모습`}>
+      <svg className={s.canvas} viewBox={`0 0 ${SIZE} ${SIZE}`} style={{maxWidth: 400}} role="img" aria-label={`그림 ${n}×${n}에서 ${k}×${k} 창이 ${r + 1}행 ${c + 1}열 자리에 놓인 모습`}>
         <rect x={0} y={0} width={SIZE} height={SIZE} fill="var(--ifm-background-color)" />
         {Array.from({length: n + 1}, (_, i) => (
           <g key={i}>

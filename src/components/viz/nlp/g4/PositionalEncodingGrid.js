@@ -42,7 +42,7 @@ export default function PositionalEncodingGrid() {
       <Controls>
         <Slider label="자리 번호 pos" min={0} max={NPOS - 1} step={1} value={pos} onChange={setPos} />
       </Controls>
-      <svg viewBox={`0 0 ${W} ${H}`} className={s.svg} role="img" aria-label={`자리 0부터 ${NPOS - 1}까지, 길이 ${d}인 사인·코사인 위치 목록의 값을 색으로 나타낸 표`}>
+      <svg viewBox={`0 0 ${W} ${H}`} className={s.svg} style={{maxWidth: 560}} role="img" aria-label={`자리 0부터 ${NPOS - 1}까지, 길이 ${d}인 사인·코사인 위치 목록의 값을 색으로 나타낸 표`}>
         {cur.map((_, c) => (
           <text key={c} x={LEFT + c * cw + cw / 2} y={TOP - 8} className={s.ts} textAnchor="middle">
             {c % 2 === 0 ? 'sin' : 'cos'}

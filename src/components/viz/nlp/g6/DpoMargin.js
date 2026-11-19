@@ -71,7 +71,7 @@ export default function DpoMargin() {
           </tr>
         </tbody>
       </table>
-      <svg viewBox="0 0 300 150" className={s.svg} role="img" aria-label="시그모이드 입력에 따른 오차 곡선과 현재 위치">
+      <svg viewBox="0 0 300 150" className={s.svg} style={{maxWidth: 420}} role="img" aria-label="시그모이드 입력에 따른 오차 곡선과 현재 위치">
         <line x1={GX} y1={10 + GH} x2={GX + GW} y2={10 + GH} stroke="var(--ifm-color-emphasis-400)" />
         <line x1={gx(0)} y1={10} x2={gx(0)} y2={10 + GH} stroke="var(--ifm-color-emphasis-300)" strokeDasharray="3 3" />
         <polyline points={pts.join(' ')} fill="none" stroke="var(--ifm-color-emphasis-700)" strokeWidth="1.5" />

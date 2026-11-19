@@ -55,7 +55,7 @@ export default function SftSpanDemo() {
           <text x={6 + qn * (cell + 4) + 8 + cell / 2} y={70} textAnchor="middle" className={s.ts}>{fmt(ae, 3)}</text>
           <text x={6} y={104} className={s.ts}>점선 = 오차에서 빠진 칸</text>
         </svg>
-        <svg viewBox="0 0 270 150" className={s.svg} role="img" aria-label="한 칸의 오차 마이너스 로그 p 곡선. p가 작을수록 가파르다">
+        <svg viewBox="0 0 270 150" className={s.svg} style={{maxWidth: 360}} role="img" aria-label="한 칸의 오차 마이너스 로그 p 곡선. p가 작을수록 가파르다">
           <line x1={CX} y1={CY + CH} x2={CX + CW + 6} y2={CY + CH} stroke="var(--ifm-color-emphasis-400)" />
           <line x1={CX} y1={CY} x2={CX} y2={CY + CH} stroke="var(--ifm-color-emphasis-400)" />
           <polyline points={curve.join(' ')} fill="none" stroke="var(--ifm-color-emphasis-700)" strokeWidth="1.5" />

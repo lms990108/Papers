@@ -45,7 +45,7 @@ export default function CausalMaskGrid() {
       <Controls>
         <Slider label="토큰 수 n" min={2} max={8} step={1} value={n} onChange={setN} />
       </Controls>
-      <svg viewBox={`0 0 ${W} ${H}`} className={s.svg} role="img" aria-label={`토큰 ${n}개의 어텐션 비율 표. 마스크 ${masked ? '켜짐' : '꺼짐'}`}>
+      <svg viewBox={`0 0 ${W} ${H}`} className={s.svg} style={{maxWidth: 340}} role="img" aria-label={`토큰 ${n}개의 어텐션 비율 표. 마스크 ${masked ? '켜짐' : '꺼짐'}`}>
         {A.map((row, i) => (
           <g key={i} onClick={() => setSel(i)} style={{cursor: 'pointer'}}>
             <text x={LEFT - 8} y={TOP + i * CELL + CELL / 2 + 4} className={s.t} textAnchor="end" style={{fontWeight: i === r ? 700 : 400}}>
