@@ -1,8 +1,14 @@
 ---
 title: 딥러닝
+mdx:
+  format: mdx
 ---
 
+import DlRoadmap from '@site/src/components/viz/dl/d1/DlRoadmap';
+
 곱과 덧셈을 층으로 쌓은 신경망, 학습 알고리즘, 합성곱, 생성 모델, 그리고 모델을 실제로 돌리는 서빙·병렬화까지 다룹니다.
+
+<DlRoadmap />
 
 - [신경망 (neural network)](./neural-network.md)
 - [층 (layer)](./layer.md)

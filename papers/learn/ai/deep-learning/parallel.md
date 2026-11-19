@@ -1,11 +1,23 @@
 ---
 title: Parallelism
 sidebar_position: 59
+mdx:
+  format: mdx
 ---
+
+import AllReduceGrads from '@site/src/components/viz/dl/d4/AllReduceGrads';
+import ZeroStages from '@site/src/components/viz/dl/d4/ZeroStages';
+import TensorSplit from '@site/src/components/viz/dl/d4/TensorSplit';
+import PipelineBubble from '@site/src/components/viz/dl/d4/PipelineBubble';
+import MoeRouting from '@site/src/components/viz/dl/d4/MoeRouting';
+import MfuBar from '@site/src/components/viz/dl/d4/MfuBar';
+import ScoreTable from '@site/src/components/viz/dl/d4/ScoreTable';
 
 가중치가 GPU 한 장의 메모리보다 크면 나눠 둡니다. 나눠 둔 뒤에도 한 칸의 결과는 한 장에서 계산한 것과 같아야 합니다. 달라지는 것은 중간 결과를 언제 주고받는지입니다. 그 주고받음이 **parallelism**입니다.
 
-여기의 GPU 장 수와 연산 횟수는 나눗셈이 보이게 고른 수입니다. 어떤 기계의 측정값이 아닙니다.
+여기의 GPU 장 수와 연산 횟수는 나눗셈이 보이게 고른 수입니다. 어떤 기계의 측정값이 아닙니다. 아래 그림에서 단계를 눌러 네 장이 기울기를 모으는 과정을 보세요.
+
+<AllReduceGrads />
 
 :::tip[한눈에 보기]
 **data parallelism**은 장마다 다른 배치의 기울기를 더해 같은 가중치로 갱신합니다. **tensor parallelism**은 한 행렬을 잘라 부분 곱을 더한 뒤 같은 출력을 만듭니다.
@@ -36,6 +48,8 @@ GPU 4장이 서로 다른 배치를 봅니다. 가중치는 네 장이 같이 �
 
 가중치까지 장마다 복제하지 않고 상태와 기울기 조각을 나눠 갖는 것이 **FSDP**입니다. ZeRO는 그 나눔의 단계입니다. optimizer state만 나누면 1단계, 기울기까지 나누면 2단계, 가중치까지 나누면 3단계입니다. 3단계에서는 행렬 곱 직전에 그 층의 가중치 조각을 all-gather로 모았다가, 곱이 끝나면 자기 조각만 남깁니다.
 
+<ZeroStages />
+
 ## Tensor parallelism
 
 \[
@@ -47,6 +61,10 @@ W = \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix}, \quad x = \begin{bmatrix} 1 \\
 열을 GPU 두 장에 나누면 1장은 첫째 열 \([1,\; 3]\)과 \(x\)의 첫째 칸 1을 곱해 \([1,\; 3]\)을 만듭니다. 2장은 둘째 열 \([2,\; 4]\)와 둘째 칸 1을 곱해 \([2,\; 4]\)를 만듭니다. all-reduce로 더하면 \([3,\; 7]\)입니다. 한 층의 행렬을 이렇게 나누는 것이 tensor parallelism입니다.
 
 행으로 나누면 1장은 \([1,\; 2]\)와 \([1,\; 1]\)의 곱 3만 계산하고, 2장은 \([3,\; 4]\)와 곱해 7만 계산합니다. 더할 필요는 없고, all-gather로 \([3,\; 7]\)을 모으면 됩니다. 열로 나누면 부분 합을 더하고, 행으로 나누면 부분 출력을 이어 붙입니다. 어느 쪽이든 한 장에서 구한 \([3,\; 7]\)과 같습니다.
+
+<TensorSplit />
+
+## Pipeline parallelism
 
 층을 순서대로 다른 장에 두는 것은 **pipeline parallelism**입니다. 층이 둘이고 장이 둘이면, 1장이 첫째 층을 계산하는 동안 2장은 받을 입력이 없어 쉽니다. 이 공백이 bubble입니다.
 
@@ -62,11 +80,15 @@ microbatch가 4개일 때의 자리입니다. 칸은 그 회전에서 그 장이
 
 10칸 중 쉬는 칸이 2개입니다. bubble 비율은 \(2/10 = 0.2\)입니다. microbatch를 늘리면 가운데 회전이 길어져 이 비율은 줄어듭니다. 한 번 앞 층을 계산하고 한 번 뒤 층의 기울기를 계산하는 일정을 1F1B라고 합니다. 앞만 먼저 잔뜩 쌓아 두면 중간 활성화가 메모리에 쌓입니다. 앞과 뒤를 번갈아 하면 그 저장이 빨리 빠집니다.
 
+<PipelineBubble />
+
 ## Expert와 긴 문맥
 
 FFN을 여러 벌 두고, 토큰마다 그중 몇 벌만 계산하는 것이 **MoE**입니다. 고르는 층의 이름이 router입니다. 토큰 4개, expert 2개, 토큰마다 1개만 고른다고 합시다. 고르게 가면 expert마다 2토큰입니다. 4토큰이 모두 첫째 expert로 가면 둘째는 0입니다. 반이 쉽니다.
 
 capacity factor는 expert가 한 번에 받을 토큰 상한을 평균의 몇 배로 둘지입니다. 평균이 2이고 factor가 1이면 상한은 2입니다. 셋째 토큰이 같은 expert로 오면 그 토큰은 넘칩니다. 일을 고르게 하려고, router 비율과 실제 배정 비율이 한쪽으로 몰릴수록 커지는 오차를 더합니다. load-balancing loss입니다. expert를 장마다 두고 토큰을 보내는 것이 expert parallelism입니다.
+
+<MoeRouting />
 
 문맥이 길면 토큰 축으로 나눕니다. **context parallelism**입니다. 어텐션은 다른 장의 키와 값이 필요해서, KV cache를 장 고리를 따라 한 칸씩 넘깁니다. ring attention입니다. 넘기는 동안 자기 쪽에 있는 키와 값의 곱은 먼저 할 수 있습니다.
 
@@ -74,15 +96,17 @@ capacity factor는 expert가 한 번에 받을 토큰 상한을 평균의 몇 �
 
 **MFU**는 기계가 낼 수 있는 연산 중 가중치에 실제로 곱한 연산의 비율입니다. 기계가 1초에 100번 연산할 수 있고, 가중치에 실제로 곱한 연산이 40번이면 그 비율은 0.4입니다. 나머지 0.6에는 all-reduce를 기다리는 시간, pipeline의 쉬는 칸, decode처럼 바이트당 연산이 작은 구간이 들어갑니다. 행렬 곱 자체는 GEMM입니다.
 
+<MfuBar />
+
 어텐션은 토큰 사이의 점수 표를 만듭니다. 토큰 4개면 표는 \(4 \times 4 = 16\)칸입니다. 토큰 128개면 \(128 \times 128 = 16384\)칸입니다. 이 표를 메모리에 모두 썼다가 다시 읽으면, 곱보다 읽기가 시간을 가져갑니다. 표를 타일로 나눠 그 타일 안에서 소프트맥스와 값의 곱까지 끝내면 16384칸을 저장하지 않습니다. 그 구현의 이름이 FlashAttention입니다.
+
+<ScoreTable />
 
 ## 헷갈리기 쉬운 점
 
-**all-reduce의 합으로 바로 갱신하면 안 됩니다.** 네 장의 합은 평균의 4배입니다. \([1,\; 2,\; 3,\; 4]\)를 4로 나누지 않으면 기울기가 네 배입니다.
-
-**tensor parallelism이 나누는 것은 배치가 아니라 행렬의 열이나 행입니다.** 배치는 data parallelism이 나눕니다. 열을 나눈 부분 \([1,\; 3]\)과 \([2,\; 4]\)를 더해야 \([3,\; 7]\)이 됩니다.
-
-**pipeline parallelism은 장을 늘린 만큼 빨라지지 않습니다.** 위 표의 10칸 중 2칸은 쉽니다. microbatch가 1개뿐이면 1장이 일하는 동안 2장이 쉬고, 그다음엔 반대라 쉬는 비율이 더 큽니다.
+- **all-reduce의 합으로 바로 갱신하면 안 됩니다.** 네 장의 합은 평균의 4배입니다. \([1,\; 2,\; 3,\; 4]\)를 4로 나누지 않으면 기울기가 네 배입니다.
+- **tensor parallelism이 나누는 것은 배치가 아니라 행렬의 열이나 행입니다.** 배치는 data parallelism이 나눕니다. 열을 나눈 부분 \([1,\; 3]\)과 \([2,\; 4]\)를 더해야 \([3,\; 7]\)이 됩니다.
+- **pipeline parallelism은 장을 늘린 만큼 빨라지지 않습니다.** 위 표의 10칸 중 2칸은 쉽니다. microbatch가 1개뿐이면 1장이 일하는 동안 2장이 쉬고, 그다음엔 반대라 쉬는 비율이 더 큽니다.
 
 ## 연습 문제
 
@@ -98,3 +122,7 @@ capacity factor는 expert가 한 번에 받을 토큰 상한을 평균의 몇 �
 3. 회전은 3입니다. 1회전은 2장이 쉬고, 2회전은 둘 다 일하고, 3회전은 1장이 쉽니다. 전체 6칸 중 쉬는 칸은 2개입니다.
 
 </details>
+
+## 정리
+
+data parallelism은 장마다 다른 배치의 기울기를 all-reduce로 더하고 장 수로 나눈 평균으로 같이 갱신합니다. FSDP와 ZeRO는 optimizer state, 기울기, 가중치를 단계적으로 나눠 갖습니다. tensor parallelism은 행렬의 열이나 행을 나눠 부분 곱을 더하거나 이어 붙이고, pipeline parallelism은 층을 장에 나눠 bubble이 생깁니다. MoE는 토큰이 expert로 몰리면 일부가 쉬거나 넘치고, MFU는 기계가 낼 수 있는 연산 중 실제로 가중치에 곱한 비율입니다.
