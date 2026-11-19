@@ -26,7 +26,7 @@ export default function OneHotLength() {
         <Slider label="사전 크기" min={0} max={SIZES.length - 1} value={si} onChange={setSi} format={(v) => nf(SIZES[v])} />
         <Slider label="은닉 크기 H" min={0} max={HIDDEN.length - 1} value={hi} onChange={setHi} format={(v) => String(HIDDEN[v])} />
       </Controls>
-      <svg viewBox={`0 0 ${vw} 56`} className={s.svg} role="img" aria-label={`길이 ${V}의 원-핫 목록. 좋다 번호 2의 칸만 1이다.`}>
+      <svg viewBox={`0 0 ${vw} 56`} className={s.svg} style={{maxWidth: Math.min(620, vw * 1.8)}} role="img" aria-label={`길이 ${V}의 원-핫 목록. 좋다 번호 2의 칸만 1이다.`}>
         {shown.map((i, p) => {
           const x = 4 + p * CW;
           if (i === -1)

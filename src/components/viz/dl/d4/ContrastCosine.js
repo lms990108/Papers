@@ -61,7 +61,7 @@ export default function ContrastCosine() {
         <Btn onClick={learn}>한 걸음 학습 (설명용)</Btn>
         <Btn onClick={() => setImg([0, 0])}>길이 0으로</Btn>
       </Controls>
-      <svg ref={ref} viewBox={`0 0 ${W} ${H}`} className={s.svg} role="img" aria-label="그림 목록과 두 문장 목록의 방향" {...svgProps}>
+      <svg ref={ref} viewBox={`0 0 ${W} ${H}`} className={s.svg} style={{maxWidth: 520}} role="img" aria-label="그림 목록과 두 문장 목록의 방향" {...svgProps}>
         <line x1={20} y1={OY} x2={W - 20} y2={OY} stroke="var(--vgrid)" />
         <line x1={OX} y1={14} x2={OX} y2={H - 14} stroke="var(--vgrid)" />
         <circle cx={OX} cy={OY} r={SC} fill="none" stroke="var(--vgrid)" strokeDasharray="4 4" />

@@ -63,7 +63,7 @@ export default function HnswLayers() {
           </Btn>
         ))}
       </Controls>
-      <svg viewBox="0 0 480 450" className={s.svg} role="img" aria-label="HNSW 레이어와 검색 경로">
+      <svg viewBox="0 0 480 450" className={s.svg} style={{maxWidth: 500}} role="img" aria-label="HNSW 레이어와 검색 경로">
         <Layer nodes={L2} edges={E2} hl={st.l2} path={st.p2} label="레이어 2 (점 적음, 링크 김)" y0={30} y1={120} />
         <Layer nodes={L1} edges={E1} hl={st.l1} path={st.p1} label="레이어 1" y0={150} y1={240} />
         <Layer nodes={L0} edges={E0} hl={[]} path={[]} label="레이어 0 (모든 점)" y0={270} y1={395} amber={st.l0} best={st.best} />

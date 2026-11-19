@@ -49,7 +49,7 @@ export default function RbfReject() {
         <Btn onClick={() => { setP(START.p); setA(START.a); setB(START.b); }}>처음 위치</Btn>
         <Btn onClick={() => setP([3.2, 1.7])}>멀리 보내기</Btn>
       </Controls>
-      <svg ref={ref} viewBox={`0 0 ${W} ${H}`} className={s.canvas} style={{maxWidth: '100%'}} role="img" aria-label="앞 층 상태 평면: 점과 두 클래스 기준, 문턱 원" {...svgProps}>
+      <svg ref={ref} viewBox={`0 0 ${W} ${H}`} className={s.canvas} style={{maxWidth: 560}} role="img" aria-label="앞 층 상태 평면: 점과 두 클래스 기준, 문턱 원" {...svgProps}>
         {star(a, '3', 'a', 'var(--va)')}
         {star(b, '8', 'b', 'var(--vc)')}
         <line x1={X(p[0])} y1={Y(p[1])} x2={X(a[0])} y2={Y(a[1])} stroke="var(--va)" strokeWidth={yA <= yB ? 2.5 : 1.2} strokeDasharray={yA <= yB ? undefined : '4 3'} />

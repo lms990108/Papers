@@ -54,7 +54,7 @@ export default function SvmMargin() {
         <Btn onClick={() => { setPts(START); setTp(T0); setOnly(false); }}>본문의 점으로</Btn>
         <Btn onClick={() => setPts(pts.map((p, i) => (i === 3 ? [2, 2] : p)))}>(1,1)을 (2,2)로 옮기기</Btn>
       </Controls>
-      <svg ref={ref} viewBox={`0 0 ${W} ${H}`} className={s.canvas} style={{maxWidth: '100%'}} role="img" aria-label="두 클래스의 점, 최대 여백 직선, 서포트 벡터" {...svgProps}>
+      <svg ref={ref} viewBox={`0 0 ${W} ${H}`} className={s.canvas} style={{maxWidth: 480}} role="img" aria-label="두 클래스의 점, 최대 여백 직선, 서포트 벡터" {...svgProps}>
         {strip.length > 2 ? <polygon points={strip.map((p) => `${X(p[0])},${Y(p[1])}`).join(' ')} fill="var(--vok)" fillOpacity="0.14" /> : null}
         <line x1={X(XR[0])} y1={Y(0)} x2={X(XR[1])} y2={Y(0)} stroke="var(--vgrid)" />
         <line x1={X(0)} y1={Y(YR[0])} x2={X(0)} y2={Y(YR[1])} stroke="var(--vgrid)" />

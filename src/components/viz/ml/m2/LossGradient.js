@@ -30,7 +30,7 @@ function Panel({title, fa, fb, ymin, ymax, sc, ticks, aria}) {
     return a.join(' ');
   };
   return (
-    <svg viewBox={`0 0 ${PW} ${PH}`} className={s.svg} role="img" aria-label={aria}>
+    <svg viewBox={`0 0 ${PW} ${PH}`} className={s.svg} style={{maxWidth: 340}} role="img" aria-label={aria}>
       <text x={L} y={T - 3} className={s.ts}>{title}</text>
       {ticks.map((y) => (
         <g key={y}>

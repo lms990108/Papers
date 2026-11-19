@@ -56,7 +56,7 @@ export default function Conv2DStep() {
       <div className={s.two}>
         <div>
           <div className={s.title}>입력 ({N}×{N}, 패딩 {pad}겹)</div>
-          <svg viewBox={`0 0 ${size} ${size}`} className={s.svg} style={{maxWidth: 360}} role="img" aria-label={`입력 ${N}×${N}에 패딩 ${pad}겹을 두르고 3×3 창이 ${r + 1}행 ${c + 1}열 자리에 놓인 그림`}>
+          <svg viewBox={`0 0 ${size} ${size}`} className={s.svg} style={{maxWidth: 320}} role="img" aria-label={`입력 ${N}×${N}에 패딩 ${pad}겹을 두르고 3×3 창이 ${r + 1}행 ${c + 1}열 자리에 놓인 그림`}>
             {z.map((row, i) =>
               row.map((v, j) => {
                 const real = i >= pad && i < pad + N && j >= pad && j < pad + N;

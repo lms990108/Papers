@@ -24,7 +24,7 @@ function Panel({title, fn, ymax, sc, label, ticks}) {
     pts.push(X(v) + ',' + Y(fn(v)));
   }
   return (
-    <svg viewBox={'0 0 ' + W + ' ' + H} className={s.svg} role="img" aria-label={title}>
+    <svg viewBox={'0 0 ' + W + ' ' + H} className={s.svg} style={{maxWidth: 340}} role="img" aria-label={title}>
       <text x={L} y={9} className={s.ts}>{title}</text>
       <line x1={L} y1={H - B} x2={W - R} y2={H - B} stroke="var(--ifm-color-emphasis-400)" />
       <line x1={L} y1={T} x2={L} y2={H - B} stroke="var(--ifm-color-emphasis-400)" />

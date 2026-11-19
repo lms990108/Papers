@@ -11,7 +11,7 @@ const F = makeFrame(W, H, [-0.5, 1.5], [-0.5, 1.5], {l: 24, r: 10, t: 10, b: 22}
 
 function Plane({pts, sel, label, line}) {
   return (
-    <svg viewBox={`0 0 ${W} ${H}`} className={s.svg} role="img" aria-label={label}>
+    <svg viewBox={`0 0 ${W} ${H}`} className={s.svg} style={{maxWidth: 340}} role="img" aria-label={label}>
       <line x1={F.X(-0.5)} y1={F.Y(0)} x2={F.X(1.5)} y2={F.Y(0)} stroke="var(--vgrid)" />
       <line x1={F.X(0)} y1={F.Y(-0.5)} x2={F.X(0)} y2={F.Y(1.5)} stroke="var(--vgrid)" />
       {line !== undefined ? <line x1={F.X(-0.5)} y1={F.Y(-0.5 + line)} x2={F.X(1.5)} y2={F.Y(1.5 + line)} stroke="var(--ifm-font-color-base)" strokeWidth="2" /> : null}
