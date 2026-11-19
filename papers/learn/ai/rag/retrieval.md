@@ -21,7 +21,7 @@ import {RetrievalDemo, KeywordVsEmbedding} from '@site/src/components/viz';
 - 키워드 검색은 같은 말이 있을 때 강하고, 임베딩 검색은 말이 달라도 뜻이 가까우면 올라올 수 있습니다.
 - 1등 청크가 틀리면 [그라운딩](./grounding.md) 이후의 답도 흔들리기 쉽습니다.
 
-선수 지식은 [청킹](./chunking.md), [임베딩](../nlp/embedding.md), [코사인 유사도](../nlp/cosine-similarity.md)입니다. 다음으로 보면 좋은 글은 [그라운딩](./grounding.md), [벡터 인덱스](./vector-index.md)입니다.
+선수 지식은 [청킹](./chunking.md), [임베딩](../nlp/embedding.md), [코사인 유사도](../nlp/cosine-similarity.md)입니다. 다음으로 보면 좋은 글은 [그라운딩](./grounding.md), [벡터 인덱스](./vector-index.md), [고급 RAG](./advanced-rag.md)입니다.
 :::
 
 ## 배경

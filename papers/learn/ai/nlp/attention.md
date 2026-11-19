@@ -23,7 +23,7 @@ import AttentionCost from '@site/src/components/viz/nlp/g4/AttentionCost';
 - 한 자리가 다른 모든 자리를 한 번에 보므로, 앞 토큰이 몇 칸 떨어져 있든 한 번의 곱으로 이어집니다.
 - 다음 토큰을 맞히는 학습에서는 뒤 칸의 점수를 소프트맥스 전에 가려 둡니다.
 
-먼저 읽을 것: [임베딩](./embedding.md), [소프트맥스](../machine-learning/softmax.md), [순환 신경망](./rnn.md). 이어지는 것: [트랜스포머](./transformer.md).
+먼저 읽을 것: [임베딩](./embedding.md), [소프트맥스](../machine-learning/softmax.md), [순환 신경망](./rnn.md). 이어지는 것: [셀프 어텐션](./self-attention.md), [트랜스포머](./transformer.md).
 :::
 
 ## 배경
