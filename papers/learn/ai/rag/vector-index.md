@@ -33,7 +33,7 @@ import {
 - 스칼라 양자화는 숫자 하나를 더 적은 비트로 저장해 메모리를 줄이고, 대신 거리 계산에 오차가 생깁니다.
 - recall이 떨어지는 원인은 두 가지입니다. 후보 목록에 정답이 못 들어오는 **누락**과, 후보 안에서 순서가 밀리는 **순서 오류**입니다.
 
-선수 지식은 [임베딩](../nlp/embedding.md), [코사인 유사도](../nlp/cosine-similarity.md), [검색](./retrieval.md)입니다. 다음으로 보면 좋은 글은 [그라운딩](./grounding.md)입니다.
+선수 지식은 [임베딩](../nlp/embedding.md), [코사인 유사도](../nlp/cosine-similarity.md), [검색](./retrieval.md)입니다. 다음으로 보면 좋은 글은 [그라운딩](./grounding.md), [고급 RAG](./advanced-rag.md), [지식 그래프](./knowledge-graph.md)입니다.
 :::
 
 ## 1. 가까운 점 찾기

@@ -24,7 +24,7 @@ import TransformerParamCount from '@site/src/components/viz/nlp/g4/TransformerPa
 - 어텐션에는 순서 정보가 없어서, 입력에 자리 목록(위치 인코딩)을 더해 순서를 넣습니다.
 - 다음 토큰을 맞히는 용도에서는 어텐션에 마스크를 걸어 뒤 토큰을 가립니다.
 
-먼저 읽을 것: [어텐션](./attention.md), [임베딩](./embedding.md), [기울기 소실](../deep-learning/gradient-vanishing.md). 이어지는 것: [다음 토큰](./next-token.md), [버트](./bert.md).
+먼저 읽을 것: [어텐션](./attention.md), [셀프 어텐션](./self-attention.md), [임베딩](./embedding.md), [기울기 소실](../deep-learning/gradient-vanishing.md). 이어지는 것: [다음 토큰](./next-token.md), [버트](./bert.md).
 :::
 
 ## 배경
