@@ -66,7 +66,7 @@ microbatch가 4개일 때의 자리입니다. 칸은 그 회전에서 그 장이
 
 FFN을 여러 벌 두고, 토큰마다 그중 몇 벌만 계산하는 것이 **MoE**입니다. 고르는 층의 이름이 router입니다. 토큰 4개, expert 2개, 토큰마다 1개만 고른다고 합시다. 고르게 가면 expert마다 2토큰입니다. 4토큰이 모두 첫째 expert로 가면 둘째는 0입니다. 반이 쉽니다.
 
-capacity factor는 expert가 한 번에 받을 토큰 상한을 평균의 몇 배로 둘지입니다. 평균이 2이고 factor가 1이면 상한은 2입니다. 셋째 토큰이 같은 expert로 오면 그 토큰은 넘칩니다. 일을 고르게 하려고, router 비율과 실제 배정 비율이 한쪽으로 몰릴수록 커지는 손실을 더합니다. load-balancing loss입니다. expert를 장마다 두고 토큰을 보내는 것이 expert parallelism입니다.
+capacity factor는 expert가 한 번에 받을 토큰 상한을 평균의 몇 배로 둘지입니다. 평균이 2이고 factor가 1이면 상한은 2입니다. 셋째 토큰이 같은 expert로 오면 그 토큰은 넘칩니다. 일을 고르게 하려고, router 비율과 실제 배정 비율이 한쪽으로 몰릴수록 커지는 오차를 더합니다. load-balancing loss입니다. expert를 장마다 두고 토큰을 보내는 것이 expert parallelism입니다.
 
 문맥이 길면 토큰 축으로 나눕니다. **context parallelism**입니다. 어텐션은 다른 장의 키와 값이 필요해서, KV cache를 장 고리를 따라 한 칸씩 넘깁니다. ring attention입니다. 넘기는 동안 자기 쪽에 있는 키와 값의 곱은 먼저 할 수 있습니다.
 
