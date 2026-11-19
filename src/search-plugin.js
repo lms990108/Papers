@@ -4,6 +4,8 @@ const path = require('path');
 function bodyOf(markdown) {
   const withoutFrontMatter = markdown.replace(/^---\r?\n[\s\S]*?\r?\n---/, '');
   return withoutFrontMatter
+    .replace(/^import .*$/gm, ' ')
+    .replace(/<\/?[A-Za-z][^>]*>/g, ' ')
     .replace(/```/g, ' ')
     .replace(/!\[[^\]]*]\([^)]*\)/g, ' ')
     .replace(/\[([^\]]*)]\([^)]*\)/g, '$1')
