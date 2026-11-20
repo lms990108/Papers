@@ -111,7 +111,7 @@ export default function PatchGrid() {
         <Stat label="한 변의 패치 수" value={k} />
         <Stat label="패치 토큰 수" value={comma(N)} />
         <Stat label="분류 토큰 포함 길이 n" value={comma(n)} />
-        <Stat label="패치 하나의 길이 (P×P×3)" value={comma(P * P * 3)} />
+        <Stat label="패치 하나의 길이 (P×P×3, 3은 RGB 채널)" value={comma(P * P * 3)} />
         <Stat label="어텐션 칸 수 n²" value={comma(n * n)} tone={n * n > 1000000 ? 'bad' : undefined} />
         <Stat label="224, 패치 16 대비" value={`${fmt(n * n / BASE, 1)}배`} />
       </Stats>

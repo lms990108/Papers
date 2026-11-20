@@ -3,7 +3,7 @@ import {Viz, Controls, Btn, Stats, Stat, Note, fmt, styles as s} from '../../Viz
 
 const PROJ = [
   {
-    name: '원문의 projector',
+    name: '본문의 projector',
     rows: [
       [0.5, 0, 0, 0],
       [0, 0, 0.5, 0],
@@ -121,7 +121,7 @@ export default function ProjectorMatrix() {
       ) : null}
       {!asToken ? (
         <Note>
-          원문의 projector는 첫째 칸과 셋째 칸만 봅니다. [1, 0, 1, 0]이면 [0.5, 0.5]이고, [0, 1, 0, 1]이면 [0, 0]입니다. 인코더 출력과 hidden size가 다를 때 projector가 그 사이를 잇습니다.
+          본문의 projector는 첫째 칸과 셋째 칸만 봅니다. [1, 0, 1, 0]이면 [0.5, 0.5]이고, [0, 1, 0, 1]이면 [0, 0]입니다. 인코더 출력과 hidden size가 다를 때 projector가 그 사이를 잇습니다.
         </Note>
       ) : null}
     </Viz>

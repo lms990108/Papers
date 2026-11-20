@@ -24,7 +24,7 @@ export default function ConvShare() {
   return (
     <Viz
       title="창이 놓이는 자리와 파라미터 수"
-      caption="N은 그림 한 변의 칸 수, k는 창 한 변의 칸 수입니다. 공유 O는 모든 자리가 같은 빈칸 한 벌을 쓰고, 공유 X는 자리마다 빈칸을 따로 둡니다. 창을 한 칸씩 옮기면 놓이는 자리가 (N − k + 1)²개이고, 자리마다 출력 칸이 하나입니다. 기본값 28, 5는 원문의 576, 452,160, 14,976, 26이고, 32와 5는 연습 문제 3의 784, 26, 20,384입니다. 막대는 값이 크게 차이 나서 로그 눈금으로 그렸습니다."
+      caption="N은 그림 한 변의 칸 수, k는 창 한 변의 칸 수입니다. 막대 세 개는 빈칸(가중치와 바이어스)의 수입니다. 전부 보기는 앞 층 칸을 모두 보고, 창만 보는 두 방법 중 칸마다 따로는 자리마다 빈칸을 따로 두고, 한 벌 공유는 모든 자리가 같은 빈칸 한 벌을 씁니다. 창을 한 칸씩 옮기면 놓이는 자리가 (N − k + 1)²개이고, 자리마다 출력 칸이 하나입니다. 기본값 28, 5는 본문의 576, 452,160, 14,976, 26이고, 32와 5는 연습 문제 3의 784, 26, 20,384입니다. 막대는 값이 크게 차이 나서 로그 눈금으로 그렸습니다."
     >
       <Controls>
         <Slider label="그림 한 변 N" min={6} max={32} value={n} onChange={setN} />
@@ -49,9 +49,9 @@ export default function ConvShare() {
         ))}
         <rect x={c * cs} y={r * cs} width={k * cs} height={k * cs} fill="var(--vb)" fillOpacity={0.3} stroke="var(--vb)" strokeWidth={2.5} />
       </svg>
-      <Bar label="완전 연결" value={lg(full)} max={maxLog} color="var(--vbad)" text={comma(full)} />
-      <Bar label="창만 보고 공유 X" value={lg(local)} max={maxLog} color="var(--vb)" text={comma(local)} />
-      <Bar label="창만 보고 공유 O" value={lg(shared)} max={maxLog} color="var(--vok)" text={comma(shared)} />
+      <Bar label="전부 보기" value={lg(full)} max={maxLog} color="var(--vbad)" text={comma(full)} />
+      <Bar label="창만, 칸마다 따로" value={lg(local)} max={maxLog} color="var(--vb)" text={comma(local)} />
+      <Bar label="창만, 한 벌 공유" value={lg(shared)} max={maxLog} color="var(--vok)" text={comma(shared)} />
       <Stats>
         <Stat label="창이 놓이는 자리 (한 줄)" value={out} />
         <Stat label="출력 칸 수" value={comma(cells)} />

@@ -21,7 +21,7 @@ export default function NewReviewVote() {
   return (
     <Viz
       title="학습 쌍을 다 맞히는 가중치 여섯 개에 새 리뷰를 넣어 보기"
-      caption="아래 여섯 쌍은 학습 쌍 네 개를 모두 맞히는 후보입니다. 학습에 없던 새 리뷰의 특성을 바꿔 보세요. 후보끼리 답이 갈리는 입력이 있습니다."
+      caption="아래 여섯 쌍은 학습 쌍 네 개를 모두 맞히는 후보입니다. 학습에 없던 새 리뷰의 입력을 바꿔 보세요. 후보끼리 답이 갈리는 입력이 있습니다."
     >
       <Controls>
         <Slider label="새 리뷰의 좋다 횟수 x1" min={0} max={3} step={1} value={x[0]} onChange={(v) => setX([v, x[1]])} />

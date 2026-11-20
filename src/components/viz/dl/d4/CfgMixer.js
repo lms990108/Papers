@@ -16,7 +16,7 @@ export default function CfgMixer() {
   return (
     <Viz
       title="CFG: 조건 없는 속도와 문장 조건의 속도를 섞기"
-      caption="섞은 속도 = 조건 없는 속도 + 세기 × (조건 속도 − 조건 없는 속도)입니다. 보폭은 0.25, 출발은 x = 1입니다. 기본값은 원문의 −0.5, −1, 세기 2입니다."
+      caption="섞은 속도 = 조건 없는 속도 + 세기 × (조건 속도 − 조건 없는 속도)입니다. 보폭은 0.25, 출발은 x = 1입니다. 기본값은 본문의 −0.5, −1, 세기 2입니다."
     >
       <Controls>
         <Slider label="조건 없는 속도" min={-3} max={0} step={0.25} value={u} onChange={setU} format={(v) => fmt(v, 2)} />
@@ -45,7 +45,7 @@ export default function CfgMixer() {
             setW(2);
           }}
         >
-          원문
+          본문 값
         </Btn>
       </Controls>
       <Bar label="조건 없는 속도" value={Math.abs(u)} max={M} color="var(--ifm-color-emphasis-600)" text={fmt(u, 2)} />

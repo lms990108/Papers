@@ -97,7 +97,7 @@ export default function HiddenUnits() {
                 <th>유닛</th>
                 <th>a의 기울기</th>
                 <th>v의 기울기</th>
-                <th>W 기울기 (x₁, x₂ 칸)</th>
+                <th>W 기울기 (x₁ 쪽, x₂ 쪽)</th>
               </tr>
             </thead>
             <tbody>

@@ -13,10 +13,10 @@ export default function TransitionCounter() {
   return (
     <Viz
       title="상태가 보이는 10일 기록에서 전이표 만들기"
-      caption="날짜 칸을 누르면 맑음과 비가 바뀝니다. 전이표는 센 횟수를 행의 합으로 나눈 값입니다. 기본값은 원문의 10일(맑음 맑음 맑음 비 비 맑음 맑음 비 비 비)입니다. 원문의 표는 이 예를 위해 직접 정한 값이고 실제 날씨 통계가 아닙니다."
+      caption="날짜 칸을 누르면 맑음과 비가 바뀝니다. 전이표는 센 횟수를 행의 합으로 나눈 값입니다. 기본값은 본문의 10일(맑음 맑음 맑음 비 비 맑음 맑음 비 비 비)입니다. 본문의 표는 이 예를 위해 직접 정한 값이고 실제 날씨 통계가 아닙니다."
     >
       <Controls>
-        <Btn on={false} onClick={() => setDays(ORIGIN)}>원문 기록</Btn>
+        <Btn on={false} onClick={() => setDays(ORIGIN)}>본문 기록</Btn>
         <Btn on={false} onClick={() => setDays(days.map(() => 0))}>모두 맑음</Btn>
       </Controls>
       <div style={{display: 'flex', flexWrap: 'wrap', gap: 6, margin: '6px 0 12px'}}>

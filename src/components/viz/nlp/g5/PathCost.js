@@ -32,7 +32,7 @@ export default function PathCost() {
       <Controls>
         <Slider label="시작 없는 I의 비용" min={0} max={8} step={1} value={pen} onChange={setPen} />
         <Btn on={pen === 0} onClick={() => setPen(0)}>비용 없음</Btn>
-        <Btn on={pen === 5} onClick={() => setPen(5)}>원문 값 5</Btn>
+        <Btn on={pen === 5} onClick={() => setPen(5)}>본문 값 5</Btn>
       </Controls>
       <table className={s.grid}>
         <thead>

@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {Viz, Controls, Slider, Btn, Stats, Stat, Note, styles as s} from '../../Viz';
 import {comma} from './dlmath';
 
-// 원문: 사전 4개, 목록 길이 2, 블록은 2x2 가중치 + 바이어스 2
+// 본문: 사전 4개, 목록 길이 2, 블록은 2x2 가중치 + 바이어스 2
 const V = 4;
 const D = 2;
 const BLOCK = D * D + D;
@@ -22,7 +22,7 @@ export default function SentenceBlocks() {
   return (
     <Viz
       title="문장이 길어지면 무엇이 늘고 무엇이 그대로인가"
-      caption="사전 4개, 목록 길이 2, 블록 하나는 2×2 가중치와 바이어스 2개로 둔 원문의 단순한 모델입니다. 기본값(토큰 3개, 블록 2개)에서 임베딩 8 + 블록 12 + 점수 표 8 = 28이고, 토큰 300개에서 곱셈은 2,400번입니다."
+      caption="사전 4개, 목록 길이 2, 블록 하나는 2×2 가중치와 바이어스 2개로 둔 본문의 단순한 모델입니다. 기본값(토큰 3개, 블록 2개)에서 임베딩 8 + 블록 12 + 점수 표 8 = 28이고, 토큰 300개에서 곱셈은 2,400번입니다. 블록 곱셈 횟수는 토큰마다 2×2 가중치를 곱하는 곱셈(토큰당 4번)을 블록 수만큼 센 것입니다."
     >
       <Controls>
         <Slider label="토큰 수" min={1} max={300} value={len} onChange={setLen} />
@@ -36,7 +36,7 @@ export default function SentenceBlocks() {
       </Controls>
       <Controls>
         <Btn on={shared} onClick={() => setShared(true)}>
-          자리가 빈칸을 같이 씀 (원문)
+          자리가 빈칸을 같이 씀 (본문)
         </Btn>
         <Btn on={!shared} onClick={() => setShared(false)}>
           자리마다 따로 빈칸 (비교용)

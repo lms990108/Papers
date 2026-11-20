@@ -30,7 +30,7 @@ export default function Contamination() {
   return (
     <Viz
       title="점수가 좋은 이유가 외워서일 수 있는가 (benchmark contamination)"
-      caption="'오늘 날씨' 다음 칸의 점수가 0, 0, 2, 0일 때 '좋다'의 비율이 0.711, 오차가 0.341입니다(원문). 슬라이더로 '좋다'의 점수를 바꾸는 것은 설명용입니다. 학습이 그 칸을 더 맞출수록 점수가 오르고 오차가 줄어듭니다."
+      caption="'오늘 날씨' 다음 칸의 점수가 오늘, 날씨, 좋다, 나쁘다 순으로 0, 0, 2, 0일 때 '좋다'의 비율이 0.711, 오차가 0.341입니다(본문). 슬라이더로 '좋다'의 점수를 바꾸는 것은 설명용입니다. 학습이 그 칸을 더 맞출수록 점수가 오르고 오차가 줄어듭니다."
     >
       <Controls>
         <Btn on={seen} onClick={() => setSeen(true)}>시험 문장이 학습 문서에 있었다</Btn>
@@ -40,7 +40,7 @@ export default function Contamination() {
       </Controls>
       <Controls>
         <Slider label="'좋다'의 점수 (설명용)" min={0} max={6} step={0.25} value={score} onChange={setScore} format={(v) => fmt(v, 2)} />
-        <Btn onClick={() => setScore(2)}>원문 (2)</Btn>
+        <Btn onClick={() => setScore(2)}>본문 (2)</Btn>
       </Controls>
       {rephrase ? (
         <Note>다른 문장 “날씨가 오늘 좋다”의 칸별 비율은 따로 계산해야 하며, 아래 막대(오늘 날씨 다음 칸)를 쓸 수 없습니다.</Note>
@@ -57,7 +57,7 @@ export default function Contamination() {
       ))}
       <Stats>
         <Stat label="‘좋다’의 비율" value={rephrase ? '쓸 수 없음' : fmt(p[2], 3)} />
-        <Stat label="오차 −ln(비율)" value={rephrase ? '쓸 수 없음' : fmt(loss, 3)} />
+        <Stat label="오차 (비율의 로그에 마이너스)" value={rephrase ? '쓸 수 없음' : fmt(loss, 3)} />
         <Stat label="읽는 법" value={tone === 'good' ? '그대로 읽기' : '조심해서 읽기'} tone={tone} />
       </Stats>
       <Note>{verdict} 점수를 읽을 때는 시험 문장이 학습 문서에 있었는지, 다른 말로 바꿨을 때 맞은 횟수가 줄어드는지가 같이 필요합니다.</Note>

@@ -19,7 +19,7 @@ export default function MfuBar() {
   return (
     <Viz
       title="MFU: 기계가 낼 수 있는 100번 중 가중치에 곱한 몇 번인가"
-      caption="기계가 1초에 100번 연산할 수 있다고 둡니다. 곱하지 못한 시간을 세 갈래로 나눈 값은 원문에 없는 설명용 값이고, 기본값 30 + 20 + 10 = 60이면 곱한 연산이 40번, MFU는 0.4입니다."
+      caption="기계가 1초에 100번 연산할 수 있다고 둡니다. 곱하지 못한 시간을 세 갈래로 나눈 값은 본문에 없는 설명용 값이고, 기본값 30 + 20 + 10 = 60이면 곱한 연산이 40번, MFU는 0.4입니다."
     >
       <Controls>
         {PARTS.map((p) => (
@@ -27,7 +27,7 @@ export default function MfuBar() {
         ))}
       </Controls>
       <Controls>
-        <Btn onClick={() => setV({wait: 30, idle: 20, low: 10})}>원문 (곱한 연산 40번)</Btn>
+        <Btn onClick={() => setV({wait: 30, idle: 20, low: 10})}>본문 (곱한 연산 40번)</Btn>
         <Btn onClick={() => setV({wait: 0, idle: 0, low: 0})}>하나도 안 놀면</Btn>
       </Controls>
       <div style={{display: 'flex', height: 34, borderRadius: 6, overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-300)'}} role="img" aria-label={`연산 100번 중 곱한 연산 ${matmul}번`}>

@@ -54,7 +54,7 @@ export default function BatchRounds() {
   return (
     <Viz
       title="A의 decode 1칸과 B의 프롬프트 8토큰을 한 회전에 넣기"
-      caption="가중치 읽기는 늘 32바이트이고, 한 회전의 연산은 2 × M × 16입니다. 초록 점은 그 회전이 끝날 때 A가 토큰 하나를 받는 시점입니다. 칸 수를 8로 하면 B의 8토큰을 한 번에 넣는 경우입니다."
+      caption="가중치 읽기는 늘 32바이트이고, 한 회전의 연산은 2 × M × 16입니다. 초록 점은 그 회전이 끝날 때 A가 토큰 하나를 받는 시점입니다. 칸 수를 8로 하면 B의 8토큰을 한 번에 넣는 경우입니다. 'prefill 전용 기계를 따로 둠'은 B의 prefill을 다른 기계가 맡는 경우이고, 아래 Prefill-decode disaggregation에서 설명합니다."
     >
       <Controls>
         <Btn on={!split} onClick={() => setSplit(false)}>한 기계에서 번갈아</Btn>

@@ -26,7 +26,7 @@ export default function TwoParamDescent() {
   return (
     <Viz
       title="가파른 축과 완만한 축에 같은 학습률 쓰기"
-      caption="오차 (w₁ − 3)² + 10(w₂ − 1)²의 등고선입니다. 타원이 좁은 w₂ 쪽이 가파릅니다. 시작은 (0, 0)이고, ε이 0.1에 닿으면 w₂가 0과 2를 왕복합니다."
+      caption="오차 (w₁ − 3)² + 10(w₂ − 1)²의 등고선입니다. 등고선은 오차가 같은 점을 이은 타원이고, 안쪽일수록 오차가 작습니다. 타원이 좁은 w₂ 쪽이 가파릅니다. 시작은 (0, 0)이고, ε이 0.1에 닿으면 w₂가 0과 2를 왕복합니다."
     >
       <Controls>
         <Btn on={Math.abs(eps - 0.05) < 1e-9} onClick={() => setEps(0.05)}>ε = 0.05</Btn>
@@ -76,9 +76,9 @@ export default function TwoParamDescent() {
         <text x={4} y={10} className={s.ts}>w₂</text>
       </svg>
       <Stats>
-        <Stat label="w₁ 쪽 곱 1 − 2ε" value={fmt(f1, 2)} tone={Math.abs(f1) < 1 ? 'good' : 'bad'} />
-        <Stat label="w₂ 쪽 곱 1 − 20ε" value={fmt(f2, 2)} tone={Math.abs(f2) < 1 ? 'good' : 'bad'} />
-        <Stat label="w₁ 한계 / w₂ 한계" value="1 / 0.1" />
+        <Stat label="w₁ − 3에 곱해지는 수 1 − 2ε" value={fmt(f1, 2)} tone={Math.abs(f1) < 1 ? 'good' : 'bad'} />
+        <Stat label="w₂ − 1에 곱해지는 수 1 − 20ε" value={fmt(f2, 2)} tone={Math.abs(f2) < 1 ? 'good' : 'bad'} />
+        <Stat label="학습률 한계 (w₁ 쪽 / w₂ 쪽)" value="1 / 0.1" />
       </Stats>
       {out ? <Note>일부 점이 그림 밖으로 나갔습니다. 빈 점은 그림 가장자리에 붙여 그렸고, 값은 아래 표에 있습니다.</Note> : null}
       <table className={s.grid}>

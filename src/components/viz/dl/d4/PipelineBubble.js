@@ -15,7 +15,7 @@ export default function PipelineBubble() {
   return (
     <Viz
       title="pipeline parallelism의 bubble"
-      caption="행이 장(층 순서), 열이 회전입니다. 칸의 숫자는 그 회전에 그 장이 처리하는 microbatch이고 '쉼'이 bubble입니다. 장 2개와 microbatch 4개가 원문의 예입니다. 장 3개 이상은 같은 규칙을 넓힌 설명용 계산입니다."
+      caption="행이 장(층 순서), 열이 회전입니다. 칸의 숫자는 그 회전에 그 장이 처리하는 microbatch이고 '쉼'이 bubble입니다. 장 2개와 microbatch 4개가 본문의 예입니다. 장 3개 이상은 같은 규칙을 넓힌 설명용 계산입니다."
     >
       <Controls>
         <Slider label="장(층) 수" min={2} max={4} value={S} onChange={setS} />
@@ -26,7 +26,7 @@ export default function PipelineBubble() {
             setM(4);
           }}
         >
-          원문 (2, 4)
+          본문 (2, 4)
         </Btn>
         <Btn
           onClick={() => {

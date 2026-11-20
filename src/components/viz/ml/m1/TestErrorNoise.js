@@ -73,7 +73,7 @@ export default function TestErrorNoise() {
       </svg>
       <Stats>
         <Stat label="표준오차" value={fmt(se, 4)} tone={se > 0.1 ? 'bad' : se < 0.003 ? 'good' : undefined} />
-        <Stat label="뽑은 30개의 표준편차" value={fmt(sd, 4)} />
+        <Stat label="뽑은 30개가 흔들린 폭 (표준편차)" value={fmt(sd, 4)} />
         <Stat label="가장 낮은 값 ~ 높은 값" value={pct(Math.min.apply(null, draws)) + ' ~ ' + pct(Math.max.apply(null, draws))} />
       </Stats>
       <Note>

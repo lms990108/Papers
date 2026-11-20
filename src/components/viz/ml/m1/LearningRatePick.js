@@ -94,7 +94,7 @@ export default function LearningRatePick() {
         <Stat label={'A의 오차 (' + n + '번 뒤)'} value={g3(ea)} />
         <Stat label={'B의 오차 (' + n + '번 뒤)'} value={g3(eb)} />
         <Stat label="오차가 더 작은 쪽" value={pick} tone={pick === '같음' ? undefined : 'good'} />
-        <Stat label="w - 3의 배수 (1 - 2·학습률)" value={'A ' + fmt(1 - 2 * a, 2) + ' / B ' + fmt(1 - 2 * b, 2)} />
+        <Stat label="한 번마다 w - 3에 곱해지는 수 (1 - 2·학습률)" value={'A ' + fmt(1 - 2 * a, 2) + ' / B ' + fmt(1 - 2 * b, 2)} />
       </Stats>
       <Note>
         0.1 대 1에서 한 번 갱신하면 A는 오차 5.76, B는 9로 시작 값 9에서 줄지 않았고, B는 그 뒤로도 0과 6을 오갑니다. 그래서 A를 고릅니다. 0.5 대 1.5에서는 0.5가 한 번에 3에 도착해 오차 0이고, 1.5는 w = 9에서 오차 36입니다. 1보다 큰 학습률에서는 점점 멀어집니다.

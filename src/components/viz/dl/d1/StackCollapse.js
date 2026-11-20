@@ -35,7 +35,7 @@ export default function StackCollapse() {
   return (
     <Viz
       title="층 둘을 쌓았을 때: 직선과 구부린 결과"
-      caption="y = w₂ · f(w₁ · x)입니다. f는 두 층 사이에 끼우는 구부러지는 함수입니다. 점선은 가운데 함수가 없을 때의 직선 w₂ · w₁ · x입니다. 기본값(0.5, 1, tanh)은 원문의 표와 같습니다."
+      caption="y = w₂ · f(w₁ · x)입니다. f는 두 층 사이에 끼우는 구부러지는 함수입니다. 점선은 가운데 함수가 없을 때의 직선 w₂ · w₁ · x입니다. 기본값(0.5, 1, tanh)은 본문의 표와 같습니다."
     >
       <Controls>
         <Slider label="w₁ (첫 층 가중치)" min={-3} max={3} step={0.1} value={w1} onChange={setW1} format={(v) => fmt(v, 1)} />
@@ -55,7 +55,7 @@ export default function StackCollapse() {
             setMode('tanh');
           }}
         >
-          원문 예 (0.5, 1, tanh)
+          본문 예 (0.5, 1, tanh)
         </Btn>
         <Btn
           onClick={() => {

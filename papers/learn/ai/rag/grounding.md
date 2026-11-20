@@ -50,7 +50,7 @@ import TwoLayerEval from '@site/src/components/viz/rag/r1/TwoLayerEval';
 
 ## Prefill
 
-조각이 늘면 prefill이 읽는 칸이 늘어납니다. [Prefill, decode](../nlp/prefill-decode.md)에서 본 것처럼, 답을 한 토큰씩 잇기 전에 붙인 글 전체를 먼저 읽습니다. \(k\)와 청크 크기를 키우면 이 구간이 커집니다. 검색이 좋은 조각을 고를수록, 같은 칸 안에 쓸모 있는 문장이 더 들어갑니다.
+답을 한 토큰씩 잇기 전에 붙인 글 전체를 먼저 읽는 단계가 prefill입니다. [Prefill, decode](../nlp/prefill-decode.md)에서 본 구간입니다. 조각이 늘면 prefill이 읽는 칸이 늘어납니다. \(k\)와 청크 크기를 키우면 이 구간이 커집니다. 검색이 좋은 조각을 고를수록, 같은 칸 안에 쓸모 있는 문장이 더 들어갑니다.
 
 <PromptLength />
 

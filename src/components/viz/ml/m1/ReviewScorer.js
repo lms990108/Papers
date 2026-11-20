@@ -91,7 +91,7 @@ export default function ReviewScorer() {
         <Stat label="붙은 답을 맞힌 개수" value={correct + ' / 4'} tone={correct === 4 ? 'good' : correct <= 2 ? 'bad' : undefined} />
       </Stats>
       {w1 === 0 && w2 === 0 ? <Note>가중치가 둘 다 0이면 어떤 리뷰든 점수가 0입니다. 점수 0은 “0보다 크지 않다”라서 부정으로 읽히고, 부정 리뷰 둘이 우연히 맞습니다.</Note> : null}
-      {extra ? <Note>“나쁘지 않다”는 “나쁘다” 토큰이 없어서 입력이 (0, 0)입니다. 가중치가 무엇이든 점수는 0이고, 0은 긍정이 아닙니다.</Note> : null}
+      {extra ? <Note>“나쁘지 않다”에는 “나쁘다”라는 단어가 그대로 없어서 입력이 (0, 0)입니다. 가중치가 무엇이든 점수는 0이고, 0은 긍정이 아닙니다.</Note> : null}
     </Viz>
   );
 }

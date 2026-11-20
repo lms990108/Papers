@@ -51,11 +51,11 @@ export default function SlopeProbe() {
   return (
     <Viz
       title="기울기는 δ를 줄일 때 가까워지는 값"
-      caption="점을 끌거나 슬라이더로 w를 옮기세요. δ는 w를 오른쪽으로 옮기는 아주 작은 폭입니다. 파란 선은 w와 w+δ를 잇는 선이고, 주황 선은 진짜 접선입니다. δ를 줄이면 두 선이 겹치고, w = 0, δ = 1에서 −5, δ = 0.1에서 −5.9처럼 −6에 붙습니다."
+      caption="점을 끌거나 슬라이더로 w를 옮기세요. δ는 w를 오른쪽으로 옮기는 아주 작은 폭입니다. 변화율은 w를 δ만큼 옮겼을 때 오차가 변한 양을 δ로 나눈 값이고, 파란 선은 w와 w+δ의 두 점을 잇는 선입니다. 주황 점선은 w에서 곡선에 딱 닿는 선(접선)이며, 이 선의 기울기가 진짜 기울기입니다. δ를 줄이면 두 선이 겹치고, w = 0, δ = 1에서 −5, δ = 0.1에서 −5.9처럼 −6에 붙습니다."
     >
       <Controls>
         <Slider label="w" min={X0 + 0.2} max={X1 - 1.2} step={0.05} value={w} onChange={setW} format={(v) => fmt(v, 2)} />
-        <Slider label="δ 단계" min={0} max={4} step={1} value={di} onChange={setDi} format={(v) => DNAME[v]} />
+        <Slider label="δ (옮기는 폭)" min={0} max={4} step={1} value={di} onChange={setDi} format={(v) => DNAME[v]} />
       </Controls>
       <svg ref={ref} viewBox={`0 0 ${W} ${H}`} className={s.svg} role="img" aria-label="오차 곡선, 접선과 할선" {...svgProps}>
         <line x1={36} y1={py(0)} x2={W - 14} y2={py(0)} stroke="var(--ifm-color-emphasis-400)" />
@@ -73,8 +73,8 @@ export default function SlopeProbe() {
         <text x={px(w + d) + 6} y={py(E1(w + d)) + 14} className={s.ts} style={{fill: 'var(--va)'}}>w+δ</text>
         <circle cx={px(w)} cy={py(E1(w))} r={13} fill="var(--vb)" fillOpacity="0.15" stroke="var(--vb)" cursor="grab" onPointerDown={start('w')} />
         <circle cx={px(w)} cy={py(E1(w))} r={3.5} fill="var(--vb)" pointerEvents="none" />
-        <text x={W - 16} y={26} textAnchor="end" className={s.ts} style={{fill: 'var(--va)'}}>파란 실선: 변화율(할선)</text>
-        <text x={W - 16} y={42} textAnchor="end" className={s.ts} style={{fill: 'var(--vb)'}}>주황 점선: 기울기(접선)</text>
+        <text x={W - 16} y={26} textAnchor="end" className={s.ts} style={{fill: 'var(--va)'}}>파란 실선: 두 점을 잇는 선(변화율)</text>
+        <text x={W - 16} y={42} textAnchor="end" className={s.ts} style={{fill: 'var(--vb)'}}>주황 점선: 딱 닿는 선(기울기)</text>
       </svg>
       <Stats>
         <Stat label="δ" value={DNAME[di]} />

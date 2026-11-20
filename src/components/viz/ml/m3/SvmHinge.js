@@ -54,7 +54,7 @@ export default function SvmHinge() {
   return (
     <Viz
       title="겹치는 데이터: C가 여백과 힌지 오차의 비중을 정합니다"
-      caption="C를 올리고 내려 보세요. C가 크면 틀리는 점이 없도록 여백을 줄이고, 작으면 몇 점이 여백 안이나 반대편으로 들어와도 여백을 넓게 둡니다. 점을 끌어도 됩니다. 점 배치는 설명용이고, 해는 쌍대 문제를 풀어 구한 값입니다."
+      caption="C를 올리고 내려 보세요. C가 크면 틀리는 점이 없도록 여백을 줄이고, 작으면 몇 점이 여백 안이나 반대편으로 들어와도 여백을 넓게 둡니다. 점을 끌어도 됩니다. 점 배치는 설명용이고, 해는 최적화 문제를 풀어 구한 값입니다."
     >
       <Controls>
         {SCEN.map((c, k) => <Btn key={c.name} on={scen === k} onClick={() => choose(k)}>{c.name}</Btn>)}
@@ -103,7 +103,7 @@ export default function SvmHinge() {
         <Stat label="반대편(y·f ≤ 0) 점" value={wrong} tone={wrong ? 'bad' : 'good'} />
         <Stat label="½‖w‖² (작을수록 여백이 넓음)" value={fmt(reg, 3)} />
         <Stat label="C × 힌지 오차의 합" value={fmt(C * hs, 3)} />
-        <Stat label="목적 함수 (위 두 값의 합)" value={fmt(reg + C * hs, 3)} />
+        <Stat label="목적 함수 (최소로 만들 값, 위 두 값의 합)" value={fmt(reg + C * hs, 3)} />
       </Stats>
       {flat ? <Note>w가 0에 가까워 여백이 한없이 넓습니다.</Note> : <Note>½‖w‖²를 줄이면 여백이 넓어지고, C × 힌지 합을 줄이면 위반이 줄어듭니다. C를 바꾸면 두 항이 서로 반대로 움직이는 것을 볼 수 있습니다.</Note>}
     </Viz>

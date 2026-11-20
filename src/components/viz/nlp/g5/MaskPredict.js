@@ -34,7 +34,7 @@ export default function MaskPredict() {
   return (
     <Viz
       title="가린 칸을 앞뒤 문맥으로 맞히기"
-      caption="“오늘 [마스크] 좋다”에서 정답은 날씨입니다. 문맥을 켜고 끄면 날씨 칸의 점수가 달라집니다. 오늘 +1, 좋다 +2는 설명용 값입니다."
+      caption="“오늘 [마스크] 좋다”에서 정답은 날씨입니다. 문맥을 켜고 끄면 날씨 칸의 점수가 달라집니다. 오늘을 보면 날씨 칸의 점수에 +1, 좋다를 보면 +2가 더해지는데, 이 값은 설명용입니다."
     >
       <Controls>
         <Btn on={left} onClick={() => toggle(() => setLeft(!left))}>왼쪽 문맥 “오늘” 보기</Btn>

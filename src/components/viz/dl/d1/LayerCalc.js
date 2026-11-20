@@ -6,7 +6,7 @@ const W0 = [
   [0.5, -0.2],
   [0.1, 0.4],
 ];
-const V = [1, -1]; // 원문의 출력 줄
+const V = [1, -1]; // 본문의 출력 줄
 const halo = {stroke: 'var(--ifm-background-surface-color)', strokeWidth: 4, paintOrder: 'stroke'};
 const ZX = 60;
 const HX = 270;
@@ -30,7 +30,7 @@ export default function LayerCalc() {
   return (
     <Viz
       title="두 칸짜리 층을 직접 계산하기"
-      caption="z는 입력, a는 가중치를 곱해 더한 합, h는 구부린 값(은닉 값), y는 출력입니다. W의 아래 숫자 둘은 앞이 칸 번호, 뒤가 입력 번호입니다. 첫 층(W, b)은 원문의 두 줄 가중치이고, 출력 칸이 하나인 둘째 층의 가중치는 (1, -1)로 고정했습니다. 기본값에서 a = (0.3, 0.5), h = (0.291, 0.462), y = -0.171이 나옵니다."
+      caption="z는 입력, a는 가중치를 곱해 더한 합, h는 구부린 값(은닉 값), y는 출력입니다. W의 아래 숫자 둘은 앞이 칸 번호, 뒤가 입력 번호입니다. 첫 층(W, b)은 본문의 두 줄 가중치이고, 출력 칸이 하나인 둘째 층의 가중치는 (1, -1)로 고정했습니다. 기본값에서 a = (0.3, 0.5), h = (0.291, 0.462), y = -0.171이 나옵니다."
     >
       <Controls>
         <Slider label="z₁" min={-2} max={2} step={0.1} value={z[0]} onChange={(v) => setZ([v, z[1]])} format={(v) => fmt(v, 1)} />
@@ -61,7 +61,7 @@ export default function LayerCalc() {
             setMode('tanh');
           }}
         >
-          원문 값으로
+          본문 값으로
         </Btn>
       </Controls>
       <svg className={s.svg} viewBox="0 0 560 190" role="img" aria-label="입력 z 두 칸이 가중치 W와 활성화 함수를 거쳐 은닉 값 h 두 칸이 되고, 다시 출력 y 하나가 되는 그림">

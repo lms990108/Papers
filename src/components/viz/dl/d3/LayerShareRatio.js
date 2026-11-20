@@ -50,7 +50,7 @@ export default function LayerShareRatio() {
               <rect x={70} y={y} width={Math.max(2, X(l[2]) - 70)} height={14} fill="var(--va)" opacity={0.75} />
               <text x={X(l[2]) + 6} y={y + 12} className={s.ts}>연결 {num(l[2])}</text>
               <rect x={70} y={y + 18} width={Math.max(2, X(p) - 70)} height={14} fill="var(--vb)" opacity={0.85} />
-              <text x={X(p) + 6} y={y + 30} className={s.ts}>파라미터 {num(p)} ({trim(l[2] / p, 1)}배)</text>
+              <text x={X(p) + 6} y={y + 30} className={s.ts}>파라미터 {num(p)} · 연결÷파라미터 {trim(l[2] / p, 1)}</text>
             </g>
           );
         })}
@@ -58,9 +58,9 @@ export default function LayerShareRatio() {
       <Note><b>{LAYERS[sel][0]}</b>: {share ? LAYERS[sel][3] : '공유를 껐으므로 연결마다 값이 따로라 파라미터 수가 연결 수와 같습니다.'}</Note>
       <Stats>
         <Stat label="학습 파라미터 합" value={num(sumPar)} tone={share ? 'good' : 'bad'} />
-        <Stat label="연결 합 (RBF 840 포함)" value={num(sumConn)} />
+        <Stat label="연결 합 (출력층 840 포함)" value={num(sumConn)} />
       </Stats>
-      <Note>출력 RBF의 연결 840개(84 × 10)는 기준 벡터가 고정이라 학습 파라미터에 들어가지 않습니다. 앞 층일수록 공유 효과가 크고, 뒤로 갈수록 공유할 위치가 사라집니다.</Note>
+      <Note>LeNet-5의 맨 끝 출력층(RBF)은 F6의 84칸을 숫자 10개와 잇습니다. 이 연결 840개(84 × 10)는 기준 벡터가 고정이라 학습 파라미터에 들어가지 않습니다. 앞 층일수록 공유 효과가 크고, 뒤로 갈수록 공유할 위치가 사라집니다.</Note>
     </Viz>
   );
 }

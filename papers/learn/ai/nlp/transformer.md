@@ -11,7 +11,7 @@ import PositionalEncodingGrid from '@site/src/components/viz/nlp/g4/PositionalEn
 import CausalMaskGrid from '@site/src/components/viz/nlp/g4/CausalMaskGrid';
 import TransformerParamCount from '@site/src/components/viz/nlp/g4/TransformerParamCount';
 
-문장을 넣는 언어 모델의 가운데는 같은 모양의 블록을 쌓은 것입니다. 그 블록이 **트랜스포머**(transformer)의 한 층입니다. [신경망의 구조](../deep-learning/structure.md)에서 블록이라고 부른 상자가 여기 그림입니다. 모양은 블록마다 같고, 빈칸은 블록마다 따로입니다. 한 블록 안에서는 토큰 자리가 달라도 질문, 열쇠, 값, 그리고 뒤의 층이 같은 가중치를 씁니다.
+문장을 넣는 언어 모델의 가운데는 같은 모양의 블록을 쌓은 것입니다. 그 블록이 **트랜스포머**(transformer)의 한 층입니다. [신경망의 구조](../deep-learning/structure.md)에서 블록이라고 부른 상자가 여기 그림입니다. 모양은 블록마다 같고, 안에 채우는 가중치는 블록마다 따로입니다. 한 블록 안에서는 토큰 자리가 달라도 질문, 열쇠, 값, 그리고 뒤의 층이 같은 가중치를 씁니다.
 
 그림에 나오는 말을 먼저 읽어 둡니다.
 
@@ -47,7 +47,7 @@ import TransformerParamCount from '@site/src/components/viz/nlp/g4/TransformerPa
 
 블록이 목록 전체를 다시 쓰지 않아도, 이전 목록이 다음 블록으로 지나갑니다. 블록이 배우는 것은 새 목록이 아니라 원래 목록에 더할 변화량입니다. [기울기 소실](../deep-learning/gradient-vanishing.md)에서 본 대로 더해진 길은 기울기 1이 그대로 앞으로 가서, 층을 깊게 쌓아도 앞 층이 움직입니다.
 
-위 그림의 2번과 5번 단계(주황 글자)가 잔차 연결입니다. 다음 블록은 같은 배선에 자기 빈칸을 둡니다.
+위 그림의 2번과 5번 단계(주황 글자)가 잔차 연결입니다. 다음 블록은 같은 구조에 자기 가중치를 따로 둡니다.
 
 ## 토큰 표현
 
@@ -67,7 +67,7 @@ import TransformerParamCount from '@site/src/components/viz/nlp/g4/TransformerPa
 
 ### 칸마다의 층
 
-그다음은 토큰마다 따로 두는 층입니다. 자리는 가중치를 공유합니다. 수로는 이렇게 씁니다. 구부러지는 함수로 이 예는 ReLU를 씁니다. 0보다 작으면 0으로 둡니다.
+그다음은 토큰마다 따로 계산하는 층입니다. 모든 자리가 같은 가중치를 공유합니다. 두 번의 곱 사이에는 직선이 아닌 구부러진 함수를 하나 두는데, 이 예는 ReLU를 씁니다. 0보다 작으면 0으로 둡니다. 수로는 이렇게 씁니다.
 
 \[
 u = \mathrm{ReLU}(z W_1 + b_1), \quad y = u W_2 + b_2
