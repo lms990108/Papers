@@ -128,7 +128,7 @@ export default function ReceptiveField() {
         <Stat label="합성곱이 보는 토큰" value={`${a.count} / ${tot}`} tone={a.count === tot ? 'good' : undefined} />
         <Stat label="창 어텐션이 보는 토큰" value={`${w.count} / ${tot}`} tone={w.count === tot ? 'good' : undefined} />
         <Stat label="전역 어텐션이 보는 토큰" value={`${b.count} / ${tot}`} tone="good" />
-        <Stat label="1층에서 토큰 하나의 연결" value="9 / 49 / 196" />
+        <Stat label="1층에서 토큰 하나가 보는 수 (합성곱 / 창 / 전역)" value="9 / 49 / 196" />
       </Stats>
       <Note>1층의 연결 수는 합성곱 9개, 창 49개, 전역 196개입니다. L을 키우면 합성곱의 범위는 층마다 한 칸씩 넓어지고, 창 어텐션은 창을 밀면서 서서히 넓어집니다. 전역 어텐션은 1층부터 전체입니다.</Note>
     </Viz>

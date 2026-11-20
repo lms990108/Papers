@@ -41,7 +41,7 @@ export default function SelectionBias() {
       <Controls>
         <Slider label="설정 개수 k" min={1} max={50} step={1} value={k} onChange={setK} />
         <Btn on={false} onClick={() => setSeed(seed + 1)}>난수를 바꿔 다시 돌리기</Btn>
-        <Btn on={false} onClick={() => { setSeed(0); setK(20); }}>원문 값으로</Btn>
+        <Btn on={false} onClick={() => { setSeed(0); setK(20); }}>본문 값으로</Btn>
         <span className={s.ts}>난수 번호 {seed}</span>
       </Controls>
       <svg viewBox={`0 0 ${VW} ${VH}`} className={s.svg} role="img" aria-label="설정마다의 시험 오류와 진짜 오류율 1%, 그리고 고른 설정을 새 시험에서 다시 잰 값">

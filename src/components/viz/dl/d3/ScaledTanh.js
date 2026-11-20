@@ -39,7 +39,7 @@ export default function ScaledTanh() {
   return (
     <Viz
       title="은닉 유닛의 함수 f(a) = A·tanh(S·a)"
-      caption="A와 S를 바꿔 f(1)이 얼마인지 보세요. A = 1.7159, S = 2/3이면 f(1) = 1이고 f(−1) = −1입니다. 위 곡선이 f, 아래 곡선이 2차 미분의 절댓값입니다. 점은 입력 a가 가리키는 값입니다."
+      caption="A와 S를 바꿔 f(1)이 얼마인지 보세요. A = 1.7159, S = 2/3이면 f(1) = 1이고 f(−1) = −1입니다. 위 곡선이 f, 아래 곡선이 2차 미분(곡선이 휘는 정도)의 절댓값입니다. 점은 입력 a가 가리키는 값입니다."
     >
       <Controls>
         <Btn on={isLecun} onClick={() => { setA(LECUN[0]); setS(LECUN[1]); }}>A = 1.7159, S = 2/3</Btn>

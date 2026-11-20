@@ -72,7 +72,7 @@ export default function GaltonLine() {
         <Stat label="부모 키 x" value={fmt(x, 2)} />
         <Stat label="자식 키 y" value={fmt(y, 2)} />
         <Stat label="평균 쪽으로 돌아간 양" value={fmt(back, 2)} tone={back > 0.001 ? 'good' : back < -0.001 ? 'bad' : undefined} />
-        <Stat label="y = 기울기·x + 절편" value={slopeText(k) + 'x + ' + fmt(b0, 2)} />
+        <Stat label="y = 기울기·x + 상수" value={slopeText(k) + 'x + ' + fmt(b0, 2)} />
       </Stats>
       <Note>
         기울기 2/3이면 부모 +3은 자식 +2로, 71.25에서 70.25가 됩니다. 두 식 68.25 + 2/3(x - 68.25)와 2/3x + 22.75는 같은 값을 냅니다. 부모가 평균이면 돌아갈 양이 0이고, 기울기가 1이면 돌아가는 양이 없습니다.

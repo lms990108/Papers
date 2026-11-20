@@ -72,7 +72,7 @@ export default function AnyResGrid() {
           {mode === 'pool' ? (
             <div>
               <Stats>
-                <Stat label="사분면 평균 (왼위, 오위, 왼아래, 오아래)" value={qm.map((x) => fmt(x, 2)).join(', ')} />
+                <Stat label="사분면 평균 (왼쪽 위, 오른쪽 위, 왼쪽 아래, 오른쪽 아래)" value={qm.map((x) => fmt(x, 2)).join(', ')} />
                 <Stat label="네 수를 평균낸 한 칸" value={fmt(pooled, 2)} />
                 <Stat label="토큰 수" value="1개" />
               </Stats>

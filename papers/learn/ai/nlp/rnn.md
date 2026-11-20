@@ -10,7 +10,7 @@ import RnnWeightShare from '@site/src/components/viz/nlp/g3/RnnWeightShare';
 import BpttStep from '@site/src/components/viz/nlp/g3/BpttStep';
 import GradDecay from '@site/src/components/viz/nlp/g3/GradDecay';
 
-[엔그램](./ngram.md)은 앞의 정해진 개수만 봅니다. 그런데 문장이 길어져도 상태의 크기를 일정하게 두고, 그 상태를 단어마다 갱신할 수 있습니다. 직전 상태와 지금 토큰을 받아 다음 상태를 만드는 망이 **순환 신경망**(recurrent neural network, RNN)입니다.
+[엔그램](./ngram.md)은 앞의 정해진 개수만 봅니다. 그런데 지금까지 읽은 내용을 담는 수 목록(상태)의 크기를 문장이 길어져도 일정하게 두고, 그 상태를 단어마다 갱신할 수 있습니다. 직전 상태와 지금 토큰을 받아 다음 상태를 만드는 망이 **순환 신경망**(recurrent neural network, RNN)입니다.
 
 토큰을 한 칸씩 읽으며 상태가 어떻게 바뀌는지 따라가 보세요.
 

@@ -33,7 +33,7 @@ export default function QueryModes() {
   const hint = (() => {
     if (mode === 'local' && q.seeds.length === 0) return '질문에 개체 이름이 없어 시작점을 못 잡았습니다. 로컬 검색은 특정 개체를 묻는 질문에 맞는 방식입니다.';
     if (isGlobal && q.need !== 'cover') return '글로벌 검색은 커뮤니티 요약을 모아 종합합니다. 이 질문은 특정 개체의 세부 관계를 묻기 때문에 요약만으로 충분한지는 요약문이 그 관계를 남겨 뒀는지에 달렸습니다.';
-    if (mode === 'vec' && qi === 2 && !ok) return `청크 ${CHUNKS.length}개 가운데 ${ctx.chunks.length}개만 가져왔습니다. 코퍼스가 1,669청크라면 k를 5로 해도 0.3%입니다.`;
+    if (mode === 'vec' && qi === 2 && !ok) return `청크 ${CHUNKS.length}개 가운데 ${ctx.chunks.length}개만 가져왔습니다. 논문의 팟캐스트 코퍼스처럼 청크가 1,669개라면 k를 5로 해도 0.3%입니다.`;
     if (mode === 'vec' && qi === 1) return '벡터 검색은 질문과 닮은 청크를 가져옵니다. 두 사람을 잇는 중간 청크는 질문과 닮지 않아 순위에 들지 않습니다.';
     if ((mode === 'local' || mode === 'hyb') && h >= 2) return '이웃을 더 멀리 따라가면 필요한 청크가 들어오지만 상관없는 청크도 같이 들어옵니다. 실제 구현은 우선순위와 토큰 예산으로 거릅니다.';
     return '';

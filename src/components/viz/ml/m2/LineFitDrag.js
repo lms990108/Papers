@@ -56,7 +56,7 @@ export default function LineFitDrag() {
   return (
     <Viz
       title="직선을 움직여 오차를 줄여 보기"
-      caption="주황 직선이 가설 y = wx + b입니다. 직선 양 끝의 동그라미를 끌거나 슬라이더를 움직이면 w와 b가 바뀝니다. 빨간 세로선이 오차(예측 - 정답)입니다."
+      caption="주황 직선이 y = wx + b입니다(이런 식을 가설이라고 합니다). 직선 양 끝의 동그라미를 끌거나 슬라이더를 움직이면 w와 b가 바뀝니다. 빨간 세로선이 오차(예측 - 정답)입니다."
     >
       <Controls>
         <Slider label="w (기울기)" min={-1} max={4} step={0.1} value={w} onChange={setW} format={(v) => num(v, 1)} />

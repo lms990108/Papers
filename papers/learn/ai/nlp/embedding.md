@@ -51,7 +51,7 @@ import {EmbeddingLookup, TableSize, SparseUpdate} from '@site/src/components/viz
 | 2 | 좋다 | 1, 1 |
 | 3 | 나쁘다 | 0, 0 |
 
-“오늘 날씨”는 번호 0 다음에 번호 1입니다. 망에 들어가는 것은 그 번호가 아니라 두 행입니다.
+“오늘 날씨”는 번호 0 다음에 번호 1입니다. 망에 들어가는 것은 그 번호가 아니라 표의 두 행입니다. 두 행을 위아래로 쌓으면 이렇습니다.
 
 \[
 \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}

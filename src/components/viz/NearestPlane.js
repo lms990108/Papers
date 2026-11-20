@@ -21,7 +21,7 @@ export default function NearestPlane() {
   return (
     <Viz
       title="가장 가까운 점 k개 찾기"
-      caption="질문(주황 점)을 끌어 보세요. 점선 원은 k번째로 가까운 점까지의 거리입니다. 임베딩은 이런 점이고, 1024차원이면 축이 1024개일 뿐 같은 문제입니다."
+      caption="질문(주황 점)을 끌어 보세요. 점선 원은 k번째로 가까운 점까지의 거리입니다. 임베딩은 이런 점입니다. 실제 임베딩은 차원이 훨씬 커서(예: 1024차원) 축이 1024개일 뿐 같은 문제입니다."
     >
       <Controls>
         <Slider label="k (찾을 점 수)" min={1} max={10} value={k} onChange={setK} />

@@ -15,7 +15,7 @@ const STEPS = [
   {k: 'dy', f: '∂E/∂y = 2(y − t)', note: '이제 뒤에서 앞으로 갑니다. 출력이 정답 쪽으로 가려면 y를 얼마나 바꿔야 하는지의 신호입니다.'},
   {k: 'dw2', f: '∂E/∂w₂ = ∂E/∂y × h', note: 'w₂를 키우면 y는 h만큼 커집니다. 그래서 y의 신호에 h를 곱합니다.'},
   {k: 'dh', f: '∂E/∂h = ∂E/∂y × w₂', note: 'h를 키우면 y는 w₂만큼 커집니다. 이 값은 정답이 아니라 출력 오차가 뒤로 보낸 신호입니다.'},
-  {k: 'da', f: '∂E/∂a = ∂E/∂h × (1 − h²)', note: 'tanh의 기울기 1 − h²를 곱합니다. 이 값은 입력이 0일 때 1이고, 포화에 가까울수록 0에 가까워 신호가 줄어듭니다.'},
+  {k: 'da', f: '∂E/∂a = ∂E/∂h × (1 − h²)', note: 'tanh의 기울기 1 − h²를 곱합니다. 이 값은 입력이 0일 때 1이고, 포화(h가 1이나 -1에 붙은 상태)에 가까울수록 0에 가까워 신호가 줄어듭니다.'},
   {k: 'dw1', f: '∂E/∂w₁ = ∂E/∂a × x', note: 'a = w₁ × x이므로 x를 곱합니다. 이것이 앞 파라미터의 기울기입니다.'},
 ];
 
@@ -91,7 +91,7 @@ export default function TwoLayerBackprop() {
       </svg>
       <Note>{st === 0 ? '입력과 파라미터만 있습니다. 다음 버튼을 눌러 보세요.' : STEPS[st - 1].note}</Note>
       <Stats>
-        <Stat label="1 − h²" value={fmt(1 - n.h * n.h, 4)} />
+        <Stat label="tanh의 기울기 1 − h²" value={fmt(1 - n.h * n.h, 4)} />
         <Stat label="갱신 뒤 w₁ (ε = 0.1)" value={done ? fmt(nw1, 4) : '—'} />
         <Stat label="갱신 뒤 w₂" value={done ? fmt(nw2, 4) : '—'} />
         <Stat label="갱신 뒤 오차" value={done ? fmt(nE, 4) : '—'} tone={done ? (nE < n.E ? 'good' : 'bad') : undefined} />

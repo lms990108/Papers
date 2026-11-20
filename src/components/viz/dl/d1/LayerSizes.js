@@ -31,7 +31,7 @@ export default function LayerSizes() {
   return (
     <Viz
       title="층의 크기로 빈칸 수 세기"
-      caption="한 층의 빈칸은 가중치 n_in × n_out개와 바이어스 n_out개입니다. 기본값 784 → 100 → 10은 원문의 79,510개입니다."
+      caption="한 층의 빈칸은 가중치 n_in × n_out개와 바이어스 n_out개입니다. 기본값 784 → 100 → 10은 본문의 79,510개입니다."
     >
       <Controls>
         <Btn on={nIn === 784 && nOut === 10 && layers === 0} onClick={() => preset(784, 10, 0, 100)}>

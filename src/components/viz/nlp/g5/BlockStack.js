@@ -67,8 +67,8 @@ export default function BlockStack() {
       <div className={s.title} style={{marginTop: 14}}>weight tying: 토큰 표와 점수 행렬을 같은 수로 쓰면</div>
       <Controls>
         <Slider label="단어 수 V" min={2} max={50} step={1} value={V} onChange={setV} />
-        <Btn onClick={() => { setV(4); setD(2); setHeads(1); }}>원문 예 (단어 4개, d = 2)</Btn>
-        <Btn onClick={() => { setD(4); setHeads(2); }}>원문 head 예 (d = 4, head 2)</Btn>
+        <Btn onClick={() => { setV(4); setD(2); setHeads(1); }}>본문 예 (단어 4개, d = 2)</Btn>
+        <Btn onClick={() => { setD(4); setHeads(2); }}>본문 head 예 (d = 4, head 2)</Btn>
       </Controls>
       <Stats>
         <Stat label="토큰 표 V × d" value={String(table)} />

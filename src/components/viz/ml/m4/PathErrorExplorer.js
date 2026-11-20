@@ -8,7 +8,7 @@ const ORIGIN = {
   ok: [true, true, false, false],
 };
 const PRESETS = [
-  {name: '원문 값', ...ORIGIN},
+  {name: '본문 값', ...ORIGIN},
   {name: '연습 1: A(1, 정답)와 C(1)뿐', cost: [1, 2, 1, 3], on: [true, false, true, false], ok: [true, true, false, false]},
   {name: '연습 3: C의 비용 3', cost: [1, 2, 3, 3], on: [true, false, true, false], ok: [true, true, false, false]},
 ];

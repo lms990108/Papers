@@ -17,7 +17,7 @@ export default function WeightCount() {
   return (
     <Viz
       title="가운데 단계 하나가 가중치를 얼마나 늘리나"
-      caption="출력은 점수 10개로 고정했고, 바이어스는 세지 않았습니다. 기본값 28×28과 가운데(은닉) 100칸은 원문의 7,840개와 79,400개입니다."
+      caption="출력은 점수 10개로 고정했고, 바이어스는 세지 않았습니다. 기본값 28×28과 가운데(은닉) 100칸은 본문의 7,840개와 79,400개입니다."
     >
       <Controls>
         <Slider label="그림 한 변" min={3} max={28} value={side} onChange={setSide} format={(v) => `${v}×${v}`} />
@@ -31,7 +31,7 @@ export default function WeightCount() {
           format={(v) => (v === 0 ? '없음' : v)}
         />
         <Btn on={side === 28 && hidden === 100} onClick={() => {setSide(28); setHidden(100);}}>
-          원문의 값
+          본문의 값
         </Btn>
         <Btn on={side === 28 && hidden === 50} onClick={() => {setSide(28); setHidden(50);}}>
           연습 문제 2 (가운데 50칸)

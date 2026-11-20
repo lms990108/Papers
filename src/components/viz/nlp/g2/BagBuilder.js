@@ -50,7 +50,7 @@ export default function BagBuilder() {
           onChange={(e) => setText(e.target.value)}
         />
         <Btn on={unk} onClick={() => setUnk(!unk)}>
-          사전에 없는 말을 [UNK] 칸에 세기
+          사전에 없는 말을 따로 한 칸([UNK])에 세기
         </Btn>
       </Controls>
 

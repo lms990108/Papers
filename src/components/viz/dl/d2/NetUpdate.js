@@ -30,10 +30,10 @@ export default function NetUpdate() {
         <Btn onClick={() => setHist([[0.5, 1]])}>처음으로</Btn>
       </Controls>
       <Stats>
-        <Stat label="w₁ 기울기 (식)" value={fmt(n.dw1, 4)} />
-        <Stat label="w₁ 기울기 (수치)" value={fmt(nw1, 4)} tone={Math.abs(nw1 - n.dw1) < 1e-3 ? 'good' : 'bad'} />
-        <Stat label="w₂ 기울기 (식)" value={fmt(n.dw2, 4)} />
-        <Stat label="w₂ 기울기 (수치)" value={fmt(nw2, 4)} tone={Math.abs(nw2 - n.dw2) < 1e-3 ? 'good' : 'bad'} />
+        <Stat label="w₁ 기울기 (역전파 식)" value={fmt(n.dw1, 4)} />
+        <Stat label="w₁ 기울기 (δ로 잰 값)" value={fmt(nw1, 4)} tone={Math.abs(nw1 - n.dw1) < 1e-3 ? 'good' : 'bad'} />
+        <Stat label="w₂ 기울기 (역전파 식)" value={fmt(n.dw2, 4)} />
+        <Stat label="w₂ 기울기 (δ로 잰 값)" value={fmt(nw2, 4)} tone={Math.abs(nw2 - n.dw2) < 1e-3 ? 'good' : 'bad'} />
       </Stats>
       <table className={s.grid}>
         <thead>

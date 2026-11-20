@@ -50,8 +50,8 @@ export default function ParamLadder() {
       {ok ? (
         <>
           <Bar label="완전 연결" value={lg(fc)} max={top} color="var(--vbad)" text={num(fc)} />
-          <Bar label="국소, 위치마다 따로" value={lg(local)} max={top} color="var(--vb)" text={num(local)} />
-          <Bar label="국소 + 공유" value={lg(shared)} max={top} color="var(--vok)" text={num(shared)} />
+          <Bar label="국소 수용장 (위치마다 따로)" value={lg(local)} max={top} color="var(--vb)" text={num(local)} />
+          <Bar label="국소 수용장 + 공유" value={lg(shared)} max={top} color="var(--vok)" text={num(shared)} />
           <Stats>
             <Stat label="출력 한 변 / 유닛 수" value={`${O} / ${num(units)}`} />
             <Stat label="완전 연결 ÷ 공유" value={`약 ${num(fc / shared)}배`} />

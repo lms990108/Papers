@@ -18,7 +18,7 @@ export default function FaithInject() {
   return (
     <Viz
       title="정답이 문서에 있을 때의 확인, 그리고 지시와 데이터가 한 목록인 문제"
-      caption="문서가 '연기가 좋다'의 별점 4라고 합시다. 답이 문서의 수와 같은지가 faithfulness입니다. 아래 칸의 문장은 원문의 예를 풀어 쓴 설명용 프롬프트입니다."
+      caption="문서가 '연기가 좋다'의 별점 4라고 합시다. 답이 문서의 수와 같은지가 faithfulness입니다. 아래 칸의 문장은 본문의 예를 풀어 쓴 설명용 프롬프트입니다."
     >
       <Controls>
         <span style={{fontSize: '0.85rem'}}>모델이 낸 답(별점):</span>

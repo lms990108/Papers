@@ -23,7 +23,7 @@ function build(mode, x, a) {
     const u = x;
     const g = u.map(silu);
     const f = g.map((e, i) => e * u[i]);
-    steps.push({t: 'FFN', f: 'SiLU(문) × 값 (단위행렬 가중치)', rows: [['입력 u = x', u], ['SiLU(u)', g], ['FFN 출력', f]], d: '원문처럼 FFN만 따로 보기 위해 입력을 x로 다시 둡니다. 문과 값 갈래의 가중치는 단위행렬입니다.'});
+    steps.push({t: 'FFN', f: 'SiLU(문) × 값 (단위행렬 가중치)', rows: [['입력 u = x', u], ['SiLU(u)', g], ['FFN 출력', f]], d: '본문처럼 FFN만 따로 보기 위해 입력을 x로 다시 둡니다. 문과 값 갈래의 가중치는 단위행렬입니다.'});
     steps.push({t: '더하기 (잔차)', f: 'y = u + FFN', rows: [['u', u], ['FFN 출력', f], ['y', add(u, f)]], d: '입력에 FFN 출력을 더합니다. 문이 0인 칸은 더해지지 않습니다.'});
   } else {
     const n2 = norm(h);
@@ -68,10 +68,10 @@ export default function BlockSteps() {
   return (
     <Viz
       title="블록 하나를 단계별로 지나가기"
-      caption="단계를 눌러 보세요. 입력 [1, 0], 어텐션 출력 [0.2, 0.1](설명용)이 기본값이고, 슬라이더로 바꿀 수 있습니다. 원문 순서에서는 FFN을 입력 x에서 따로 계산하고, 이어서 계산에서는 h를 정규화해 FFN에 넣습니다."
+      caption="단계를 눌러 보세요. 입력 [1, 0], 어텐션 출력 [0.2, 0.1](설명용)이 기본값이고, 슬라이더로 바꿀 수 있습니다. 본문 순서에서는 FFN을 입력 x에서 따로 계산하고, 이어서 계산에서는 h를 정규화해 FFN에 넣습니다."
     >
       <Controls>
-        <Btn on={mode === 'orig'} onClick={() => setMode('orig')}>원문 순서</Btn>
+        <Btn on={mode === 'orig'} onClick={() => setMode('orig')}>본문 순서</Btn>
         <Btn on={mode === 'chain'} onClick={() => { setMode('chain'); }}>이어서 계산 (pre-norm)</Btn>
         <Btn onClick={() => { setX([1, 0]); setA([0.2, 0.1]); }}>기본값으로</Btn>
       </Controls>

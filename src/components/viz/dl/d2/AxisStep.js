@@ -34,7 +34,7 @@ export default function AxisStep() {
   return (
     <Viz
       title="축마다 보폭을 나누면"
-      caption="오차 (w₁ − 3)² + 10(w₂ − 1)²에서 2차 미분은 w₁ 쪽 2, w₂ 쪽 20입니다. 축별 보폭은 ε_k = η / (μ + h_kk)이고, 여기서는 h_kk에 이 값을 그대로 씁니다. 시작은 (0, 0)입니다."
+      caption="오차 (w₁ − 3)² + 10(w₂ − 1)²에서 2차 미분(곡선이 얼마나 급한지)은 w₁ 쪽 2, w₂ 쪽 20입니다. 공통 0.05와 공통 0.1은 두 축에 같은 학습률을 쓴 경우입니다. 축별 보폭은 ε_k = η / (μ + h_kk)이고, 여기서는 h_kk에 이 값을 그대로 씁니다. 시작은 (0, 0)입니다."
     >
       <Controls>
         <Slider label="η (전역 학습률)" min={0.05} max={1} step={0.05} value={eta} onChange={setEta} format={(v) => fmt(v, 2)} />
@@ -85,7 +85,7 @@ export default function AxisStep() {
       <Stats>
         <Stat label="ε₁ = η/(μ+2)" value={fmt(e1, 4)} />
         <Stat label="ε₂ = η/(μ+20)" value={fmt(e2, 5)} />
-        <Stat label="축별 곱 1−ε₁h₁ / 1−ε₂h₂" value={`${fmt(1 - e1 * H1, 3)} / ${fmt(1 - e2 * H2, 3)}`} />
+        <Stat label="남은 거리에 곱해지는 수 (w₁ 쪽 / w₂ 쪽)" value={`${fmt(1 - e1 * H1, 3)} / ${fmt(1 - e2 * H2, 3)}`} />
       </Stats>
       <table className={s.grid}>
         <thead>
@@ -108,7 +108,7 @@ export default function AxisStep() {
         </tbody>
       </table>
       <Note>
-        공통 0.05는 w₂가 한 번에 끝나지만 w₁이 느리고, 공통 0.1은 w₂가 왕복합니다. 축별 보폭은 두 축의 곱이 거의 같아서(η = 0.2, μ = 0.02에서 둘 다 약 0.8) 같은 속도로 줄어듭니다.
+        공통 0.05는 w₂가 한 번에 끝나지만 w₁이 느리고, 공통 0.1은 w₂가 왕복합니다. 축별 보폭은 남은 거리에 곱해지는 수가 두 축에서 거의 같아서(η = 0.2, μ = 0.02에서 둘 다 약 0.8) 같은 속도로 줄어듭니다.
       </Note>
     </Viz>
   );

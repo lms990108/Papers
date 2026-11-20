@@ -48,7 +48,7 @@ LLM은 긴 글의 모든 자리에서 다음 토큰을 맞히고, 그 \(-\log p\
 \frac{0.693 + 0.341}{2} = 0.517
 \]
 
-LLM이 줄이는 수는 이 평균입니다. 자리 하나의 0.341만 보면, 앞 칸을 틀린 모델과 맞춘 모델이 같아 보입니다. 글이 길어지면 평균에 들어가는 자리가 늘어날 뿐, 칸마다의 식은 같습니다.
+LLM이 줄이는 수는 이 평균입니다. 자리 하나의 0.341만 보면, 첫째 자리를 틀린 모델과 맞춘 모델이 같아 보입니다. 글이 길어지면 평균에 들어가는 자리가 늘어날 뿐, 칸마다의 식은 같습니다.
 
 [언어 모델](./language-model.md)은 이 평균의 지수를 **퍼플렉서티**(perplexity)라고 합니다.
 
@@ -90,7 +90,7 @@ print([round(v, 3) for v in losses], round(mean, 3), round(math.exp(mean), 3))
 
 Large는 그 블록을 여러 층 두고 목록을 길게 했다는 말이지, 엔그램과 다른 종류의 오차가 아닙니다.
 
-층을 한 번 지날 때의 정규화, residual, FFN은 [Decoder block](./block.md)에서 수 하나로 밟습니다. 프롬프트 전체를 읽고 다음 칸을 하나씩 뽑는 구간은 [Prefill, decode](./prefill-decode.md)입니다. “연기가 좋다”의 별점처럼 사람이 고른 답을 나중에 맞추는 계산은 [Post-training](./post-training.md)입니다. 그 단계 전에는 별점 질문의 형식이 오차에 없습니다.
+층을 한 번 지날 때의 정규화, residual, FFN은 [Decoder block](./block.md)에서 수 하나로 밟습니다. 프롬프트 전체를 읽고 다음 칸을 하나씩 뽑는 구간은 [Prefill, decode](./prefill-decode.md)입니다. “연기가 좋다”라는 리뷰의 별점처럼 사람이 고른 답을 나중에 맞추는 계산은 [Post-training](./post-training.md)입니다. 그 단계 전에는 별점 질문의 형식이 오차에 없습니다.
 
 ## 헷갈리기 쉬운 점
 

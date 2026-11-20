@@ -58,7 +58,7 @@ export default function BatchNoise() {
   return (
     <Viz
       title="미니배치 크기와 기울기의 흔들림"
-      caption="정답이 3, 3, 1, 3인 네 쌍에서 m개를 뽑을 때 나올 수 있는 기울기를 모두 세어 그렸습니다(w = 0이면 표본별 기울기는 −6, −6, −2, −6). 막대 높이는 그 기울기가 나올 비율이고, 점선이 전체 평균 기울기입니다."
+      caption="정답이 3, 3, 1, 3인 네 쌍에서, 한 번에 쓰는 쌍의 수 m(미니배치 크기)개를 뽑을 때 나올 수 있는 기울기를 모두 세어 그렸습니다(w = 0이면 표본별 기울기는 −6, −6, −2, −6). 막대 높이는 그 기울기가 나올 비율이고, 점선이 전체 평균 기울기입니다."
     >
       <Controls>
         {[1, 2, 3, 4].map((v) => (
@@ -95,7 +95,7 @@ export default function BatchNoise() {
       </Controls>
       <Stats>
         <Stat label="가능한 기울기 평균" value={fmt(mean, 3)} tone={Math.abs(mean - full) < 1e-9 ? 'good' : 'bad'} />
-        <Stat label="흔들림 (표준편차)" value={fmt(sd, 3)} />
+        <Stat label="흔들림 (평균에서 퍼진 정도)" value={fmt(sd, 3)} />
         <Stat label="가장 작은 값 ~ 가장 큰 값" value={`${fmt(Math.min(...grads), 2)} ~ ${fmt(Math.max(...grads), 2)}`} />
         <Stat label="뽑은 기울기의 평균" value={dmean == null ? '—' : fmt(dmean, 3)} />
       </Stats>

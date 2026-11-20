@@ -38,7 +38,7 @@ export default function PassAtK() {
   return (
     <Viz
       title="pass@k: 뽑기 n번 중 c번 맞았을 때, k번을 고르면"
-      caption="pass@k는 n번 뽑은 것 중 k번을 골랐을 때 그 안에 맞은 것이 하나 이상 있을 확률입니다. 앞쪽 c개가 맞은 뽑기이고 나머지는 틀린 뽑기입니다. 아래 칸 하나가 'n개 중 k개를 고르는 경우' 하나입니다. 초록은 하나 이상 맞은 경우, 빨강은 틀린 것만 고른 경우입니다. 기본값 5, 2, 3은 원문의 값입니다."
+      caption="pass@k는 n번 뽑은 것 중 k번을 골랐을 때 그 안에 맞은 것이 하나 이상 있을 확률입니다. 앞쪽 c개가 맞은 뽑기이고 나머지는 틀린 뽑기입니다. 아래 칸 하나가 'n개 중 k개를 고르는 경우' 하나이고, 그 경우의 수를 C(n, k)로 적습니다. 초록은 하나 이상 맞은 경우, 빨강은 틀린 것만 고른 경우입니다. 기본값 5, 2, 3은 본문의 값입니다."
     >
       <Controls>
         <Slider label="뽑은 횟수 n" min={1} max={8} value={n} onChange={setNn} />
@@ -53,7 +53,7 @@ export default function PassAtK() {
             setK(3);
           }}
         >
-          원문 (5, 2, 3)
+          본문 (5, 2, 3)
         </Btn>
         <Btn
           onClick={() => {

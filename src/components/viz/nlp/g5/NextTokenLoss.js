@@ -28,7 +28,7 @@ export default function NextTokenLoss() {
   return (
     <Viz
       title="정답 칸의 비율이 오차가 됩니다"
-      caption="자리를 고르고 점수를 바꿔 보세요. 정답 칸의 비율이 1에 가까우면 오차가 0에 가깝고, 낮으면 커집니다. 점수의 기본값은 원문의 가정입니다."
+      caption="자리를 고르고 점수를 바꿔 보세요. 정답 칸의 비율이 1에 가까우면 오차가 0에 가깝고, 낮으면 커집니다. 점수의 기본값은 본문의 가정입니다."
     >
       <Controls>
         {POS.map((p, r) => (

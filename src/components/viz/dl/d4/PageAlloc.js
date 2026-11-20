@@ -57,7 +57,7 @@ export default function PageAlloc() {
   return (
     <Viz
       title="최대 길이를 연속으로 예약하기와 page로 붙이기 (PagedAttention)"
-      caption="파랑 칸이 실제 캐시, 빨강 칸이 빈 칸입니다. 보라 테두리 하나가 page 하나이고, page는 메모리 안에서 붙어 있지 않아도 됩니다. 기본값은 A 3토큰, B 8토큰, page 4토큰, 최대 길이 16칸으로 원문의 표와 같습니다."
+      caption="파랑 칸이 실제 캐시, 빨강 칸이 빈 칸입니다. 보라 테두리 하나가 page 하나이고, page는 메모리 안에서 붙어 있지 않아도 됩니다. 기본값은 A 3토큰, B 8토큰, page 4토큰, 최대 길이 16칸으로 본문의 표와 같습니다."
     >
       <Controls>
         <Slider label="A 토큰" min={1} max={MAXLEN} value={a} onChange={setA} />

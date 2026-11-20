@@ -85,7 +85,7 @@ export default function SelectionBias() {
         <Slider label="후보 수 K" min={1} max={50} step={1} value={K} onChange={setK} />
         <Slider label="문장 수 n" min={0} max={NS.length - 1} step={1} value={ni} onChange={setNi} format={() => String(n)} />
         <Btn onClick={() => setSeed(seed + 1)}>한 번 더 해 보기</Btn>
-        <Btn on={K === 20 && n === 20} onClick={() => {setK(20); setNi(1);}}>원문 설정 (20, 20)</Btn>
+        <Btn on={K === 20 && n === 20} onClick={() => {setK(20); setNi(1);}}>본문 설정 (20, 20)</Btn>
       </Controls>
       <svg viewBox={'0 0 ' + W + ' 190'} className={s.svg} role="img" aria-label="후보들의 검증 점수와 같은 후보의 새 시험 점수">
         <Strip title="후보 K개의 검증 점수" vals={trial.val} pick={trial.best} y={70} />
@@ -98,7 +98,7 @@ export default function SelectionBias() {
         <Stat label="새 시험 점수의 기댓값" value="0.500" tone="good" />
       </Stats>
       <Note>
-        K = 20, n = 20이면 기댓값이 0.706입니다. 원문의 1000번 평균 0.709와 0.706은 이 값 둘레에서 나온 것이고, 그 후보를 새 시험으로 재면 0.498로 0.5에 가깝습니다. 후보가 많을수록, 문장이 적을수록 부풀림이 커집니다. K = 1이면 고르는 일이 없어 부풀림도 없습니다.
+        K = 20, n = 20이면 기댓값이 0.706입니다. 본문의 1000번 평균 0.709와 0.706은 이 값 둘레에서 나온 것이고, 그 후보를 새 시험으로 재면 0.498로 0.5에 가깝습니다. 후보가 많을수록, 문장이 적을수록 부풀림이 커집니다. K = 1이면 고르는 일이 없어 부풀림도 없습니다.
       </Note>
     </Viz>
   );

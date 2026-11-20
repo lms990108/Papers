@@ -31,7 +31,7 @@ export default function SelfAttentionCostN() {
         ))}
       </Controls>
 
-      <div className={s.title}>토큰 수 n = {comma(n)}, 표현 길이 d = {comma(d)}</div>
+      <div className={s.title}>토큰 수 n = {comma(n)}, 목록 길이 d = {comma(d)}</div>
       <Bar label="셀프 어텐션 n²·d" value={Math.log10(att)} max={MAXLOG} color="var(--va)" text={comma(att)} />
       <Bar label="순환 신경망 n·d²" value={Math.log10(rnn)} max={MAXLOG} color="var(--vb)" text={comma(rnn)} />
 

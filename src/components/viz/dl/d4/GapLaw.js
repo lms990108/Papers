@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Viz, Controls, Slider, Stats, Stat, Note, fmt, styles as s} from '../../Viz';
 
-// 원문 표(7차 모델, 매번 새 잡음으로 20번 학습한 평균)
+// 본문 표(7차 모델, 매번 새 잡음으로 20번 학습한 평균)
 const ROWS = [
   {P: 8, tr: 0.0, te: 0.1295, gap: 0.1295},
   {P: 16, tr: 0.0201, te: 0.0546, gap: 0.0345},
@@ -37,7 +37,7 @@ export default function GapLaw() {
   return (
     <Viz
       title="학습 쌍 P를 늘리면 간격이 줄어드는 모양"
-      caption="점은 원문 표의 측정값(7차 모델, 20번 평균)입니다. 곡선은 간격 ≈ k(h/P)^α를 P=8의 값 0.1295에 맞춰 그린 것이며, k와 h를 따로 모르므로 곡선의 높이는 설명용입니다. α를 바꿔 곡선이 점들과 얼마나 맞는지 보세요."
+      caption="점은 본문 표의 측정값(7차 모델, 20번 평균)입니다. 곡선은 간격 ≈ k(h/P)^α를 P=8의 값 0.1295에 맞춰 그린 것이며, k와 h를 따로 모르므로 곡선의 높이는 설명용입니다. α를 바꿔 곡선이 점들과 얼마나 맞는지 보세요."
     >
       <Controls>
         <Slider label="α" min={0.5} max={1} step={0.05} value={alpha} onChange={setAlpha} format={(v) => fmt(v, 2)} />

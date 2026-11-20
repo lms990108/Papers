@@ -28,7 +28,7 @@ export default function Saturation() {
   return (
     <Viz
       title="입력이 커지면 기울기가 죽는다 (포화)"
-      caption="활성화 함수 입력 z에서의 기울기입니다. tanh는 0에서 1로 가장 크고, 시그모이드는 0에서 0.25로 가장 큽니다. z를 옮기며 값을 읽어 보세요. 0.5와 2는 본문의 예입니다."
+      caption="활성화 함수 입력 z에서의 기울기입니다. tanh는 0에서 1로 가장 크고, 시그모이드는 0에서 0.25로 가장 큽니다. z를 옮기며 값을 읽어 보세요. 0.5와 2는 본문의 예입니다. 포화는 입력이 커져 출력이 끝값(tanh는 1이나 -1, 시그모이드는 1이나 0)에 붙고, 기울기가 0에 가까워진 상태입니다."
     >
       <Controls>
         <Btn on={z === 0} onClick={() => setZ(0)}>z = 0</Btn>
@@ -65,7 +65,7 @@ export default function Saturation() {
         <Stat label="시그모이드 기울기" value={fmt(ds, 4)} />
         <Stat label="ReLU 기울기" value={fmt(dr, 0)} />
         <Stat label="tanh(z)" value={fmt(Math.tanh(z), 3)} />
-        <Stat label="z = 0.5의 tanh 기울기와 비율" value={`${fmt(ref / Math.max(dt, 1e-12), 1)}배`} />
+        <Stat label="tanh 기울기가 z = 0.5일 때보다 몇 배 작은가" value={`${fmt(ref / Math.max(dt, 1e-12), 1)}배`} />
       </Stats>
       <Note>
         z = 0.5에서 tanh 기울기는 약 0.786이고, z = 2에서는 tanh(2) ≈ 0.964이고 기울기가 약 0.071로 0.786의 약 11분의 1입니다. 칸이 이 구간에 들어가면 뒤에 0.25를 곱하지 않아도 앞 층으로 가는 신호가 이미 작습니다. ReLU는 z가 양수이면 기울기가 1이라 포화가 없고, 음수이면 0입니다.

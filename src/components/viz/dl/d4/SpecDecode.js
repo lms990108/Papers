@@ -31,10 +31,10 @@ export default function SpecDecode() {
   return (
     <Viz
       title="speculative decoding: 초안 3토큰을 큰 모델이 한 번에 검사하기"
-      caption="초안 비율을 q, 큰 모델 비율을 p라 하면 그 토큰을 min(1, p/q)의 확률로 남깁니다. 아래 u는 그 확률과 비교할 뽑은 수이고(u가 확률 이하이면 남김), 첫 거절 뒤의 초안은 버립니다. 원문의 두 토큰 외 셋째 줄의 값과 u는 설명용입니다."
+      caption="초안 비율을 q, 큰 모델 비율을 p라 하면 그 토큰을 min(1, p/q)의 확률로 남깁니다. 아래 u는 그 확률과 비교할 뽑은 수이고(u가 확률 이하이면 남김), 첫 거절 뒤의 초안은 버립니다. 본문의 두 토큰 외 셋째 줄의 값과 u는 설명용입니다."
     >
       <Controls>
-        <Btn onClick={() => setToks(INIT)}>원문의 예 (0.8/0.9, 0.8/0.2)</Btn>
+        <Btn onClick={() => setToks(INIT)}>본문의 예 (0.8/0.9, 0.8/0.2)</Btn>
         <Btn onClick={() => setToks([{q: 0.4, p: 0.8, u: 0.5}, INIT[1], INIT[2]])}>연습 3 (0.4, 0.8)</Btn>
       </Controls>
       {toks.map((t, i) => (

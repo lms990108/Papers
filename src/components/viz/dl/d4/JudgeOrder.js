@@ -20,7 +20,7 @@ export default function JudgeOrder() {
   return (
     <Viz
       title="심판이 준 점수는 순서를 뒤집어도 같은가"
-      caption="이 점수는 측정값이 아니라 원문이 든 설명용 값입니다. 슬라이더로 점수를 바꿔 보세요. 같은 두 답을 순서만 뒤집어 두 번 채점하고, 두 번의 평균을 비교합니다."
+      caption="이 점수는 측정값이 아니라 본문이 든 설명용 값입니다. 슬라이더로 점수를 바꿔 보세요. 같은 두 답을 순서만 뒤집어 두 번 채점하고, 두 번의 평균을 비교합니다."
     >
       <Controls>
         <Btn on={flip} onClick={() => setFlip(true)}>순서를 뒤집어 두 번 채점</Btn>
@@ -33,7 +33,7 @@ export default function JudgeOrder() {
             setA2(0.5);
           }}
         >
-          원문 값으로
+          본문 값으로
         </Btn>
         <Btn
           onClick={() => {

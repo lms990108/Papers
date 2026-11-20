@@ -29,7 +29,7 @@ export default function NoiseTarget() {
             setSub(0.25);
           }}
         >
-          원문 (0.75에서 0.25)
+          본문 (0.75에서 0.25)
         </Btn>
         <Btn onClick={() => setSub(noise)}>한 번에 전부</Btn>
       </Controls>
@@ -54,7 +54,7 @@ export default function NoiseTarget() {
       <Note>
         {sb === noise
           ? `예측한 잡음 ${fmt(noise, 2)}을 한 번에 빼면 ${fmt(x, 2)} − ${fmt(noise, 2)} = 0입니다.`
-          : `일정 중 일부만 빼면 중간이 남습니다. ${fmt(x, 2)}에서 ${fmt(sb, 2)}를 빼면 ${fmt(after, 2)}입니다.`}
+          : `예측한 잡음 중 일부만 빼면 중간이 남습니다. ${fmt(x, 2)}에서 ${fmt(sb, 2)}를 빼면 ${fmt(after, 2)}입니다.`}
         {x === 0.75 && sb === 0.25 ? ' flow matching의 두 번째 걸음과 같은 자리입니다.' : ''}
         {' '}
         도착점은 같이 만들 수 있고, 네트워크가 맞히라고 배운 수가 다릅니다. 한쪽은 속도 −1, 한쪽은 잡음 {fmt(noise, 2)}입니다.

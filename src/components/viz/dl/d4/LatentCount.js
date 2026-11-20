@@ -25,7 +25,7 @@ export default function LatentCount() {
   return (
     <Viz
       title="픽셀 4개 대신 잠재 2개에서 걷기 (latent diffusion)"
-      caption="밝기 네 칸 [1, 0, 1, 0]을 multimodal 페이지의 projector 두 줄로 줄이면 [0.5, 0.5]입니다. 되돌리는 행렬은 원문에 없는 설명용 값입니다."
+      caption="밝기 네 칸 [1, 0, 1, 0]을 Multimodal 페이지에서 쓴 두 줄짜리 곱(projector)으로 줄이면 [0.5, 0.5]입니다. 되돌리는 행렬은 본문에 없는 설명용 값입니다."
     >
       <Controls>
         <Slider label="걸음 수" min={1} max={16} value={steps} onChange={setSteps} />
