@@ -12,7 +12,7 @@ import WeightCount from '@site/src/components/viz/dl/d1/WeightCount';
 
 [선형 회귀](../machine-learning/linear-regression.md)와 [퍼셉트론](../machine-learning/perceptron.md)은 칸 하나였습니다. 입력에 가중치를 곱해 더하고, 수 하나나 0과 1을 냈습니다. 손으로 쓴 숫자를 맞힐 때는 입력이 수백 개이고, 답은 0부터 9까지 열 개입니다. 칸 하나의 직선으로는 그 열 개를 가르지 못합니다.
 
-[퍼셉트론](../machine-learning/perceptron.md)의 배타적 논리합도 직선 하나로 갈리지 않았고, 칸을 두 단계로 쌓아서 갈랐습니다. 그 단계를 여럿 둔 기계가 **신경망**(neural network)입니다. 아래 그림에서 픽셀을 눌러 보세요. 그림이 점수 둘로 바뀌는 계산이 보입니다.
+[퍼셉트론](../machine-learning/perceptron.md)의 배타적 논리합(XOR)도 직선 하나로 갈리지 않았고, 칸을 두 단계로 쌓아서 갈랐습니다. 그 단계를 여럿 둔 기계가 **신경망**(neural network)입니다. 아래 그림에서 픽셀을 눌러 보세요. 그림이 점수 둘로 바뀌는 계산이 보입니다.
 
 <PixelScore />
 

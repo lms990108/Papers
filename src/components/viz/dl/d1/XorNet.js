@@ -30,7 +30,7 @@ export default function XorNet() {
 
   return (
     <Viz
-      title="배타적 논리합을 은닉 칸 둘로 가르기"
+      title="배타적 논리합(XOR)을 은닉 칸 둘로 가르기"
       caption="가중치는 모두 1이고, 첫 합은 x₁ + x₂에 바이어스를 더한 것입니다. 기본값은 원문의 -0.5, -1.5, -0.5입니다. 부호 함수는 양수이면 1, 아니면 0입니다."
     >
       <Controls>
