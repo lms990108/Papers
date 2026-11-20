@@ -73,9 +73,9 @@ export default function PathErrorExplorer() {
             <th>정답</th>
             <th>비용 c</th>
             <th>e^(-c)</th>
-            <th>전체 몫</th>
-            <th>정답 안 몫</th>
-            <th>기울기</th>
+            <th>전체 몫 (e^(-c)가 전체 합에서 차지하는 비율)</th>
+            <th>정답 안 몫 (정답 경로의 합에서 차지하는 비율)</th>
+            <th>기울기 (c를 올릴 때 E가 변하는 정도)</th>
           </tr>
         </thead>
         <tbody>

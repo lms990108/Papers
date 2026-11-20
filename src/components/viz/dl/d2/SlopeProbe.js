@@ -51,7 +51,7 @@ export default function SlopeProbe() {
   return (
     <Viz
       title="기울기는 δ를 줄일 때 가까워지는 값"
-      caption="점을 끌거나 슬라이더로 w를 옮기세요. 파란 선은 w와 w+δ를 잇는 선이고, 주황 선은 진짜 접선입니다. δ를 줄이면 두 선이 겹치고, w = 0, δ = 1에서 −5, δ = 0.1에서 −5.9처럼 −6에 붙습니다."
+      caption="점을 끌거나 슬라이더로 w를 옮기세요. δ는 w를 오른쪽으로 옮기는 아주 작은 폭입니다. 파란 선은 w와 w+δ를 잇는 선이고, 주황 선은 진짜 접선입니다. δ를 줄이면 두 선이 겹치고, w = 0, δ = 1에서 −5, δ = 0.1에서 −5.9처럼 −6에 붙습니다."
     >
       <Controls>
         <Slider label="w" min={X0 + 0.2} max={X1 - 1.2} step={0.05} value={w} onChange={setW} format={(v) => fmt(v, 2)} />

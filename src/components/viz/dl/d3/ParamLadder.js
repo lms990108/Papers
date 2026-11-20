@@ -44,7 +44,7 @@ export default function ParamLadder() {
         <Slider label={one ? '입력 칸 N' : '입력 한 변 N'} min={4} max={one ? 100 : 64} value={N} onChange={set('N')} />
         <Slider label="커널 K" min={1} max={9} value={K} onChange={set('K')} />
         <Slider label="패딩 P" min={0} max={4} value={P} onChange={set('P')} />
-        {one ? null : <Slider label="입력 채널" min={1} max={3} value={Cin} onChange={set('Cin')} />}
+        {one ? null : <Slider label="입력 채널 (흑백 1, RGB 3)" min={1} max={3} value={Cin} onChange={set('Cin')} />}
         {one ? null : <Slider label="출력 맵 수" min={1} max={64} value={Cout} onChange={set('Cout')} />}
       </Controls>
       {ok ? (

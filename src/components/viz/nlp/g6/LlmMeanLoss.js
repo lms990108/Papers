@@ -31,8 +31,8 @@ export default function LlmMeanLoss() {
         ))}
       </Controls>
       <Controls>
-        <Slider label="첫째 자리 p (날씨)" min={0.05} max={1} step={0.01} value={p[0]} onChange={set(0)} format={(v) => fmt(v, 3)} />
-        <Slider label="둘째 자리 p (좋다)" min={0.05} max={1} step={0.01} value={p[1]} onChange={set(1)} format={(v) => fmt(v, 3)} />
+        <Slider label="첫째 자리의 정답 비율 p (날씨)" min={0.05} max={1} step={0.01} value={p[0]} onChange={set(0)} format={(v) => fmt(v, 3)} />
+        <Slider label="둘째 자리의 정답 비율 p (좋다)" min={0.05} max={1} step={0.01} value={p[1]} onChange={set(1)} format={(v) => fmt(v, 3)} />
       </Controls>
       <svg viewBox="0 0 480 120" className={s.svg} role="img" aria-label="오늘 날씨 좋다에서 자리마다 다음 토큰을 맞히고 오차를 낸다">
         {TOKENS.map((w, i) => (

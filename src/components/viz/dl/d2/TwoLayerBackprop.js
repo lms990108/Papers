@@ -67,7 +67,7 @@ export default function TwoLayerBackprop() {
       <svg viewBox={`0 0 ${W} ${H}`} className={s.svg} role="img" aria-label="두 층 망의 순방향 값과 역방향 기울기">
         <text x={4} y={14} className={s.ts}>순방향 →</text>
         <Box x={CX.x} y={28} title="입력 x" val={fmt(x, 4)} on />
-        <Box x={CX.a} y={28} title="a" val={v('a')} on={have('a')} cur={cur === 'a'} />
+        <Box x={CX.a} y={28} title="a (첫 합)" val={v('a')} on={have('a')} cur={cur === 'a'} />
         <Box x={CX.h} y={28} title="h (정답 없음)" val={v('h')} on={have('h')} cur={cur === 'h'} />
         <Box x={CX.y} y={28} title="출력 y" val={v('y')} on={have('y')} cur={cur === 'y'} />
         <Box x={CX.E} y={28} title="오차 E" val={v('E')} on={have('E')} cur={cur === 'E'} />

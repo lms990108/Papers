@@ -33,7 +33,7 @@ export default function DpoMargin() {
   return (
     <Viz
       title="DPO의 오차는 간격이 얼마나 벌어졌는가"
-      caption="기준 모델의 logprob은 고른 답 -0.5, 버린 답 -1.0으로 고정입니다. 학습 중인 모델의 logprob을 움직여 보세요. 세기 β는 글의 예에서 1입니다."
+      caption="기준 모델의 logprob은 고른 답 -0.5, 버린 답 -1.0으로 고정입니다. 학습 중인 모델의 logprob을 움직여 보세요. π는 학습 중인 모델이, π_ref는 기준 모델이 답에 준 확률이고, log π는 그 logprob입니다. 차이는 학습 중 값에서 기준 값을 뺀 것입니다. 세기 β는 두 차이의 간격에 곱하는 수로, 글의 예에서 1입니다. σ는 입력을 0과 1 사이로 바꾸는 시그모이드입니다."
     >
       <Controls>
         {PRESETS.map((p) => (
@@ -53,7 +53,7 @@ export default function DpoMargin() {
             <th />
             <th>학습 중 log π</th>
             <th>기준 log π_ref</th>
-            <th>차이</th>
+            <th>차이 (학습 중 − 기준)</th>
           </tr>
         </thead>
         <tbody>
@@ -83,7 +83,7 @@ export default function DpoMargin() {
       <Stats>
         <Stat label="시그모이드 입력" value={fmt(x, 2)} />
         <Stat label="시그모이드 출력" value={fmt(sig(x), 3)} />
-        <Stat label="오차 -log σ" value={fmt(e, 3)} tone={e < 0.69 ? 'good' : e > 0.7 ? 'bad' : undefined} />
+        <Stat label="오차 -log σ (σ는 시그모이드 출력)" value={fmt(e, 3)} tone={e < 0.69 ? 'good' : e > 0.7 ? 'bad' : undefined} />
       </Stats>
       <Note>
         {near(dw, dl)

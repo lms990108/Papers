@@ -40,7 +40,7 @@ export default function BpttStep() {
   return (
     <Viz
       title="시간 펼침 역전파: 거슬러 가며 기울기 모으기"
-      caption="상태의 첫 칸만 떼어 낸 스칼라 예입니다. 오차를 마지막 상태 h3으로 두고, 버튼을 눌러 한 칸씩 거슬러 가 보세요. 한 칸마다 tanh의 기울기와 w가 곱해지고, 같은 w가 쓰인 세 자리의 몫을 모두 더합니다."
+      caption="상태의 첫 칸만 떼어 낸 스칼라 예입니다. 오차 L을 마지막 상태 h3으로 두고, 버튼을 눌러 한 칸씩 거슬러 가 보세요. 한 칸마다 tanh의 기울기와 w가 곱해지고, 같은 w가 쓰인 세 자리의 몫을 모두 더합니다."
     >
       <Controls>
         <Btn onClick={() => setK(Math.min(3, k + 1))}>한 칸 거슬러 가기</Btn>
@@ -80,8 +80,8 @@ export default function BpttStep() {
         <thead>
           <tr>
             <th>자리 t</th>
-            <th>dL/dh_t</th>
-            <th>dL/da_t = dL/dh_t × (1 − h_t²)</th>
+            <th>상태의 기울기 dL/dh_t</th>
+            <th>tanh 안의 값 a_t의 기울기 dL/da_t = dL/dh_t × (1 − h_t²)</th>
             <th>w의 몫 = dL/da_t × h_(t−1)</th>
           </tr>
         </thead>

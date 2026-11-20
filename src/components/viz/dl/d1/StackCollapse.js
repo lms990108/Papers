@@ -35,12 +35,12 @@ export default function StackCollapse() {
   return (
     <Viz
       title="층 둘을 쌓았을 때: 직선과 구부린 결과"
-      caption="y = w₂ · f(w₁ · x)입니다. 점선은 가운데 함수가 없을 때의 직선 w₂ · w₁ · x입니다. 기본값(0.5, 1, tanh)은 원문의 표와 같습니다."
+      caption="y = w₂ · f(w₁ · x)입니다. f는 두 층 사이에 끼우는 구부러지는 함수입니다. 점선은 가운데 함수가 없을 때의 직선 w₂ · w₁ · x입니다. 기본값(0.5, 1, tanh)은 원문의 표와 같습니다."
     >
       <Controls>
-        <Slider label="w₁" min={-3} max={3} step={0.1} value={w1} onChange={setW1} format={(v) => fmt(v, 1)} />
-        <Slider label="w₂" min={-3} max={3} step={0.1} value={w2} onChange={setW2} format={(v) => fmt(v, 1)} />
-        <Slider label="x" min={-4} max={4} step={0.5} value={x} onChange={setX} format={(v) => fmt(v, 1)} />
+        <Slider label="w₁ (첫 층 가중치)" min={-3} max={3} step={0.1} value={w1} onChange={setW1} format={(v) => fmt(v, 1)} />
+        <Slider label="w₂ (둘째 층 가중치)" min={-3} max={3} step={0.1} value={w2} onChange={setW2} format={(v) => fmt(v, 1)} />
+        <Slider label="x (입력)" min={-4} max={4} step={0.5} value={x} onChange={setX} format={(v) => fmt(v, 1)} />
       </Controls>
       <Controls>
         {['none', 'tanh', 'relu', 'sigmoid'].map((m) => (
@@ -96,9 +96,9 @@ export default function StackCollapse() {
         </g>
       </svg>
       <Stats>
-        <Stat label="a = w₁x" value={fmt(r.a, 3)} />
-        <Stat label="h = f(a)" value={fmt(r.h, 3)} />
-        <Stat label="y = w₂h" value={fmt(r.y, 3)} />
+        <Stat label="a = w₁x (첫 층의 합)" value={fmt(r.a, 3)} />
+        <Stat label="h = f(a) (구부린 값)" value={fmt(r.h, 3)} />
+        <Stat label="y = w₂h (출력)" value={fmt(r.y, 3)} />
         <Stat label="직선일 때 y" value={fmt(r.lin, 3)} />
         <Stat label="두 값의 차이" value={fmt(Math.abs(r.y - r.lin), 3)} tone={Math.abs(r.y - r.lin) < 1e-9 ? 'good' : 'bad'} />
       </Stats>

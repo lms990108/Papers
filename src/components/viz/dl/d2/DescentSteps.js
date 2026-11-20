@@ -51,7 +51,7 @@ export default function DescentSteps() {
   return (
     <Viz
       title="오차 곡선 위를 한 걸음씩 내려가기"
-      caption="오차는 (w − 3)의 제곱입니다. 학습률 ε과 시작 위치를 바꾸고 걸음을 늘려 보세요. 가운데 곱 1 − 2ε가 1보다 작을 때만 3에 모입니다."
+      caption="w는 파라미터이고 오차 곡선의 가로 위치입니다. 오차는 (w − 3)의 제곱입니다. 학습률 ε은 한 걸음에 옮기는 비율이고, 기울기는 w를 키웠을 때 오차가 변하는 비율입니다. 한 걸음마다 (w − 3)에 1 − 2ε가 곱해지고, 그 크기가 1보다 작을 때만 3에 모입니다."
     >
       <Controls>
         {PRESETS.map((p) => (
@@ -95,7 +95,7 @@ export default function DescentSteps() {
         ))}
       </svg>
       <Stats>
-        <Stat label="곱 1 − 2ε" value={fmt(f, 2)} tone={af < 1 - 1e-9 ? 'good' : 'bad'} />
+        <Stat label="한 걸음에 곱해지는 수 1 − 2ε" value={fmt(f, 2)} tone={af < 1 - 1e-9 ? 'good' : 'bad'} />
         <Stat label="현재 w" value={tr(path[t], 4)} />
         <Stat label="현재 기울기" value={tr(g1(path[t]), 4)} />
         <Stat label="현재 오차" value={tr(E1(path[t]), 4)} />

@@ -48,7 +48,7 @@ export default function BagScore() {
       </Controls>
       <Controls>
         {WORDS.map((name, i) => (
-          <Slider key={name} label={`w(${name})`} min={-2} max={2} step={0.1} value={w[i]} onChange={(v) => setWi(i, v)} format={(v) => fmt(v, 1)} />
+          <Slider key={name} label={`가중치 w(${name})`} min={-2} max={2} step={0.1} value={w[i]} onChange={(v) => setWi(i, v)} format={(v) => fmt(v, 1)} />
         ))}
         <Btn onClick={() => setW(W0)}>가중치 처음 값</Btn>
       </Controls>

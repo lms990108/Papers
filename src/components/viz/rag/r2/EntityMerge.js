@@ -66,8 +66,8 @@ export default function EntityMerge() {
       </div>
       <Stats>
         <Stat label="노드 수" value={r.nodes.length} />
-        <Stat label="맞게 합친 쌍" value={`${r.good} / ${r.goldPairs}`} tone={r.good === r.goldPairs ? 'good' : undefined} />
-        <Stat label="잘못 합친 쌍" value={r.wrong} tone={r.wrong ? 'bad' : 'good'} />
+        <Stat label="맞게 합친 이름 쌍" value={`${r.good} / ${r.goldPairs}`} tone={r.good === r.goldPairs ? 'good' : undefined} />
+        <Stat label="잘못 합친 이름 쌍" value={r.wrong} tone={r.wrong ? 'bad' : 'good'} />
         <Stat label="질문의 답" value={found ? r.people.join(', ') : '길이 끊김'} tone={found ? 'good' : 'bad'} />
       </Stats>
       <Note>

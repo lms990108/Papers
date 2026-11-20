@@ -57,7 +57,7 @@ export default function PerceptronBoundary() {
   return (
     <Viz
       title="퍼셉트론 한 개의 경계는 직선 하나입니다"
-      caption="표를 고르고 w와 b를 돌려 직선을 옮겨 보세요. 주황 칠한 쪽이 출력 1입니다. 논리곱과 논리합은 네 점을 모두 맞히는 직선이 있지만, 배타적 논리합은 어떻게 돌려도 네 점을 다 맞히지 못합니다."
+      caption="표를 고르고 w와 b를 돌려 직선을 옮겨 보세요. 주황 칠한 쪽이 출력 1입니다. 점 안의 숫자는 그 점의 정답입니다. 논리곱과 논리합은 네 점을 모두 맞히는 직선이 있지만, 배타적 논리합은 어떻게 돌려도 네 점을 다 맞히지 못합니다."
     >
       <Controls>
         {Object.keys(TABLES).map((k) => (
@@ -65,9 +65,9 @@ export default function PerceptronBoundary() {
         ))}
       </Controls>
       <Controls>
-        <Slider label="w₁" min={-3} max={3} step={0.5} value={w[0]} onChange={(v) => setW([v, w[1]])} format={(v) => num(v, 1)} />
-        <Slider label="w₂" min={-3} max={3} step={0.5} value={w[1]} onChange={(v) => setW([w[0], v])} format={(v) => num(v, 1)} />
-        <Slider label="바이어스 b" min={-4} max={3} step={0.25} value={b} onChange={setB} format={(v) => num(v, 2)} />
+        <Slider label="w₁ (x₁에 곱하는 수)" min={-3} max={3} step={0.5} value={w[0]} onChange={(v) => setW([v, w[1]])} format={(v) => num(v, 1)} />
+        <Slider label="w₂ (x₂에 곱하는 수)" min={-3} max={3} step={0.5} value={w[1]} onChange={(v) => setW([w[0], v])} format={(v) => num(v, 1)} />
+        <Slider label="바이어스 b (더하는 수)" min={-4} max={3} step={0.25} value={b} onChange={setB} format={(v) => num(v, 2)} />
       </Controls>
       <svg viewBox={`0 0 ${W} ${H}`} className={s.svg} style={{maxWidth: 460, margin: '0 auto'}} role="img" aria-label="입력 평면의 네 점과 퍼셉트론의 경계 직선">
         {pos.length > 2 ? <polygon points={pos.map((p) => `${X(p[0])},${Y(p[1])}`).join(' ')} fill="var(--vb)" fillOpacity="0.13" /> : null}

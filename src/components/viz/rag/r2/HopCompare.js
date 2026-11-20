@@ -54,7 +54,7 @@ export default function HopCompare() {
       <div className={s.two}>
         <div>
           <Controls>
-            <Slider label="k" min={1} max={CHUNKS.length} value={kk} onChange={setK} />
+            <Slider label="k (고를 청크 수)" min={1} max={CHUNKS.length} value={kk} onChange={setK} />
           </Controls>
           <div style={{display: 'grid', gap: 5}}>
             {ranked.map((r, i) => {

@@ -116,8 +116,8 @@ export default function NerScore() {
         <Stat label="TP, FP, FN" value={tp + ', ' + fp + ', ' + fn} />
         <Stat label="정밀도" value={fmt(P, 3)} />
         <Stat label="재현율" value={fmt(R, 3)} />
-        <Stat label="마이크로 F1" value={fmt(F, 3)} tone={F >= 0.8 ? 'good' : F < 0.5 ? 'bad' : undefined} />
-        <Stat label="매크로 F1" value={fmt(macro, 3)} />
+        <Stat label="마이크로 F1 (개체 전체를 한꺼번에 센 값)" value={fmt(F, 3)} tone={F >= 0.8 ? 'good' : F < 0.5 ? 'bad' : undefined} />
+        <Stat label="매크로 F1 (종류별 F1의 평균)" value={fmt(macro, 3)} />
         <Stat label="토큰 정확도" value={fmt(acc, 3)} />
       </Stats>
       <table className={s.grid}>

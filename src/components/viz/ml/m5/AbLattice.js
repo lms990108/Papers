@@ -49,13 +49,13 @@ export default function AbLattice() {
   return (
     <Viz
       title="격자에서 노드마다 가장 싼 도착 하나만 남기기"
-      caption="호의 비용을 바꿔 보세요. 굵은 호가 비터비가 남기는 호입니다. 아래 표의 네 경로를 다 더한 최솟값과 노드 아래 v가 늘 같습니다."
+      caption="호의 비용을 바꿔 보세요. 굵은 호가 비터비가 남기는 호입니다. 아래 표의 네 경로를 다 더한 최솟값과 노드 아래 v(그 노드까지의 최소 비용)가 늘 같습니다."
     >
       <Controls>
-        <Slider label="0→1 a" min={0} max={8} step={0.5} value={c0.a} onChange={set0('a')} />
-        <Slider label="0→1 b" min={0} max={8} step={0.5} value={c0.b} onChange={set0('b')} />
-        <Slider label="1→2 b" min={0} max={8} step={0.5} value={c1.b} onChange={set1('b')} />
-        <Slider label="1→2 a" min={0} max={8} step={0.5} value={c1.a} onChange={set1('a')} />
+        <Slider label="위치 0→1, 호 a의 비용" min={0} max={8} step={0.5} value={c0.a} onChange={set0('a')} />
+        <Slider label="위치 0→1, 호 b의 비용" min={0} max={8} step={0.5} value={c0.b} onChange={set0('b')} />
+        <Slider label="위치 1→2, 호 b의 비용" min={0} max={8} step={0.5} value={c1.b} onChange={set1('b')} />
+        <Slider label="위치 1→2, 호 a의 비용" min={0} max={8} step={0.5} value={c1.a} onChange={set1('a')} />
       </Controls>
       <Controls>
         <Btn onClick={() => { setC0(START); setC1(NEXT); }}>원본 값 (1, 4, 2, 3)</Btn>
@@ -93,8 +93,8 @@ export default function AbLattice() {
         </tbody>
       </table>
       <Stats>
-        <Stat label="v1 = min(a, b)" value={v1} />
-        <Stat label="v2 = v1 + 다음 호의 최소" value={v2} />
+        <Stat label="v1 = 노드 1까지의 최소 비용" value={v1} />
+        <Stat label="v2 = v1 + 다음 호 중 싼 쪽" value={v2} />
         <Stat label="네 경로를 나열한 최솟값" value={brute} tone={Math.abs(brute - v2) < 1e-9 ? 'good' : 'bad'} />
       </Stats>
       <Note>

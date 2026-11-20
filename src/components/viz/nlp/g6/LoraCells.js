@@ -39,11 +39,11 @@ export default function LoraCells() {
   return (
     <Viz
       title="LoRA: 얼린 행렬 옆에 폭이 좁은 곱만 학습"
-      caption="hidden size h와 폭 r을 바꿔 학습하는 칸 수를 보세요. 회색 칸은 얼려 둔 원래 행렬이고, 색 칸이 학습하는 칸입니다. 칸의 값은 글의 예(첫 칸만 1, 0.5)를 따른 설명용 값입니다."
+      caption="hidden size h(원래 행렬 한 변의 칸 수)와 폭 r(곱하는 두 행렬의 좁은 변)을 바꿔 학습하는 칸 수를 보세요. 회색 칸은 얼려 둔 원래 행렬이고, 색 칸이 학습하는 칸입니다. 칸의 값은 글의 예(첫 칸만 1, 0.5)를 따른 설명용 값입니다."
     >
       <Controls>
-        <Slider label="hidden size h" min={2} max={8} value={h} onChange={(v) => { setH(v); if (r > v) setR(v); }} />
-        <Slider label="폭 r" min={1} max={h} value={rr} onChange={setR} />
+        <Slider label="hidden size h (행렬 한 변의 칸 수)" min={2} max={8} value={h} onChange={(v) => { setH(v); if (r > v) setR(v); }} />
+        <Slider label="폭 r (좁은 곱의 폭)" min={1} max={h} value={rr} onChange={setR} />
         <Btn on={q} onClick={() => setQ(!q)}>QLoRA로 보기</Btn>
       </Controls>
       <svg viewBox="0 0 560 190" className={s.svg} role="img" aria-label="얼린 h×h 행렬 옆에 h×r 행렬과 r×h 행렬이 더해진다">

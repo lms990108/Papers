@@ -52,13 +52,13 @@ export default function RnnUnroll() {
   return (
     <Viz
       title="시간 순서로 펼친 순환 신경망"
-      caption="‘다음 토큰’을 눌러 한 칸씩 읽어 보세요. 상태 h는 직전 상태에 w를 곱하고 지금 토큰을 더한 뒤 tanh로 누른 값입니다. w = 0.5와 오늘, 날씨, 좋다가 본문의 계산 예입니다."
+      caption="‘다음 토큰’을 눌러 한 칸씩 읽어 보세요. 상태 h는 직전 상태에 w를 곱하고 지금 토큰을 더한 뒤 tanh로 누른 값입니다. tanh는 값을 -1과 1 사이로 누르는 함수이고, h0은 시작 상태(0)입니다. w = 0.5와 오늘, 날씨, 좋다가 본문의 계산 예입니다."
     >
       <Controls>
         <Btn onClick={() => setT(Math.min(3, t + 1))}>다음 토큰</Btn>
         <Btn onClick={() => setT(Math.max(0, t - 1))}>이전</Btn>
         <Btn onClick={() => setT(0)}>처음으로</Btn>
-        <Slider label="w (W_h = w × 단위행렬)" min={0} max={1.5} step={0.1} value={w} onChange={setW} format={(x) => fmt(x, 1)} />
+        <Slider label="w (직전 상태에 곱하는 수, W_h = w × 단위행렬)" min={0} max={1.5} step={0.1} value={w} onChange={setW} format={(x) => fmt(x, 1)} />
       </Controls>
       <Controls>
         {words.map((nm, i) => (

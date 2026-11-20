@@ -16,6 +16,8 @@ import ForwardGrid from '@site/src/components/viz/ml/m4/ForwardGrid';
 
 같은 라벨 `ab`를 내는 길이 두 개이고 비용이 3과 3.2라고 합시다. 비터비는 3만 남깁니다. 전방은 둘을 더합니다. 비용 2.7짜리 다른 라벨과 비교해 보세요.
 
+그림의 비용은 해석의 벌점이라서 작을수록 좋습니다. 그림에서 min은 둘 중 작은 비용만 남기는 것이고, logadd는 확률 쪽에서 더한 뒤 다시 비용으로 돌리는 것입니다. logadd는 아래 정의에서 식으로 봅니다.
+
 <LabelFlip />
 
 :::tip[한눈에 보기]

@@ -73,12 +73,12 @@ export default function Bm25Explorer() {
         ))}
       </Controls>
       <Controls>
-        <Slider label="k1" min={0} max={3} step={0.1} value={k1} onChange={setK1} format={(v) => fmt(v, 1)} />
-        <Slider label="b" min={0} max={1} step={0.05} value={b} onChange={setB} format={(v) => fmt(v, 2)} />
+        <Slider label="k1 (횟수 포화 정도)" min={0} max={3} step={0.1} value={k1} onChange={setK1} format={(v) => fmt(v, 1)} />
+        <Slider label="b (길이 보정 세기)" min={0} max={1} step={0.05} value={b} onChange={setB} format={(v) => fmt(v, 2)} />
       </Controls>
       <div className={s.note} style={{margin: '0 0 6px'}}>
         청크 수 N = {CHUNKS.length}, 평균 길이 avgdl = {fmt(avgdl, 3)}단어.{' '}
-        {termInfo.map((t) => `${t.t}: df = ${t.df}, idf = ${fmt(t.idf, 3)}`).join(' / ')}
+        {termInfo.map((t) => `${t.t}: 든 청크 수 df = ${t.df}, idf = ${fmt(t.idf, 3)}`).join(' / ')}
       </div>
       {rows.map((r) => {
         const c = CHUNKS.find((x) => x.id === r.id);

@@ -41,7 +41,7 @@ export default function DecodingSampler() {
   return (
     <Viz
       title="점수에서 다음 칸 고르기"
-      caption="세 칸의 점수(logit)에서 소프트맥스로 비율을 만들고, 고르는 규칙에 따라 후보를 남깁니다. 기본값은 글의 점수 2, 1, 0입니다."
+      caption="세 칸의 점수(logit)에서 소프트맥스로 비율을 만들고, 고르는 규칙에 따라 후보를 남깁니다. 기본값은 글의 점수 2, 1, 0입니다. 온도는 점수를 나누는 수입니다. greedy는 비율이 가장 큰 칸만, top-k는 상위 k개만, top-p는 큰 비율부터 더해 합이 p가 되는 곳까지, min-p는 1등 비율에 곱할 비율을 곱한 값 이상인 칸만 남깁니다."
     >
       <Controls>
         {NAMES.map((n, i) => (

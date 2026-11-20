@@ -85,7 +85,7 @@ export default function AddCell() {
       <Stats>
         <Stat label="칸 1이 정답일 때 오차 (2칸)" value={num(Etwo, 3)} />
         <Stat label="칸 1이 정답일 때 오차 (지금)" value={num(Ea, 3)} tone={three && Ea > Etwo + 1e-9 ? 'bad' : undefined} />
-        {!three ? <Stat label="σ(s1 - s2)" value={num(sigmoid(a - b), 3)} tone="good" /> : null}
+        {!three ? <Stat label="시그모이드 σ(s1 - s2) (s1, s2는 칸 1, 2의 점수)" value={num(sigmoid(a - b), 3)} tone="good" /> : null}
       </Stats>
       <Note>
         {three

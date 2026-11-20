@@ -86,13 +86,13 @@ export default function LossGradient() {
       </Controls>
       <div className={s.two}>
         <Panel title="오차 (파랑: 로그, 주황: 제곱)" fa={fCe} fb={fSq} ymin={0} ymax={5} sc={sc} ticks={[0, 1, 2, 3, 4, 5]} aria="점수에 대한 로그 오차와 제곱 오차 곡선" />
-        <Panel title="점수 s의 기울기" fa={gC} fb={gS} ymin={-1.05} ymax={1.05} sc={sc} ticks={[-1, -0.5, 0, 0.5, 1]} aria="점수에 대한 두 오차의 기울기 곡선" />
+        <Panel title="점수 s를 올릴 때의 오차 기울기" fa={gC} fb={gS} ymin={-1.05} ymax={1.05} sc={sc} ticks={[-1, -0.5, 0, 0.5, 1]} aria="점수에 대한 두 오차의 기울기 곡선" />
       </div>
       <Stats>
         <Stat label="비율 p" value={num(p, 3)} />
         <Stat label="로그 오차" value={num(ce, 3)} />
         <Stat label="제곱 오차 (p - t)²" value={num(sq, 3)} />
-        <Stat label="로그 오차의 s 기울기 p - t" value={num(gCe, 3)} tone="good" />
+        <Stat label="로그 오차의 s 기울기 p - t (p 비율, t 정답)" value={num(gCe, 3)} tone="good" />
         <Stat label="제곱 오차의 s 기울기" value={num(gSq, 3)} tone={Math.abs(gSq) < 0.05 && Math.abs(gCe) > 0.5 ? 'bad' : undefined} />
       </Stats>
       <Note>

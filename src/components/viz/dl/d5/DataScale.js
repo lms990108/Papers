@@ -45,7 +45,7 @@ export default function DataScale() {
   return (
     <Viz
       title="규칙을 구조에 넣은 정도와 사전학습 데이터 양"
-      caption="설명용 곡선입니다. 세로축에 값이 없고, 실제 실험 결과나 정확한 교차 지점이 아닙니다. 데이터 양의 눈금(ImageNet 약 1.3M, ImageNet-21k 14M, JFT-300M 303M)과 9M, 90M 부분집합은 ViT 논문이 쓴 크기이고, 논문이 보고한 관찰은 9M에서 ViT가 같은 크기의 ResNet보다 더 과적합했고 90M 이상에서는 ViT가 앞선다는 것입니다. 곡선의 모양만 보세요."
+      caption="b는 이웃만 보기 같은 규칙을 구조에 넣은 양을 나타내는 설명용 숫자이고, CNN 계열 곡선은 0.9, ViT 계열 곡선은 0.1로 그렸습니다. 설명용 곡선입니다. 세로축에 값이 없고, 실제 실험 결과나 정확한 교차 지점이 아닙니다. 데이터 양의 눈금(ImageNet 약 1.3M, ImageNet-21k 14M, JFT-300M 303M)과 9M, 90M 부분집합은 ViT 논문이 쓴 크기이고, 논문이 보고한 관찰은 9M에서 ViT가 같은 크기의 ResNet보다 더 과적합했고 90M 이상에서는 ViT가 앞선다는 것입니다. 곡선의 모양만 보세요."
     >
       <Controls>
         <Slider label="사전학습 이미지 수" min={T0} max={T1} step={0.05} value={t} onChange={setT} format={(v) => `${fmt(Math.pow(10, v) / 1e6, 1)}M`} />

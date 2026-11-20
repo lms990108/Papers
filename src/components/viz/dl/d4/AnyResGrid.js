@@ -31,7 +31,7 @@ export default function AnyResGrid() {
   return (
     <Viz
       title="4×4 그림을 토큰으로: 한 칸으로 평균내기와 2×2 조각 나누기 (AnyRes)"
-      caption="칸을 눌러 밝기를 바꾸세요. 한 칸으로 평균내면 어느 사분면이 밝았는지 사라지고, 조각을 유지하면 그 정보가 토큰 자리에 남습니다. 조각마다 projector(첫째·셋째 칸 × 0.5)를 통과시킨 토큰도 함께 보입니다."
+      caption="projector는 조각을 길이 2인 그림 토큰으로 줄이는 행렬입니다. 칸을 눌러 밝기를 바꾸세요. 한 칸으로 평균내면 어느 사분면이 밝았는지 사라지고, 조각을 유지하면 그 정보가 토큰 자리에 남습니다. 조각마다 projector(첫째·셋째 칸 × 0.5)를 통과시킨 토큰도 함께 보입니다."
     >
       <Controls>
         {PRESETS.map((p) => (
@@ -97,11 +97,11 @@ export default function AnyResGrid() {
         </div>
       </div>
       <Stats>
-        <Stat label="prefill에 서는 토큰" value={`${tokens}개`} />
+        <Stat label="언어 모델이 읽는 토큰 (prefill)" value={`${tokens}개`} />
         <Stat label="1개일 때보다 연산" value={`${tokens}배`} tone={tokens > 1 ? 'bad' : 'good'} />
       </Stats>
       <Note>
-        칸이 늘면 조각 수를 늘리는 방식이 AnyRes입니다. 토큰이 1개에서 4개로 늘면 prefill의 연산도 토큰 수에 비례해 늘어서, M이 4배이면 그 구간의 연산도 4배입니다.
+        칸이 늘면 조각 수를 늘리는 방식이 AnyRes입니다. 토큰이 1개에서 4개로 늘면 prefill의 연산도 토큰 수에 비례해 늘어서, 토큰 수가 4배이면 그 구간의 연산도 4배입니다.
       </Note>
     </Viz>
   );

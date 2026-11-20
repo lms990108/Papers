@@ -62,7 +62,7 @@ export default function LogisticStep() {
         ))}
       </Controls>
       <Controls>
-        <Slider label="학습률" min={0.05} max={3} step={0.05} value={lr} onChange={setLr} format={(v) => num(v, 2)} />
+        <Slider label="학습률 (한 걸음의 크기)" min={0.05} max={3} step={0.05} value={lr} onChange={setLr} format={(v) => num(v, 2)} />
         <Btn on={Math.abs(lr - 0.1) < 1e-9} onClick={() => setLr(0.1)}>0.1</Btn>
         <Btn on={Math.abs(lr - 1) < 1e-9} onClick={() => setLr(1)}>1</Btn>
         <Btn onClick={() => apply(1)}>한 걸음</Btn>
@@ -97,7 +97,7 @@ export default function LogisticStep() {
         <Stat label="비율 p" value={num(p, 4)} />
         <Stat label="지금의 오차" value={num(E, 4)} />
         <Stat label="한 걸음 뒤의 오차" value={num(En, 4)} tone={En < E - 1e-12 ? 'good' : En > E + 1e-12 ? 'bad' : undefined} />
-        <Stat label="수치 미분 (w1)" value={num(num1, 3)} />
+        <Stat label="w1 기울기를 수치 미분으로 잰 값 (검산)" value={num(num1, 3)} />
       </Stats>
       <p className={s.note}>
         오차의 변화(최근 {shown.length}개): {shown.map((v) => num(v, 4)).join(' → ')}

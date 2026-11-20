@@ -88,14 +88,14 @@ export default function AnnDemo({mode = 'graph'}) {
     cx.strokeStyle = 'rgba(136,135,128,0.32)';
     cx.lineWidth = 0.6;
     for (let i = 0; i < N; i += 1) {
-      for (const j of adj[i]) {
+      adj[i].forEach((j) => {
         if (j > i) {
           cx.beginPath();
           cx.moveTo(X(POINTS[i]), Y(POINTS[i]));
           cx.lineTo(X(POINTS[j]), Y(POINTS[j]));
           cx.stroke();
         }
-      }
+      });
     }
     const vis = new Set(cur.visited);
     for (let i = 0; i < N; i += 1) {
@@ -157,7 +157,7 @@ export default function AnnDemo({mode = 'graph'}) {
               {b.label}
             </Btn>
           ))}
-          <Btn on={refine} onClick={() => setRefine(!refine)}>refine</Btn>
+          <Btn on={refine} onClick={() => setRefine(!refine)}>refine (후보를 원래 좌표로 재정렬)</Btn>
         </Controls>
       ) : null}
       <canvas

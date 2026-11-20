@@ -52,7 +52,7 @@ export default function QueryRewrite() {
         {CASES.map((c, i) => (
           <Btn key={c.name} on={i === ci} onClick={() => pickCase(i)}>{c.name}</Btn>
         ))}
-        <Slider label="k" min={1} max={8} value={k} onChange={setK} />
+        <Slider label="k (상위로 볼 개수)" min={1} max={8} value={k} onChange={setK} />
       </Controls>
       <div className={s.note} style={{margin: '0 0 6px'}}>{cs.intro}</div>
       <Controls>

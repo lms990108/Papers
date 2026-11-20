@@ -60,7 +60,7 @@ export default function SvmHinge() {
         {SCEN.map((c, k) => <Btn key={c.name} on={scen === k} onClick={() => choose(k)}>{c.name}</Btn>)}
       </Controls>
       <Controls>
-        <Slider label="C (로그 눈금)" min={-2} max={2} step={0.1} value={e} onChange={setE} format={() => fmt(C, C < 1 ? 3 : 2)} />
+        <Slider label="C (오차의 비중, 로그 눈금)" min={-2} max={2} step={0.1} value={e} onChange={setE} format={() => fmt(C, C < 1 ? 3 : 2)} />
         <Btn onClick={() => setE(-2)}>C = 0.01</Btn>
         <Btn onClick={() => setE(0)}>C = 1</Btn>
         <Btn onClick={() => setE(2)}>C = 100</Btn>
@@ -93,17 +93,17 @@ export default function SvmHinge() {
             return <circle key={i} cx={zx(z)} cy={hy(hinge[i])} r={4.5} fill={p.t < 0 ? 'var(--va)' : 'var(--vb)'} stroke="var(--ifm-background-color)" />;
           })}
           {[-2, 0, 1, 2].map((z) => <text key={z} x={zx(z)} y={hy(0) + 14} textAnchor="middle" className={s.ts}>{z}</text>)}
-          <text x={CW / 2} y={CH - 6} textAnchor="middle" className={s.ts}>가로축 y·f(x), 세로축 max(0, 1 − y·f(x))</text>
+          <text x={CW / 2} y={CH - 6} textAnchor="middle" className={s.ts}>가로축 y·f(x) (양수면 맞힘), 세로축 힌지 오차 max(0, 1 − y·f(x))</text>
           <text x={zx(1) + 6} y={hy(0) - 8} className={s.ts}>1 이상이면 0</text>
         </svg>
       </div>
       <Stats>
-        <Stat label="여백 폭 2/‖w‖" value={flat ? '무한대' : fmt(2 / wn, 3)} />
+        <Stat label="여백 폭 2/‖w‖ (‖w‖는 w의 길이)" value={flat ? '무한대' : fmt(2 / wn, 3)} />
         <Stat label="여백 안으로 들어온 점" value={inside} />
         <Stat label="반대편(y·f ≤ 0) 점" value={wrong} tone={wrong ? 'bad' : 'good'} />
-        <Stat label="½‖w‖²" value={fmt(reg, 3)} />
-        <Stat label="C × 힌지 합" value={fmt(C * hs, 3)} />
-        <Stat label="목적 함수 합" value={fmt(reg + C * hs, 3)} />
+        <Stat label="½‖w‖² (작을수록 여백이 넓음)" value={fmt(reg, 3)} />
+        <Stat label="C × 힌지 오차의 합" value={fmt(C * hs, 3)} />
+        <Stat label="목적 함수 (위 두 값의 합)" value={fmt(reg + C * hs, 3)} />
       </Stats>
       {flat ? <Note>w가 0에 가까워 여백이 한없이 넓습니다.</Note> : <Note>½‖w‖²를 줄이면 여백이 넓어지고, C × 힌지 합을 줄이면 위반이 줄어듭니다. C를 바꾸면 두 항이 서로 반대로 움직이는 것을 볼 수 있습니다.</Note>}
     </Viz>

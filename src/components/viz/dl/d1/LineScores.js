@@ -47,7 +47,7 @@ export default function LineScores({lines = 2}) {
           [0, 1].map((i) => (
             <Slider
               key={`${j}${i}`}
-              label={n === 1 ? `w${i + 1}` : `${j + 1}줄 w${i + 1}`}
+              label={n === 1 ? `w${i + 1} (칸 ${i + 1}에 곱하는 가중치)` : `${j + 1}줄 w${i + 1} (칸 ${i + 1}의 가중치)`}
               min={-1}
               max={1}
               step={0.1}

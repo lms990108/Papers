@@ -39,7 +39,7 @@ export default function TfIdfTable() {
   return (
     <Viz
       title="TF, IDF, TF-IDF를 단계별로 계산하기"
-      caption="문서를 고쳐 쓰거나 추가해 보세요. 문서가 바뀌면 N과 df가 바뀌고 idf도 바뀝니다. 모든 문서에 있는 단어는 idf가 0이라 칸이 0으로 지워집니다(주황 칸)."
+      caption="문서를 고쳐 쓰거나 추가해 보세요. tf는 단어가 한 문서에 나온 횟수를 그 문서의 단어 수로 나눈 값, N은 문서의 총 수, df는 그 단어가 들어 있는 문서의 수, idf는 ln(N / df)입니다. 문서가 바뀌면 N과 df가 바뀌고 idf도 바뀝니다. 모든 문서에 있는 단어는 idf가 0이라 칸이 0으로 지워집니다(주황 칸)."
     >
       <table className={s.grid}>
         <thead>
@@ -110,7 +110,7 @@ export default function TfIdfTable() {
           </table>
           {step >= 2 ? (
             <>
-              <div className={s.title} style={{marginTop: 12}}>2. idf = ln(N / df), N = {N}</div>
+              <div className={s.title} style={{marginTop: 12}}>2. df = 단어가 들어 있는 문서 수, idf = ln(N / df), N = {N} (문서의 총 수)</div>
               <table className={s.grid}>
                 <thead>
                   <tr>

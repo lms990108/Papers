@@ -73,7 +73,7 @@ export default function XorTwoLayer() {
       </div>
       <table className={s.grid}>
         <thead>
-          <tr><th>x₁</th><th>x₂</th><th>h₁</th><th>h₂</th><th>h₁ − h₂ {c3 < 0 ? '−' : '+'} {num(Math.abs(c3), 2)}</th><th>y</th><th>XOR</th></tr>
+          <tr><th>x₁</th><th>x₂</th><th>h₁</th><th>h₂</th><th>h₁ − h₂ {c3 < 0 ? '−' : '+'} {num(Math.abs(c3), 2)}</th><th>y</th><th>정답 (배타적 논리합)</th></tr>
         </thead>
         <tbody>
           {PTS.map((p, i) => (

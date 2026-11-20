@@ -91,7 +91,7 @@ export default function HmmJoint() {
             <tr key={t}>
               <td>{t + 1}</td>
               <td>{t === 0 ? `${STATES[q[0]]}에서 ${OBS[o[0]]}` : `${STATES[q[t - 1]]}→${STATES[q[t]]}, ${STATES[q[t]]}에서 ${OBS[o[t]]}`}</td>
-              <td>{t === 0 ? `π = ${trim(st.trans)} × B = ${trim(st.emit)}` : `${trim(st.trans)} × ${trim(st.emit)} = ${trim(st.trans * st.emit)}`}</td>
+              <td>{t === 0 ? `시작 π ${trim(st.trans)} × 방출 ${trim(st.emit)} = ${trim(st.trans * st.emit)}` : `${trim(st.trans)} × ${trim(st.emit)} = ${trim(st.trans * st.emit)}`}</td>
               <td className={t === T - 1 ? s.cellOn : undefined}>{trim(st.acc)}</td>
             </tr>
           ))}
@@ -99,7 +99,7 @@ export default function HmmJoint() {
       </table>
       <Stats>
         <Stat label="상태열과 관측열이 함께 나올 확률" value={trim(total)} />
-        <Stat label="-ln(확률) (비용)" value={total > 0 ? (-Math.log(total)).toFixed(3) : '무한대 (확률 0)'} />
+        <Stat label="-ln(확률) (작을수록 확률이 큼)" value={total > 0 ? (-Math.log(total)).toFixed(3) : '무한대 (확률 0)'} />
       </Stats>
       <Note>
         {total === 0

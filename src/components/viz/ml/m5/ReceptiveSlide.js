@@ -65,7 +65,7 @@ export default function ReceptiveSlide() {
       </div>
       <table className={s.grid}>
         <thead>
-          <tr><th>입력</th><th>C1 (5×5)</th><th>S2 (2×2)</th><th>C3 (5×5)</th><th>S4 (2×2)</th><th>C5 (5×5)</th></tr>
+          <tr><th>입력</th><th>C1 (합성곱 5×5)</th><th>S2 (서브샘플링 2×2)</th><th>C3 (합성곱 5×5)</th><th>S4 (서브샘플링 2×2)</th><th>C5 (합성곱 5×5)</th></tr>
         </thead>
         <tbody>
           <tr>
@@ -75,8 +75,8 @@ export default function ReceptiveSlide() {
         </tbody>
       </table>
       <Stats>
-        <Stat label="C5 위치 수" value={n} />
-        <Stat label="폭 = 32 + 4k 에서 k" value={k} />
+        <Stat label="C5 위치 수 (마지막 층의 출력 위치)" value={n} />
+        <Stat label="입력 폭 = 32 + 4k 에서 k" value={k} />
         <Stat label="위치가 보는 입력 칸" value={`${a}~${a + 31}`} />
         <Stat label="이웃과 같이 보는 칸" value={n > 1 ? '28 / 32' : '없음'} />
       </Stats>

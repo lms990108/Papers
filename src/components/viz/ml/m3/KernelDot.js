@@ -35,10 +35,10 @@ export default function KernelDot() {
         <Btn onClick={() => { setX([2, 1]); setZ([1, 3]); }}>x = (2, 1), z = (1, 3)</Btn>
       </Controls>
       <Controls>
-        <Slider label="x₁" min={-4} max={4} value={x[0]} onChange={(q) => setX(set(x, 0, q))} />
-        <Slider label="x₂" min={-4} max={4} value={x[1]} onChange={(q) => setX(set(x, 1, q))} />
-        <Slider label="z₁" min={-4} max={4} value={z[0]} onChange={(q) => setZ(set(z, 0, q))} />
-        <Slider label="z₂" min={-4} max={4} value={z[1]} onChange={(q) => setZ(set(z, 1, q))} />
+        <Slider label="x의 첫째 수 x₁" min={-4} max={4} value={x[0]} onChange={(q) => setX(set(x, 0, q))} />
+        <Slider label="x의 둘째 수 x₂" min={-4} max={4} value={x[1]} onChange={(q) => setX(set(x, 1, q))} />
+        <Slider label="z의 첫째 수 z₁" min={-4} max={4} value={z[0]} onChange={(q) => setZ(set(z, 0, q))} />
+        <Slider label="z의 둘째 수 z₂" min={-4} max={4} value={z[1]} onChange={(q) => setZ(set(z, 1, q))} />
       </Controls>
       <div className={s.two}>
         <div className={s.stat}>
@@ -51,15 +51,15 @@ export default function KernelDot() {
           <span>방법 2: 원래 좌표에서 내적하고 제곱</span>
           <div className={s.t}>x·z = {dotXZ}</div>
           <div className={s.t}>(x·z)² = {dotXZ}² </div>
-          <b>k(x, z) = {viaK}</b>
+          <b>k(x, z) = (x·z)² = {viaK}</b>
         </div>
       </div>
       <Stats>
         <Stat label="두 값의 차이" value={fmt(Math.abs(viaPhi - viaK), 6)} tone="good" />
       </Stats>
       <Controls>
-        <Slider label="입력 변수 수 n" min={2} max={1000} step={1} value={n} onChange={setN} />
-        <Slider label="차수 k" min={1} max={5} value={k} onChange={setK} />
+        <Slider label="입력 변수 수 n (픽셀 수)" min={2} max={1000} step={1} value={n} onChange={setN} />
+        <Slider label="차수 k (곱하는 변수 개수)" min={1} max={5} value={k} onChange={setK} />
         <Btn onClick={() => { setN(784); setK(2); }}>784 픽셀, 2차</Btn>
         <Btn onClick={() => { setN(784); setK(4); }}>784 픽셀, 4차</Btn>
         <Btn onClick={() => { setN(40); setK(2); }}>주성분 40개, 2차</Btn>

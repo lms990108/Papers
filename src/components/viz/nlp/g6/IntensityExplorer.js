@@ -89,7 +89,7 @@ export default function IntensityExplorer() {
         <Stat label="판정 (설명용 상한 기준)" value={mem ? 'memory-bound' : 'compute-bound'} tone={mem ? 'bad' : 'good'} />
       </Stats>
       <Note>
-        행렬의 한 변을 4에서 4096으로 바꿔도 바이트당 연산은 M 그대로입니다. 연산과 읽기가 모두 변의 제곱으로 늘기 때문입니다. 값을 정하는 것은 한 번에 곱하는 토큰 수입니다.
+        compute-bound는 계산량이 시간을 정하는 쪽이고, memory-bound는 가중치를 읽는 시간이 시간을 정하는 쪽입니다. 행렬의 한 변을 4에서 4096으로 바꿔도 바이트당 연산은 M 그대로입니다. 연산과 읽기가 모두 변의 제곱으로 늘기 때문입니다. 값을 정하는 것은 한 번에 곱하는 토큰 수입니다.
       </Note>
     </Viz>
   );

@@ -20,7 +20,7 @@ export default function IdfVariants() {
   return (
     <Viz
       title="idf 식을 바꿔 보기"
-      caption="문서 수 N과 문서 빈도 df를 바꿔 보세요. 로그의 밑만 다른 처음 세 줄은 df=1과 df=2의 비가 같습니다. 스무딩한 sk 줄은 비가 달라집니다. 선택한 df 열이 주황색입니다."
+      caption="문서 수 N과 문서 빈도 df(단어가 들어 있는 문서 수)를 바꿔 보세요. sk는 scikit-learn의 식이고, 스무딩은 df가 0이거나 N일 때의 문제를 피하려고 1을 더하는 변형입니다. 로그의 밑만 다른 처음 세 줄은 df=1과 df=2의 비가 같습니다. 스무딩한 sk 줄은 비가 달라집니다. 선택한 df 열이 주황색입니다."
     >
       <div className={s.controls}>
         <Slider label="문서 수 N" min={2} max={6} value={N} onChange={(v) => {

@@ -33,7 +33,7 @@ export default function PadStateDrift() {
   return (
     <Viz
       title="빈 칸을 지나가면 마지막 상태가 달라진다"
-      caption="“날씨 좋다”에 빈 칸을 붙여 순환 신경망 예(W_x는 단위행렬, W_h는 0.5배 단위행렬, 시작 상태 0)로 읽습니다. 빈 칸의 입력은 영 목록으로 둔 설명용 설정입니다."
+      caption="“날씨 좋다”에 빈 칸을 붙여 순환 신경망의 상태를 칸마다 따라갑니다. 설명용 설정으로, 입력에 곱하는 가중치 W_x는 단위행렬(입력 그대로), 이전 상태에 곱하는 가중치 W_h는 0.5배 단위행렬(이전 상태의 절반), 시작 상태는 0이고 빈 칸의 입력은 영 목록입니다. tanh는 값을 -1과 1 사이로 누르는 함수입니다."
     >
       <Controls>
         <Slider label="빈 칸 수" min={0} max={4} value={pads} onChange={setPads} />
@@ -46,8 +46,8 @@ export default function PadStateDrift() {
           <tr>
             <th>칸</th>
             <th>토큰</th>
-            <th>tanh 안의 값 a</th>
-            <th>상태 h</th>
+            <th>tanh 안의 값 a (0.5 × 이전 상태 + 입력)</th>
+            <th>상태 h (a에 tanh를 씌운 값)</th>
           </tr>
         </thead>
         <tbody>

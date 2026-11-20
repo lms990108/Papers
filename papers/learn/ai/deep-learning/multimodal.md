@@ -48,7 +48,7 @@ import ContrastCosine from '@site/src/components/viz/dl/d4/ContrastCosine';
 
 <AnyResGrid />
 
-사분면마다 \(2 \times 2\) 조각을 유지하면 목록이 4개입니다. 첫째 조각의 밝기 평균은 1이고 나머지 세 조각은 0입니다. projector를 조각마다 통과하면 토큰 4개가 prefill에 섭니다. 칸이 늘면 조각 수를 늘리는 방식이 **AnyRes**입니다. 토큰이 1개에서 4개로 늘면, [Prefill, decode](../nlp/prefill-decode.md)의 연산도 토큰 수에 비례해 늡니다. \(M\)이 4배가 되면 그 구간의 연산도 4배입니다.
+사분면마다 \(2 \times 2\) 조각을 유지하면 목록이 4개입니다. 첫째 조각의 밝기 평균은 1이고 나머지 세 조각은 0입니다. projector를 조각마다 통과하면 토큰 4개가 prefill에 섭니다. 칸이 늘면 조각 수를 늘리는 방식이 **AnyRes**입니다. 토큰이 1개에서 4개로 늘면, [Prefill, decode](../nlp/prefill-decode.md)의 연산도 토큰 수에 비례해 늡니다. 토큰 수가 4배가 되면 그 구간의 연산도 4배입니다.
 
 ## 대조 학습
 
