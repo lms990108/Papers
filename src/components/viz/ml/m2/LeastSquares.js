@@ -110,15 +110,15 @@ export default function LeastSquares() {
       <table className={s.grid}>
         <tbody>
           <tr>
-            <th>평균</th>
+            <th>평균 (x̄는 x의 평균, t̄는 별점 t의 평균)</th>
             <td>x̄ = {num(mx, 3)}, t̄ = {num(mt, 3)}</td>
           </tr>
           <tr>
-            <th>분자 Σ(x - x̄)(t - t̄)</th>
+            <th>분자 Σ(x - x̄)(t - t̄) (Σ는 점마다 구해 모두 더함)</th>
             <td>{num(sxy, 3)}</td>
           </tr>
           <tr>
-            <th>분모 Σ(x - x̄)²</th>
+            <th>분모 Σ(x - x̄)² (점마다 구해 모두 더함)</th>
             <td>{num(sxx, 3)}</td>
           </tr>
           <tr>

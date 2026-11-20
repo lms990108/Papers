@@ -42,7 +42,7 @@ export default function SvmAngleSweep() {
       caption="각도 슬라이더로 w의 방향을 돌려 보세요. 두 묶음을 w 방향으로 눌러 편 뒤, 양쪽 가장 가까운 점 사이의 빈 폭이 여백입니다. 오른쪽 곡선은 모든 방향의 폭이고, 45도에서 2.8284로 가장 큽니다. 서포트 벡터 둘만 남겨도 같은 곡선 꼭대기가 나옵니다."
     >
       <Controls>
-        <Slider label="방향 θ" min={0} max={359} step={1} value={deg} onChange={setDeg} format={(v) => `${v}°`} />
+        <Slider label="w의 방향 θ (가로축에서 잰 각도)" min={0} max={359} step={1} value={deg} onChange={setDeg} format={(v) => `${v}°`} />
         <Btn on={deg === bd} onClick={() => setDeg(bd)}>최적 방향으로</Btn>
         <Btn on={two} onClick={() => setTwo(!two)}>서포트 벡터 (1,1), (3,3)만 쓰기</Btn>
       </Controls>
@@ -87,7 +87,7 @@ export default function SvmAngleSweep() {
       <Stats>
         <Stat label="이 방향의 여백 폭" value={fmt(r.gap, 4)} tone={ok ? 'good' : 'bad'} />
         <Stat label="가장 넓은 방향" value={`${bd}°`} />
-        <Stat label="그때의 폭 (= 2/‖w‖)" value={fmt(gaps[bd], 4)} />
+        <Stat label="그때의 폭 (= 2/‖w‖, ‖w‖는 w의 길이)" value={fmt(gaps[bd], 4)} />
       </Stats>
       {!ok ? <Note>이 방향으로 눌러 펴면 두 묶음이 겹쳐 가를 수 없습니다. 폭이 음수라는 뜻입니다.</Note> : null}
     </Viz>

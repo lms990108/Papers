@@ -67,7 +67,7 @@ export default function RbfBitmapDistance() {
         {KEYS.map((k) => <Btn key={k} on={same(REFV[k])} onClick={() => setX(REFV[k])}>{k} 그대로</Btn>)}
       </Controls>
       <Controls>
-        <Slider label="상태 크기 a" min={0.2} max={1} step={0.1} value={a} onChange={setA} format={(v) => fmt(v, 1)} />
+        <Slider label="상태 크기 a (입력의 ±1에 곱하는 수)" min={0.2} max={1} step={0.1} value={a} onChange={setA} format={(v) => fmt(v, 1)} />
         <Slider label="거부 문턱 T" min={0} max={60} step={1} value={T} onChange={setT} />
       </Controls>
       <div style={{display: 'flex', flexWrap: 'wrap', gap: '14px 18px', alignItems: 'flex-start', margin: '4px 0 10px'}}>

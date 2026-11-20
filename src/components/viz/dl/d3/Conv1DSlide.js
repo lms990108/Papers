@@ -24,7 +24,7 @@ export default function Conv1DSlide() {
   return (
     <Viz
       title="창을 한 칸씩 옮기며 곱하고 더하기"
-      caption="창 위치를 움직여 보세요. 창이 옮겨 가도 a, b, c는 그대로입니다. 입력 칸을 눌러 고른 뒤 값을 바꾸거나 가중치를 바꾸면 출력이 바로 다시 계산됩니다. 기본값은 본문의 예(a=1, b=0, c=−1)입니다."
+      caption="윗줄 x₀, x₁, …은 입력이고, 창 안 세 칸에 가중치 a, b, c를 곱해 더한 값이 아랫줄의 출력 y입니다. 창 위치 i는 출력 y의 번호입니다. 창이 옮겨 가도 a, b, c는 그대로입니다. 입력 칸을 눌러 고른 뒤 값을 바꾸거나 가중치를 바꾸면 출력이 바로 다시 계산됩니다. 기본값은 본문의 예(a=1, b=0, c=−1)입니다."
     >
       <Controls>
         <Slider label="창 위치 i" min={0} max={O - 1} value={p} onChange={setPos} />

@@ -25,7 +25,7 @@ export default function ContextBudget() {
       </Controls>
       <Controls>
         <Slider label="입력 한도(토큰)" min={2000} max={32000} step={1000} value={limit} onChange={setLimit} format={f} />
-        <Slider label="k" min={1} max={10} value={k} onChange={setK} />
+        <Slider label="k (붙일 청크 수)" min={1} max={10} value={k} onChange={setK} />
       </Controls>
       <Bar label="입력 한도" value={limit} max={max} color="var(--ifm-color-emphasis-500)" text={`${f(limit)} 토큰`} />
       <Bar label="전부 붙이기" value={all} max={max} color={fits(all) ? 'var(--vok)' : 'var(--vbad)'} text={`${f(all)} 토큰`} />

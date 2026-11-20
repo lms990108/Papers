@@ -37,8 +37,8 @@ export default function ClsFinetune() {
       caption="[CLS] 목록 h와 분류 줄 W(열은 긍정, 부정)로 점수를 만들고 소프트맥스와 오차를 계산합니다. 경사하강 한 걸음을 누르면 W가 기울기의 반대 방향으로 움직입니다. 학습 속도 값은 설명용입니다."
     >
       <Controls>
-        <Slider label="h의 첫 칸" min={-2} max={2} step={0.5} value={h[0]} onChange={(v) => setH([v, h[1]])} format={(v) => fmt(v, 1)} />
-        <Slider label="h의 둘째 칸" min={-2} max={2} step={0.5} value={h[1]} onChange={(v) => setH([h[0], v])} format={(v) => fmt(v, 1)} />
+        <Slider label="[CLS] 목록 h의 첫 칸" min={-2} max={2} step={0.5} value={h[0]} onChange={(v) => setH([v, h[1]])} format={(v) => fmt(v, 1)} />
+        <Slider label="[CLS] 목록 h의 둘째 칸" min={-2} max={2} step={0.5} value={h[1]} onChange={(v) => setH([h[0], v])} format={(v) => fmt(v, 1)} />
         {LABELS.map((l, c) => (
           <Btn key={l} on={y === c} onClick={() => setY(c)}>
             정답 = {l}
@@ -51,7 +51,7 @@ export default function ClsFinetune() {
           <table className={s.grid}>
             <thead>
               <tr>
-                <th>h의 칸</th>
+                <th>h의 칸 (그 칸에 곱하는 W의 행)</th>
                 <th>긍정 열</th>
                 <th>부정 열</th>
               </tr>
@@ -99,7 +99,7 @@ export default function ClsFinetune() {
         <Stat label="점수 차이 (긍정 − 부정)" value={fmt(score[0] - score[1], 2)} />
       </Stats>
       <Controls>
-        <Slider label="학습 속도" min={0.1} max={1} step={0.1} value={lr} onChange={setLr} format={(v) => fmt(v, 1)} />
+        <Slider label="학습 속도 (한 걸음의 크기)" min={0.1} max={1} step={0.1} value={lr} onChange={setLr} format={(v) => fmt(v, 1)} />
         <Btn onClick={step}>경사하강 한 걸음</Btn>
         <Btn onClick={reset}>W 되돌리기</Btn>
         <Btn onClick={() => setH([1, 0.5])}>h 되돌리기</Btn>

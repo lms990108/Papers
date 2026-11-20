@@ -20,11 +20,11 @@ export default function OneHotLength() {
   return (
     <Viz
       title="사전이 커지면 목록도 길어진다"
-      caption="사전 크기를 올리면 원-핫 목록의 칸이 늘고, 1은 여전히 한 칸입니다. 같은 사전에 은닉 크기 H의 표를 두면 파라미터는 사전 크기 × H입니다. 사전 5만, H = 100이면 5,000,000개입니다."
+      caption="V는 사전의 단어 수, H는 임베딩 목록의 길이(은닉 크기)입니다. 사전 크기 V를 올리면 원-핫 목록의 칸이 늘고, 1은 여전히 한 칸입니다. 단어마다 길이 H인 목록을 두는 임베딩 표의 파라미터(학습하는 수)는 V × H개입니다. V = 5만, H = 100이면 5,000,000개입니다."
     >
       <Controls>
-        <Slider label="사전 크기" min={0} max={SIZES.length - 1} value={si} onChange={setSi} format={(v) => nf(SIZES[v])} />
-        <Slider label="은닉 크기 H" min={0} max={HIDDEN.length - 1} value={hi} onChange={setHi} format={(v) => String(HIDDEN[v])} />
+        <Slider label="사전 크기 V (단어 수)" min={0} max={SIZES.length - 1} value={si} onChange={setSi} format={(v) => nf(SIZES[v])} />
+        <Slider label="은닉 크기 H (임베딩 목록의 길이)" min={0} max={HIDDEN.length - 1} value={hi} onChange={setHi} format={(v) => String(HIDDEN[v])} />
       </Controls>
       <svg viewBox={`0 0 ${vw} 56`} className={s.svg} style={{maxWidth: Math.min(620, vw * 1.8)}} role="img" aria-label={`길이 ${V}의 원-핫 목록. 좋다 번호 2의 칸만 1이다.`}>
         {shown.map((i, p) => {

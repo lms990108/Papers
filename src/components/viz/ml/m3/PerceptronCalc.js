@@ -51,9 +51,9 @@ export default function PerceptronCalc() {
         <Slider label="나쁘다 횟수" min={0} max={3} value={x[1]} onChange={(v) => setX([x[0], v])} />
       </Controls>
       <Controls>
-        <Slider label="w₁(좋다)" min={-2} max={2} step={0.5} value={w[0]} onChange={(v) => sw(0, v)} format={(v) => num(v, 1)} />
-        <Slider label="w₂(나쁘다)" min={-2} max={2} step={0.5} value={w[1]} onChange={(v) => sw(1, v)} format={(v) => num(v, 1)} />
-        <Slider label="바이어스 b" min={-2} max={2} step={0.5} value={b} onChange={setB} format={(v) => num(v, 1)} />
+        <Slider label="w₁ (좋다 횟수에 곱하는 수)" min={-2} max={2} step={0.5} value={w[0]} onChange={(v) => sw(0, v)} format={(v) => num(v, 1)} />
+        <Slider label="w₂ (나쁘다 횟수에 곱하는 수)" min={-2} max={2} step={0.5} value={w[1]} onChange={(v) => sw(1, v)} format={(v) => num(v, 1)} />
+        <Slider label="바이어스 b (더하는 수)" min={-2} max={2} step={0.5} value={b} onChange={setB} format={(v) => num(v, 1)} />
         <Btn onClick={() => { setW([1, -1]); setB(0); }}>w = (1, −1), b = 0</Btn>
         <Btn onClick={() => { setW([1, -1]); setB(1.5); }}>b = 1.5</Btn>
       </Controls>
@@ -82,15 +82,15 @@ export default function PerceptronCalc() {
         </g>
       </svg>
       <Stats>
-        <Stat label="점수 s" value={num(sc, 1)} />
+        <Stat label="점수 s (곱해서 더한 값)" value={num(sc, 1)} />
         <Stat label="퍼셉트론 출력" value={y} />
         <Stat label="정답" value={lab(t)} />
-        <Stat label="시그모이드 p" value={num(p, 3)} />
+        <Stat label="시그모이드 비율 p (비교용)" value={num(p, 3)} />
         <Stat label="로지스틱 오차" value={err == null ? '—' : num(err, 3)} tone={err == null ? undefined : err > 0.5 ? 'bad' : 'good'} />
       </Stats>
       <table className={s.grid}>
         <thead>
-          <tr><th>리뷰</th><th>(x₁, x₂)</th><th>s</th><th>y</th><th>정답</th></tr>
+          <tr><th>리뷰</th><th>(x₁ 좋다, x₂ 나쁘다)</th><th>점수 s</th><th>출력 y</th><th>정답</th></tr>
         </thead>
         <tbody>
           {REVIEWS.map((r) => {

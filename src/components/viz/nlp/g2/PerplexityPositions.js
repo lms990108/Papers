@@ -32,7 +32,7 @@ export default function PerplexityPositions() {
       </Controls>
       <Controls>
         {p.map((v, i) => (
-          <Slider key={i} label={`p${i + 1}`} min={0.01} max={1} step={0.01} value={v} onChange={(x) => setOne(i, x)} format={(x) => fmt(x, 3)} />
+          <Slider key={i} label={`${i + 1}번째 자리의 정답 비율 p${i + 1}`} min={0.01} max={1} step={0.01} value={v} onChange={(x) => setOne(i, x)} format={(x) => fmt(x, 3)} />
         ))}
       </Controls>
       <Controls>

@@ -20,7 +20,7 @@ export default function SelfAttentionCostN() {
   return (
     <Viz
       title="문장 길이 n에 따른 층당 비용"
-      caption="막대는 복잡도 식의 값이고, 상수 배는 무시했으며 로그 눈금입니다. 셀프 어텐션은 n²·d, 순환 신경망은 n·d²입니다(Vaswani 외, 2017의 표 1). n과 d는 설명용 값이고 실제 모델의 수치가 아닙니다."
+      caption="n은 토큰 수, d는 토큰 목록의 길이입니다. 막대는 복잡도 식의 값이고, 상수 배는 무시했으며 로그 눈금입니다. 셀프 어텐션은 n²·d, 순환 신경망은 n·d²입니다(Vaswani 외, 2017의 표 1). n과 d는 설명용 값이고 실제 모델의 수치가 아닙니다."
     >
       <Controls>
         <Slider label="토큰 수 n" min={0} max={12} step={1} value={e} onChange={setE} format={(v) => comma(2 ** v)} />

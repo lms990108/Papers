@@ -15,6 +15,15 @@ import LoraCells from '@site/src/components/viz/nlp/g6/LoraCells';
 
 별점 질문은 [지도 학습](../machine-learning/supervised-learning.md)의 리뷰를 그대로 씁니다. “연기가 좋다”의 정답은 4입니다.
 
+그림에 나오는 말을 먼저 읽어 둡니다.
+
+- \(p\): 모델이 정답 토큰에 준 확률입니다. 0과 1 사이의 수입니다.
+- \(-\log p\): 그 칸의 오차입니다. \(p\)가 작을수록 커집니다.
+- logprob: \(\log p\), 곧 확률에 log를 씌운 값입니다. 확률이 1보다 작으니 0 이하입니다.
+- 기준 모델: SFT가 끝난 모델입니다. 뒤 단계에서 학습 중에도 고정해 두고 비교만 합니다.
+- 정책: 답을 내는, 학습 중인 모델입니다.
+- SFT, DPO, GRPO와 RLHF, RLAIF, RLVR, PRM: 그림의 단계와 보상 방식의 이름입니다. 아래 절에서 하나씩 설명합니다.
+
 <PostTrainingStages />
 
 :::tip[한눈에 보기]

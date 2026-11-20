@@ -43,9 +43,9 @@ export default function SigmoidReview() {
         ))}
       </Controls>
       <Controls>
-        <Slider label="w1 (좋다)" min={-3} max={3} step={0.1} value={w1} onChange={setW1} format={(v) => num(v, 1)} />
-        <Slider label="w2 (나쁘다)" min={-3} max={3} step={0.1} value={w2} onChange={setW2} format={(v) => num(v, 1)} />
-        <Slider label="b" min={-3} max={3} step={0.1} value={b} onChange={setB} format={(v) => num(v, 1)} />
+        <Slider label="w1 (좋다 횟수에 곱하는 수)" min={-3} max={3} step={0.1} value={w1} onChange={setW1} format={(v) => num(v, 1)} />
+        <Slider label="w2 (나쁘다 횟수에 곱하는 수)" min={-3} max={3} step={0.1} value={w2} onChange={setW2} format={(v) => num(v, 1)} />
+        <Slider label="b (마지막에 더하는 수)" min={-3} max={3} step={0.1} value={b} onChange={setB} format={(v) => num(v, 1)} />
       </Controls>
       <div style={{overflowX: 'auto'}}>
         <table className={s.grid}>

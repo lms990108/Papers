@@ -161,9 +161,9 @@ export default function WeightBias() {
           : null}
       </Controls>
       <Controls>
-        <Slider label={two ? 'w1 (좋다)' : 'w'} min={-3} max={4} step={0.1} value={w} onChange={setW} format={(v) => num(v, 1)} />
-        {two ? <Slider label="w2 (나쁘다)" min={-3} max={4} step={0.1} value={w2} onChange={setW2} format={(v) => num(v, 1)} /> : null}
-        <Slider label="b" min={-3} max={3} step={0.1} value={b} onChange={setB} format={(v) => num(v, 1)} />
+        <Slider label={two ? 'w1 (좋다 횟수에 곱하는 수)' : 'w (좋다 횟수에 곱하는 수)'} min={-3} max={4} step={0.1} value={w} onChange={setW} format={(v) => num(v, 1)} />
+        {two ? <Slider label="w2 (나쁘다 횟수에 곱하는 수)" min={-3} max={4} step={0.1} value={w2} onChange={setW2} format={(v) => num(v, 1)} /> : null}
+        <Slider label="b (더하는 수)" min={-3} max={3} step={0.1} value={b} onChange={setB} format={(v) => num(v, 1)} />
       </Controls>
       {two ? <TwoD w1={w} w2={w2} b={b} /> : <OneD w={w} b={b} />}
       <Stats>

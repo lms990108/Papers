@@ -15,7 +15,7 @@ function build(mode, x, a) {
   const h = add(x, a);
   const steps = [
     {t: '입력', f: '입력 x', rows: [['x', x]], d: '목록 하나가 블록에 들어옵니다. 길이 2는 칸을 보이게 줄인 것입니다.'},
-    {t: '층 정규화', f: 'rms = ' + fmt(rms(x), 3) + ',  Norm(x) = x ÷ rms', rows: [['x', x], ['Norm(x)', n1]], d: 'RMSNorm은 제곱평균의 제곱근으로 나눠 크기를 맞춥니다. 평균은 빼지 않습니다.'},
+    {t: '정규화 (RMSNorm)', f: 'rms = ' + fmt(rms(x), 3) + ',  Norm(x) = x ÷ rms', rows: [['x', x], ['Norm(x)', n1]], d: 'RMSNorm은 제곱평균의 제곱근으로 나눠 크기를 맞춥니다. 평균은 빼지 않습니다.'},
     {t: '어텐션', f: 'Attn(Norm(x)) = a (설명용 값)', rows: [['Norm(x)', n1], ['a', a]], d: '정규화한 목록으로 어텐션을 계산합니다. 출력 a는 보이게 고른 값이고 어텐션 페이지의 계산 결과가 아닙니다.'},
     {t: '더하기 (잔차)', f: 'h = x + a', rows: [['x', x], ['a', a], ['h', h]], d: '어텐션 출력만 넘기지 않고 입력 x에 더합니다. 입력이 남고 어텐션 결과가 붙습니다.'},
   ];
@@ -29,7 +29,7 @@ function build(mode, x, a) {
     const n2 = norm(h);
     const g = n2.map(silu);
     const f = g.map((e, i) => e * n2[i]);
-    steps.push({t: '층 정규화', f: 'rms = ' + fmt(rms(h), 3) + ',  Norm(h) = h ÷ rms', rows: [['h', h], ['Norm(h)', n2]], d: 'pre-norm이라 FFN 앞에서도 정규화합니다. 잔차로 지나가는 h는 정규화를 거치지 않습니다.'});
+    steps.push({t: '정규화 (RMSNorm)', f: 'rms = ' + fmt(rms(h), 3) + ',  Norm(h) = h ÷ rms', rows: [['h', h], ['Norm(h)', n2]], d: 'pre-norm이라 FFN 앞에서도 정규화합니다. 잔차로 지나가는 h는 정규화를 거치지 않습니다.'});
     steps.push({t: 'FFN', f: 'SiLU(문) × 값 (단위행렬 가중치)', rows: [['Norm(h)', n2], ['SiLU', g], ['FFN 출력', f]], d: '정규화한 목록을 문과 값 두 갈래로 보내 칸마다 곱합니다.'});
     steps.push({t: '더하기 (잔차)', f: 'y = h + FFN', rows: [['h', h], ['FFN 출력', f], ['y', add(h, f)]], d: '정규화 전의 h에 FFN 출력을 더합니다. y의 길이는 입력 x와 같습니다.'});
   }
@@ -78,8 +78,8 @@ export default function BlockSteps() {
       <Controls>
         {sl('입력 x 첫 칸', x, setX, 0, -2, 2)}
         {sl('입력 x 둘째 칸', x, setX, 1, -2, 2)}
-        {sl('a 첫 칸', a, setA, 0, -1, 1)}
-        {sl('a 둘째 칸', a, setA, 1, -1, 1)}
+        {sl('어텐션 출력 a 첫 칸', a, setA, 0, -1, 1)}
+        {sl('어텐션 출력 a 둘째 칸', a, setA, 1, -1, 1)}
       </Controls>
       <div style={{display: 'flex', flexWrap: 'wrap', gap: 6, margin: '4px 0 10px'}}>
         {steps.map((st, i) => (

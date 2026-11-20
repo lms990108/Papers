@@ -30,7 +30,7 @@ export default function SftSpanDemo() {
   return (
     <Viz
       title="SFT: 오차를 답 구간에만 두기"
-      caption="질문 토큰이 3개이고 각 정답 확률이 0.5이면 질문 구간의 오차는 2.079입니다. 질문 구간을 합에 넣을지 빼 보세요. 오른쪽 곡선은 한 칸의 오차 -log p입니다."
+      caption="질문 토큰이 3개이고 각 정답 확률이 0.5이면 질문 구간의 오차는 2.079입니다. 질문 구간을 합에 넣을지 빼 보세요. 오른쪽 곡선은 한 칸의 오차 -log p입니다(p는 그 칸의 정답 토큰에 모델이 준 확률)."
     >
       <Controls>
         <Btn on={!ansOnly} onClick={() => setAnsOnly(false)}>질문과 답 모두 오차에 넣기</Btn>
@@ -38,8 +38,8 @@ export default function SftSpanDemo() {
       </Controls>
       <Controls>
         <Slider label="질문 토큰 수" min={1} max={6} value={qn} onChange={setQn} />
-        <Slider label="질문 칸 p" min={0.05} max={0.99} step={0.01} value={qp} onChange={setQp} format={(v) => fmt(v, 2)} />
-        <Slider label="답 칸 p" min={0.05} max={0.99} step={0.01} value={ap} onChange={setAp} format={(v) => fmt(v, 2)} />
+        <Slider label="질문 칸의 정답 확률 p" min={0.05} max={0.99} step={0.01} value={qp} onChange={setQp} format={(v) => fmt(v, 2)} />
+        <Slider label="답 칸의 정답 확률 p" min={0.05} max={0.99} step={0.01} value={ap} onChange={setAp} format={(v) => fmt(v, 2)} />
       </Controls>
       <div className={s.two}>
         <svg viewBox="0 0 420 110" className={s.svg} role="img" aria-label="질문 토큰들과 답 토큰 하나. 답 구간에만 오차를 두면 질문 칸은 합에서 빠진다">

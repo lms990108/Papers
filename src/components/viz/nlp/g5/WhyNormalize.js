@@ -26,7 +26,7 @@ export default function WhyNormalize() {
         <Stat label="점수 차이 x − 0" value={fmt(x1, 1)} />
         <Stat label="e의 x제곱" value={big < 1e6 ? fmt(big, 1) : big.toExponential(2)} />
         <Stat label="작은 칸의 비율" value={fmt(1 - p, 5)} tone={1 - p < 0.001 ? 'bad' : undefined} />
-        <Stat label="반응도 p(1−p)" value={fmt(p * (1 - p), 5)} tone={p * (1 - p) < 0.001 ? 'bad' : undefined} />
+        <Stat label="기울기 p(1−p)" value={fmt(p * (1 - p), 5)} tone={p * (1 - p) < 0.001 ? 'bad' : undefined} />
       </Stats>
       <Note>
         점수 1과 0이면 비율은 0.731과 0.269입니다. 점수 10과 0이면 e의 10제곱이 약 22026이라 큰 칸의 비율이 거의 1이고, 기울기도 거의 사라집니다. 정규화한 첫째 칸은 덧셈을 몇 번 쌓았든 1.414로 그대로입니다. 반응도 p(1−p)는 점수가 변할 때 비율이 얼마나 움직이는지를 나타냅니다.

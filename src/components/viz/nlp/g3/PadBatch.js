@@ -27,7 +27,7 @@ export default function PadBatch() {
   return (
     <Viz
       title="길이가 다른 문장을 한 묶음으로"
-      caption="최대 길이를 바꾸면 짧은 문장은 빈 칸(0)으로 채워지고, 긴 문장은 앞쪽 토큰만 남고 잘립니다. 0은 번호가 아니라 빈 칸이라는 표시입니다. 밑줄은 마지막 실제 단어입니다."
+      caption="최대 길이를 바꾸면 짧은 문장은 빈 칸(0)으로 채워지고, 긴 문장은 앞쪽 토큰만 남고 잘립니다. 0은 번호가 아니라 빈 칸이라는 표시입니다. 마스크는 칸마다 실제 단어면 1, 빈 칸이면 0으로 적은 목록입니다. 밑줄은 마지막 실제 단어입니다."
     >
       <Controls>
         <Slider label="최대 길이" min={1} max={6} value={maxLen} onChange={setMaxLen} />

@@ -61,7 +61,7 @@ export default function NextTokenLoss() {
             <th>점수</th>
             <th>e의 점수 제곱</th>
             <th>비율 p</th>
-            <th>기울기 p − y</th>
+            <th>기울기 p − y (y: 정답 칸 1, 나머지 0)</th>
           </tr>
         </thead>
         <tbody>

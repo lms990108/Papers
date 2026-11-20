@@ -24,7 +24,7 @@ export default function NearestPlane() {
       caption="질문(주황 점)을 끌어 보세요. 점선 원은 k번째로 가까운 점까지의 거리입니다. 임베딩은 이런 점이고, 1024차원이면 축이 1024개일 뿐 같은 문제입니다."
     >
       <Controls>
-        <Slider label="k" min={1} max={10} value={k} onChange={setK} />
+        <Slider label="k (찾을 점 수)" min={1} max={10} value={k} onChange={setK} />
       </Controls>
       <svg ref={ref} viewBox={`0 0 ${W} ${H}`} className={s.svg} role="img" aria-label="점들과 질문 점" {...svgProps}>
         <circle cx={q[0]} cy={q[1]} r={radius} fill="var(--vb)" fillOpacity="0.07" stroke="var(--vb)" strokeDasharray="5 4" />

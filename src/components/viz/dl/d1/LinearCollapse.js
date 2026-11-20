@@ -47,7 +47,7 @@ export default function LinearCollapse() {
   return (
     <Viz
       title="두 단계를 한 단계로 합쳐 보기"
-      caption="W₁과 W₂는 원문의 값입니다. 가운데에 아무것도 끼우지 않으면 두 단계의 결과와 합친 W₂W₁의 결과가 같습니다. tanh나 ReLU를 끼우면 달라집니다."
+      caption="x는 입력 두 칸의 밝기이고, W₁은 첫 단계의 가중치 묶음, W₂는 둘째 단계의 가중치 묶음입니다(원문의 값). 가운데에 아무것도 끼우지 않으면 두 단계의 결과와 합친 W₂W₁의 결과가 같습니다. tanh나 ReLU는 값을 구부리는 함수인데, 이것을 끼우면 달라집니다. h는 첫 단계 뒤에 사이를 지난 값입니다."
     >
       <Controls>
         <Slider label="x₁" min={-2} max={2} step={0.1} value={x[0]} onChange={(v) => setX([v, x[1]])} format={(v) => fmt(v, 1)} />

@@ -40,8 +40,8 @@ export default function Conv2DStep() {
       caption="입력 칸을 누르면 0과 1이 바뀝니다. 커널 칸을 눌러 고른 뒤 슬라이더로 값을 바꾸세요. 스트라이드와 패딩을 바꾸면 출력 크기가 함수대로 달라집니다. 기본값은 본문의 7 모양과 가로 모서리 검출기입니다."
     >
       <Controls>
-        <Slider label="스트라이드 S" min={1} max={3} value={stride} onChange={setStride} />
-        <Slider label="패딩 P" min={0} max={2} value={pad} onChange={setPad} />
+        <Slider label="스트라이드 S (창을 옮기는 칸 수)" min={1} max={3} value={stride} onChange={setStride} />
+        <Slider label="패딩 P (가장자리에 두르는 0의 겹 수)" min={0} max={2} value={pad} onChange={setPad} />
         <Slider label="창 자리" min={0} max={total - 1} value={st} onChange={setStep} format={(v) => `${v + 1} / ${total}`} />
         <Btn onClick={() => setStep((st + 1) % total)}>다음 자리</Btn>
         <Btn onClick={() => setStep(total - 1)}>모두 채우기</Btn>

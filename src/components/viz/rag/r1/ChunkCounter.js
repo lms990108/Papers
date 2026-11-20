@@ -59,7 +59,7 @@ export default function ChunkCounter() {
       </svg>
       <Stats>
         <Stat label="청크 수" value={`${f(count)}개`} />
-        <Stat label="새로 나아가는 폭" value={`${f(stride)} 토큰`} />
+        <Stat label="청크 간격(크기 − 오버랩)" value={`${f(stride)} 토큰`} />
         <Stat label="저장되는 토큰 합" value={f(stored)} />
         <Stat label="문서 대비 저장량" value={`${(stored / n).toFixed(2)}배`} tone={stored > n ? 'bad' : 'good'} />
       </Stats>

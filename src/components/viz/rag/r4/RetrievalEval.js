@@ -36,7 +36,7 @@ export default function RetrievalEval() {
       caption="k를 바꿔 recall@k를 보고, 질문마다 생성 답이 맞았는지를 눌러 바꿔 보세요. 질문 5개, 검색 순위, 생성 정답 여부는 모두 설명용 값입니다."
     >
       <Controls>
-        <Slider label="k" min={1} max={8} value={k} onChange={setK} />
+        <Slider label="k (상위로 볼 개수)" min={1} max={8} value={k} onChange={setK} />
       </Controls>
       <table className={s.grid}>
         <thead>

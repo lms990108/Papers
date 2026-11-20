@@ -23,7 +23,7 @@ export default function PrefillDecodeTimeline() {
   return (
     <Viz
       title="prefill 한 번, decode 여러 번"
-      caption="색 막대는 그 구간의 연산 횟수이고, 회색 막대는 가중치를 읽는 양(32바이트)입니다. 두 막대는 같은 눈금입니다. 4×4 행렬 한 개를 기준으로 한 설명용 크기입니다."
+      caption="색 막대는 그 구간의 연산 횟수이고, 회색 막대는 가중치를 읽는 양(32바이트)입니다. 두 막대는 같은 눈금입니다. 4×4 행렬 한 개를 기준으로 한 설명용 크기입니다. TTFT(time to first token)는 첫 출력 토큰까지의 대기 시간이고, TPOT(time per output token)는 출력 토큰 사이의 간격입니다."
     >
       <Controls>
         <Slider label="프롬프트 토큰 수" min={1} max={16} value={m} onChange={setM} />

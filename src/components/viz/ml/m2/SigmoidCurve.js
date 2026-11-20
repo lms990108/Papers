@@ -108,7 +108,7 @@ export default function SigmoidCurve() {
       </div>
       <Stats>
         <Stat label="지금의 p" value={num(p, 3)} />
-        <Stat label="σ(-s) = 1 - σ(s)" value={num(sigmoid(-sc), 3) + ' + ' + num(p, 3) + ' = ' + num(sigmoid(-sc) + p, 3)} />
+        <Stat label="σ(-s) + σ(s) = 1 (σ는 시그모이드)" value={num(sigmoid(-sc), 3) + ' + ' + num(p, 3) + ' = ' + num(sigmoid(-sc) + p, 3)} />
         <Stat label="기울기 p(1 - p)" value={num(slope, 3)} />
         <Stat label="오즈 p ÷ (1 - p) = e^s" value={num(Math.exp(sc), 3)} />
       </Stats>

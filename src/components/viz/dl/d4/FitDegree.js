@@ -62,11 +62,11 @@ export default function FitDegree() {
   return (
     <Viz
       title="차수(용량)를 올리며 점 8개에 곡선 맞추기"
-      caption="원문의 파이썬 코드와 같은 점(학습 8개, 시험 200개)과 같은 계산입니다. 파랑 점이 학습 쌍이고, 점선은 잡음 없는 참값 sin(πx)입니다. 아래 오차는 평균 제곱 오차(MSE)입니다."
+      caption="차수는 곡선이 얼마나 휠 수 있는지를 정하는 수이고, λ는 0이면 누르지 않는 세기입니다. 원문의 파이썬 코드와 같은 점(학습 8개, 시험 200개)과 같은 계산입니다. 파랑 점이 학습 쌍이고, 점선은 잡음 없는 참값 sin(πx)입니다. 아래 오차는 평균 제곱 오차(MSE)입니다."
     >
       <Controls>
         <Slider label="차수" min={1} max={7} value={deg} onChange={setDeg} />
-        <Slider label="정칙화 λ" min={0} max={LAMS.length - 1} value={li} onChange={setLi} format={(i) => lamText(LAMS[i])} />
+        <Slider label="정칙화 λ (가중치를 누르는 세기)" min={0} max={LAMS.length - 1} value={li} onChange={setLi} format={(i) => lamText(LAMS[i])} />
         <Btn on={showTest} onClick={() => setShowTest(!showTest)}>시험 점 200개 보기</Btn>
       </Controls>
       <Controls>

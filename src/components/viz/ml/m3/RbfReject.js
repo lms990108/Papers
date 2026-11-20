@@ -45,7 +45,7 @@ export default function RbfReject() {
       caption="점(앞 층이 낸 상태)과 별(클래스 기준)을 끌어 보세요. 벌점은 거리의 제곱이고, 점선 원은 문턱 T 안쪽(벌점이 T보다 작은 영역)입니다. 어느 원에도 들어가지 않으면 가장 가까운 별이 있어도 거부합니다. 좌표와 문턱은 설명용 값입니다."
     >
       <Controls>
-        <Slider label="문턱 T(제곱 거리)" min={0.25} max={12} step={0.25} value={T} onChange={setT} format={(v) => fmt(v, 2)} />
+        <Slider label="문턱 T (최소 벌점이 이 값 이상이면 거부)" min={0.25} max={12} step={0.25} value={T} onChange={setT} format={(v) => fmt(v, 2)} />
         <Btn onClick={() => { setP(START.p); setA(START.a); setB(START.b); }}>처음 위치</Btn>
         <Btn onClick={() => setP([3.2, 1.7])}>멀리 보내기</Btn>
       </Controls>
@@ -61,8 +61,8 @@ export default function RbfReject() {
         <text x={X(p[0]) + 12} y={Y(p[1]) + 20} className={s.t} style={{fill: reject ? 'var(--vbad)' : 'var(--vb)'}}>지금 입력{reject ? ' (거부)' : ''}</text>
       </svg>
       <Stats>
-        <Stat label="3의 벌점 y₃" value={fmt(yA, 2)} />
-        <Stat label="8의 벌점 y₈" value={fmt(yB, 2)} />
+        <Stat label="3의 벌점 y₃ (3의 별까지 거리의 제곱)" value={fmt(yA, 2)} />
+        <Stat label="8의 벌점 y₈ (8의 별까지 거리의 제곱)" value={fmt(yB, 2)} />
         <Stat label="더 가까운 기준" value={nearer} />
         <Stat label={`최소 벌점 ≥ 문턱(${fmt(T, 2)})?`} value={reject ? '예: 거부' : `아니오: ${nearer}로 읽음`} tone={reject ? 'bad' : 'good'} />
       </Stats>

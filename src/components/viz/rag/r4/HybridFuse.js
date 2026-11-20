@@ -95,7 +95,7 @@ export default function HybridFuse() {
         <Btn on={false} onClick={() => setLists(initLists(q))}>순위 처음으로</Btn>
       </Controls>
       <Controls>
-        <Slider label="상수 k" min={1} max={200} value={k} onChange={setK} />
+        <Slider label="상수 k (순위에 더하는 수)" min={1} max={200} value={k} onChange={setK} />
         <Slider label="목록에서 쓰는 상위 개수(창)" min={1} max={8} value={win} onChange={setWin} />
       </Controls>
       <div className={s.two}>

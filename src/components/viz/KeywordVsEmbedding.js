@@ -46,7 +46,7 @@ export default function KeywordVsEmbedding() {
   return (
     <Viz
       title="키워드 검색과 임베딩 검색 비교"
-      caption="질문을 고르고 검색 방식을 바꿔 보세요. 임베딩 점수는 설명용 값입니다."
+      caption="질문을 고르고 검색 방식을 바꿔 보세요. 임베딩 점수는 설명용 값이고, 코사인은 질문과 청크의 방향이 같을수록 1에 가까워지는 값입니다."
     >
       <Controls>
         {CASES.map((c, i) => (

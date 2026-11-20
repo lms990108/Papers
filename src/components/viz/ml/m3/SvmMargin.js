@@ -27,6 +27,7 @@ export default function SvmMargin() {
   const [pts, setPts] = useState(START);
   const [tp, setTp] = useState(T0);
   const [only, setOnly] = useState(false);
+  const [showW, setShowW] = useState(true);
   const {start, svgProps} = useDrag(ref, W, H, (id, q) => {
     const v = cl([ix(q[0]), iy(q[1])]);
     if (id === 't') setTp(v);
@@ -43,6 +44,17 @@ export default function SvmMargin() {
   const same = only && full && sol && Math.abs(sol.w[0] - full.w[0]) < 1e-3 && Math.abs(sol.w[1] - full.w[1]) < 1e-3 && Math.abs(sol.b - full.b) < 1e-3;
   const strip = sol ? clipHalfPlane(clipHalfPlane(RECT, sol.w[0], sol.w[1], sol.b + 1), -sol.w[0], -sol.w[1], 1 - sol.b) : [];
   const ln = (c) => clipLine(sol.w[0], sol.w[1], sol.b - c, XR[0], XR[1], YR[0], YR[1]);
+  let arrow = null;
+  if (sol && wn > 1e-9) {
+    const c0 = [2.5, 2.4];
+    const k = f0(sol, c0) / (wn * wn);
+    const tail = [c0[0] - k * sol.w[0], c0[1] - k * sol.w[1]];
+    const head = [tail[0] + (0.9 * sol.w[0]) / wn, tail[1] + (0.9 * sol.w[1]) / wn];
+    const [tx, ty, hx, hy] = [X(tail[0]), Y(tail[1]), X(head[0]), Y(head[1])];
+    const len = Math.hypot(hx - tx, hy - ty) || 1;
+    const [ux, uy] = [(hx - tx) / len, (hy - ty) / len];
+    arrow = {tx, ty, hx, hy, wing: [[hx - 11 * ux - 5 * uy, hy - 11 * uy + 5 * ux], [hx - 11 * ux + 5 * uy, hy - 11 * uy - 5 * ux]], lx: hx + 10 * ux, ly: hy + 10 * uy + 4};
+  }
 
   return (
     <Viz
@@ -53,6 +65,7 @@ export default function SvmMargin() {
         <Btn on={only} onClick={() => setOnly(!only)}>서포트 벡터만 남기기</Btn>
         <Btn onClick={() => { setPts(START); setTp(T0); setOnly(false); }}>본문의 점으로</Btn>
         <Btn onClick={() => setPts(pts.map((p, i) => (i === 3 ? [2, 2] : p)))}>(1,1)을 (2,2)로 옮기기</Btn>
+        <Btn on={showW} onClick={() => setShowW(!showW)}>w 방향 화살표</Btn>
       </Controls>
       <svg ref={ref} viewBox={`0 0 ${W} ${H}`} className={s.canvas} style={{maxWidth: 480}} role="img" aria-label="두 클래스의 점, 최대 여백 직선, 서포트 벡터" {...svgProps}>
         {strip.length > 2 ? <polygon points={strip.map((p) => `${X(p[0])},${Y(p[1])}`).join(' ')} fill="var(--vok)" fillOpacity="0.14" /> : null}
@@ -74,17 +87,26 @@ export default function SvmMargin() {
             </g>
           );
         })}
+        {showW && arrow ? (
+          <g style={{pointerEvents: 'none'}}>
+            <line x1={arrow.tx} y1={arrow.ty} x2={arrow.hx} y2={arrow.hy} stroke="var(--vc)" strokeWidth="3" />
+            <polygon points={`${arrow.hx},${arrow.hy} ${arrow.wing[0].join(',')} ${arrow.wing[1].join(',')}`} fill="var(--vc)" />
+            <text x={arrow.lx} y={arrow.ly} className={s.t} style={{fill: 'var(--vc)', fontWeight: 700}}>w</text>
+          </g>
+        ) : null}
         <rect x={X(tp[0]) - 8} y={Y(tp[1]) - 8} width={16} height={16} fill="var(--vok)" fillOpacity="0.85" />
         <rect x={X(tp[0]) - 16} y={Y(tp[1]) - 16} width={32} height={32} fill="transparent" cursor="grab" onPointerDown={start('t')} />
         <text x={X(tp[0]) + 12} y={Y(tp[1]) - 12} className={s.t} style={{fill: 'var(--vok)'}}>시험 점</text>
       </svg>
       {sol ? (
         <Stats>
-          <Stat label="면 f(x) = w·x + b" value={`${fmt(sol.w[0], 3)}x₁ + ${fmt(sol.w[1], 3)}x₂ ${sol.b < 0 ? '−' : '+'} ${fmt(Math.abs(sol.b), 3)}`} />
-          <Stat label="여백 폭 2/‖w‖" value={fmt(2 / wn, 3)} />
+          <Stat label="w₁ (가로 위치에 곱하는 수)" value={fmt(sol.w[0], 3)} />
+          <Stat label="w₂ (세로 위치에 곱하는 수)" value={fmt(sol.w[1], 3)} />
+          <Stat label="b (직선을 미는 수)" value={fmt(sol.b, 3)} />
+          <Stat label="여백 폭 (2 ÷ w의 길이)" value={fmt(2 / wn, 3)} />
           <Stat label="서포트 벡터 수" value={svSet.filter(Boolean).length} />
-          <Stat label="시험 점 f" value={`${fmt(ft, 3)} → ${ft > 0 ? '+1' : '−1'}`} tone={Math.abs(ft) < 1 ? 'bad' : 'good'} />
-          <Stat label="시험 점의 경계까지 거리" value={fmt(Math.abs(ft) / wn, 3)} />
+          <Stat label="시험 점의 점수 f → 예측" value={`${fmt(ft, 3)} → ${ft > 0 ? '+' : '−'}`} tone={Math.abs(ft) < 1 ? 'bad' : 'good'} />
+          <Stat label="시험 점에서 직선까지 거리" value={fmt(Math.abs(ft) / wn, 3)} />
           {only ? <Stat label="전체 점으로 푼 면과 같은가" value={same ? '같음' : '다름'} tone={same ? 'good' : 'bad'} /> : null}
         </Stats>
       ) : (
@@ -93,7 +115,7 @@ export default function SvmMargin() {
       {sol ? (
         <table className={s.grid}>
           <thead>
-            <tr><th>점</th><th>라벨</th><th>f(x)</th><th>y·f(x)</th><th>역할</th></tr>
+            <tr><th>점 (x₁, x₂)</th><th>라벨 y</th><th>점수 f</th><th>y × f</th><th>역할</th></tr>
           </thead>
           <tbody>
             {pts.map((p, i) => {
@@ -109,6 +131,7 @@ export default function SvmMargin() {
           </tbody>
         </table>
       ) : null}
+      {sol ? <Note>y × f가 1이면 점이 점선 위(서포트 벡터), 1보다 크면 여백 밖, 0 이하이면 직선 반대편입니다. 점수 f는 w₁x₁ + w₂x₂ + b이고, 0이면 직선 위입니다.</Note> : null}
     </Viz>
   );
 }

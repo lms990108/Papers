@@ -19,7 +19,7 @@ export default function GrpoAdvantage() {
   return (
     <Viz
       title="GRPO의 우위와 rejection sampling"
-      caption="답 네 개의 보상을 눌러 0과 1로 바꿔 보세요. 우위는 보상에서 평균을 뺀 값입니다. 아래 버튼으로 같은 보상을 rejection sampling 관점에서 볼 수 있습니다."
+      caption="답 네 개의 보상을 눌러 0과 1로 바꿔 보세요. 우위는 보상에서 평균을 뺀 값입니다. 아래 버튼으로 같은 보상을 rejection sampling 관점에서 볼 수 있습니다. rejection sampling은 보상이 높은 답만 골라 SFT의 답으로 쓰는 방법입니다."
     >
       <Controls>
         {PRESETS.map((p) => (

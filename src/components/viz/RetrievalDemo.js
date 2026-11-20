@@ -41,7 +41,7 @@ export default function RetrievalDemo() {
   return (
     <Viz
       title="질문과 가까운 청크 k개 고르기"
-      caption="질문 화살표 끝을 끌어 돌려 보세요. 각 청크는 방향으로 표시한 임베딩이고, 질문과 방향이 가까운 순서(코사인)로 k개를 고릅니다. 위치와 점수는 설명용 값입니다."
+      caption="질문 화살표 끝을 끌어 돌려 보세요. 각 청크는 방향으로 표시한 임베딩이고, 질문과 방향이 가까운 순서로 k개를 고릅니다. 코사인은 두 방향이 같을수록 1에 가까워지는 값입니다. 위치와 점수는 설명용 값입니다."
     >
       <Controls>
         <Slider label="k (남길 청크 수)" min={1} max={8} value={k} onChange={setK} />

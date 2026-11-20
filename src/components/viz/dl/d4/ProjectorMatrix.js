@@ -37,7 +37,7 @@ export default function ProjectorMatrix() {
   return (
     <Viz
       title="projector: 픽셀 네 칸을 길이 2인 그림 토큰으로"
-      caption="밝기 칸을 눌러 켜고 끄세요. 줄마다 가중치와 밝기를 곱해 더하면 그림 토큰의 한 칸이 됩니다. 가중치는 계산이 보이게 고른 수입니다. 두 번째 projector와 칸 이름(왼쪽 위 등)은 설명용입니다."
+      caption="projector는 픽셀 네 칸을 길이 2인 그림 토큰으로 줄이는 행렬입니다. 밝기 칸을 눌러 켜고 끄세요. 줄마다 가중치와 밝기를 곱해 더하면 그림 토큰의 한 칸이 됩니다. 가중치는 계산이 보이게 고른 수입니다. 두 번째 projector와 칸 이름(왼쪽 위 등)은 설명용입니다."
     >
       <Controls>
         {IMGS.map((im) => (
@@ -115,7 +115,7 @@ export default function ProjectorMatrix() {
         <Stats>
           <Stat label="그림 토큰" value={`[${prods.map((v) => fmt(v, 1)).join(', ')}]`} />
           <Stat label="글 토큰" value="[1, 0]" />
-          <Stat label="prefill의 토큰 수" value="2개 (글 1 + 그림 1)" />
+          <Stat label="언어 모델이 읽는 토큰 수 (prefill)" value="2개 (글 1 + 그림 1)" />
           <Stat label="길이가 같아 더할 수 있는가" value="가능" tone="good" />
         </Stats>
       ) : null}

@@ -118,9 +118,9 @@ export default function LineFitDrag() {
         <thead>
           <tr>
             <th>리뷰</th>
-            <th>횟수 x</th>
-            <th>예측 y = {num(w, 1)}x + {num(b, 1)}</th>
-            <th>정답 t</th>
+            <th>좋다 횟수 x</th>
+            <th>예측 별점 y = {num(w, 1)}x + {num(b, 1)}</th>
+            <th>정답 별점 t</th>
             <th>오차 y - t</th>
             <th>제곱</th>
           </tr>

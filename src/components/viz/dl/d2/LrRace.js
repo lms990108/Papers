@@ -23,7 +23,7 @@ export default function LrRace() {
   return (
     <Viz
       title="학습률 다섯 개로 달리기"
-      caption="모두 w = 0에서 시작해 목표 3을 향합니다. 걸음 수를 늘리면서 어느 선이 3에 먼저 닿고, 어느 선이 튀는지 보세요. 선 끝의 글자가 학습률입니다."
+      caption="모두 w = 0에서 시작해 목표 3을 향합니다. 걸음 수를 늘리면서 어느 선이 3에 먼저 닿고, 어느 선이 튀는지 보세요. 선 끝의 글자가 학습률 ε입니다."
     >
       <Controls>
         <Slider label="걸음 수" min={1} max={10} step={1} value={n} onChange={setN} />

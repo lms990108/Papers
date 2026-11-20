@@ -52,15 +52,15 @@ export default function AttentionExplorer() {
         <Btn on={rev} onClick={() => setRev(!rev)}>토큰 순서 바꾸기</Btn>
       </Controls>
       <Controls>
-        <Slider label="W_Q의 첫 칸 배율" min={0.5} max={3} step={0.5} value={qs} onChange={setQs} format={(v) => fmt(v, 1)} />
-        <Slider label="W_V의 둘째 칸 배율" min={0.5} max={3} step={0.5} value={vs} onChange={setVs} format={(v) => fmt(v, 1)} />
+        <Slider label="질문 q를 만드는 W_Q의 첫 칸 배율" min={0.5} max={3} step={0.5} value={qs} onChange={setQs} format={(v) => fmt(v, 1)} />
+        <Slider label="값 v를 만드는 W_V의 둘째 칸 배율" min={0.5} max={3} step={0.5} value={vs} onChange={setVs} format={(v) => fmt(v, 1)} />
       </Controls>
 
       <table className={s.grid}>
         <thead>
           <tr>
             <th>토큰</th>
-            <th>입력 x</th>
+            <th>입력 x (토큰의 수 목록)</th>
             <th>질문 q</th>
             <th>열쇠 k</th>
             <th>값 v</th>

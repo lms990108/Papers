@@ -51,8 +51,8 @@ export default function LabelFlip() {
         <text x="10" y="20" className={s.ts}>파랑 동그라미: ab의 두 경로 / 보라 삼각형: 다른 라벨 / 비용이 낮을수록 좋음</text>
       </svg>
       <Stats>
-        <Stat label="비터비: ab = min" value={fmt(vit, 3)} />
-        <Stat label="전방: ab = logadd" value={fmt(fw, 3)} tone="good" />
+        <Stat label="비터비: ab = min (작은 쪽만)" value={fmt(vit, 3)} />
+        <Stat label="전방: ab = logadd (더한 뒤 비용으로)" value={fmt(fw, 3)} tone="good" />
         <Stat label="다른 라벨" value={fmt(c3, 3)} />
         <Stat label="비터비의 판단" value={vV} tone={vV === 'ab' ? 'good' : 'bad'} />
         <Stat label="전방의 판단" value={vF} tone={vF === 'ab' ? 'good' : 'bad'} />

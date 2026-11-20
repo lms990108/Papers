@@ -64,6 +64,7 @@ export default function RagPipeline() {
               <div className={s.legend}>수 목록(연차, 병가, 출장): {c.vec.join(', ')}</div>
             </div>
           ))}
+          <Note>수 목록은 청크의 뜻을 숫자 세 개로 적은 설명용 값이고, 세 칸은 차례로 연차, 병가, 출장입니다.</Note>
         </div>
       ) : null}
 
@@ -80,7 +81,7 @@ export default function RagPipeline() {
             />
           ))}
           <Note>
-            막대는 질문과 청크의 코사인 유사도입니다. 질문 수 목록은 {q.vec.join(', ')}이고, 위의 {k}개만 남깁니다.
+            막대는 질문과 청크의 코사인 유사도이고, 두 수 목록이 같은 방향에 가까울수록 큽니다. 질문 수 목록은 {q.vec.join(', ')}이고, 위의 {k}개만 남깁니다.
             {qi === 1 && k === 1 ? ' 휴가 일수는 연차와 병가 사이에 있어서 병가 청크가 1위입니다. k를 2로 올려 보세요.' : ''}
           </Note>
         </div>
