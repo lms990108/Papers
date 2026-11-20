@@ -47,7 +47,7 @@ export default function XorTwoLayer() {
   // h1 - h2 + c3 = 0 직선: h2 = h1 + c3
   return (
     <Viz
-      title="칸을 두 단계로 쌓으면 배타적 논리합이 풀립니다"
+      title="칸을 두 단계로 쌓으면 배타적 논리합(XOR)이 풀립니다"
       caption="입력을 하나 고르고 세 문턱을 움직여 보세요. 첫 단계(h₁, h₂)가 네 점을 새 평면으로 옮기고, 둘째 단계가 그 평면에서 직선 하나로 가릅니다. 기본값은 본문과 같은 −0.5, −1.5, −0.5입니다."
     >
       <Controls>
@@ -73,7 +73,7 @@ export default function XorTwoLayer() {
       </div>
       <table className={s.grid}>
         <thead>
-          <tr><th>x₁</th><th>x₂</th><th>h₁</th><th>h₂</th><th>h₁ − h₂ {c3 < 0 ? '−' : '+'} {num(Math.abs(c3), 2)}</th><th>y</th><th>정답 (배타적 논리합)</th></tr>
+          <tr><th>x₁</th><th>x₂</th><th>h₁</th><th>h₂</th><th>h₁ − h₂ {c3 < 0 ? '−' : '+'} {num(Math.abs(c3), 2)}</th><th>y</th><th>정답 (XOR)</th></tr>
         </thead>
         <tbody>
           {PTS.map((p, i) => (
