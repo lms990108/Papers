@@ -27,7 +27,7 @@ import LocalMinima from '@site/src/components/viz/dl/d2/LocalMinima';
 - 한 번에 옮기는 비율 \(\epsilon\)(학습률)이 너무 작으면 느리고, 너무 크면 최솟값을 넘어 왕복하거나 멀어집니다.
 - 기울기가 0인 점에서 멈추지만, 그 점이 가장 낮은 곳이라는 보장은 없습니다.
 
-앞에서 빈칸의 자리를 정하는 [신경망의 구조](./structure.md)를 봤습니다. 뒤에서는 표본 하나로 고치는 [확률적 경사하강법](./sgd.md)과, 층이 여럿일 때 기울기를 구하는 [역전파](./backpropagation.md)를 봅니다.
+앞에서 파라미터의 자리를 정하는 [신경망의 구조](./structure.md)를 봤습니다. 뒤에서는 표본 하나로 고치는 [확률적 경사하강법](./sgd.md)과, 층이 여럿일 때 기울기를 구하는 [역전파](./backpropagation.md)를 봅니다.
 :::
 
 ## 배경

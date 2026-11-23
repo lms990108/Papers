@@ -12,7 +12,7 @@ import FfnGate from '@site/src/components/viz/nlp/g5/FfnGate';
 import CausalMaskRow from '@site/src/components/viz/nlp/g5/CausalMaskRow';
 import BlockStack from '@site/src/components/viz/nlp/g5/BlockStack';
 
-[어텐션](./attention.md)은 토큰의 목록을 다른 토큰과 섞어 새 목록을 만듭니다. 그 한 번으로 층이 끝나지는 않습니다. 섞기 전과 섞은 뒤를 더하고, 칸마다 한 번 더 구부린 뒤 다시 더합니다. 이 두 덧셈을 한 세트로 쌓은 것이 **decoder block**입니다.
+[어텐션](./attention.md)은 토큰의 목록을 다른 토큰과 섞어 새 목록을 만듭니다. 그 한 번으로 층이 끝나지는 않습니다. 섞기 전과 섞은 뒤를 더하고, 칸마다 활성화 함수를 한 번 더 거친 뒤 다시 더합니다. 이 두 덧셈을 한 세트로 쌓은 것이 **decoder block**입니다.
 
 입력을 \(x = [1,\; 0]\)으로 둡니다. 길이가 2인 것은 칸을 보이게 줄인 것입니다. 실제 모델의 목록은 수천 칸입니다. 단계 버튼을 눌러 블록 하나를 지나가 보세요.
 

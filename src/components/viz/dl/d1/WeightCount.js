@@ -67,7 +67,7 @@ export default function WeightCount() {
         <Stat label="입력 칸 수" value={comma(nIn)} />
         <Stat label="늘어난 배수" value={hidden > 0 ? `${ratio.toFixed(1)}배` : '1.0배'} tone={ratio > 5 ? 'bad' : undefined} />
       </Stats>
-      <Note>가운데 칸 수를 바꿔 보세요. 28×28에서 100칸이면 비워 둘 수가 열 배로 늘어납니다. 빈칸이 많으면 표현할 수 있는 함수가 늘지만 학습 쌍을 외우기도 쉬워집니다.</Note>
+      <Note>가운데 칸 수를 바꿔 보세요. 28×28에서 100칸이면 정해야 할 수가 열 배로 늘어납니다. 파라미터가 많으면 표현할 수 있는 함수가 늘지만 학습 쌍을 외우기도 쉬워집니다.</Note>
     </Viz>
   );
 }

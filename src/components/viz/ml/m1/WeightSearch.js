@@ -50,7 +50,7 @@ export default function WeightSearch() {
 
   return (
     <Viz
-      title="후보를 하나씩 넣어 보며 빈칸을 고르기"
+      title="후보를 하나씩 넣어 보며 파라미터를 고르기"
       caption="칸마다 (w1, w2) 후보입니다. 칸 안의 수는 그 후보가 맞힌 리뷰 개수입니다. 후보를 시도하거나 칸을 눌러 보세요."
     >
       <Controls>
