@@ -11,7 +11,7 @@ import PositionalEncodingGrid from '@site/src/components/viz/nlp/g4/PositionalEn
 import CausalMaskGrid from '@site/src/components/viz/nlp/g4/CausalMaskGrid';
 import TransformerParamCount from '@site/src/components/viz/nlp/g4/TransformerParamCount';
 
-문장을 넣는 언어 모델의 가운데는 같은 모양의 블록을 쌓은 것입니다. 그 블록이 **트랜스포머**(transformer)의 한 층입니다. [신경망의 구조](../deep-learning/structure.md)에서 블록이라고 부른 상자가 여기 그림입니다. 모양은 블록마다 같고, 안에 채우는 가중치는 블록마다 따로입니다. 한 블록 안에서는 토큰 자리가 달라도 질문, 열쇠, 값, 그리고 뒤의 층이 같은 가중치를 씁니다.
+문장을 넣는 언어 모델의 가운데는 같은 모양의 블록을 쌓은 것입니다. 그 블록이 **트랜스포머**(transformer)의 한 층입니다. [신경망의 구조](../deep-learning/structure.md)에서 블록이라고 부른 상자가 여기 그림입니다. 모양은 블록마다 같고, 안에 쓰는 가중치는 블록마다 따로입니다. 한 블록 안에서는 토큰 자리가 달라도 질문, 열쇠, 값, 그리고 뒤의 층이 같은 가중치를 씁니다.
 
 그림에 나오는 말을 먼저 읽어 둡니다.
 
@@ -67,7 +67,7 @@ import TransformerParamCount from '@site/src/components/viz/nlp/g4/TransformerPa
 
 ### 칸마다의 층
 
-그다음은 토큰마다 따로 계산하는 층입니다. 모든 자리가 같은 가중치를 공유합니다. 두 번의 곱 사이에는 직선이 아닌 구부러진 함수를 하나 두는데, 이 예는 ReLU를 씁니다. 0보다 작으면 0으로 둡니다. 수로는 이렇게 씁니다.
+그다음은 토큰마다 따로 계산하는 층입니다. 모든 자리가 같은 가중치를 공유합니다. 두 번의 곱 사이에는 직선이 아닌 활성화 함수를 하나 두는데, 이 예는 ReLU를 씁니다. 0보다 작으면 0으로 둡니다. 수로는 이렇게 씁니다.
 
 \[
 u = \mathrm{ReLU}(z W_1 + b_1), \quad y = u W_2 + b_2

@@ -34,8 +34,8 @@ export default function StackCollapse() {
 
   return (
     <Viz
-      title="층 둘을 쌓았을 때: 직선과 구부린 결과"
-      caption="y = w₂ · f(w₁ · x)입니다. f는 두 층 사이에 끼우는 구부러지는 함수입니다. 점선은 가운데 함수가 없을 때의 직선 w₂ · w₁ · x입니다. 기본값(0.5, 1, tanh)은 본문의 표와 같습니다."
+      title="층 둘을 쌓았을 때: 직선과 활성화 함수를 거친 결과"
+      caption="y = w₂ · f(w₁ · x)입니다. f는 두 층 사이에 끼우는 활성화 함수입니다. 점선은 가운데 함수가 없을 때의 직선 w₂ · w₁ · x입니다. 기본값(0.5, 1, tanh)은 본문의 표와 같습니다."
     >
       <Controls>
         <Slider label="w₁ (첫 층 가중치)" min={-3} max={3} step={0.1} value={w1} onChange={setW1} format={(v) => fmt(v, 1)} />
@@ -87,7 +87,7 @@ export default function StackCollapse() {
         <g>
           <line x1={W - 190} x2={W - 160} y1={18} y2={18} stroke="var(--va)" strokeWidth={2.6} />
           <text x={W - 154} y={22} className={s.ts}>
-            구부린 결과 (실선)
+            활성화 함수를 거친 결과 (실선)
           </text>
           <line x1={W - 190} x2={W - 160} y1={36} y2={36} stroke="var(--ifm-color-emphasis-600)" strokeWidth={2} strokeDasharray="5 4" />
           <text x={W - 154} y={40} className={s.ts}>
@@ -97,7 +97,7 @@ export default function StackCollapse() {
       </svg>
       <Stats>
         <Stat label="a = w₁x (첫 층의 합)" value={fmt(r.a, 3)} />
-        <Stat label="h = f(a) (구부린 값)" value={fmt(r.h, 3)} />
+        <Stat label="h = f(a) (활성화 함수를 거친 값)" value={fmt(r.h, 3)} />
         <Stat label="y = w₂h (출력)" value={fmt(r.y, 3)} />
         <Stat label="직선일 때 y" value={fmt(r.lin, 3)} />
         <Stat label="두 값의 차이" value={fmt(Math.abs(r.y - r.lin), 3)} tone={Math.abs(r.y - r.lin) < 1e-9 ? 'good' : 'bad'} />

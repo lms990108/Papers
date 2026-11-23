@@ -32,7 +32,7 @@ export default function ReviewScorer() {
 
   return (
     <Viz
-      title="가중치를 채우면 리뷰마다 점수가 나옵니다"
+      title="가중치를 넣으면 리뷰마다 점수가 나옵니다"
       caption="w1과 w2를 바꿔 보세요. 점수가 0보다 크면 긍정으로 읽고, 읽은 답을 붙은 답과 비교합니다. 기본값은 학습으로 채운 (1, -1)입니다."
     >
       <Controls>
@@ -41,7 +41,7 @@ export default function ReviewScorer() {
       </Controls>
       <Controls>
         <Btn on={w1 === 1 && w2 === -1} onClick={() => {setW1(1); setW2(-1);}}>(1, -1) 채운 뒤</Btn>
-        <Btn on={w1 === 0 && w2 === 0} onClick={() => {setW1(0); setW2(0);}}>(0, 0) 빈칸 그대로</Btn>
+        <Btn on={w1 === 0 && w2 === 0} onClick={() => {setW1(0); setW2(0);}}>(0, 0) 파라미터 그대로</Btn>
         <Btn on={extra} onClick={() => setExtra(!extra)}>“나쁘지 않다” 넣어 보기</Btn>
       </Controls>
       <div style={{overflowX: 'auto'}}>

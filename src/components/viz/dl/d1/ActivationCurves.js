@@ -34,8 +34,8 @@ export default function ActivationCurves() {
 
   return (
     <Viz
-      title="구부러지는 함수 셋을 겹쳐 보기"
-      caption="a는 구부러지는 함수에 들어가는 값, 곧 가중치를 곱해 더한 합입니다. a를 움직이면 세 함수의 값이 함께 바뀝니다. 표의 -2, 0, 0.5, 3은 본문의 표와 같은 값입니다. 곡선은 위쪽 3.5와 아래쪽 -1.5에서 잘라 그렸습니다."
+      title="활성화 함수 셋을 겹쳐 보기"
+      caption="a는 활성화 함수에 들어가는 값, 곧 가중치를 곱해 더한 합입니다. a를 움직이면 세 함수의 값이 함께 바뀝니다. 표의 -2, 0, 0.5, 3은 본문의 표와 같은 값입니다. 곡선은 위쪽 3.5와 아래쪽 -1.5에서 잘라 그렸습니다."
     >
       <Controls>
         <Slider label="a" min={-4} max={4} step={0.1} value={a} onChange={setA} format={(v) => fmt(v, 1)} />

@@ -16,8 +16,8 @@ export default function EdgeToggle() {
 
   return (
     <Viz
-      title="선을 그리면 빈칸이 생기고, 안 그리면 없다"
-      caption="은닉 칸 하나가 두 픽셀을 봅니다. 선 위의 수 0.5와 -0.2는 본문의 값입니다. a는 픽셀 밝기에 선 위의 수를 곱해 더한 합, h는 그 합을 구부린 값(은닉 칸의 값), y는 출력이고, tanh는 수를 -1과 1 사이로 구부리는 함수입니다. 선을 지우면 그 가중치라는 빈칸은 존재하지 않습니다."
+      title="선을 그리면 파라미터가 생기고, 안 그리면 없다"
+      caption="은닉 칸 하나가 두 픽셀을 봅니다. 선 위의 수 0.5와 -0.2는 본문의 값입니다. a는 픽셀 밝기에 선 위의 수를 곱해 더한 합, h는 그 합을 활성화 함수를 거친 값(은닉 칸의 값), y는 출력이고, tanh는 수를 -1과 1 사이로 누르는 활성화 함수입니다. 선을 지우면 그 가중치라는 파라미터는 존재하지 않습니다."
     >
       <Controls>
         <Slider label="x₁" min={0} max={1} step={0.1} value={x[0]} onChange={(v) => setX([v, x[1]])} format={(v) => fmt(v, 1)} />
@@ -43,7 +43,7 @@ export default function EdgeToggle() {
               </>
             ) : (
               <text x={190} y={Y[i] + (i === 0 ? -6 : 18)} textAnchor="middle" className={s.ts}>
-                선 없음 (빈칸 없음)
+                선 없음 (파라미터 없음)
               </text>
             )}
             <circle cx={90} cy={Y[i]} r={22} fill="var(--ifm-background-color)" stroke="var(--ifm-color-emphasis-500)" />

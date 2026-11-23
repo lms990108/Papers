@@ -30,8 +30,8 @@ export default function LayerSizes() {
 
   return (
     <Viz
-      title="층의 크기로 빈칸 수 세기"
-      caption="한 층의 빈칸은 가중치 n_in × n_out개와 바이어스 n_out개입니다. 기본값 784 → 100 → 10은 본문의 79,510개입니다."
+      title="층의 크기로 파라미터 수 세기"
+      caption="한 층의 파라미터는 가중치 n_in × n_out개와 바이어스 n_out개입니다. 기본값 784 → 100 → 10은 본문의 79,510개입니다."
     >
       <Controls>
         <Btn on={nIn === 784 && nOut === 10 && layers === 0} onClick={() => preset(784, 10, 0, 100)}>
@@ -91,10 +91,10 @@ export default function LayerSizes() {
       <Stats>
         <Stat label="구조" value={sizes.join('-')} />
         <Stat label="층 수" value={rows.length} />
-        <Stat label="전체 빈칸 수" value={comma(total)} />
+        <Stat label="전체 파라미터 수" value={comma(total)} />
       </Stats>
       <Note>
-        은닉층을 하나 더 쌓으면 {width} → {width} 층의 {comma(width * width + (bias ? width : 0))}개가 더해집니다. 은닉 칸 수는 학습이 정하지 않고 배선을 그릴 때 사람이 정합니다.
+        은닉층을 하나 더 쌓으면 {width} → {width} 층의 {comma(width * width + (bias ? width : 0))}개가 더해집니다. 은닉 칸 수는 학습이 정하지 않고 구조를 짤 때 사람이 정합니다.
       </Note>
     </Viz>
   );

@@ -36,7 +36,7 @@ export default function PixelScore() {
   return (
     <Viz
       title="픽셀 아홉 개를 점수 둘로 바꾸기"
-      caption="칸을 눌러 밝기를 0과 1로 바꿉니다. 가중치는 본문에서 계산을 보이려고 손으로 고른 수이고, 실제로는 학습이 채웁니다."
+      caption="칸을 눌러 밝기를 0과 1로 바꿉니다. 가중치는 본문에서 계산을 보이려고 손으로 고른 수이고, 실제로는 학습이 정합니다."
     >
       <Controls>
         <Btn on={x.join() === IMG7.join()} onClick={() => setX(IMG7)}>

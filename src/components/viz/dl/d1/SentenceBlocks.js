@@ -36,13 +36,13 @@ export default function SentenceBlocks() {
       </Controls>
       <Controls>
         <Btn on={shared} onClick={() => setShared(true)}>
-          자리가 빈칸을 같이 씀 (본문)
+          자리가 파라미터를 같이 씀 (본문)
         </Btn>
         <Btn on={!shared} onClick={() => setShared(false)}>
-          자리마다 따로 빈칸 (비교용)
+          자리마다 따로 파라미터 (비교용)
         </Btn>
       </Controls>
-      <svg className={s.svg} viewBox="0 0 560 230" role="img" aria-label={`토큰 ${len}개가 블록 ${blocks}개를 지나는 그림. ${shared ? '블록마다 빈칸 한 벌을 모든 자리가 공유' : '자리마다 따로 빈칸'}`}>
+      <svg className={s.svg} viewBox="0 0 560 230" role="img" aria-label={`토큰 ${len}개가 블록 ${blocks}개를 지나는 그림. ${shared ? '블록마다 파라미터 한 벌을 모든 자리가 공유' : '자리마다 따로 파라미터'}`}>
         {Array.from({length: shown}, (_, i) => {
           const bw = (500 - 8 * (shown - 1)) / shown;
           return (
@@ -66,7 +66,7 @@ export default function SentenceBlocks() {
               <g key={b}>
                 <rect x={30} y={y} width={500} height={24} rx={6} fill="var(--vb)" fillOpacity={0.22} stroke="var(--vb)" />
                 <text x={280} y={y + 16} textAnchor="middle" className={s.t}>
-                  블록 {b + 1} · 빈칸 {BLOCK}개를 모든 자리가 같이 씀
+                  블록 {b + 1} · 파라미터 {BLOCK}개를 모든 자리가 같이 씀
                 </text>
               </g>
             );
@@ -78,7 +78,7 @@ export default function SentenceBlocks() {
                 <rect key={i} x={30 + i * (bw + 8)} y={y} width={bw} height={24} rx={4} fill="var(--vbad)" fillOpacity={0.18} stroke="var(--vbad)" />
               ))}
               <text x={280} y={y + 16} textAnchor="middle" className={s.t}>
-                블록 {b + 1} · 자리마다 빈칸 {BLOCK}개씩
+                블록 {b + 1} · 자리마다 파라미터 {BLOCK}개씩
               </text>
             </g>
           );
@@ -93,7 +93,7 @@ export default function SentenceBlocks() {
       </Stats>
       <Note>
         {shared
-          ? '토큰 수를 올리면 곱셈 횟수만 늘고 블록 파라미터는 그대로입니다. 한 블록 안에서 자리가 달라도 같은 빈칸을 쓰기 때문입니다.'
+          ? '토큰 수를 올리면 곱셈 횟수만 늘고 블록 파라미터는 그대로입니다. 한 블록 안에서 자리가 달라도 같은 파라미터를 쓰기 때문입니다.'
           : '자리마다 따로 두면 블록 파라미터가 자리 수만큼 곱해집니다(이 비교는 같은 블록을 자리 수만큼 따로 둔다는 단순한 가정입니다). 문장이 준비한 자리보다 길면 받을 수도 없습니다.'}
       </Note>
     </Viz>

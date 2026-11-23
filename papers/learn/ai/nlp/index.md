@@ -9,7 +9,7 @@ import OutputShapes from '@site/src/components/viz/nlp/g6/OutputShapes';
 import PreprocessPipeline from '@site/src/components/viz/nlp/g6/PreprocessPipeline';
 import KoreanTokenSplit from '@site/src/components/viz/nlp/g6/KoreanTokenSplit';
 
-사람이 쓴 글을 입력으로 받고, 그 글에 대한 답을 수로 내는 문제들을 **자연어 처리**(natural language processing, NLP)라고 합니다. 자연어는 사람이 쓰는 말입니다. 빈칸을 예제로 채우는 방법은 [머신러닝](../machine-learning/)이고, 자연어 처리는 그 방법의 이름이 아니라 입력이 글인 문제의 이름입니다. 그림의 밝기와 달리, 글은 길이가 문장마다 다르고 칸의 밝기 같은 수가 아닙니다.
+사람이 쓴 글을 입력으로 받고, 그 글에 대한 답을 수로 내는 문제들을 **자연어 처리**(natural language processing, NLP)라고 합니다. 자연어는 사람이 쓰는 말입니다. 파라미터를 예제로 정하는 방법은 [머신러닝](../machine-learning/)이고, 자연어 처리는 그 방법의 이름이 아니라 입력이 글인 문제의 이름입니다. 그림의 밝기와 달리, 글은 길이가 문장마다 다르고 칸의 밝기 같은 수가 아닙니다.
 
 같은 문장 “날씨 나쁘다”로 기계에 시키는 일이 여러 가지입니다. 답이 어떤 모양인지만 다릅니다. 세 출력은 문장 하나에 레이블 하나, 단어마다 표지(그 자리의 레이블), 다음 단어를 맞히는 비율입니다. 문장을 바꾸거나 단어를 붙여 보면서 세 출력이 어떻게 달라지는지 보세요.
 
