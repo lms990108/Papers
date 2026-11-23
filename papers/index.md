@@ -12,7 +12,13 @@ title: Dustin's Papers
 
 Yann LeCun, Léon Bottou, Yoshua Bengio, Patrick Haffner. *Proceedings of the IEEE*, 86(11):2278–2324, 1998.
 
-[내용](./paper/content/lecun-1998.md) · [리뷰](./paper/review/lecun-1998.md) · [원문 PDF](http://yann.lecun.com/exdb/publis/pdf/lecun-98.pdf)
+[요약과 리뷰](./paper/lecun-1998.md) · [원문 PDF](http://yann.lecun.com/exdb/publis/pdf/lecun-98.pdf)
+
+### Attention Is All You Need
+
+Ashish Vaswani 외. *NeurIPS*, 2017.
+
+[요약과 리뷰](./paper/attention-is-all-you-need.md) · [원문 PDF](https://arxiv.org/pdf/1706.03762)
 
 ## 작업공간
 
