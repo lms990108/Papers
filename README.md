@@ -35,9 +35,9 @@ Yann LeCun, Léon Bottou, Yoshua Bengio, Patrick Haffner. *Proceedings of the IE
 
 [내용](papers/paper/content/lecun-1998.md) · [리뷰](papers/paper/review/lecun-1998.md) · [원문 PDF](http://yann.lecun.com/exdb/publis/pdf/lecun-98.pdf)
 
-## 작업공간
+## 경력기술서
 
-[작업공간](papers/work/index.md)
+[경력기술서](papers/work/index.md)
 
 ## 학습공간
 
