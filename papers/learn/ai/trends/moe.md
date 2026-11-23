@@ -9,13 +9,13 @@ import Quiz from '@site/src/components/viz/Quiz';
 
 MoE는 [Transformer block](../nlp/block.md)의 FFN을 여러 벌의 expert로 바꾸고, router가 token마다 top-k개의 expert만 골라 계산하는 구조입니다. attention은 그대로이고, 그래서 모델의 총 파라미터(total)와 token 하나가 쓰는 파라미터(active)가 다릅니다.
 
-2026년 11월 기준 정리이고, 모델 이름은 예시입니다.
+2026년 11월 기준 정리이고 모델 이름은 예시입니다.
 
 에이전트를 만들 때는 이런 곳에서 만납니다.
 
 - **모델 카드의 이름**: `235B-A22B`처럼 total과 active가 같이 적힙니다.
 - **직접 호스팅**: 계산량은 active를 따르는데 GPU 메모리는 total을 따릅니다.
-- **서빙 엔진 설정**: expert parallelism 옵션이 나오고, 노드 사이 통신이 병목이 됩니다.
+- **서빙 엔진 설정**: expert parallelism 옵션이 나오고 노드 사이 통신이 병목이 됩니다.
 - **모델 비교**: active가 작아서 빠를 것 같은 모델이 total 때문에 장비를 더 먹기도 합니다.
 
 ## 계산
@@ -47,11 +47,11 @@ Mixtral을 fp16(2바이트)으로 올리면 \(46.7\text{B} \times 2 = 93.4\text{
 
 ### expert를 GPU에 나누면 all-to-all 통신이 생깁니다
 
-expert를 GPU 여러 장에 나눠 놓는 것이 expert parallelism입니다. token은 자기 expert가 있는 장으로 가서 계산한 뒤 돌아오므로 층마다 모든 장이 서로 token을 보내는 all-to-all이 두 번 생깁니다. 이 통신이 노드 사이 네트워크를 타면 느려집니다. 분산 방식 전반은 [Parallelism](../deep-learning/parallel.md)에 있습니다.
+expert를 GPU 여러 장에 나눠 놓는 것이 expert parallelism입니다. token은 자기 expert가 있는 장으로 가서 계산한 뒤 돌아옵니다. 그래서 층마다 모든 장이 서로 token을 보내는 all-to-all이 두 번 생깁니다. 이 통신이 노드 사이 네트워크를 타면 느려집니다. 분산 방식 전반은 [Parallelism](../deep-learning/parallel.md)에 있습니다.
 
 ### 학습에서는 expert 쏠림을 막아야 합니다
 
-router가 몇 expert만 계속 고르면 나머지는 학습을 못 받아 더 안 뽑힙니다. token 1,000개에 top-2이면 배정이 2,000건이라 expert당 250건이 고른 몫인데, 한 expert가 500건을 받으면 그 expert의 GPU가 step 시간을 정합니다. 막는 방법은 두 가지입니다. 쏠릴수록 커지는 보조 손실(load-balancing loss)을 오차에 더하는 방식이 있고, DeepSeek-V3는 expert마다 bias를 두는 방식을 씁니다. 몰린 expert의 bias는 낮추고 한가한 expert는 높여서 고르는 순위만 바꿉니다. 보조 손실은 품질을 깎을 수 있어 이를 피하려는 방식입니다.
+router가 몇 expert만 계속 고르면 나머지는 학습을 못 받아 더 안 뽑힙니다. token 1,000개에 top-2이면 배정이 2,000건이라 expert당 250건이 고른 몫인데, 한 expert가 500건을 받으면 그 expert의 GPU가 step 시간을 정합니다. 막는 방법은 두 가지입니다. 쏠릴수록 커지는 보조 손실(load-balancing loss)을 오차에 더하는 방식이 있고, DeepSeek-V3는 expert마다 bias를 두는 방식을 씁니다. 몰린 expert의 bias는 낮추고 한가한 expert는 높여서 고르는 순위만 바꿉니다. 보조 손실이 품질을 깎을 수 있어서 이를 피하려는 방식입니다.
 
 ## 이름 읽기와 판단
 
@@ -81,7 +81,7 @@ API로 쓰면 token 단가와 지연만 보이니 MoE인지 신경 쓸 일이 �
 
 - Mixtral 8x7B는 hidden size 4096, FFN 폭 14336, 32층입니다. SwiGLU FFN 하나는 행렬 3개라 \(3 \times 4096 \times 14336 \approx 176\text{M}\)이고, expert 8개에 32층이면 약 45.1B입니다. attention은 key와 value의 head가 8개(GQA)라 층당 약 42M이고 32층에 1.34B, embedding과 출력 행렬이 0.26B이며, 합하면 46.7B입니다. 켜지는 것은 FFN의 2/8인 11.3B에 1.6B를 더한 12.9B입니다. 구성 값은 Mixtral 논문 기준이고, attention 크기는 key와 value head 8개(GQA)를 가정한 계산입니다.
 - DeepSeek-V3는 항상 켜지는 shared expert 1개와 256개 중 8개를 고르는 routed expert를 함께 씁니다. active 37B에는 attention과 shared expert가 들어 있습니다.
-- Mixtral의 router는 점수에서 top-k를 먼저 고르고 그 점수끼리 softmax를 합니다. 위 계산 예와 같은 순서입니다. softmax를 먼저 하고 고른 가중치를 다시 맞추는 방식도 있어서, 모델마다 구현을 확인해야 합니다.
+- Mixtral의 router는 점수에서 top-k를 먼저 고르고 그 점수끼리 softmax를 합니다. 위 계산 예와 같은 순서입니다. softmax를 먼저 하고 고른 가중치를 다시 맞추는 방식도 있어서 모델마다 구현을 확인해야 합니다.
 - DeepSeek-V3의 bias는 expert를 고르는 순위에만 더하고, 출력을 섞는 가중치는 원래 점수로 만듭니다.
 - 학습 때 expert마다 받을 token 상한(capacity factor)을 두기도 합니다. 상한을 넘은 token은 그 expert를 건너뜁니다.
 
