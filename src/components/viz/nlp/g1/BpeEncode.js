@@ -4,7 +4,7 @@ import {Viz, Controls, Btn, Note, styles as s} from '../../Viz';
 const MERGES = [['e', 's'], ['es', 't'], ['l', 'o'], ['lo', 'w']];
 const PRESETS = ['lowest', 'newer', 'wide', 'zzz', 'lower', 'newest'];
 
-// 학습한 순서대로 합치기 목록을 적용한다. 단계마다 토큰 목록을 남긴다.
+// 학습한 순서대로 합치기 목록을 적용한다. 단계마다 token 목록을 남긴다.
 function encodeSteps(word) {
   let toks = word.split('');
   const trace = [{merge: null, toks}];
@@ -68,8 +68,8 @@ export default function BpeEncode() {
             <tr>
               <th>단계</th>
               <th>적용한 합치기</th>
-              <th>토큰 목록</th>
-              <th>토큰 수</th>
+              <th>token 목록</th>
+              <th>token 수</th>
             </tr>
           </thead>
           <tbody>

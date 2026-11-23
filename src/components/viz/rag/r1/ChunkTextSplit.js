@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {Viz, Controls, Slider, Stats, Stat, Note, styles as s} from '../../Viz';
 import {box, tint} from './ragToy';
 
-// 설명용 문서: 어절을 토큰 대신 쓴다. 연차 문장은 topic 0.
+// 설명용 문서: 어절을 token 대신 쓴다. 연차 문장은 topic 0.
 const SENTS = [
   {t: '연차는 15일입니다.', topic: 0},
   {t: '입사 첫해는 11일입니다.', topic: 0},
@@ -52,7 +52,7 @@ export default function ChunkTextSplit() {
   return (
     <Viz
       title="같은 문서를 청크 크기와 오버랩으로 나누기"
-      caption="어절 하나를 토큰 하나로 본 설명용 문서입니다(실제 토큰 수와는 다릅니다). 파란 글씨가 연차 문장이고, 주황 밑줄은 앞 청크와 겹친 어절입니다. 말줄임표는 문장이 그 자리에서 잘렸다는 표시입니다."
+      caption="어절 하나를 token 하나로 본 설명용 문서입니다(실제 token 수와는 다릅니다). 파란 글씨가 연차 문장이고, 주황 밑줄은 앞 청크와 겹친 어절입니다. 말줄임표는 문장이 그 자리에서 잘렸다는 표시입니다."
     >
       <Controls>
         <Slider label="청크 크기(어절)" min={1} max={12} value={size} onChange={setSize} />

@@ -46,7 +46,7 @@ export default function TransformerBlockFlow() {
   const l2 = layerNorm(z2);
 
   const rows = [
-    {n: '입력', f: '토큰의 목록 x (위치 목록을 더하기 전)', r: x},
+    {n: '입력', f: 'token의 목록 x (위치 목록을 더하기 전)', r: x},
     {n: '어텐션', f: '어텐션 출력 a', r: a},
     {n: '더하기 (잔차 연결)', f: 'z = x + a — 원래 목록 x가 그대로 지나갑니다', r: z1, res: true},
     {n: '층 정규화', f: `평균 ${trim(l1.mu)}, 표준편차 ${trim(l1.sd)} 기준으로 정규화`, r: l1.out},

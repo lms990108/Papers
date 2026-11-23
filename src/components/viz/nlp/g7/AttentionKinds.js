@@ -45,7 +45,7 @@ export default function AttentionKinds() {
   return (
     <Viz
       title="셀프, 크로스, 인과: 같은 계산에서 무엇이 달라지나"
-      caption="계산은 세 경우 모두 같습니다. 달라지는 것은 질문이 어디서 오는지, 열쇠와 값이 어디서 오는지, 어느 칸을 가리는지입니다. 크로스의 목표 쪽 토큰 값은 설명용 값이고, 가중치는 어텐션 페이지의 셋짜리 예와 같습니다."
+      caption="계산은 세 경우 모두 같습니다. 달라지는 것은 질문이 어디서 오는지, 열쇠와 값이 어디서 오는지, 어느 칸을 가리는지입니다. 크로스의 목표 쪽 token 값은 설명용 값이고, 가중치는 어텐션 페이지의 셋짜리 예와 같습니다."
     >
       <Controls>
         {MODES.map((x) => (
@@ -53,7 +53,7 @@ export default function AttentionKinds() {
             {x.t}
           </Btn>
         ))}
-        {cross ? <Slider label="목표 쪽 토큰 수 m" min={1} max={4} step={1} value={m} onChange={setM} /> : null}
+        {cross ? <Slider label="목표 쪽 token 수 m" min={1} max={4} step={1} value={m} onChange={setM} /> : null}
       </Controls>
 
       <table className={s.grid}>

@@ -52,10 +52,10 @@ export default function RnnUnroll() {
   return (
     <Viz
       title="시간 순서로 펼친 순환 신경망"
-      caption="‘다음 토큰’을 눌러 한 칸씩 읽어 보세요. 상태 h는 직전 상태에 w를 곱하고 지금 토큰을 더한 뒤 tanh로 누른 값입니다. tanh는 값을 -1과 1 사이로 누르는 함수이고, h0은 시작 상태(0)입니다. w = 0.5와 오늘, 날씨, 좋다가 본문의 계산 예입니다."
+      caption="‘다음 token’을 눌러 한 칸씩 읽어 보세요. 상태 h는 직전 상태에 w를 곱하고 지금 token을 더한 뒤 tanh로 누른 값입니다. tanh는 값을 -1과 1 사이로 누르는 함수이고, h0은 시작 상태(0)입니다. w = 0.5와 오늘, 날씨, 좋다가 본문의 계산 예입니다."
     >
       <Controls>
-        <Btn onClick={() => setT(Math.min(3, t + 1))}>다음 토큰</Btn>
+        <Btn onClick={() => setT(Math.min(3, t + 1))}>다음 token</Btn>
         <Btn onClick={() => setT(Math.max(0, t - 1))}>이전</Btn>
         <Btn onClick={() => setT(0)}>처음으로</Btn>
         <Slider label="w (직전 상태에 곱하는 수, W_h = w × 단위행렬)" min={0} max={1.5} step={0.1} value={w} onChange={setW} format={(x) => fmt(x, 1)} />
@@ -63,7 +63,7 @@ export default function RnnUnroll() {
       <Controls>
         {words.map((nm, i) => (
           <label key={i} className={s.ctl}>
-            <span>{i + 1}번째 토큰</span>
+            <span>{i + 1}번째 token</span>
             <select value={nm} onChange={(e) => setWord(i, e.target.value)} style={{background: 'var(--ifm-background-color)', color: 'var(--ifm-font-color-base)', border: '1px solid var(--ifm-color-emphasis-300)', borderRadius: 6, padding: '2px 4px'}}>
               {NAMES.map((x) => (
                 <option key={x} value={x}>{x} {L(TOKENS[x], 0)}</option>
@@ -73,7 +73,7 @@ export default function RnnUnroll() {
         ))}
       </Controls>
 
-      <svg viewBox="0 0 680 250" className={s.svg} role="img" aria-label="시작 상태 h0에서 세 토큰을 차례로 읽으며 상태가 바뀌는 펼친 그림">
+      <svg viewBox="0 0 680 250" className={s.svg} role="img" aria-label="시작 상태 h0에서 세 token을 차례로 읽으며 상태가 바뀌는 펼친 그림">
         <defs>
           <marker id="rnnArrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
             <path d="M0,0 L10,5 L0,10 z" fill="var(--ifm-color-emphasis-700)" />
@@ -98,7 +98,7 @@ export default function RnnUnroll() {
         <thead>
           <tr>
             <th>자리</th>
-            <th>직전 상태 × w + 토큰 = a</th>
+            <th>직전 상태 × w + token = a</th>
             <th>tanh(a) = 상태</th>
           </tr>
         </thead>
@@ -115,7 +115,7 @@ export default function RnnUnroll() {
         </tbody>
       </table>
       <Note>
-        첫 칸만 따라가면 {st.slice(1).map((x, i) => (i + 1 <= t ? fmt(x.h[0], 3) : '?')).join(' → ')}입니다. 첫 토큰의 값은 다음 자리에서 w배로 줄어 남아 있다가 새 토큰과 섞이므로, 첫 칸만 보고 어떤 토큰이었는지 가리킬 수는 없습니다.
+        첫 칸만 따라가면 {st.slice(1).map((x, i) => (i + 1 <= t ? fmt(x.h[0], 3) : '?')).join(' → ')}입니다. 첫 token의 값은 다음 자리에서 w배로 줄어 남아 있다가 새 token과 섞이므로, 첫 칸만 보고 어떤 token이었는지 가리킬 수는 없습니다.
       </Note>
     </Viz>
   );

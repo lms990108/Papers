@@ -97,7 +97,7 @@ export default function BpeSteps() {
   return (
     <Viz
       title="BPE: 자주 붙은 쌍을 한 단계씩 합치기"
-      caption="슬라이더로 합친 횟수를 정하세요. 코퍼스는 학습에 쓰는 글 모음이고, 사전 크기는 토큰 종류의 수(표의 행 수)입니다. 합칠 때마다 사전에는 행이 하나 늘고, 코퍼스의 토큰 수는 줄어듭니다. 맨 오른쪽은 단어마다 토큰 하나인 어절 단위, 맨 왼쪽은 글자 단위입니다."
+      caption="슬라이더로 합친 횟수를 정하세요. 코퍼스는 학습에 쓰는 글 모음이고, 사전 크기는 token 종류의 수(표의 행 수)입니다. 합칠 때마다 사전에는 행이 하나 늘고, 코퍼스의 token 수는 줄어듭니다. 맨 오른쪽은 단어마다 token 하나인 어절 단위, 맨 왼쪽은 글자 단위입니다."
     >
       <Controls>
         {CORPORA.map((c, i) => (
@@ -168,18 +168,18 @@ export default function BpeSteps() {
               </tbody>
             </table>
           ) : (
-            <Note>모든 단어가 토큰 하나입니다.</Note>
+            <Note>모든 단어가 token 하나입니다.</Note>
           )}
-          {h.best ? <Note>횟수가 같으면 먼저 나온 쌍을 고릅니다. 한 번 더 합치면 {h.best.a}+{h.best.b}가 새 토큰이 됩니다.</Note> : null}
+          {h.best ? <Note>횟수가 같으면 먼저 나온 쌍을 고릅니다. 한 번 더 합치면 {h.best.a}+{h.best.b}가 새 token이 됩니다.</Note> : null}
         </div>
       </div>
       <Stats>
         <Stat label="합친 횟수" value={step} />
-        <Stat label="코퍼스 토큰 수" value={h.tokens} />
+        <Stat label="코퍼스 token 수" value={h.tokens} />
         <Stat label="사전 크기" value={h.vocab} />
       </Stats>
       <Bar label="사전 크기" value={h.vocab} max={hist[last].vocab} color="var(--va)" text={`${h.vocab}`} />
-      <Bar label="코퍼스 토큰 수" value={h.tokens} max={start.tokens} color="var(--vb)" text={`${h.tokens}`} />
+      <Bar label="코퍼스 token 수" value={h.tokens} max={start.tokens} color="var(--vb)" text={`${h.tokens}`} />
       <Note>사전 크기 = 처음 글자 수 + 합친 횟수입니다. 한쪽이 늘면 다른 쪽이 줄어듭니다.</Note>
     </Viz>
   );

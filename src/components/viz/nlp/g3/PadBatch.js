@@ -27,7 +27,7 @@ export default function PadBatch() {
   return (
     <Viz
       title="길이가 다른 문장을 한 묶음으로"
-      caption="최대 길이를 바꾸면 짧은 문장은 빈 칸(0)으로 채워지고, 긴 문장은 앞쪽 토큰만 남고 잘립니다. 0은 번호가 아니라 빈 칸이라는 표시입니다. 마스크는 칸마다 실제 단어면 1, 빈 칸이면 0으로 적은 목록입니다. 밑줄은 마지막 실제 단어입니다."
+      caption="최대 길이를 바꾸면 짧은 문장은 빈 칸(0)으로 채워지고, 긴 문장은 앞쪽 token만 남고 잘립니다. 0은 번호가 아니라 빈 칸이라는 표시입니다. 마스크는 칸마다 실제 단어면 1, 빈 칸이면 0으로 적은 목록입니다. 밑줄은 마지막 실제 단어입니다."
     >
       <Controls>
         <Slider label="최대 길이" min={1} max={6} value={maxLen} onChange={setMaxLen} />
@@ -43,7 +43,7 @@ export default function PadBatch() {
               <th key={i}>{i + 1}</th>
             ))}
             <th>마스크</th>
-            <th>잘린 토큰</th>
+            <th>잘린 token</th>
           </tr>
         </thead>
         <tbody>
@@ -72,11 +72,11 @@ export default function PadBatch() {
         <Stat label="전체 칸" value={total} />
         <Stat label="빈 칸" value={padN} tone={padN > 0 ? 'bad' : 'good'} />
         <Stat label="빈 칸 비율" value={`${fmt((padN / total) * 100, 1)}%`} />
-        <Stat label="잘린 토큰" value={cutN} tone={cutN > 0 ? 'bad' : 'good'} />
+        <Stat label="잘린 token" value={cutN} tone={cutN > 0 ? 'bad' : 'good'} />
       </Stats>
       <Note>
         {maxLen < longest
-          ? '최대 길이가 가장 긴 문장보다 짧으면 잘리는 토큰이 생깁니다. 잘린 뒤의 단어는 그 학습 단계에 없습니다.'
+          ? '최대 길이가 가장 긴 문장보다 짧으면 잘리는 token이 생깁니다. 잘린 뒤의 단어는 그 학습 단계에 없습니다.'
           : maxLen === longest
           ? '가장 긴 문장에 맞추면 아무것도 잘리지 않고 짧은 문장에만 빈 칸이 붙습니다.'
           : '최대 길이를 가장 긴 문장보다 크게 잡으면 잘리는 것 없이 빈 칸만 늘어납니다.'}
