@@ -4,15 +4,11 @@ mdx:
   format: mdx
 ---
 
-import DlRoadmap from '@site/src/components/viz/dl/d1/DlRoadmap';
-
-곱과 덧셈을 층으로 쌓은 신경망, 학습 알고리즘, 합성곱, 생성 모델, 그리고 모델을 실제로 돌리는 서빙·병렬화까지 다룹니다.
-
-<DlRoadmap />
+LLM과 임베딩 모델이 어떻게 만들어지고 돌아가는지를 다루는 섹션입니다. 모델을 호출하는 에이전트 개발자에게는 모델 크기, 학습 설정(learning rate, epochs), 서빙 비용, 평가가 맞닿는 곳입니다. 앞쪽은 신경망의 기본 부품과 학습 절차이고, 뒤쪽은 이미지·생성 모델, 서빙과 병렬화, 평가입니다.
 
 - [신경망 (neural network)](./neural-network.md)
 - [층 (layer)](./layer.md)
-- [신경망의 구조 (neural network)](./structure.md)
+- [신경망의 구조 (architecture)](./structure.md)
 - [경사하강법 (gradient descent)](./gradient-descent.md)
 - [확률적 경사하강법 (SGD)](./sgd.md)
 - [역전파 (backpropagation)](./backpropagation.md)

@@ -81,12 +81,12 @@ export default function AttentionMasks() {
       </Controls>
       <div className={s.two}>
         <Table title="양방향 (버트): 앞뒤를 모두 봅니다" scores={scores} causal={false} sel={sel} />
-        <Table title="인과 (다음 토큰): 자기 앞만 봅니다" scores={scores} causal sel={sel} />
+        <Table title="인과 (다음 token): 자기 앞만 봅니다" scores={scores} causal sel={sel} />
       </div>
       <Note>
-        {TOK[sel]} 행에서 뒤쪽 토큰이 가져가는 비율은 양방향 표에서 {fmt(leak, 3)}이고, 인과 표에서는 0입니다.
+        {TOK[sel]} 행에서 뒤쪽 token이 가져가는 비율은 양방향 표에서 {fmt(leak, 3)}이고, 인과 표에서는 0입니다.
         {sel === 2
-          ? ' 마지막 토큰은 뒤쪽이 없어서 두 표의 행이 같습니다.'
+          ? ' 마지막 token은 뒤쪽이 없어서 두 표의 행이 같습니다.'
           : ' 다음 단어를 맞히는 학습에서 이 비율이 살아 있으면 정답이 입력으로 새 버립니다.'}
       </Note>
     </Viz>

@@ -1,15 +1,4 @@
 export {default as CosineExplorer} from './CosineExplorer';
-export {default as LengthVsDirection} from './LengthVsDirection';
-export {default as BagCosineTable} from './BagCosineTable';
 export {default as EmbeddingLookup} from './EmbeddingLookup';
-export {default as TableSize} from './TableSize';
-export {default as SparseUpdate} from './SparseUpdate';
-export {default as RetrievalDemo} from './RetrievalDemo';
-export {default as KeywordVsEmbedding} from './KeywordVsEmbedding';
 export {default as NearestPlane} from './NearestPlane';
-export {default as CostCalc} from './CostCalc';
-export {default as HnswLayers} from './HnswLayers';
 export {default as AnnDemo} from './AnnDemo';
-export {default as RecallGrid} from './RecallGrid';
-export {default as QuantizationLevels} from './QuantizationLevels';
-export {default as ScoreFlip} from './ScoreFlip';

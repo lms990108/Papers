@@ -57,17 +57,17 @@ export default function PageAlloc() {
   return (
     <Viz
       title="최대 길이를 연속으로 예약하기와 page로 붙이기 (PagedAttention)"
-      caption="파랑 칸이 실제 캐시, 빨강 칸이 빈 칸입니다. 보라 테두리 하나가 page 하나이고, page는 메모리 안에서 붙어 있지 않아도 됩니다. 기본값은 A 3토큰, B 8토큰, page 4토큰, 최대 길이 16칸으로 본문의 표와 같습니다."
+      caption="파랑 칸이 실제 캐시, 빨강 칸이 빈 칸입니다. 보라 테두리 하나가 page 하나이고, page는 메모리 안에서 붙어 있지 않아도 됩니다. 기본값은 A 3 token, B 8 token, page 4 token, 최대 길이 16칸으로 본문의 표와 같습니다."
     >
       <Controls>
-        <Slider label="A 토큰" min={1} max={MAXLEN} value={a} onChange={setA} />
-        <Slider label="B 토큰" min={1} max={MAXLEN} value={b} onChange={setB} />
+        <Slider label="A token" min={1} max={MAXLEN} value={a} onChange={setA} />
+        <Slider label="B token" min={1} max={MAXLEN} value={b} onChange={setB} />
       </Controls>
       <Controls>
         <span style={{fontSize: '0.85rem'}}>page 크기</span>
         {SIZES.map((x) => (
           <Btn key={x} on={ps === x} onClick={() => setPs(x)}>
-            {x}토큰
+            {x}token
           </Btn>
         ))}
         <Btn
@@ -76,7 +76,7 @@ export default function PageAlloc() {
             setPs(4);
           }}
         >
-          연습 2 (9토큰)
+          연습 2 (9 token)
         </Btn>
       </Controls>
       <b style={{fontSize: '0.85rem'}}>연속 예약: 요청마다 최대 길이 16칸</b>
@@ -93,7 +93,7 @@ export default function PageAlloc() {
       </Stats>
       <Note>
         page를 써도 마지막 page의 남은 칸은 빕니다. 다른 점은 비는 단위가 최대 길이 전체가 아니라 page 하나의 나머지라는 것입니다.
-        {a === 9 && ps === 4 ? ' 9토큰이면 page 2개가 차고 1칸이 남아 page는 3개이며, 마지막 page 4칸 중 3칸이 빕니다.' : ''}
+        {a === 9 && ps === 4 ? ' 9 token이면 page 2개가 차고 1칸이 남아 page는 3개이며, 마지막 page 4칸 중 3칸이 빕니다.' : ''}
         {' '}요청이 끝나면 page 번호만 반납하고 다음 요청이 그 번호를 받아 갑니다.
       </Note>
     </Viz>

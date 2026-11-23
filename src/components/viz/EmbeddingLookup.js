@@ -49,7 +49,7 @@ export default function EmbeddingLookup() {
             <thead>
               <tr>
                 <th>번호</th>
-                <th>토큰</th>
+                <th>token</th>
                 <th>목록</th>
               </tr>
             </thead>
