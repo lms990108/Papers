@@ -26,6 +26,24 @@ Aditya Kusupati 외. *NeurIPS*, 2022.
 
 [요약과 리뷰](./paper/matryoshka-representation-learning.md) · [원문 PDF](https://arxiv.org/pdf/2205.13147)
 
+### Learning Transferable Visual Models From Natural Language Supervision (CLIP)
+
+Alec Radford 외 (OpenAI). *arXiv*, 2021.
+
+[요약과 리뷰](./paper/clip.md) · [원문 PDF](https://arxiv.org/pdf/2103.00020)
+
+### Visual Instruction Tuning (LLaVA)
+
+Haotian Liu 외. *NeurIPS*, 2023 (Oral).
+
+[요약과 리뷰](./paper/llava.md) · [원문 PDF](https://arxiv.org/pdf/2304.08485)
+
+### Qwen3-VL Technical Report
+
+Qwen Team. *arXiv*, 2025.
+
+[요약과 리뷰](./paper/qwen3-vl.md) · [원문 PDF](https://arxiv.org/pdf/2511.21631)
+
 ## 경력기술서
 
 [경력기술서](./work/index.md)
