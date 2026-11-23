@@ -8,3 +8,4 @@ title: AI
 - [딥러닝](./deep-learning/)
 - [자연어처리](./nlp/)
 - [RAG](./rag/)
+- [최신 동향](./trends/)
