@@ -51,6 +51,7 @@ token이 1개에서 4개로 늘면 prefill 연산도 그만큼 커집니다. 해
 <summary>더 깊이: 대조 학습과 CLIP</summary>
 
 - 이미지 벡터와 문장 벡터의 길이가 같으면 [코사인 유사도](../nlp/cosine-similarity.md)를 셀 수 있습니다. 이미지 \([1, 0]\), 맞는 문장 \([1, 0]\)의 코사인은 1이고, 다른 문장 \([0, 1]\)과는 0입니다. 학습은 맞는 쌍의 코사인을 키우고 다른 쌍을 줄입니다. 이 짝 맞추기가 대조 학습(contrastive learning)이고, CLIP과 SigLIP이 이 목적으로 이미지 인코더와 문장 인코더를 함께 학습합니다. 이런 이미지 벡터를 언어 모델의 입력으로 쓰면 VLM(vision-language model)이 됩니다.
+- 이미지 token 수 계산, 학습 단계, 문서·GUI 활용과 실패 패턴은 [VLM](./vlm.md)에서 다룹니다.
 - 대조 학습이 줄이는 것은 맞는 쌍과 다른 쌍의 코사인 차이이고, 언어 모델의 다음 token 오차와 다릅니다.
 - 소리는 파형을 짧은 조각으로 잘라 각각 벡터로 만들어 글 token 옆에 세웁니다.
 - token이 늘면 [Prefill, decode](../nlp/prefill-decode.md)의 연산도 token 수에 비례해 늡니다. 글을 읽는 residual의 구조는 [Decoder block](../nlp/block.md)에 있습니다.

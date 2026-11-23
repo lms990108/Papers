@@ -20,6 +20,7 @@ LLM과 임베딩 모델이 어떻게 만들어지고 돌아가는지를 다루�
 - [LeNet-5](./lenet-5.md)
 - [비전 트랜스포머 (Vision Transformer, ViT)](./vision-transformer.md)
 - [Multimodal](./multimodal.md)
+- [VLM (vision-language model)](./vlm.md)
 - [Diffusion, flow](./generation.md)
 - [Continuous batching](./serving.md)
 - [Parallelism](./parallel.md)
