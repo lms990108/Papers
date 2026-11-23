@@ -20,6 +20,12 @@ Ashish Vaswani 외. *NeurIPS*, 2017.
 
 [요약과 리뷰](./paper/attention-is-all-you-need.md) · [원문 PDF](https://arxiv.org/pdf/1706.03762)
 
+### Matryoshka Representation Learning
+
+Aditya Kusupati 외. *NeurIPS*, 2022.
+
+[요약과 리뷰](./paper/matryoshka-representation-learning.md) · [원문 PDF](https://arxiv.org/pdf/2205.13147)
+
 ## 작업공간
 
 [작업공간](./work/index.md)
