@@ -8,7 +8,7 @@ mdx:
 import NextTokenTemperatureSampler from '@site/src/components/viz/nlp/g5/NextTokenTemperatureSampler';
 import Quiz from '@site/src/components/viz/Quiz';
 
-다음 token 예측은 지금까지의 token으로 다음 token의 비율을 만들고, 하나를 골라 이어 붙이는 일을 되풀이하는 방식입니다. LLM이 글을 만드는 방법 전부입니다.
+다음 token 예측은 지금까지의 token으로 다음 token의 비율을 만들고, 하나를 골라 이어 붙이는 일을 되풀이하는 방식입니다. LLM이 글을 만드는 기본 방식입니다.
 
 에이전트를 만들 때 이 과정은 호출 파라미터로 나타납니다.
 
@@ -50,7 +50,7 @@ token 하나를 만들 때마다 모델이 한 번씩 돕니다. 출력 token �
 
 ### 한 번 고른 token은 되돌리지 못합니다
 
-고른 token이 다음 입력이 되므로 앞에서 틀어지면 뒤가 그 위에서 이어집니다. JSON 중간에 형식이 깨지는 일이 이래서 생깁니다. 일부 API는 출력 형식을 제한하는 디코딩(structured outputs)을 제공하니, 파싱이 중요한 곳에서는 프롬프트로 부탁하는 것보다 이쪽이 확실합니다.
+고른 token이 다음 입력이 되므로 앞에서 틀어지면 뒤가 그 위에서 이어집니다. JSON 중간에 형식이 깨지는 일이 이래서 생깁니다. 일부 API는 출력 형식을 제한하는 디코딩(structured outputs)을 제공하니, 파싱이 중요한 곳에서는 prompt로 부탁하는 것보다 이쪽이 확실합니다.
 
 ### logprobs는 정확도가 아닙니다
 

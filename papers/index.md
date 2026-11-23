@@ -26,9 +26,9 @@ Aditya Kusupati 외. *NeurIPS*, 2022.
 
 [요약과 리뷰](./paper/matryoshka-representation-learning.md) · [원문 PDF](https://arxiv.org/pdf/2205.13147)
 
-## 작업공간
+## 경력기술서
 
-[작업공간](./work/index.md)
+[경력기술서](./work/index.md)
 
 ## 학습공간
 

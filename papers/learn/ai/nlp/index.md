@@ -12,7 +12,7 @@ LLM 에이전트의 입력과 출력은 거의 다 글이어서, 이 영역의 �
 - **prompt와 응답**: 글을 token으로 자르고 번호로 바꿔 모델에 넣습니다. 비용과 context window가 token 수로 정해집니다. → [tokenization](./tokenization.md)
 - **검색(RAG)**: 글을 벡터로 바꿔 가까운 것을 찾고, 키워드 검색과 섞어 씁니다. → [임베딩](./embedding.md), [코사인 유사도](./cosine-similarity.md), [TF-IDF](./tf-idf.md)
 - **생성**: 다음 token의 확률을 만들어 하나씩 고릅니다. → [다음 token](./next-token.md), [언어 모델](./language-model.md)
-- **서빙과 비용**: prompt를 읽는 구간과 token을 이어 쓰는 구간의 성격이 다릅니다. → [prefill, decode](./prefill-decode.md)
+- **서빙과 비용**: prompt를 읽는 구간과 token을 이어 쓰는 구간의 성격이 다릅니다. → [Prefill, decode](./prefill-decode.md)
 
 ## 읽는 순서
 
@@ -26,7 +26,7 @@ LLM을 쓰는 데 바로 필요한 쪽부터 읽습니다.
 | [언어 모델](./language-model.md) | logprobs, 퍼플렉서티, n-gram(BLEU, ROUGE, 반복 억제) |
 | [다음 token](./next-token.md) | 생성, 학습 목표 |
 | [어텐션](./attention.md), [셀프 어텐션](./self-attention.md), [트랜스포머](./transformer.md), [Decoder block](./block.md) | LLM의 내부 구조 |
-| [LLM](./llm.md), [post-training](./post-training.md), [prefill, decode](./prefill-decode.md) | 모델 종류, 정렬, 서빙 |
+| [LLM](./llm.md), [Post-training](./post-training.md), [Prefill, decode](./prefill-decode.md) | 모델 종류, 정렬, 서빙 |
 
 아래는 LLM 이전의 방법들입니다. 직접 쓰는 일은 드물고, 키워드 검색과 평가 지표를 이해하는 정도로 필요합니다.
 
@@ -35,7 +35,7 @@ LLM을 쓰는 데 바로 필요한 쪽부터 읽습니다.
 | [단어 주머니](./bag-of-words.md) | 임베딩이 왜 필요한지, 키워드 검색의 바탕 |
 | [TF-IDF](./tf-idf.md) | BM25와 hybrid search |
 | [텍스트 전처리](./text-preprocessing.md) | 검색 엔진의 분석기 설정(불용어, 어간 추출) |
-| [워드투벡터](./word2vec.md), [패딩](./padding.md), [순환 신경망](./rnn.md), [LSTM](./lstm.md), [BERT](./bert.md), [개체명 인식](./ner.md) | 임베딩과 트랜스포머가 나오기까지의 흐름, 분류·추출 모델 |
+| [워드투벡터](./word2vec.md), [패딩](./padding.md), [순환 신경망](./rnn.md), [장단기 메모리](./lstm.md), [버트](./bert.md), [개체명 인식](./ner.md) | 임베딩과 트랜스포머가 나오기까지의 흐름, 분류와 추출 모델 |
 
 ## 한국어에서 조심할 것
 

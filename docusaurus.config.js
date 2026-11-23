@@ -9,7 +9,7 @@ function baseUrlFrom(value) {
 
 const config = {
   title: "Dustin's Papers",
-  tagline: '논문리뷰, 작업공간, 학습공간',
+  tagline: '논문리뷰, 경력기술서, 학습공간',
   url: process.env.DOCUSAURUS_URL || 'http://localhost:3000',
   baseUrl: baseUrlFrom(process.env.DOCUSAURUS_BASE_URL),
   onBrokenLinks: 'throw',
@@ -53,7 +53,7 @@ const config = {
       title: "Dustin's Papers",
       items: [
         {to: '/paper', label: '논문리뷰'},
-        {to: '/work', label: '작업공간'},
+        {to: '/work', label: '경력기술서'},
         {to: '/learn', label: '학습공간'},
       ],
     },
