@@ -8,11 +8,11 @@ mdx:
 import KvCacheGrowth from '@site/src/components/viz/nlp/g6/KvCacheGrowth';
 import Quiz from '@site/src/components/viz/Quiz';
 
-LLM 서빙은 두 구간으로 나뉩니다. 프롬프트의 token을 한꺼번에 읽는 구간이 prefill이고, 그다음부터 token을 하나씩 이어 쓰는 구간이 decode입니다. 에이전트 개발에서 지연 시간과 비용을 직접 좌우하는 개념입니다.
+LLM 서빙은 두 구간으로 나뉩니다. prompt의 token을 한꺼번에 읽는 구간이 prefill이고, 그다음부터 token을 하나씩 이어 쓰는 구간이 decode입니다. 에이전트 개발에서 지연 시간과 비용을 직접 좌우하는 개념입니다.
 
 - **지연 시간**: 첫 token이 나오기까지의 시간(TTFT)은 prefill이, token 사이의 간격(TPOT)은 decode가 정합니다.
-- **입력과 출력의 단가 차이**: 입력 token과 출력 token의 요금이 다른 데에는 두 구간의 계산 방식 차이가 깔려 있습니다.
-- **prompt caching**: 앞부분이 같으면 prefill을 건너뜁니다. 에이전트 루프에서 효과가 가장 큰 최적화입니다.
+- **입력과 출력의 단가 차이**: 입력 token과 출력 token의 요금이 다른 데에는 두 구간의 계산 방식 차이가 있습니다.
+- **prompt caching**: 앞부분이 같으면 prefill을 건너뜁니다. 에이전트 루프에서 효과가 큰 최적화입니다.
 - **KV cache 메모리**: 긴 context와 동시 요청이 많을수록 GPU 메모리를 먹습니다. → [Continuous batching](../deep-learning/serving.md)
 
 ## 계산
@@ -60,7 +60,7 @@ token 하나의 캐시 크기는 다음과 같습니다.
 ## 퀴즈
 
 <Quiz items={[
-  {ask: '긴 system prompt 맨 앞에 "현재 시각: 14:03:22"를 넣었습니다. 매 요청마다 시각이 바뀝니다. prompt caching은 어떻게 되나요?', opts: ['시각이 바뀌어도 그 뒤의 긴 system prompt는 캐시된다', '앞부분이 바뀌므로 그 뒤 전체가 매번 다시 계산된다', '시각 부분만 다시 계산된다'], ans: 1, why: '캐시는 앞에서부터 이어서 같은 구간에만 적용됩니다. 맨 앞이 바뀌면 그 뒤가 같아도 캐시를 쓰지 못합니다. 바뀌는 값은 프롬프트 뒤쪽으로 옮겨야 합니다.'},
+  {ask: '긴 system prompt 맨 앞에 "현재 시각: 14:03:22"를 넣었습니다. 매 요청마다 시각이 바뀝니다. prompt caching은 어떻게 되나요?', opts: ['시각이 바뀌어도 그 뒤의 긴 system prompt는 캐시된다', '앞부분이 바뀌므로 그 뒤 전체가 매번 다시 계산된다', '시각 부분만 다시 계산된다'], ans: 1, why: '캐시는 앞에서부터 이어서 같은 구간에만 적용됩니다. 맨 앞이 바뀌면 그 뒤가 같아도 캐시를 쓰지 못합니다. 바뀌는 값은 prompt 뒤쪽으로 옮겨야 합니다.'},
   {ask: '응답이 너무 느려서 줄이려 합니다. 입력을 1,000 token 줄이는 것과 출력을 100 token 줄이는 것 중 보통 어느 쪽이 시간을 더 줄이나요?', opts: ['입력 1,000 token 줄이기', '출력 100 token 줄이기', '거의 같다'], ans: 1, why: '출력은 token마다 한 번씩 모델이 돌아 100 token이면 TPOT 25ms 기준 2.5초입니다. 입력 1,000 token은 prefill에서 한꺼번에 처리되어 보통 그보다 짧게 걸립니다. 서빙 환경에 따라 달라지지만 token당 시간은 출력이 훨씬 큽니다.'},
 ]} />
 

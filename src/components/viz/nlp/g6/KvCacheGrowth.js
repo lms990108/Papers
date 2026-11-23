@@ -23,10 +23,10 @@ export default function KvCacheGrowth() {
   return (
     <Viz
       title="KV 캐시가 쌓이는 모습"
-      caption="token마다 키 4개와 값 4개(수 8개)가 남습니다. 프롬프트 token 수와 decode 횟수를 바꾸며 캐시 크기와, 캐시가 없을 때 다시 해야 하는 연산을 비교해 보세요."
+      caption="token마다 키 4개와 값 4개(수 8개)가 남습니다. prompt token 수와 decode 횟수를 바꾸며 캐시 크기와, 캐시가 없을 때 다시 해야 하는 연산을 비교해 보세요."
     >
       <Controls>
-        <Slider label="프롬프트 token 수" min={1} max={8} value={m} onChange={setM} />
+        <Slider label="prompt token 수" min={1} max={8} value={m} onChange={setM} />
         <Slider label="decode 횟수" min={0} max={8} value={t} onChange={setT} />
         <Btn on={gone} onClick={() => setGone(!gone)}>메모리 부족: 캐시 지우기</Btn>
       </Controls>
@@ -59,7 +59,7 @@ export default function KvCacheGrowth() {
         {gone
           ? `캐시를 지우면 다음 칸을 만들기 전에 이 요청의 prefill부터 다시 합니다(KV recomputation). ${L}token이라 연산 ${2 * L * CELLS}번입니다.`
           : t === 0
-            ? 'prefill이 막 끝난 상태입니다. 캐시에는 프롬프트 token의 키와 값이 모두 있고, decode를 하지 않았으므로 캐시 읽기는 아직 없습니다.'
+            ? 'prefill이 막 끝난 상태입니다. 캐시에는 prompt token의 키와 값이 모두 있고, decode를 하지 않았으므로 캐시 읽기는 아직 없습니다.'
             : `이번 decode는 가중치 16칸에 더해 캐시 ${readCache}개를 읽습니다. 캐시가 있으면 연산은 32번이지만, 없으면 앞 token의 곱까지 다시 해서 ${without}번입니다.`}
       </Note>
     </Viz>
