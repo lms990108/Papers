@@ -2,3 +2,8 @@ node_modules
 .docusaurus
 build
 _workspace
+
+# Claude Code skills installed locally
+.agents/
+.claude/
+skills-lock.json

@@ -1,0 +1,235 @@
+.home {
+  --home-radius: 14px;
+  --home-border: var(--ifm-color-emphasis-200);
+  padding-bottom: 1rem;
+  word-break: keep-all;
+}
+
+.hero {
+  padding: 1.5rem 0 2rem;
+}
+
+.heroTitle {
+  margin: 0 0 0.75rem;
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.heroLead {
+  max-width: 40rem;
+  margin: 0;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: var(--ifm-color-emphasis-700);
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  min-height: 11rem;
+  padding: 1.25rem 1.25rem 1.1rem;
+  border: 1px solid var(--home-border);
+  border-radius: var(--home-radius);
+  background: var(--ifm-background-surface-color);
+  color: var(--ifm-font-color-base);
+  text-decoration: none;
+  transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  border-color: var(--ifm-color-primary);
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.12);
+  color: var(--ifm-font-color-base);
+  text-decoration: none;
+}
+
+.cardLabel {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--ifm-color-primary);
+}
+
+.cardTitle {
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.cardBody {
+  flex: 1;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--ifm-color-emphasis-700);
+}
+
+.cardArrow {
+  align-self: flex-end;
+  font-size: 1.1rem;
+  color: var(--ifm-color-emphasis-500);
+  transition: transform 0.15s ease, color 0.15s ease;
+}
+
+.card:hover .cardArrow {
+  transform: translateX(4px);
+  color: var(--ifm-color-primary);
+}
+
+.section {
+  margin-bottom: 2.75rem;
+}
+
+.sectionHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--home-border);
+}
+
+.sectionHead h2 {
+  margin: 0;
+  font-size: 1.3rem;
+  letter-spacing: -0.01em;
+}
+
+.more {
+  font-size: 0.9rem;
+  color: var(--ifm-color-emphasis-600);
+}
+
+.papers {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.paper {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--home-border);
+}
+
+.paper:last-child {
+  border-bottom: 0;
+}
+
+.paperMain {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+}
+
+.paperTitle {
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--ifm-font-color-base);
+}
+
+.paperTitle:hover {
+  color: var(--ifm-color-primary);
+}
+
+.paperNote {
+  font-size: 0.9rem;
+  color: var(--ifm-color-emphasis-600);
+}
+
+.paperSide {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.2rem;
+  text-align: right;
+}
+
+.paperMeta {
+  font-size: 0.85rem;
+  color: var(--ifm-color-emphasis-600);
+  white-space: nowrap;
+}
+
+.pdf {
+  font-size: 0.85rem;
+}
+
+.areas {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
+  gap: 0.75rem;
+}
+
+.area {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--home-border);
+  border-radius: 10px;
+  color: var(--ifm-font-color-base);
+  text-decoration: none;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.area:hover {
+  border-color: var(--ifm-color-primary);
+  background: var(--ifm-color-emphasis-100);
+  color: var(--ifm-font-color-base);
+  text-decoration: none;
+}
+
+.areaTitle {
+  font-weight: 700;
+}
+
+.areaNote {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--ifm-color-emphasis-600);
+}
+
+.foot {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--ifm-color-emphasis-600);
+}
+
+@media (max-width: 996px) {
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    min-height: 0;
+  }
+
+  .paper {
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .paperSide {
+    flex-direction: row;
+    align-items: baseline;
+    gap: 0.75rem;
+    text-align: left;
+  }
+}

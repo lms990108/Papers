@@ -27,13 +27,7 @@ docker compose up --build -d
 
 ## 논문
 
-원문은 올리지 않고 링크만 둔다.
-
-### Gradient-Based Learning Applied to Document Recognition
-
-Yann LeCun, Léon Bottou, Yoshua Bengio, Patrick Haffner. *Proceedings of the IEEE*, 86(11):2278–2324, 1998.
-
-[내용](papers/paper/content/lecun-1998.md) · [리뷰](papers/paper/review/lecun-1998.md) · [원문 PDF](http://yann.lecun.com/exdb/publis/pdf/lecun-98.pdf)
+원문은 올리지 않고 링크만 둔다. 리뷰 글은 `papers/paper/`에 두고, 홈 화면의 목록은 `src/components/Home/index.js`의 `PAPERS`에 직접 추가한다.
 
 ## 경력기술서
 
