@@ -1,7 +1,7 @@
 {
   "label": "논문리뷰",
-  "position": 2,
-  "collapsed": false,
+  "position": 3,
+  "collapsed": true,
   "link": {
     "type": "generated-index",
     "slug": "/paper",
