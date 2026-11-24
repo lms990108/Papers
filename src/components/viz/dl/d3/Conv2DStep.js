@@ -5,6 +5,7 @@ import {conv2d, chunk, trim} from './util';
 const N = 5;
 const K = 3;
 const IMG0 = [1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0];
+const EDGE = [0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1]; // 한 줄이 0 0 0 1 1인 5줄
 const KER0 = [1, 1, 1, 0, 0, 0, -1, -1, -1];
 const KERS = {
   '가로 모서리': KER0,
@@ -37,7 +38,7 @@ export default function Conv2DStep() {
   return (
     <Viz
       title="3×3 커널이 5×5 입력 위를 훑는 모습"
-      caption="입력 칸을 누르면 0과 1이 바뀝니다. 커널 칸을 눌러 고른 뒤 슬라이더로 값을 바꾸세요. 스트라이드와 패딩을 바꾸면 출력 크기가 O = ⌊(N + 2P − K) / S⌋ + 1에 따라 달라집니다. 여기서 N은 입력 한 변, K는 커널 한 변입니다. 기본값은 본문의 7 모양과 가로 모서리 검출기입니다."
+      caption="입력 칸을 누르면 0과 1이 바뀝니다. 커널 칸을 눌러 고른 뒤 슬라이더로 값을 바꾸세요. 스트라이드와 패딩을 바꾸면 출력 크기가 O = ⌊(N + 2P − K) / S⌋ + 1에 따라 달라집니다. 여기서 N은 입력 한 변, K는 커널 한 변입니다. 기본값은 7 모양과 가로 모서리 검출기이고, 본문의 경계 예는 '왼쪽 어둡고 오른쪽 밝음' 입력과 '세로 모서리' 커널을 고르면 됩니다."
     >
       <Controls>
         <Slider label="스트라이드 S (창을 옮기는 칸 수)" min={1} max={3} value={stride} onChange={setStride} />
@@ -50,7 +51,8 @@ export default function Conv2DStep() {
         {Object.keys(KERS).map((name) => (
           <Btn key={name} on={KERS[name].join() === ker.join()} onClick={() => setKer(KERS[name])}>{name}</Btn>
         ))}
-        <Btn onClick={() => setImg(IMG0)}>입력을 7 모양으로</Btn>
+        <Btn onClick={() => setImg(EDGE)}>입력: 왼쪽 어둡고 오른쪽 밝음</Btn>
+        <Btn onClick={() => setImg(IMG0)}>입력: 7 모양</Btn>
       </Controls>
 
       <div className={s.two}>
