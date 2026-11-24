@@ -11,13 +11,13 @@ import Quiz from '@site/src/components/viz/Quiz';
 
 에이전트를 만들 때 이런 곳에서 이 생각이 나옵니다.
 
-- **키워드 검색**: RAG의 BM25 같은 sparse retrieval은 단어가 문서에 몇 번 나왔는지로 점수를 냅니다. → [TF-IDF](./tf-idf.md)
-- **hybrid search**: 이 키워드 점수와 임베딩 점수를 합쳐 검색합니다. 둘이 서로 다른 것을 놓치기 때문입니다. → [고급 RAG](../rag/advanced-rag.md)
+- **키워드 검색**: RAG의 키워드 검색(BM25 같은 sparse retrieval)은 단어가 문서에 몇 번 나왔는지로 점수를 냅니다. → [TF-IDF](./tf-idf.md)
+- **hybrid search**: 이 키워드 점수와 임베딩(뜻이 비슷한 글이 가까운 벡터가 되게 바꾼 것) 점수를 합쳐 검색합니다. 둘이 서로 다른 것을 놓치기 때문입니다. → [고급 RAG](../rag/advanced-rag.md)
 - **가벼운 baseline**: 분류나 라우팅에서 LLM을 부르기 전에, 횟수 벡터와 로지스틱 회귀로 먼저 해 볼 수 있습니다.
 
 ## 계산
 
-사전을 오늘, 날씨, 좋다, 나쁘다 순으로 둡니다. 문장을 [tokenization](./tokenization.md)한 뒤 token마다 해당 칸에 1을 더합니다.
+벡터의 칸이 될 단어 목록(사전)을 오늘, 날씨, 좋다, 나쁘다 순으로 둡니다. 문장을 [tokenization](./tokenization.md)한 뒤 token마다 해당 칸에 1을 더합니다. 아래 표의 각 줄이 문장 하나의 벡터입니다.
 
 ```text
 문장                  오늘 날씨 좋다 나쁘다
@@ -28,7 +28,7 @@ import Quiz from '@site/src/components/viz/Quiz';
 
 순서가 다른 첫째와 둘째 문장이 같은 벡터입니다. 문장 길이가 달라도 벡터 길이는 사전 크기로 같습니다. 사전에 없는 단어는 칸이 없어서 버려집니다.
 
-이 벡터에 칸별 가중치 \(w\)를 곱해 더하면 한 줄짜리 분류기의 점수가 됩니다.
+문장 벡터를 \(x\)라 하고 칸별 가중치를 \(w\)라 합시다. 둘을 칸마다 곱해 더하면 한 줄짜리 분류기의 점수가 됩니다.
 
 \[
 s = w \cdot x

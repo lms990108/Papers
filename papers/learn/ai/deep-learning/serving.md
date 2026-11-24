@@ -9,7 +9,7 @@ import SlotSchedule from '@site/src/components/viz/dl/d4/SlotSchedule';
 import PageAlloc from '@site/src/components/viz/dl/d4/PageAlloc';
 import Quiz from '@site/src/components/viz/Quiz';
 
-continuous batching은 매 회전마다 끝난 요청을 빼고, decode 중인 요청과 새 요청의 prefill 조각을 같은 가중치 읽기에 같이 넣는 서빙 방식입니다.
+continuous batching은 매 회전(모델을 한 번 통과하는 계산 한 번)마다 끝난 요청을 빼고, decode 중인 요청(token을 하나씩 이어 쓰는 중)과 새 요청의 prefill 조각(prompt를 읽는 일의 일부)을 같은 가중치 읽기에 같이 넣는 서빙 방식입니다.
 
 에이전트를 만들 때는 자체 서빙이나 서빙 엔진 설정에서 만납니다.
 
@@ -20,7 +20,7 @@ continuous batching은 매 회전마다 끝난 요청을 빼고, decode 중인 �
 
 ## 계산
 
-[Prefill, decode](../nlp/prefill-decode.md)의 \(4 \times 4\) 행렬입니다. 가중치 16개, 하나에 2바이트라 읽기는 32바이트이고, token \(M\)개를 곱하면 연산은 \(2 \times M \times 16\)입니다. 요청 A는 캐시를 갖고 다음 token 하나를 기다리고, 요청 B의 prompt는 8 token입니다.
+[Prefill, decode](../nlp/prefill-decode.md)와 같이 가중치가 \(4 \times 4\) 행렬 하나뿐인 모델로 단순화합니다. 가중치 16개, 하나에 2바이트라 회전마다 읽기는 32바이트이고, token \(M\)개를 곱하면 연산은 \(2 \times M \times 16\)입니다. 요청 A는 캐시(앞 token마다 어텐션이 쓰는 키와 값을 남겨 둔 KV cache)를 갖고 다음 token 하나를 기다리고, 요청 B의 prompt는 8 token입니다.
 
 B의 8 token을 한 회전에 모두 넣으면 A의 1칸을 더해 \(M = 9\), 연산은 \(2 \times 9 \times 16 = 288\)입니다. 이 연산이 끝나야 A의 다음 token이 나옵니다. A만 있었다면 32면 끝났습니다. 8 token을 4칸씩 나누면 이렇습니다.
 
@@ -37,7 +37,7 @@ A는 첫 회전이 끝나는 연산 160에서 token을 받습니다. 연산 합�
 
 <SlotSchedule />
 
-캐시는 최대 길이만큼 연속으로 예약하지 않고 4 token짜리 page를 필요한 만큼 붙입니다(PagedAttention). 최대 길이를 16 token으로 예약하면 token 3개인 A는 13칸이, 8개인 B는 8칸이 비어 32칸 중 실제 캐시는 11칸입니다. page로 붙이면 A는 page 1개(마지막에 1칸 빔), B는 page 2개입니다. 아래 그림에서 두 방식의 빈 칸을 비교해 보세요.
+이제 캐시 메모리를 봅니다. 요청이 얼마나 길어질지 미리 모르니 최대 길이만큼 연속으로 예약하는 것이 쉬운 방법이지만 낭비가 큽니다. 그래서 4 token짜리 page를 필요한 만큼 붙입니다(PagedAttention). 최대 길이를 16 token으로 예약하면 token 3개인 A는 13칸이, 8개인 B는 8칸이 비어 32칸 중 실제 캐시는 11칸입니다. page로 붙이면 A는 page 1개(마지막에 1칸 빔), B는 page 2개입니다. 아래 그림에서 두 방식의 빈 칸을 비교해 보세요.
 
 <PageAlloc />
 
