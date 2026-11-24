@@ -60,7 +60,7 @@ export default function PatchGrid() {
             {v}×{v}
           </Btn>
         ))}
-        <span>패치 한 변</span>
+        <span>패치 한 변(픽셀)</span>
         {PATCHES.map((v) => (
           <Btn key={v} on={P === v} onClick={() => setP(v)}>
             {v}
@@ -108,7 +108,8 @@ export default function PatchGrid() {
         </svg>
       </div>
       <Stats>
-        <Stat label="한 변의 패치 수" value={k} />
+        <Stat label="패치 한 변(픽셀 수)" value={P} />
+        <Stat label="이미지 한 변에 들어가는 패치 수" value={k} />
         <Stat label="패치 token 수" value={comma(N)} />
         <Stat label="분류 token 포함 길이 n" value={comma(n)} />
         <Stat label="패치 하나의 길이 (P×P×3, 3은 RGB 채널)" value={comma(P * P * 3)} />
@@ -116,7 +117,7 @@ export default function PatchGrid() {
         <Stat label="224, 패치 16 대비" value={`${fmt(n * n / BASE, 1)}배`} />
       </Stats>
       <Note>
-        선택한 패치는 {row + 1}행 {col + 1}열이고, 시퀀스에서는 {sel + 1}번 자리입니다(0번 자리는 분류 token). 오른쪽 표에서 주황 띠가 이 token의 행과 열이고, 보라 띠가 분류 token입니다. 패치를 절반 크기로 줄이면 token은 4배, 표의 칸은 약 16배가 됩니다.
+        패치 하나는 가로 {P}픽셀, 세로 {P}픽셀입니다. 이미지 한 변이 {size}픽셀이라 한 줄에 {size} ÷ {P} = {k}개가 들어갑니다. 선택한 패치는 {row + 1}행 {col + 1}열이고, 시퀀스에서는 {sel + 1}번 자리입니다(0번 자리는 분류 token). 오른쪽 표에서 주황 띠가 이 token의 행과 열이고, 보라 띠가 분류 token입니다. 패치를 절반 크기로 줄이면 token은 4배, 표의 칸은 약 16배가 됩니다.
       </Note>
     </Viz>
   );

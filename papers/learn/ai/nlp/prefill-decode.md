@@ -15,9 +15,17 @@ LLM 서빙은 두 구간으로 나뉩니다. prompt의 token을 한꺼번에 읽
 - **prompt caching**: 앞부분이 같으면 prefill을 건너뜁니다. 에이전트 루프에서 효과가 큰 최적화입니다.
 - **KV cache 메모리**: 긴 context와 동시 요청이 많을수록 GPU 메모리를 먹습니다. → [Continuous batching](../deep-learning/serving.md)
 
+## 왜 필요한가
+
+LLM은 token을 하나씩 이어 쓰고([다음 token](./next-token.md)), 새 token 하나를 만들려면 그 앞의 모든 token을 읽어야 합니다. 그래서 서빙에는 성격이 다른 일이 둘 생깁니다. 하나는 사용자가 보낸 prompt를 읽는 일입니다. prompt의 token은 이미 다 주어져 있어서 한꺼번에 처리할 수 있습니다. 다른 하나는 답을 쓰는 일입니다. 다음 token은 앞 token을 고른 뒤에야 알 수 있어서 하나씩 순서대로 만들 수밖에 없습니다. 앞의 일이 prefill, 뒤의 일이 decode입니다. 시간이 걸리는 이유와 병목이 달라서 따로 봐야 합니다.
+
+가장 단순한 구현은 token을 하나 만들 때마다 prompt와 지금까지의 출력 전체를 처음부터 다시 계산하는 것입니다. prompt가 4,000 token이고 출력이 500 token이라고 합시다. token 하나를 처리하는 일을 1로 세면(어텐션이 길이에 따라 커지는 효과는 뺀 단순화입니다), 매번 다시 계산할 때는 \(4{,}000 + 4{,}001 + \dots + 4{,}499 = 2{,}124{,}750\)입니다. 이전 계산을 남겨 두면 prompt 4,000에 새 token 500을 더한 4,500 안팎입니다. 약 470배 차이입니다.
+
+남겨 둘 것은 앞 token의 key와 value([셀프 어텐션](./self-attention.md)에서 어텐션 점수와 출력을 만드는 데 쓰는 값)입니다. 생성용 모델의 어텐션은 각 token이 자기와 앞만 읽으므로 앞 token의 key와 value는 뒤에 무엇이 붙어도 바뀌지 않습니다. 한 번 계산해 저장하면 되고, 이 저장이 KV cache입니다. 대가는 GPU 메모리입니다. key와 value는 층([Decoder block](./block.md))마다 token마다 있어서 길이와 동시 요청 수에 따라 크게 늡니다. 이 문서는 두 구간의 시간과 KV cache의 메모리를 숫자로 따라갑니다.
+
 ## 계산
 
-응답 시간은 대략 이렇게 나뉩니다.
+TTFT(time to first token)는 요청을 보낸 뒤 첫 token이 나올 때까지의 시간이고, TPOT(time per output token)는 그 뒤 출력 token 하나당 걸리는 시간입니다. 응답 시간은 대략 이렇게 나뉩니다.
 
 \[
 \text{응답 시간} \approx \mathrm{TTFT} + (\text{출력 token 수}) \times \mathrm{TPOT}
@@ -25,9 +33,9 @@ LLM 서빙은 두 구간으로 나뉩니다. prompt의 token을 한꺼번에 읽
 
 예시 값으로 TTFT 0.8초, TPOT 25ms(초당 40 token)에 출력이 500 token이면 \(0.8 + 500 \times 0.025 = 13.3\)초입니다. 이 중 12.5초가 decode입니다. 입력을 두 배로 늘리면 TTFT가 늘고, 출력을 두 배로 늘리면 decode 시간이 거의 두 배가 됩니다.
 
-token 하나당 걸리는 시간은 prefill이 decode보다 훨씬 짧습니다. 하는 일이 다르기 때문입니다. prefill은 token 여러 개가 가중치를 한 번 읽는 동안 함께 곱해져서 계산이 빽빽합니다(compute-bound). decode는 token 하나를 만들 때마다 가중치 전체를 다시 읽습니다. 70억 파라미터 모델을 bfloat16으로 두면 14GB입니다. 메모리 대역폭이 초당 2TB인 GPU는 이것을 읽는 데만 7ms가 듭니다(memory-bound). token 하나에 최소 7ms이므로 요청 하나의 속도는 이론상 초당 140 token 안팎이 상한입니다.
+token 하나당 걸리는 시간은 prefill이 decode보다 훨씬 짧습니다. 하는 일이 다르기 때문입니다. prefill은 token 여러 개가 가중치를 한 번 읽는 동안 함께 곱해져서 계산이 빽빽합니다(계산 속도가 시간을 정하는 compute-bound). decode는 token 하나를 만들 때마다 가중치 전체를 다시 읽습니다. 70억 파라미터 모델을 bfloat16으로 두면 14GB입니다. 메모리 대역폭이 초당 2TB인 GPU는 이것을 읽는 데만 7ms가 듭니다(메모리에서 읽는 속도가 시간을 정하는 memory-bound). token 하나에 최소 7ms이므로 요청 하나의 속도는 이론상 초당 140 token 안팎이 상한입니다.
 
-decode가 매번 앞 token의 key와 value([셀프 어텐션](./self-attention.md)에서 쓰는 값)를 다시 계산하지 않도록 남겨 두는 것이 KV cache입니다. 아래 그림에서 prefill 뒤에 token이 하나씩 붙을 때 캐시가 쌓이는 모습과, 캐시가 없을 때 다시 계산해야 하는 양을 비교해 보세요.
+decode의 한 걸음에서 KV cache는 이렇게 쓰입니다. 새 token은 자기 key와 value만 새로 계산해 cache에 덧붙이고, 앞 token의 값은 cache에서 읽습니다. query는 한 번 쓰고 버립니다. 과거 token의 query는 다시 쓰이지 않아서 저장하지 않습니다. 아래 그림에서 prefill 뒤에 token이 하나씩 붙을 때 캐시가 쌓이는 모습과, 캐시가 없을 때 다시 계산해야 하는 양을 비교해 보세요.
 
 <KvCacheGrowth />
 
@@ -39,9 +47,9 @@ decode가 매번 앞 token의 key와 value([셀프 어텐션](./self-attention.m
 
 ### 앞부분이 같으면 캐시를 재사용합니다
 
-prompt caching은 요청의 앞부분이 이전과 정확히 같으면 그 구간의 KV cache를 다시 쓰고 prefill을 건너뜁니다. TTFT가 줄고, 캐시된 입력은 보통 훨씬 싸게 과금됩니다. 캐시는 앞에서부터 이어지는 구간 단위이므로 앞부분이 한 글자라도 바뀌면 그 뒤는 전부 다시 계산합니다.
+prompt caching은 요청의 앞부분이 이전과 정확히 같으면 그 구간의 KV cache를 다시 쓰고 prefill을 건너뜁니다. TTFT가 줄고, 캐시된 입력은 보통 훨씬 싸게 과금됩니다. KV cache가 요청 하나 안에서 decode가 쓰는 저장이라면, prompt caching은 그 저장을 요청 사이에서 다시 쓰는 기능입니다. 적용됐는지는 API 응답의 usage에서 확인합니다. 입력 token, 출력 token, 캐시에서 읽은 입력 token이 따로 나오고 필드 이름은 제공사마다 다릅니다. 캐시는 앞에서부터 이어지는 구간 단위이므로 앞부분이 한 글자라도 바뀌면 그 뒤는 전부 다시 계산합니다.
 
-지키면 좋은 순서가 있습니다. system prompt, 도구 정의, 긴 문서처럼 변하지 않는 것은 앞에 두고, 현재 시각이나 사용자 이름처럼 바뀌는 값은 뒤에 둡니다. 에이전트 루프는 단계마다 이전 대화 전체가 앞부분으로 반복되므로 캐시 효과가 큽니다. 캐시에는 유효 시간이 있어서 요청이 오래 끊기면 사라집니다.
+지키면 좋은 순서가 있습니다. system prompt, 도구 정의, 긴 문서처럼 변하지 않는 것은 앞에 두고, 현재 시각이나 사용자 이름처럼 바뀌는 값은 뒤에 둡니다. 에이전트 루프는 단계마다 이전 대화 전체가 앞부분으로 반복되므로 캐시 효과가 큽니다. [LLM](./llm.md)의 예(요청 \(k\)의 입력이 \(2{,}000 \times k\) token)에서는 요청 \(k\)의 앞 \(2{,}000 \times (k-1)\) token이 직전 요청과 같습니다. 캐시가 유지된다면 새로 읽을 것은 요청마다 2,000 token뿐이라, 10번의 prefill이 110,000 token에서 20,000 token으로 줄어듭니다. 캐시에는 유효 시간이 있어서 요청이 오래 끊기면 사라집니다.
 
 ### KV cache는 가중치만큼 메모리를 먹습니다
 
