@@ -25,9 +25,9 @@ LLM 서빙은 두 구간으로 나뉩니다. prompt의 token을 한꺼번에 읽
 
 예시 값으로 TTFT 0.8초, TPOT 25ms(초당 40 token)에 출력이 500 token이면 \(0.8 + 500 \times 0.025 = 13.3\)초입니다. 이 중 12.5초가 decode입니다. 입력을 두 배로 늘리면 TTFT가 늘고, 출력을 두 배로 늘리면 decode 시간이 거의 두 배가 됩니다.
 
-prefill과 decode의 속도 차이는 하는 일이 달라서 생깁니다. prefill은 token 여러 개가 가중치를 한 번 읽는 동안 함께 곱해져서 계산이 빽빽합니다(compute-bound). decode는 token 하나를 만들 때마다 가중치 전체를 다시 읽습니다. 70억 파라미터 모델을 bfloat16으로 두면 14GB입니다. 메모리 대역폭이 초당 2TB인 GPU는 이것을 읽는 데만 7ms가 듭니다(memory-bound). token 하나에 최소 7ms이므로 요청 하나의 속도는 이론상 초당 140 token 안팎이 상한입니다.
+token 하나당 걸리는 시간은 prefill이 decode보다 훨씬 짧습니다. 하는 일이 다르기 때문입니다. prefill은 token 여러 개가 가중치를 한 번 읽는 동안 함께 곱해져서 계산이 빽빽합니다(compute-bound). decode는 token 하나를 만들 때마다 가중치 전체를 다시 읽습니다. 70억 파라미터 모델을 bfloat16으로 두면 14GB입니다. 메모리 대역폭이 초당 2TB인 GPU는 이것을 읽는 데만 7ms가 듭니다(memory-bound). token 하나에 최소 7ms이므로 요청 하나의 속도는 이론상 초당 140 token 안팎이 상한입니다.
 
-decode가 매번 앞 token을 다시 계산하지 않도록 남겨 두는 것이 KV cache입니다. 아래 그림에서 prefill 뒤에 token이 하나씩 붙을 때 캐시가 쌓이는 모습과, 캐시가 없을 때 다시 계산해야 하는 양을 비교해 보세요.
+decode가 매번 앞 token의 key와 value([셀프 어텐션](./self-attention.md)에서 쓰는 값)를 다시 계산하지 않도록 남겨 두는 것이 KV cache입니다. 아래 그림에서 prefill 뒤에 token이 하나씩 붙을 때 캐시가 쌓이는 모습과, 캐시가 없을 때 다시 계산해야 하는 양을 비교해 보세요.
 
 <KvCacheGrowth />
 
@@ -51,7 +51,9 @@ token 하나의 캐시 크기는 다음과 같습니다.
 \text{token당 KV cache} = 2 \times \text{층 수} \times \text{KV 헤드 수} \times \text{헤드 크기} \times \text{바이트}
 \]
 
-층 32, KV 헤드 8, 헤드 크기 128, bfloat16(2바이트)이면 \(2 \times 32 \times 8 \times 128 \times 2 = 131{,}072\)바이트, 곧 128KiB입니다. 8,000 token의 요청 하나가 약 1GB이고, 동시에 32개를 처리하면 약 34GB입니다. 이 구성의 모델 가중치는 약 16GB라, 긴 context를 많은 사용자에게 서비스할 때는 캐시가 가중치보다 큰 비용이 됩니다. 메모리가 모자라면 캐시를 지우고 그 요청의 prefill부터 다시 하거나 요청을 대기시킵니다.
+앞의 2는 key와 value 두 벡터를 저장한다는 뜻이고, KV 헤드 수는 key와 value를 따로 두는 헤드의 수입니다.
+
+층 32, KV 헤드 8, 헤드 크기 128, bfloat16(2바이트)이면 \(2 \times 32 \times 8 \times 128 \times 2 = 131{,}072\)바이트, 곧 128KiB입니다. 8,000 token의 요청 하나가 약 1GB이고, 동시에 32개를 처리하면 약 34GB입니다. 이 구성은 파라미터가 80억 개쯤인 모델에 해당하고(앞의 70억 개 예보다 조금 큽니다) bfloat16 가중치는 약 16GB입니다. 그래서 긴 context를 많은 사용자에게 서비스할 때는 캐시가 가중치보다 큰 비용이 됩니다. 메모리가 모자라면 캐시를 지우고 그 요청의 prefill부터 다시 하거나 요청을 대기시킵니다.
 
 ### TTFT와 TPOT를 따로 봅니다
 

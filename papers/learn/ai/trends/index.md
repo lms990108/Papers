@@ -13,4 +13,4 @@ LLM과 에이전트를 만들 때 요즘 자주 마주치는 흐름을 모았습
 
 ## 읽는 순서
 
-에이전트를 만든다면 [에이전트와 도구](./agents-and-tools.md)부터 읽고 비용 문제가 생기면 [효율적 추론](./efficient-inference.md)으로 넘어갑니다. 모델을 직접 호스팅한다면 [MoE](./moe.md)를 함께 읽습니다.
+이 섹션은 [Prefill, decode](../nlp/prefill-decode.md)와 [Continuous batching](../deep-learning/serving.md)을 읽었다고 가정합니다. 에이전트를 만든다면 [에이전트와 도구](./agents-and-tools.md)부터 읽고, 모델 선택과 비용이 궁금해지면 [추론 모델](./reasoning-models.md)과 [효율적 추론](./efficient-inference.md)으로 넘어갑니다. 모델을 직접 호스팅한다면 [MoE](./moe.md)를 함께 읽습니다. 처음부터 순서대로 읽어도 됩니다.

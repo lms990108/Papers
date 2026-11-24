@@ -13,8 +13,8 @@ tokenization은 문장을 조각(token)으로 자르고 조각마다 번호를 �
 
 에이전트를 만들 때 이 규칙의 결과를 계속 만납니다.
 
-- **비용과 한도**: 요금, `max_tokens`, context window가 모두 token 수로 계산됩니다.
-- **RAG 청킹**: 문서를 token 수 기준으로 자르면 한 청크가 모델에 들어가는 크기를 맞출 수 있습니다. → [청킹](../rag/chunking.md)
+- **비용과 한도**: 요금, `max_tokens`, context window(모델이 한 번에 다룰 수 있는 token 수의 한도)가 모두 token 수로 계산됩니다.
+- **RAG 청킹**: RAG는 검색한 문서 조각(청크)을 prompt에 붙여 답하게 하는 방식입니다. 문서를 token 수 기준으로 자르면 한 청크가 모델에 들어가는 크기를 맞출 수 있습니다. → [청킹](../rag/chunking.md)
 - **모델 교체**: 모델마다 tokenizer가 달라서 같은 prompt도 token 수가 달라집니다.
 - **글자 단위 작업**: 철자 세기나 글자 뒤집기처럼 글자를 직접 다루는 일에 약합니다.
 
@@ -22,7 +22,7 @@ tokenization은 문장을 조각(token)으로 자르고 조각마다 번호를 �
 
 ## 계산
 
-요즘 LLM의 tokenizer는 대부분 BPE(byte pair encoding) 계열입니다. 글자에서 시작해, 나란히 가장 자주 붙은 쌍을 하나의 token으로 합치는 일을 정해 둔 횟수만큼 되풀이합니다.
+요즘 LLM의 tokenizer는 대부분 BPE(byte pair encoding) 계열입니다. 글자에서 시작해, 나란히 가장 자주 붙은 쌍을 하나의 token으로 합치는 일을 정해 둔 횟수만큼 되풀이합니다. 이렇게 만들어진 token의 목록을 사전이라고 부릅니다.
 
 단어 `날씨`가 2번, `날씨가`가 1번 나온 글입니다. 글자 단위로 시작하면 token은 \(2 + 2 + 3 = 7\)개입니다.
 

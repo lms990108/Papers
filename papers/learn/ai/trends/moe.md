@@ -7,7 +7,7 @@ mdx:
 
 import Quiz from '@site/src/components/viz/Quiz';
 
-MoE는 [Transformer block](../nlp/block.md)의 FFN을 여러 벌의 expert로 바꾸고, router가 token마다 top-k개의 expert만 골라 계산하는 구조입니다. attention은 그대로이고, 그래서 모델의 총 파라미터(total)와 token 하나가 쓰는 파라미터(active)가 다릅니다.
+MoE는 [Transformer block](../nlp/block.md)의 FFN(token마다 같은 가중치로 변환하는 층)을 여러 벌의 expert로 바꾸고, router가 token마다 점수가 높은 k개(top-k)의 expert만 골라 계산하는 구조입니다. attention은 그대로이고, 그래서 모델의 총 파라미터(total)와 token 하나가 쓰는 파라미터(active)가 다릅니다. expert 없이 모든 파라미터를 쓰는 일반 구조는 dense라고 부릅니다.
 
 2026년 11월 기준 정리이고 모델 이름은 예시입니다.
 
@@ -20,9 +20,9 @@ MoE는 [Transformer block](../nlp/block.md)의 FFN을 여러 벌의 expert로 �
 
 ## 계산
 
-expert가 8개이고 top-2이며 expert 하나의 FFN 파라미터가 \(P\)입니다. FFN 총량은 \(8P\)이고 token당 쓰는 것은 \(2P\)라서 \(2P / 8P = 25\%\)입니다.
+active가 total의 몇 %인지, router가 expert를 어떻게 고르고 섞는지를 숫자로 봅니다. expert가 8개이고 top-2이며 expert 하나의 FFN 파라미터가 \(P\)입니다. FFN 총량은 \(8P\)이고 token당 쓰는 것은 \(2P\)라서 \(2P / 8P = 25\%\)입니다.
 
-router는 token 벡터에서 expert마다 점수 하나를 만듭니다. 점수가 \([2.0,\ 1.0,\ 0.5,\ -1.0]\)이면 top-2는 1번(2.0)과 2번(1.0)입니다. 고른 두 점수만 softmax에 넣습니다.
+router는 token 벡터에서 expert마다 점수 하나를 만듭니다. 설명을 위해 expert가 4개라고 하고 점수가 \([2.0,\ 1.0,\ 0.5,\ -1.0]\)이면 top-2는 1번(2.0)과 2번(1.0)입니다. 고른 두 expert의 출력을 섞을 비중이 필요하니, 고른 두 점수만 합이 1인 비율로 바꾸는 softmax에 넣습니다.
 
 \[
 w = \mathrm{softmax}(2.0,\ 1.0) = \left(\frac{e^{2}}{e^{2} + e^{1}},\ \frac{e^{1}}{e^{2} + e^{1}}\right) \approx (0.731,\ 0.269)
@@ -32,26 +32,26 @@ w = \mathrm{softmax}(2.0,\ 1.0) = \left(\frac{e^{2}}{e^{2} + e^{1}},\ \frac{e^{1
 
 실제 모델의 수치입니다.
 
-- Mixtral 8x7B: 총 46.7B, active 12.9B입니다. \(12.9 / 46.7 \approx 28\%\)로 25%보다 큰 것은 attention과 embedding이 항상 켜져 있기 때문입니다. 이름의 8x7B는 56B가 아닙니다.
+- Mixtral 8x7B: 총 46.7B, active 12.9B입니다. \(12.9 / 46.7 \approx 28\%\)로 25%보다 큰 것은 attention과 embedding이 항상 켜져 있기 때문입니다. 이름의 8x7B는 56B가 아닙니다. expert끼리 attention과 embedding을 공유하기 때문입니다.
 - DeepSeek-V3: 총 671B, active 37B로 약 5.5%입니다.
 
 ## 기억할 것 네 가지
 
 ### 메모리는 total, 연산은 active입니다
 
-Mixtral을 fp16(2바이트)으로 올리면 \(46.7\text{B} \times 2 = 93.4\text{GB}\)이고, 80GB GPU 한 장에는 들어가지 않습니다. active 12.9B로 계산한 25.8GB가 아닙니다. 8-bit 양자화로 줄여도 약 47GB입니다. DeepSeek-V3는 fp16이면 1,342GB입니다. 쓰지 않는 expert도 언제 선택될지 모르니 전부 올려 둡니다.
+Mixtral을 fp16(2바이트)으로 올리면 \(46.7\text{B} \times 2 = 93.4\text{GB}\)이고, 80GB GPU 한 장에는 들어가지 않습니다. active 12.9B로 계산한 25.8GB가 아닙니다. 가중치를 8비트 정수로 줄이는 양자화([효율적 추론](./efficient-inference.md))를 해도 약 47GB입니다. DeepSeek-V3는 fp16이면 1,342GB입니다. 쓰지 않는 expert도 언제 선택될지 모르니 전부 올려 둡니다.
 
 ### batch가 커지면 decode의 읽기가 늘어납니다
 
-[decode](../nlp/prefill-decode.md)는 가중치 읽기가 시간을 정하는데, batch 1이면 token 하나가 expert 2개만 읽습니다. token이 \(B\)개이고 router가 고르게 고른다고 하면 한 expert가 한 번도 안 뽑힐 확률은 \(0.75^B\)입니다. \(B = 8\)이면 0.10, \(B = 16\)이면 0.01이라 expert 8개 중 평균 7.9개가 켜집니다. Mixtral의 한 step당 가중치 읽기는 batch 1에서 약 25.8GB, batch 16에서 약 92GB입니다. [continuous batching](../deep-learning/serving.md)으로 동시 요청을 늘려도 token당 읽기가 dense처럼 줄지 않습니다. 실제 router는 균등하지 않아서 이 값은 상한에 가깝습니다.
+[decode](../nlp/prefill-decode.md)는 가중치 읽기가 시간을 정하는데, batch 1이면 token 하나가 층마다 expert 2개만 읽습니다. batch는 한 step에 함께 처리하는 요청 수이고 요청마다 token 하나씩 만들므로 token이 \(B\)개입니다. router가 고르게 고른다고 하면 token 하나가 특정 expert를 안 고를 확률은 \(6/8 = 0.75\)이고, \(B\)개가 모두 안 고를 확률, 곧 그 expert가 한 번도 안 뽑힐 확률은 \(0.75^B\)입니다. \(B = 8\)이면 0.10, \(B = 16\)이면 0.01이라 expert 8개 중 평균 7.9개가 켜집니다. Mixtral의 한 step당 가중치 읽기는 batch 1에서 약 25.8GB, batch 16에서 약 92GB입니다. dense는 batch를 늘려도 읽는 양이 그대로라 token당 읽기가 줄지만, MoE는 읽는 양이 같이 늘어납니다. 그래서 [continuous batching](../deep-learning/serving.md)으로 동시 요청을 늘려도 token당 읽기가 dense처럼 줄지 않습니다. 실제 router는 균등하지 않아서 이 값은 상한에 가깝습니다.
 
 ### expert를 GPU에 나누면 all-to-all 통신이 생깁니다
 
-expert를 GPU 여러 장에 나눠 놓는 것이 expert parallelism입니다. token은 자기 expert가 있는 장으로 가서 계산한 뒤 돌아옵니다. 그래서 층마다 모든 장이 서로 token을 보내는 all-to-all이 두 번 생깁니다. 이 통신이 노드 사이 네트워크를 타면 느려집니다. 분산 방식 전반은 [Parallelism](../deep-learning/parallel.md)에 있습니다.
+expert를 GPU 여러 장에 나눠 놓는 것이 expert parallelism입니다. token은 자기 expert가 있는 장으로 가서 계산한 뒤 돌아옵니다. 그래서 층마다 모든 장이 서로 token을 보내는 all-to-all이 두 번(갈 때와 돌아올 때) 생깁니다. 이 통신이 노드 사이 네트워크를 타면 느려집니다. 분산 방식 전반은 [Parallelism](../deep-learning/parallel.md)에 있습니다.
 
 ### 학습에서는 expert 쏠림을 막아야 합니다
 
-router가 몇 expert만 계속 고르면 나머지는 학습을 못 받아 더 안 뽑힙니다. token 1,000개에 top-2이면 배정이 2,000건이라 expert당 250건이 고른 몫인데, 한 expert가 500건을 받으면 그 expert의 GPU가 step 시간을 정합니다. 막는 방법은 두 가지입니다. 쏠릴수록 커지는 보조 손실(load-balancing loss)을 오차에 더하는 방식이 있고, DeepSeek-V3는 expert마다 bias를 두는 방식을 씁니다. 몰린 expert의 bias는 낮추고 한가한 expert는 높여서 고르는 순위만 바꿉니다. 보조 손실이 품질을 깎을 수 있어서 이를 피하려는 방식입니다.
+router가 몇 expert만 계속 고르면 나머지는 학습을 못 받아 더 안 뽑힙니다. expert가 8개일 때 token 1,000개에 top-2이면 배정이 2,000건이라 expert당 250건이 고른 몫인데, 한 expert가 500건을 받으면 나머지 장이 그 expert의 GPU를 기다리므로 그 장이 step 시간을 정합니다. 막는 방법은 두 가지입니다. 쏠릴수록 커지는 보조 손실(load-balancing loss)을 오차에 더하는 방식이 있고, DeepSeek-V3는 expert마다 bias를 두는 방식을 씁니다. 몰린 expert의 bias는 낮추고 한가한 expert는 높여서 고르는 순위만 바꿉니다. 보조 손실이 품질을 깎을 수 있어서 이를 피하려는 방식입니다.
 
 ## 이름 읽기와 판단
 

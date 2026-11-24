@@ -30,7 +30,7 @@ export default function AnyResGrid() {
 
   return (
     <Viz
-      title="4×4 그림을 token으로: 한 칸으로 평균내기와 2×2 조각 나누기 (AnyRes)"
+      title="4×4 그림을 token으로: 한 칸으로 평균내기와 2×2 조각 나누기"
       caption="projector는 조각을 길이 2인 그림 token으로 줄이는 행렬입니다. 칸을 눌러 밝기를 바꾸세요. 한 칸으로 평균내면 어느 사분면이 밝았는지 사라지고, 조각을 유지하면 그 정보가 token 자리에 남습니다. 조각마다 projector(첫째·셋째 칸 × 0.5)를 통과시킨 token도 함께 보입니다."
     >
       <Controls>
@@ -101,7 +101,7 @@ export default function AnyResGrid() {
         <Stat label="1개일 때보다 연산" value={`${tokens}배`} tone={tokens > 1 ? 'bad' : 'good'} />
       </Stats>
       <Note>
-        칸이 늘면 조각 수를 늘리는 방식이 AnyRes입니다. token이 1개에서 4개로 늘면 prefill의 연산도 token 수에 비례해 늘어서, token 수가 4배이면 그 구간의 연산도 4배입니다.
+        조각을 유지하면 위치가 남지만 token이 늘어납니다. token이 1개에서 4개로 늘면 prefill의 연산도 token 수에 비례해 늘어서, token 수가 4배이면 그 구간의 연산도 4배입니다.
       </Note>
     </Viz>
   );

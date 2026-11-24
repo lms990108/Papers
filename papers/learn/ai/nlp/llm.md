@@ -12,7 +12,7 @@ LLM은 앞만 보는 [트랜스포머](./transformer.md) 블록을 크게 쌓고
 - **API 호출**: messages, `max_tokens`, `temperature`를 넘기고 token으로 요금을 냅니다. → [다음 token](./next-token.md)
 - **context window**: 입력과 출력이 함께 쓰는 token 한도입니다. 에이전트 루프에서 가장 먼저 부딪힙니다.
 - **지연 시간과 비용**: 입력 token은 한꺼번에, 출력 token은 하나씩 처리합니다. → [Prefill, decode](./prefill-decode.md)
-- **모델 선택**: 같은 base 모델을 후속 학습으로 chat, reasoning 모델로 만듭니다. → [Post-training](./post-training.md)
+- **모델 선택**: 사전 학습만 마친 base 모델을 후속 학습으로 chat, reasoning 모델로 만듭니다. → [Post-training](./post-training.md)
 - **지식 한계**: 학습한 시점까지의 글만 압니다. 그 뒤의 정보는 prompt나 RAG로 넣습니다. → [RAG](../rag/index.md)
 
 ## 계산

@@ -10,7 +10,7 @@ import LrRace from '@site/src/components/viz/dl/d2/LrRace';
 
 경사하강법은 오차의 기울기를 구해, 오차가 줄어드는 쪽으로 파라미터를 조금씩 옮기는 학습 절차입니다.
 
-모델을 fine-tuning하거나 학습 코드를 돌릴 때 설정 화면에서 만납니다. learning rate, epochs, batch size가 이 절차의 설정값이고, loss가 내려가지 않거나 `NaN`이 뜨는 문제에서 가장 먼저 의심할 값이 learning rate입니다. API로 호출만 하는 경우에는 직접 쓰지 않습니다.
+모델을 fine-tuning하거나 학습 코드를 돌릴 때 설정 화면에서 만납니다. learning rate, epochs, batch size가 이 절차의 설정값이고, loss(오차를 이렇게도 부릅니다)가 내려가지 않거나 `NaN`이 뜨는 문제에서 가장 먼저 의심할 값이 learning rate입니다. API로 호출만 하는 경우에는 직접 쓰지 않습니다.
 
 ## 계산
 
@@ -28,7 +28,7 @@ w \leftarrow w - \epsilon\, \frac{\partial E}{\partial w}
 3     1.464   -3.072
 ```
 
-\(w\)가 3에 다가가지만 한 번에 도착하지는 않습니다. 기울기가 줄어서 걸음도 짧아집니다. 갱신 한 번은 \(w - 3\)에 \(1 - 2\epsilon = 0.8\)을 곱하는 일이기도 합니다.
+\(w\)가 3에 다가가지만 한 번에 도착하지는 않습니다. 기울기가 줄어서 걸음도 짧아집니다. 갱신 한 번은 정답까지 남은 거리 \(w - 3\)에 \(1 - 2\epsilon = 0.8\)을 곱하는 일이기도 합니다.
 
 ## 기억할 것 세 가지
 

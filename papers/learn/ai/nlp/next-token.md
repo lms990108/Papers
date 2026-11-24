@@ -13,7 +13,7 @@ import Quiz from '@site/src/components/viz/Quiz';
 에이전트를 만들 때 이 과정은 호출 파라미터로 나타납니다.
 
 - **sampling 설정**: `temperature`, `top_p`, `top_k`가 비율에서 token을 고르는 방식을 정합니다.
-- **출력 길이와 지연 시간**: token을 하나씩 만들기 때문에 출력이 길수록 오래 걸립니다. `max_tokens`와 stop sequence가 멈추는 지점을 정합니다. → [Prefill, decode](./prefill-decode.md)
+- **출력 길이와 지연 시간**: token을 하나씩 만들기 때문에 출력이 길수록 오래 걸립니다. `max_tokens`와 stop sequence(이 문자열이 나오면 출력을 멈추게 하는 설정)가 멈추는 지점을 정합니다. → [Prefill, decode](./prefill-decode.md)
 - **logprobs**: 고른 token의 비율을 돌려주는 옵션입니다. 분류나 라우팅의 신뢰도로 읽고 싶어지는 값입니다.
 - **구조화 출력**: JSON이나 tool call 인자도 token을 하나씩 이어 쓴 결과입니다.
 
@@ -25,6 +25,8 @@ import Quiz from '@site/src/components/viz/Quiz';
 E = -\log p(\text{정답}) = -\log 0.711 \approx 0.341
 \]
 
+정답에 준 비율이 클수록 오차는 작고, 1이면 0입니다.
+
 생성에서는 정답이 없습니다. 같은 비율에서 token 하나를 골라 입력 뒤에 붙이고 다시 비율을 만듭니다. 가장 큰 칸을 늘 고르면(greedy) 같은 입력에 같은 글이 나옵니다. 비율대로 뽑으면 매번 달라집니다. 점수를 temperature \(T\)로 나눈 뒤 소프트맥스를 하면 비율의 쏠림이 바뀝니다.
 
 ```text
@@ -33,6 +35,8 @@ T=0.5   0.948
 T=1     0.711
 T=2     0.475
 ```
+
+T가 작으면 1등 칸으로 쏠리고, 크면 평평해집니다.
 
 아래 그림에서 temperature를 움직이고 뽑기를 눌러 실제로 어떤 token이 나오는지 보세요.
 

@@ -26,9 +26,9 @@ GPU 4장이 서로 다른 batch를 보고, 각자 기울기를 만듭니다. 한
 
 <AllReduceGrads />
 
-한 행렬을 나누는 것은 tensor parallelism입니다. \(W\)의 열이 \([1, 3]\)과 \([2, 4]\)이고 입력 \(x = [1, 1]\)이면 \(Wx = [3, 7]\)입니다. 열을 GPU 두 장에 나눠 1장은 \([1, 3]\), 2장은 \([2, 4]\)를 계산하고, all-reduce로 더하면 같은 \([3, 7]\)입니다.
+한 행렬을 나누는 것은 tensor parallelism입니다. \(W\)의 열이 \([1, 3]\)과 \([2, 4]\)이고 입력 \(x = [1, 1]\)이면 \(Wx = [3, 7]\)입니다. 열을 GPU 두 장에 나눠, 1장은 첫 열에 입력의 첫 칸을 곱한 \([1, 3]\), 2장은 둘째 열에 둘째 칸을 곱한 \([2, 4]\)를 계산합니다. all-reduce로 더하면 같은 \([3, 7]\)입니다.
 
-층을 순서대로 다른 장에 두면 pipeline parallelism입니다. 층 2개, 장 2개, microbatch 4개이면 5회전이 걸립니다.
+층을 순서대로 다른 장에 두면 pipeline parallelism입니다. batch를 잘게 쪼갠 조각이 microbatch이고, 이것을 차례로 흘려 보냅니다. 층 2개, 장 2개, microbatch 4개이면 5회전이 걸립니다.
 
 ```text
 회전   1장(첫째 층)   2장(둘째 층)
@@ -39,7 +39,7 @@ GPU 4장이 서로 다른 batch를 보고, 각자 기울기를 만듭니다. 한
 5      쉼             batch 4
 ```
 
-전체 10칸 중 쉬는 칸이 2개라 bubble 비율은 \(2/10 = 0.2\)입니다. 아래 그림에서 장 수와 microbatch 수를 바꿔 쉬는 칸이 어떻게 달라지는지 보세요.
+쉬는 칸을 bubble이라 하고, 전체 10칸 중 2개라 bubble 비율은 \(2/10 = 0.2\)입니다. 아래 그림에서 장 수와 microbatch 수를 바꿔 쉬는 칸이 어떻게 달라지는지 보세요.
 
 <PipelineBubble />
 
@@ -55,7 +55,7 @@ GPU 4장이 서로 다른 batch를 보고, 각자 기울기를 만듭니다. 한
 
 ### MoE는 token이 몰리면 일부 expert가 쉽니다
 
-FFN을 여러 벌 두고 router가 token마다 몇 벌만 고릅니다. token 4개, expert 2개, token마다 1개씩 고르면 고르게 갔을 때 expert마다 2 token입니다. 4 token이 모두 첫째 expert로 가면 둘째 expert는 놉니다. 한 expert가 받을 token 상한(capacity factor)을 넘은 token은 넘칩니다. 그래서 학습 때 배정이 한쪽으로 몰릴수록 커지는 항(load-balancing loss)을 오차에 더합니다.
+FFN(블록 안에서 token마다 따로 변환하는 층)을 여러 벌 두고 각 벌을 expert라 하며, router가 token마다 몇 벌만 고릅니다. token 4개, expert 2개, token마다 1개씩 고르면 고르게 갔을 때 expert마다 2 token입니다. 4 token이 모두 첫째 expert로 가면 둘째 expert는 놉니다. 한 expert가 받을 token 상한(capacity factor)을 넘은 token은 넘칩니다. 그래서 학습 때 배정이 한쪽으로 몰릴수록 커지는 항(load-balancing loss)을 오차에 더합니다.
 
 ## 퀴즈
 
