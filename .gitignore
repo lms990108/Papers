@@ -7,3 +7,6 @@ _workspace
 .agents/
 .claude/
 skills-lock.json
+
+# 로컬 설정 (챗봇 주소 등)
+.env.local

@@ -3,7 +3,8 @@ import {Viz, Controls, Btn, Note, styles as s} from '../../Viz';
 
 // 본문과 같은 설정: 입력 7칸, 창 3칸, 출력 5칸
 const X = [3, 1, 4, 1, 5, 9, 2];
-const A = [1, 0, -1]; // 공유되는 가중치 a, b, c
+const A = [-1, 0, 1]; // 공유되는 가중치 a, b, c (CNN 문서의 세로 경계 kernel과 같은 값)
+const sg = (v) => (v < 0 ? `(${v})` : `${v}`);
 const BIAS = 1;
 const K = 3;
 const O = X.length - K + 1; // 5
@@ -40,7 +41,7 @@ export default function FilterSlide() {
   const note = !has
     ? '입력 7칸 위에 3칸짜리 창을 놓고 한 칸씩 옮기며 출력을 만듭니다. 다음 버튼을 눌러 보세요.'
     : shared
-      ? `${p + 1}번째 출력: y${p + 1} = ${A[0]}×${X[p]} + ${A[1]}×${X[p + 1]} + (${A[2]})×${X[p + 2]} + ${BIAS} = ${Y[p]}. 가중치 a, b, c와 편향은 앞의 자리에서 쓴 값과 같은 값입니다.`
+      ? `${p + 1}번째 출력: y${p + 1} = ${sg(A[0])}×${X[p]} + ${sg(A[1])}×${X[p + 1]} + ${sg(A[2])}×${X[p + 2]} + ${BIAS} = ${Y[p]}. 가중치 a, b, c와 편향은 앞의 자리에서 쓴 값과 같은 값입니다.`
       : `${p + 1}번째 출력: y${p + 1} = a${SUB[p]}×${X[p]} + b${SUB[p]}×${X[p + 1]} + c${SUB[p]}×${X[p + 2]} + 편향${SUB[p]}. 이 자리 전용으로 값 4개를 따로 둡니다. 자리가 하나 늘 때마다 학습할 값이 4개 늘어납니다.`;
 
   return (
