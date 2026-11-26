@@ -1,6 +1,21 @@
-const ASK_URL =
-  process.env.ASK_URL || 'http://192.168.0.249:44269/v1/chat/completions';
-const ASK_MODEL = process.env.ASK_MODEL || 'qwen36-35b';
+const fs = require('fs');
+const path = require('path');
+
+// 주소와 모델명은 저장소에 두지 않는다. 환경 변수나 커밋하지 않는 .env.local에서 읽는다.
+function loadLocalEnv() {
+  try {
+    const file = path.join(__dirname, '..', '.env.local');
+    for (const line of fs.readFileSync(file, 'utf8').split('\n')) {
+      const m = line.match(/^\s*([A-Z_]+)\s*=\s*(.*?)\s*$/);
+      if (m && process.env[m[1]] === undefined) process.env[m[1]] = m[2];
+    }
+  } catch {
+    // .env.local이 없으면 환경 변수만 쓴다.
+  }
+}
+loadLocalEnv();
+const ASK_URL = process.env.ASK_URL || '';
+const ASK_MODEL = process.env.ASK_MODEL || '';
 const LEVELS = {
   1: {tokens: 200, how: '한두 문장으로만'},
   2: {tokens: 400, how: '짧게'},
@@ -53,6 +68,10 @@ async function ask(req, res) {
     const level = LEVELS[Number(body.level)] || LEVELS[3];
     if (!question) {
       res.status(400).json({error: '질문이 없습니다'});
+      return;
+    }
+    if (!ASK_URL || !ASK_MODEL) {
+      res.status(503).json({error: 'ASK_URL과 ASK_MODEL이 설정되지 않았습니다 (.env.example 참고)'});
       return;
     }
     const upstream = await fetch(ASK_URL, {

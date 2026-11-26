@@ -47,7 +47,7 @@ int4        0.5             35GB
 
 KV cache는 따로 듭니다([KV cache 크기 계산](../nlp/prefill-decode.md)). decode 속도도 같은 비율로 영향을 받습니다. prefill-decode 문서의 7B 모델은 가중치 14GB를 읽는 데 7ms였는데, int4로 3.5GB가 되면 읽기는 1.75ms입니다. 이론상 상한은 4배이고 실제로는 변환 연산과 KV cache 읽기 때문에 그보다 낮습니다.
 
-speculative decoding은 작은 draft 모델이 token \(k\)개를 제안하고, 큰 모델이 이를 한 번에 검증합니다. 검증은 prefill처럼 \(k\)개를 한꺼번에 계산할 수 있어서 큰 모델의 가중치를 한 번만 읽습니다. 앞에서부터 차례로 받아들이다가 처음 거절된 자리에서는 큰 모델이 token 하나를 대신 뽑고, 전부 받아들여지면 큰 모델이 하나를 더 뽑습니다. token 하나가 받아들여질 확률(acceptance)이 \(\alpha\)이고 독립이라고 가정하면, 한 step에서 얻는 token 수의 기대값은 다음과 같습니다.
+speculative decoding은 작은 draft 모델이 token \(k\)개를 제안하고, 큰 모델이 이를 한 번에 검증합니다. 검증은 prefill처럼 \(k\)개를 한꺼번에 계산할 수 있어서 큰 모델의 가중치를 한 번만 읽습니다. 앞에서부터 차례로 받아들이다가 처음 거절된 자리에서는 큰 모델이 token 하나를 대신 뽑고, 전부 받아들여지면 큰 모델이 하나를 더 뽑습니다. token 하나가 받아들여질 확률(acceptance)이 \(\alpha\)이고 독립이라고 가정하면, 한 step에서 얻는 token 수의 기댓값은 다음과 같습니다.
 
 \[
 \mathbb{E}[\text{token 수}] = \frac{1-\alpha^{k+1}}{1-\alpha}
@@ -67,7 +67,7 @@ speculative decoding은 작은 draft 모델이 token \(k\)개를 제안하고, �
 
 ### distillation은 큰 모델의 출력으로 작은 모델을 가르칩니다
 
-큰 teacher 모델이 낸 출력으로 작은 student 모델을 학습합니다. 출력은 token의 확률 분포일 수도 있고, teacher가 생성한 답 자체일 수도 있습니다. 후자는 질문과 답의 짝으로 학습하는 [post-training](../nlp/post-training.md)의 SFT와 같은 형태입니다. DeepSeek-R1 distill 계열이 이 방식입니다. 논문에 따르면 R1이 생성한 약 80만 개 샘플로 Qwen과 Llama 계열 모델을 SFT했습니다. 작은 모델이 추론 모델의 말투와 풀이 순서를 따라 배운 것입니다. 효과는 특정 작업에서 크지만, 데이터 생성과 학습 비용이 들고 teacher가 못 하는 일은 배우지 못합니다.
+큰 teacher 모델이 낸 출력으로 작은 student 모델을 학습합니다. 출력은 token의 확률 분포일 수도 있고, teacher가 생성한 답 자체일 수도 있습니다. 후자는 질문과 답의 짝으로 학습하는 [post-training](../nlp/post-training.md)의 SFT와 같은 형태입니다. DeepSeek-R1 distill 계열이 이 방식입니다. 논문에 따르면 R1이 만든 추론 샘플(약 60만 개)에 DeepSeek-V3 쪽 SFT 데이터에서 가져온 추론 외 샘플을 합친 약 80만 개로 Qwen과 Llama 계열 모델을 SFT했습니다. 작은 모델이 추론 모델의 말투와 풀이 순서를 따라 배운 것입니다. 효과는 특정 작업에서 크지만, 데이터 생성과 학습 비용이 들고 teacher가 못 하는 일은 배우지 못합니다.
 
 ### speculative decoding은 답을 바꾸지 않고 속도만 바꿉니다
 

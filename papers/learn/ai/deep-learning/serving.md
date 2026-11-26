@@ -56,7 +56,7 @@ A는 첫 회전이 끝나는 연산 160에서 token을 받습니다. 연산 합�
 - `--max-num-seqs`: 한 회전에 같이 돌리는 요청 수의 상한입니다. 위 그림의 자리 수에 해당합니다.
 - `--max-num-batched-tokens`: 한 회전에 넣는 token 수의 상한으로, 위 표의 \(M\)에 해당합니다. 낮추면 회전이 짧아져 decode의 token 간격이 안정되고, 높이면 prefill 처리량이 오르는 방향입니다.
 - `--gpu-memory-utilization`: 엔진이 쓸 GPU 메모리 비율입니다. 가중치를 뺀 나머지가 KV cache page 몫이라, 올리면 동시에 받을 수 있는 요청이 늡니다.
-- `--enable-chunked-prefill`, `--enable-prefix-caching`: 위의 chunked prefill과 prefix cache를 켭니다.
+- `--enable-chunked-prefill`, `--enable-prefix-caching`: 위의 chunked prefill과 prefix cache를 켜고 끄는 옵션입니다. 공식 문서 기준으로 V1 엔진에서는 chunked prefill이 가능한 경우 기본으로 켜지고, prefix caching도 기본으로 켜지는 것으로 알려져 있어 직접 지정하지 않아도 될 수 있습니다.
 
 ## 기억할 것 세 가지
 
@@ -66,7 +66,7 @@ A가 token을 받는 시점은 회전이 끝나는 때입니다. \(M = 9\)인 �
 
 ### 앞부분이 같아야 캐시를 재사용합니다
 
-같은 prompt 앞부분을 요청들이 공유하면 그 page는 한 번만 둡니다(prefix cache). 다른 요청이 B의 앞 4 token과 같은 앞부분으로 시작하면, 그 4 token의 키와 값은 다시 계산하지 않고 뒷부분만 prefill합니다. 에이전트 루프는 호출마다 시스템 prompt, 도구 정의, 지난 대화가 같은 순서로 앞에 붙기 때문에 이 재사용이 크게 듭니다. 시스템 prompt나 도구 목록 중간에 매번 바뀌는 값(시각 등)을 넣으면 그 뒤가 모두 다시 계산됩니다. 바뀌는 내용은 prompt 끝쪽에 둡니다.
+같은 prompt 앞부분을 요청들이 공유하면 그 page는 한 번만 둡니다(prefix cache). 다른 요청이 B의 앞 4 token과 같은 앞부분으로 시작하면, 그 4 token의 키와 값은 다시 계산하지 않고 뒷부분만 prefill합니다. 에이전트 루프는 호출마다 시스템 prompt, 도구 정의, 지난 대화가 같은 순서로 앞에 붙기 때문에 이 재사용의 효과가 큽니다. 시스템 prompt나 도구 목록 중간에 매번 바뀌는 값(시각 등)을 넣으면 그 뒤가 모두 다시 계산됩니다. 바뀌는 내용은 prompt 끝쪽에 둡니다.
 
 ### page도 빈 칸을 모두 없애지는 않습니다
 
@@ -77,7 +77,7 @@ A가 token을 받는 시점은 회전이 끝나는 때입니다. \(M = 9\)인 �
 <Quiz items={[
   {ask: '요청 A는 decode 1칸을 기다리고, 요청 B의 8 token prompt를 한 회전에 통째로 prefill합니다. A는 언제 다음 token을 받나요?', opts: ['B와 무관하게 바로 받습니다', 'B의 prefill까지 포함한 그 회전이 끝날 때 받습니다', 'B의 prefill이 끝난 다음 회전에 받습니다'], ans: 1, why: '한 회전의 연산은 같은 가중치 읽기에 모두 얹혀 있어서 회전 전체가 끝나야 결과가 나옵니다. 긴 prompt 하나가 짧은 decode를 붙잡는 것을 막으려고 chunked prefill로 잘라 넣습니다.'},
   {ask: 'page 크기가 4 token이고 요청의 token이 9개입니다. 마지막 page에서 비는 칸은 몇 칸인가요?', opts: ['0칸', '1칸', '3칸'], ans: 2, why: '9 token은 page 2개(8 token)가 차고 1 token이 세 번째 page에 들어갑니다. 세 번째 page는 4칸 중 1칸만 쓰므로 3칸이 빕니다.'},
-  {ask: '시스템 prompt 맨 앞에 요청마다 바뀌는 현재 시각을 넣었습니다. prefix cache는 어떻게 되나요?', opts: ['시각 뒷부분은 여전히 재사용됩니다', '앞부분이 달라져 그 뒤가 모두 다시 계산됩니다', '캐시는 시각과 무관합니다'], ans: 1, why: 'prefix cache는 처음부터 이어서 같은 token열만 재사용합니다. 맨 앞이 달라지면 그 뒤의 키와 값도 모두 달라지므로 재사용할 수 없습니다.'},
+  {ask: '시스템 prompt 맨 앞에 요청마다 바뀌는 현재 시각을 넣었습니다. prefix cache는 어떻게 되나요?', opts: ['시각 뒷부분은 여전히 재사용됩니다', '앞부분이 달라져 그 뒤가 모두 다시 계산됩니다', '캐시는 시각과 무관합니다'], ans: 1, why: 'prefix cache는 처음부터 이어서 같은 token 열만 재사용합니다. 맨 앞이 달라지면 그 뒤의 키와 값도 모두 달라지므로 재사용할 수 없습니다.'},
 ]} />
 
 <details>
