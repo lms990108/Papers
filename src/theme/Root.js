@@ -1,5 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import ReadingMark from '../components/ReadingMark';
 
 function pageText() {
   const article = document.querySelector('article');
@@ -190,6 +191,7 @@ export default function Root({children}) {
   return (
     <>
       {children}
+      <ReadingMark />
       {pick ? (
         <button
           type="button"

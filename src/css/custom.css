@@ -288,3 +288,128 @@
   border-left: 2px solid #7dd3fc;
   padding-left: 8px;
 }
+
+.resume {
+  position: fixed;
+  left: 20px;
+  bottom: 20px;
+  z-index: 190;
+  display: flex;
+  align-items: stretch;
+  max-width: min(360px, calc(100vw - 120px));
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 12px;
+  background: var(--ifm-background-surface-color);
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.14);
+  overflow: hidden;
+}
+
+.resume__go {
+  appearance: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  padding: 10px 6px 10px 14px;
+  border: 0;
+  background: none;
+  color: var(--ifm-font-color-base);
+  font: inherit;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.resume__go:hover {
+  color: var(--ifm-font-color-base);
+  text-decoration: none;
+  background: var(--ifm-color-emphasis-100);
+}
+
+.resume__label {
+  color: var(--ifm-color-primary);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.resume__where {
+  overflow: hidden;
+  font-size: 14px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.resume__close {
+  appearance: none;
+  padding: 0 12px;
+  border: 0;
+  background: none;
+  color: var(--ifm-color-emphasis-600);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.resume__close:hover {
+  background: var(--ifm-color-emphasis-100);
+}
+
+/* 책갈피: 소제목 옆 버튼과 표시 */
+.bookmark-btn {
+  appearance: none;
+  display: inline-flex;
+  vertical-align: middle;
+  margin-left: 0.5rem;
+  padding: 2px;
+  border: 0;
+  border-radius: 6px;
+  background: none;
+  color: var(--ifm-color-emphasis-500);
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+.anchor:hover .bookmark-btn,
+.bookmark-btn:focus-visible,
+.is-bookmarked .bookmark-btn {
+  opacity: 1;
+}
+
+@media (hover: none) {
+  .bookmark-btn {
+    opacity: 0.6;
+  }
+}
+
+.bookmark-btn:hover {
+  color: var(--ifm-color-primary);
+  background: var(--ifm-color-emphasis-100);
+}
+
+.is-bookmarked {
+  padding-left: 0.75rem;
+  margin-left: -0.75rem;
+  border-left: 4px solid var(--ifm-color-primary);
+}
+
+.is-bookmarked .bookmark-btn {
+  color: var(--ifm-color-primary);
+}
+
+.is-bookmarked .bookmark-btn::after {
+  content: '여기까지 읽음';
+  margin-left: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 18px;
+}
+
+.table-of-contents a.toc-read {
+  opacity: 0.45;
+}
+
+.table-of-contents a.toc-bookmark {
+  font-weight: 700;
+  color: var(--ifm-color-primary);
+}
