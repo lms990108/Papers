@@ -1,5 +1,5 @@
 ---
-title: Post-training
+title: 포스트 트레이닝 (post-training)
 sidebar_position: 41
 mdx:
   format: mdx

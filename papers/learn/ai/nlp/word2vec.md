@@ -57,7 +57,7 @@ import SkipgramWindow from '@site/src/components/viz/nlp/g3/SkipgramWindow';
 
 ### 사전에 없는 단어는 벡터가 없습니다
 
-학습 때 본 적 없는 단어는 벡터를 만들 수 없습니다. FastText는 단어를 글자 조각으로 나눠 조각들의 벡터를 합치므로 처음 보는 단어도 처리합니다. 요즘 LLM은 [tokenization](./tokenization.md)에서 단어를 더 작은 조각 token으로 나눠 이 문제를 피합니다.
+학습 때 본 적 없는 단어는 벡터를 만들 수 없습니다. FastText는 단어를 글자 조각으로 나눠 조각들의 벡터를 합치므로 처음 보는 단어도 처리합니다. 요즘 LLM은 [토큰화](./tokenization.md)에서 단어를 더 작은 조각 token으로 나눠 이 문제를 피합니다.
 
 <details>
 <summary>더 깊이: CBOW, 네거티브 샘플링, 학습 한 스텝</summary>

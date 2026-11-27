@@ -13,7 +13,7 @@ import Quiz from '@site/src/components/viz/Quiz';
 LLM의 모든 층 안에서 돌아가는 계산이라 직접 호출할 일은 없습니다. 대신 한계가 그대로 눈에 보입니다.
 
 - **context window 한도**: 한 번에 읽을 수 있는 token 수가 정해져 있습니다. → [LLM](./llm.md)
-- **긴 prompt의 비용과 지연 시간**: 입력이 길수록 이 계산이 빠르게 무거워집니다. → [Prefill, decode](./prefill-decode.md)
+- **긴 prompt의 비용과 지연 시간**: 입력이 길수록 이 계산이 빠르게 무거워집니다. → [프리필과 디코드](./prefill-decode.md)
 - **RAG의 청크 수**: 문서를 많이 붙일수록 필요한 문서가 받는 몫이 줄 수 있습니다. → [검색](../rag/retrieval.md)
 
 ## 왜 필요한가

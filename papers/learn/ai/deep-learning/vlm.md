@@ -7,14 +7,14 @@ mdx:
 
 import Quiz from '@site/src/components/viz/Quiz';
 
-VLM은 이미지를 읽는 vision encoder, 그 출력을 언어 모델의 벡터 길이로 맞추는 projector, 글을 쓰는 LLM을 이어 붙인 모델입니다. 이미지는 token 벡터로 바뀌어 글 token과 같은 prompt에 놓이고 답은 글 token으로 나옵니다. LLaVA나 Qwen-VL 같은 공개 모델이 이 틀을 씁니다. 비공개 API의 내부 구조는 알 수 없지만, 이미지가 token 수로 세어져 비용이 매겨지는 점은 같습니다. → [Multimodal](./multimodal.md)
+VLM은 이미지를 읽는 vision encoder, 그 출력을 언어 모델의 벡터 길이로 맞추는 projector, 글을 쓰는 LLM을 이어 붙인 모델입니다. 이미지는 token 벡터로 바뀌어 글 token과 같은 prompt에 놓이고 답은 글 token으로 나옵니다. LLaVA나 Qwen-VL 같은 공개 모델이 이 틀을 씁니다. 비공개 API의 내부 구조는 알 수 없지만, 이미지가 token 수로 세어져 비용이 매겨지는 점은 같습니다. → [멀티모달](./multimodal.md)
 
 에이전트를 만들 때는 이런 곳에서 만납니다.
 
 - **문서·스크린샷 읽기**: PDF 페이지나 화면 캡처를 이미지로 넣을지, OCR로 글을 뽑아 넘길지 정합니다.
 - **GUI·computer use 에이전트**: 스크린샷을 보고 "어디를 누를지"를 좌표로 답하게 합니다.
 - **차트·표 읽기**: 이미지 안의 수치를 뽑아 JSON으로 받습니다.
-- **비용 계산**: 이미지와 비디오 프레임이 몇 token이 되는지가 prefill 비용과 지연을 정합니다. → [Prefill, decode](../nlp/prefill-decode.md)
+- **비용 계산**: 이미지와 비디오 프레임이 몇 token이 되는지가 prefill 비용과 지연을 정합니다. → [프리필과 디코드](../nlp/prefill-decode.md)
 
 ## 왜 필요한가
 
@@ -22,7 +22,7 @@ VLM은 이미지를 읽는 vision encoder, 그 출력을 언어 모델의 벡터
 
 이전에는 일마다 도구를 이어 붙였습니다. OCR이 글자를 뽑고, 규칙이나 정규식이 필요한 줄을 찾았습니다. 웹이라면 DOM을 읽어 버튼을 찾을 수 있지만, 데스크톱 앱이나 원격 화면에는 읽을 구조가 없는 경우가 있습니다. 한계가 둘입니다. 질문이 바뀔 때마다 파이프라인을 새로 짜야 하고 OCR은 글자를 한 줄로 펴서 내놓기 때문에 표의 칸 구조, 차트의 막대 높이, 아이콘처럼 배치에 담긴 뜻이 빠집니다.
 
-VLM은 이미지를 질문과 같은 prompt에 넣고 답을 글로 받는 하나의 모델입니다. 질문이 자유로운 글이라 "합계가 얼마인가요"든 "버튼 좌표를 JSON으로 주세요"든 prompt만 바꾸면 됩니다. 한 모델을 처음부터 학습하지 않고, 이미 학습된 vision encoder와 LLM을 projector로 이어 붙여 만듭니다. [Multimodal](./multimodal.md)에서 본 encoder → projector → LLM 틀이 그대로이고, 이 페이지는 그 틀을 모델로 쓸 때 생기는 숫자(이미지 token 수, 해상도, 좌표)를 다룹니다.
+VLM은 이미지를 질문과 같은 prompt에 넣고 답을 글로 받는 하나의 모델입니다. 질문이 자유로운 글이라 "합계가 얼마인가요"든 "버튼 좌표를 JSON으로 주세요"든 prompt만 바꾸면 됩니다. 한 모델을 처음부터 학습하지 않고, 이미 학습된 vision encoder와 LLM을 projector로 이어 붙여 만듭니다. [멀티모달](./multimodal.md)에서 본 encoder → projector → LLM 틀이 그대로이고, 이 페이지는 그 틀을 모델로 쓸 때 생기는 숫자(이미지 token 수, 해상도, 좌표)를 다룹니다.
 
 ## 계산
 
@@ -34,7 +34,7 @@ VLM은 이미지를 질문과 같은 prompt에 넣고 답을 글로 받는 하�
 
 patch 14px일 때 224px 이미지는 \(16 \times 16 = 256\) token입니다. 336px은 \(24 \times 24 = 576\) token이고, LLaVA-1.5가 쓰는 vision encoder인 CLIP ViT-L/14-336(이미지-글 짝 맞추기로 학습한 ViT)이 이 크기입니다. 해상도를 1.5배 올렸는데 token은 2.25배입니다. 가로세로 각각 \(S/P\)개의 patch가 놓이는 격자라서 제곱으로 늘어납니다. token 수는 파일 용량이 아니라 가로세로 px로 정해지므로, 같은 336×336이면 PNG든 JPEG든 576 token입니다.
 
-encoder는 학습된 해상도(336px)로 입력을 받으므로, 더 큰 이미지는 그 크기의 타일로 잘라 타일마다 따로 인코딩하는 AnyRes 방식이 흔합니다. [Multimodal](./multimodal.md)의 2×2 조각 예와 달리 타일 하나가 576 token이 됩니다. 타일 4장(2×2)에 전체를 줄인 이미지 한 장을 더해 전체 모습도 주면 \(5 \times 576 = 2{,}880\) token으로, 한 장짜리의 5배입니다. prefill은 token 수에 거의 비례해 늘어나므로 첫 token이 나올 때까지 걸리는 시간도 그만큼 늘어납니다.
+encoder는 학습된 해상도(336px)로 입력을 받으므로, 더 큰 이미지는 그 크기의 타일로 잘라 타일마다 따로 인코딩하는 AnyRes 방식이 흔합니다. [멀티모달](./multimodal.md)의 2×2 조각 예와 달리 타일 하나가 576 token이 됩니다. 타일 4장(2×2)에 전체를 줄인 이미지 한 장을 더해 전체 모습도 주면 \(5 \times 576 = 2{,}880\) token으로, 한 장짜리의 5배입니다. prefill은 token 수에 거의 비례해 늘어나므로 첫 token이 나올 때까지 걸리는 시간도 그만큼 늘어납니다.
 
 비디오는 프레임(이미지 한 장)을 여러 장 넣는 것이라 프레임 수에 프레임당 token을 곱합니다. 1초에 한 프레임씩 60초를 뽑아 프레임당 256 token이면 \(60 \times 256 = 15{,}360\) token입니다. 프레임마다 이웃한 2×2 token을 하나로 합쳐 64 token으로 줄이면 \(60 \times 64 = 3{,}840\) token입니다.
 
@@ -80,9 +80,9 @@ grounding은 "저 버튼이 어디인지"를 박스나 점 좌표로 답하게 �
 
 - AnyRes가 큰 이미지를 고정 해상도 encoder에 맞춰 타일로 자른다면, Qwen2-VL 이후 계열은 encoder가 이미지 크기에 맞춰 token 수를 바꿉니다(dynamic resolution). Qwen2-VL과 Qwen2.5-VL은 patch 14px 뒤에 인접한 2×2 token을 하나로 합쳐, token 하나가 28×28px를 덮습니다(Qwen3-VL은 patch가 16px라 32×32px입니다). 1120×840 이미지라면 \((1120/28) \times (840/28) = 40 \times 30 = 1{,}200\) token입니다.
 - 비디오는 프레임을 고르는 방식이 정확도와 비용을 함께 바꿉니다. 일정 간격으로 뽑기, 장면이 바뀔 때 뽑기, 질문과 관련 있는 프레임만 뽑기가 흔합니다. 프레임이 어느 시각의 것인지 모델에 알려 주는 방법도 모델마다 다릅니다. Qwen3-VL은 timestamp를 글 token으로 넣습니다.
-- 텍스트, 이미지, 오디오, 비디오를 한 모델이 처리하는 native multimodal(omni) 모델이 늘고 있습니다. 오디오를 글로 먼저 바꾸지 않아서 억양 같은 정보가 남습니다. 가중치가 공개된 Qwen3-Omni가 한 예입니다.
+- 텍스트, 이미지, 오디오, 비디오를 한 모델이 처리하는 네이티브 멀티모달(native multimodal, omni) 모델이 늘고 있습니다. 오디오를 글로 먼저 바꾸지 않아서 억양 같은 정보가 남습니다. 가중치가 공개된 Qwen3-Omni가 한 예입니다.
 - GUI 에이전트용으로 화면 요소를 정확히 가리키는 능력을 따로 학습한 모델이 나오고 있습니다. 좌표를 text token으로 쓰는 방식은 학습하지 않은 해상도에서 정확도가 떨어진다는 보고가 있어, 입력 크기를 학습 때와 맞추는 것이 안전합니다.
 - 가중치가 공개된 VLM이 넓게 퍼져 있습니다. Qwen-VL 계열(Qwen3-VL은 Apache 2.0), InternVL, LLaVA 계열이 대표적이며, 자기 서버에서 돌리거나 자기 데이터로 추가 학습할 수 있습니다.
-- 이미지 token은 prefill에서 글 token과 같이 처리되므로 [Prefill, decode](../nlp/prefill-decode.md)의 prompt caching이 그대로 적용됩니다. 같은 이미지를 반복해 물으면 이미지를 prompt 앞쪽에 두는 편이 유리합니다.
+- 이미지 token은 prefill에서 글 token과 같이 처리되므로 [프리필과 디코드](../nlp/prefill-decode.md)의 prompt caching이 그대로 적용됩니다. 같은 이미지를 반복해 물으면 이미지를 prompt 앞쪽에 두는 편이 유리합니다.
 
 </details>

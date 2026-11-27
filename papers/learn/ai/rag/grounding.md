@@ -92,7 +92,7 @@ def invalid_citations(answer, n_chunks):
 <summary>더 깊이: 손실 함수와 입력 길이</summary>
 
 - 그라운딩은 새 모델이나 새 손실 함수를 만들지 않습니다. 쓰는 LLM은 같고, 입력에 청크가 더 붙을 뿐이라 다음 token의 \(-\log p\)도 그대로입니다.
-- 청크가 늘면 [Prefill, decode](../nlp/prefill-decode.md)에서 prefill 구간이 길어집니다. 검색이 좋은 청크를 고를수록 같은 입력 길이에 쓸모 있는 문장이 더 들어갑니다.
+- 청크가 늘면 [프리필과 디코드](../nlp/prefill-decode.md)에서 prefill 구간이 길어집니다. 검색이 좋은 청크를 고를수록 같은 입력 길이에 쓸모 있는 문장이 더 들어갑니다.
 - 청크를 질문 앞에 둘지 뒤에 둘지는 [어텐션](../nlp/attention.md)이 보는 위치를 바꿉니다. 최적 순서는 모델과 데이터마다 달라서 평가로 정합니다.
 - 앞 단계는 [검색](./retrieval.md), 다음 단계 보강은 [고급 RAG](./advanced-rag.md)입니다.
 

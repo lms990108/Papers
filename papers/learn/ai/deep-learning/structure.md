@@ -84,7 +84,7 @@ fine-tuning 설정 화면의 learning rate, epochs, batch size는 하이퍼파�
 
 - 사전 4개, 임베딩 길이 2이면 임베딩 표가 \(4 \times 2 = 8\)개입니다. 블록 하나를 2×2 가중치와 바이어스 2개로 단순화하면 6개이고 블록 둘이면 12개입니다. 마지막 벡터에서 사전의 네 단어 점수를 내는 표가 8개 더 들어 모두 \(8 + 12 + 8 = 28\)개입니다.
 - 이 단순한 블록에서도 token이 3개에서 300개로 늘면 곱셈은 100배가 되지만 블록 파라미터는 12개로 같습니다.
-- 실제 블록에는 어텐션이 있어 훨씬 크지만 공유하는 방식은 같습니다. 임베딩은 [임베딩](../nlp/embedding.md), token 자르기는 [tokenization](../nlp/tokenization.md), 오차는 [다음 token](../nlp/next-token.md)에서 다룹니다.
+- 실제 블록에는 어텐션이 있어 훨씬 크지만 공유하는 방식은 같습니다. 임베딩은 [임베딩](../nlp/embedding.md), token 자르기는 [토큰화](../nlp/tokenization.md), 오차는 [다음 token](../nlp/next-token.md)에서 다룹니다.
 - learning rate 같은 값은 연결 방식이 아니라 [경사하강법](./gradient-descent.md)의 보폭이어서 구조가 아니라 하이퍼파라미터로 분류합니다. 은닉 칸 수는 구조이면서 하이퍼파라미터이기도 합니다.
 
 </details>

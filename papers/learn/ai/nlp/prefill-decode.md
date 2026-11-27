@@ -1,5 +1,5 @@
 ---
-title: Prefill, decode
+title: 프리필과 디코드 (prefill, decode)
 sidebar_position: 40
 mdx:
   format: mdx
@@ -13,7 +13,7 @@ LLM 서빙은 두 구간으로 나뉩니다. prompt의 token을 한꺼번에 읽
 - **지연 시간**: 첫 token이 나오기까지의 시간(TTFT)은 prefill이, token 사이의 간격(TPOT)은 decode가 정합니다.
 - **입력과 출력의 단가 차이**: 입력 token과 출력 token의 요금이 다른 데에는 두 구간의 계산 방식 차이가 있습니다.
 - **prompt caching**: 앞부분이 같으면 prefill을 건너뜁니다. 에이전트 루프에서 효과가 큰 최적화입니다.
-- **KV cache 메모리**: 긴 context와 동시 요청이 많을수록 GPU 메모리를 먹습니다. → [Continuous batching](../deep-learning/serving.md)
+- **KV cache 메모리**: 긴 context와 동시 요청이 많을수록 GPU 메모리를 먹습니다. → [컨티뉴어스 배칭](../deep-learning/serving.md)
 
 ## 왜 필요한가
 
@@ -21,7 +21,7 @@ LLM은 token을 하나씩 이어 쓰고([다음 token](./next-token.md)), 새 to
 
 가장 단순한 구현은 token을 하나 만들 때마다 prompt와 지금까지의 출력 전체를 처음부터 다시 계산하는 것입니다. prompt가 4,000 token이고 출력이 500 token이라고 합시다. token 하나를 처리하는 일을 1로 세면(어텐션이 길이에 따라 커지는 효과는 뺀 단순화입니다), 매번 다시 계산할 때는 \(4{,}000 + 4{,}001 + \dots + 4{,}499 = 2{,}124{,}750\)입니다. 이전 계산을 남겨 두면 prompt 4,000에 새 token 500을 더한 4,500 안팎입니다. 약 470배 차이입니다.
 
-남겨 둘 것은 앞 token의 key와 value([셀프 어텐션](./self-attention.md)에서 어텐션 점수와 출력을 만드는 데 쓰는 값)입니다. 생성용 모델의 어텐션은 각 token이 자기와 앞만 읽으므로 앞 token의 key와 value는 뒤에 무엇이 붙어도 바뀌지 않습니다. 한 번 계산해 저장하면 되고, 이 저장이 KV cache입니다. 대가는 GPU 메모리입니다. key와 value는 층([Decoder block](./block.md))마다 token마다 있어서 길이와 동시 요청 수에 따라 크게 늡니다. 이 문서는 두 구간의 시간과 KV cache의 메모리를 숫자로 따라갑니다.
+남겨 둘 것은 앞 token의 key와 value([셀프 어텐션](./self-attention.md)에서 어텐션 점수와 출력을 만드는 데 쓰는 값)입니다. 생성용 모델의 어텐션은 각 token이 자기와 앞만 읽으므로 앞 token의 key와 value는 뒤에 무엇이 붙어도 바뀌지 않습니다. 한 번 계산해 저장하면 되고, 이 저장이 KV cache입니다. 대가는 GPU 메모리입니다. key와 value는 층([디코더 블록](./block.md))마다 token마다 있어서 길이와 동시 요청 수에 따라 크게 늡니다. 이 문서는 두 구간의 시간과 KV cache의 메모리를 숫자로 따라갑니다.
 
 ## 계산
 
@@ -82,6 +82,6 @@ token 하나의 캐시 크기는 다음과 같습니다.
 - 모델은 token마다 점수(logit)를 내고, 소프트맥스를 거쳐 비율이 되며, 그 로그가 logprob입니다. 점수 2, 1, 0의 비율은 0.665, 0.245, 0.090입니다.
 - greedy는 가장 큰 비율을 고릅니다. top-k는 상위 k개만 남깁니다. top-p는 큰 비율부터 더해 합이 p가 되는 곳에서 끊습니다. p가 0.9면 0.665와 0.245가 남습니다. min-p는 1등 비율에 정한 값을 곱한 것보다 작은 후보를 버립니다.
 - EOS는 문장이 끝났다는 특수 token으로, 이것이 뽑히면 decode를 멈춥니다. beam search는 후보 문장을 여러 개 유지하며 logprob 합이 큰 길을 남깁니다.
-- 요청 하나의 TPOT를 줄이려면 모델을 작게 하거나 양자화해 읽는 바이트를 줄이는 방법이 있습니다. 처리량을 올리려면 여러 요청을 묶습니다. → [Continuous batching](../deep-learning/serving.md)
+- 요청 하나의 TPOT를 줄이려면 모델을 작게 하거나 양자화해 읽는 바이트를 줄이는 방법이 있습니다. 처리량을 올리려면 여러 요청을 묶습니다. → [컨티뉴어스 배칭](../deep-learning/serving.md)
 
 </details>
