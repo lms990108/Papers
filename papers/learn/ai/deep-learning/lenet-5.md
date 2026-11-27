@@ -1,5 +1,5 @@
 ---
-title: LeNet-5
+title: 르넷-5 (LeNet-5)
 sidebar_position: 45
 mdx:
   format: mdx

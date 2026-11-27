@@ -93,7 +93,7 @@ token 순서를 섞어도 각 token의 어텐션 결과는 같다. 위치 정보
 
 ### decoder는 뒤를 가립니다
 
-생성할 때 아직 만들지 않은 뒤 token은 볼 수 없다. 학습 때는 정답이 이미 입력에 있으므로 뒤 token을 점수에서 가려야 학습과 생성이 같아진다. 이 가림 덕분에 앞 token의 key와 value를 저장해 두고 재사용하는 KV cache가 가능하다. → [Prefill, decode](../learn/ai/nlp/prefill-decode.md)
+생성할 때 아직 만들지 않은 뒤 token은 볼 수 없다. 학습 때는 정답이 이미 입력에 있으므로 뒤 token을 점수에서 가려야 학습과 생성이 같아진다. 이 가림 덕분에 앞 token의 key와 value를 저장해 두고 재사용하는 KV cache가 가능하다. → [프리필과 디코드](../learn/ai/nlp/prefill-decode.md)
 
 ### 헤드는 많을수록 좋지 않습니다
 

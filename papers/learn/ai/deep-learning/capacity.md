@@ -95,7 +95,7 @@ E_{\mathrm{train}} + \lambda \sum w^2
 - \(\lambda \sum w^2\)의 기울기는 \(2\lambda w\)라서 갱신이 \((1 - 2\epsilon\lambda)\,w - \epsilon\,\partial E_{\mathrm{train}}/\partial w\)가 됩니다. 매 갱신마다 가중치가 조금씩 줄어서 가중치 감쇠(weight decay)라고도 부릅니다.
 - 한국어 자료는 정칙화를 정규화라고도 적습니다. 정규화는 입력 크기를 맞추는 normalization의 번역어이기도 해서 이 문서는 정칙화로 씁니다.
 - 용량이 점점 큰 모델을 순서대로 두고 학습 오류와 간격을 같이 줄이는 것이 구조적 위험 최소화입니다. 실무에서는 오차에 벌점 항을 더하는 식으로 비슷하게 합니다.
-- 구조를 넣어 자유 파라미터를 줄이는 방법도 있습니다. [가중치 공유](./weight-sharing.md)가 그 예입니다. [LeNet-5](./lenet-5.md)는 연결이 약 340,908개인데 자유 파라미터가 약 60,000개이고, 학습 오류 0.35%와 시험 오류 0.95%의 간격이 0.6%p입니다.
+- 구조를 넣어 자유 파라미터를 줄이는 방법도 있습니다. [가중치 공유](./weight-sharing.md)가 그 예입니다. [르넷-5](./lenet-5.md)는 연결이 약 340,908개인데 자유 파라미터가 약 60,000개이고, 학습 오류 0.35%와 시험 오류 0.95%의 간격이 0.6%p입니다.
 - 오차를 줄이는 절차는 [경사하강법](./gradient-descent.md), 오류를 재는 예제 데이터는 [MNIST](../machine-learning/mnist.md), 오차와 오류의 구분은 [판별 학습](../machine-learning/discriminative-learning.md)에 있습니다.
 
 </details>

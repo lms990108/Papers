@@ -1,5 +1,5 @@
 ---
-title: tokenization
+title: 토큰화 (tokenization)
 sidebar_position: 19
 mdx:
   format: mdx

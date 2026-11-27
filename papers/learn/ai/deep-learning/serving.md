@@ -1,5 +1,5 @@
 ---
-title: Continuous batching
+title: 컨티뉴어스 배칭 (continuous batching)
 sidebar_position: 58
 mdx:
   format: mdx
@@ -20,7 +20,7 @@ continuous batching은 매 회전(모델을 한 번 통과하는 계산 한 번)
 
 ## 왜 필요한가
 
-LLM 서버에는 요청이 동시에 여러 개 들어옵니다. 하나씩 따로 돌리면 GPU가 놉니다. [Prefill, decode](../nlp/prefill-decode.md)에서 본 것처럼 decode는 token 하나를 만들 때마다 가중치 전체를 읽고, 시간의 대부분이 그 읽기에 듭니다. 예로 가중치가 14GB이고 GPU가 초당 2TB를 읽으면 한 번 읽는 데 7ms입니다. 요청 하나면 이 7ms에 token을 1개 얻습니다. 읽기가 시간을 정하는 동안은 곱셈이 늘어도 시간이 거의 그대로이므로, 요청 8개의 token을 같은 읽기에 함께 곱하면 8개를 얻습니다. 그래서 요청을 묶습니다(batch).
+LLM 서버에는 요청이 동시에 여러 개 들어옵니다. 하나씩 따로 돌리면 GPU가 놉니다. [프리필과 디코드](../nlp/prefill-decode.md)에서 본 것처럼 decode는 token 하나를 만들 때마다 가중치 전체를 읽고, 시간의 대부분이 그 읽기에 듭니다. 예로 가중치가 14GB이고 GPU가 초당 2TB를 읽으면 한 번 읽는 데 7ms입니다. 요청 하나면 이 7ms에 token을 1개 얻습니다. 읽기가 시간을 정하는 동안은 곱셈이 늘어도 시간이 거의 그대로이므로, 요청 8개의 token을 같은 읽기에 함께 곱하면 8개를 얻습니다. 그래서 요청을 묶습니다(batch).
 
 처음 쓰인 방식은 요청 몇 개를 batch로 묶어 모두 끝날 때까지 같이 돌리는 것입니다. 한계는 요청마다 출력 길이가 다르다는 점입니다. 출력이 10, 10, 10, 100 token인 요청 넷을 묶으면 10회전 뒤 세 자리는 90회전 동안 비어 있고, 자리 사용률은 \((10 \times 3 + 100) / (100 \times 4) = 0.325\)입니다. 기다리던 새 요청도 batch가 끝나야 시작합니다.
 
@@ -28,7 +28,7 @@ continuous batching은 회전마다 끝난 요청을 빼고 그 자리에 새 �
 
 ## 계산
 
-[Prefill, decode](../nlp/prefill-decode.md)와 같이 가중치가 \(4 \times 4\) 행렬 하나뿐인 모델로 단순화합니다. 가중치 16개, 하나에 2바이트라 회전마다 읽기는 32바이트이고, token \(M\)개를 곱하면 연산은 \(2 \times M \times 16\)입니다. 요청 A는 캐시(앞 token마다 어텐션이 쓰는 키와 값을 남겨 둔 KV cache)를 갖고 다음 token 하나를 기다리고, 요청 B의 prompt는 8 token입니다.
+[프리필과 디코드](../nlp/prefill-decode.md)와 같이 가중치가 \(4 \times 4\) 행렬 하나뿐인 모델로 단순화합니다. 가중치 16개, 하나에 2바이트라 회전마다 읽기는 32바이트이고, token \(M\)개를 곱하면 연산은 \(2 \times M \times 16\)입니다. 요청 A는 캐시(앞 token마다 어텐션이 쓰는 키와 값을 남겨 둔 KV cache)를 갖고 다음 token 하나를 기다리고, 요청 B의 prompt는 8 token입니다.
 
 B의 8 token을 한 회전에 모두 넣으면 A의 1칸을 더해 \(M = 9\), 연산은 \(2 \times 9 \times 16 = 288\)입니다. 이 연산이 끝나야 A의 다음 token이 나옵니다. A만 있었다면 32면 끝났습니다. 8 token을 4칸씩 나누면 이렇습니다.
 
@@ -86,6 +86,6 @@ A가 token을 받는 시점은 회전이 끝나는 때입니다. \(M = 9\)인 �
 - prefill은 token이 많아 계산량이 시간을 정하는 compute-bound이고, decode는 token 하나라 가중치 읽기가 시간을 정하는 memory-bound입니다. prefill 전용 기계가 캐시를 만들어 decode 전용 기계로 넘기면 decode 줄이 prefill의 행렬 곱을 기다리지 않습니다(prefill-decode disaggregation). 넘기는 것은 가중치가 아니라 키와 값입니다.
 - 앞부분을 token 열의 나무에서 찾아 재사용하는 구현을 radix cache라고 합니다.
 - speculative decoding은 작은 모델이 초안으로 3 token을 뽑고 큰 모델이 한 번의 prefill처럼 검사해, 큰 모델의 읽기 1번으로 여러 token을 얻으려는 방법입니다. 초안 비율 \(q\), 큰 모델 비율 \(p\)이면 그 token을 \(\min(1, p/q)\)의 확률로 남깁니다. 초안 0.8에 큰 모델 0.9이면 \(0.9/0.8 = 1.125\)라 1로 잘려 남고, 초안 0.8에 큰 모델 0.2이면 0.25의 확률로 남습니다. 거절한 token의 뒤는 버립니다. 초안이 자주 맞으면 한 읽기에 남는 token이 늘고, 자주 틀리면 버린 초안을 계산한 시간만 듭니다.
-- 이 페이지의 연산과 바이트 수는 계산이 보이게 고른 수입니다. 가중치를 GPU 여러 장에 나누는 방법은 [Parallelism](./parallel.md)에 있습니다.
+- 이 페이지의 연산과 바이트 수는 계산이 보이게 고른 수입니다. 가중치를 GPU 여러 장에 나누는 방법은 [병렬화](./parallel.md)에 있습니다.
 
 </details>

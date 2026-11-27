@@ -14,7 +14,7 @@ import Quiz from '@site/src/components/viz/Quiz';
 
 - **생성용 LLM**: 뒤를 가린(causal) 셀프 어텐션만 쌓습니다. → [LLM](./llm.md)
 - **임베딩 모델, reranker**(검색된 청크를 질문과 함께 읽고 순위를 다시 매기는 모델): 앞뒤를 모두 보는 셀프 어텐션이 많습니다. → [버트](./bert.md)
-- **prompt caching**: 앞을 읽기만 하는 성질 덕분에 앞부분의 계산을 재사용합니다. → [Prefill, decode](./prefill-decode.md)
+- **prompt caching**: 앞을 읽기만 하는 성질 덕분에 앞부분의 계산을 재사용합니다. → [프리필과 디코드](./prefill-decode.md)
 
 ## 왜 필요한가
 

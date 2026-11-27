@@ -9,10 +9,10 @@ mdx:
 
 LLM 에이전트의 입력과 출력은 거의 다 글이어서, 이 영역의 개념이 곧 LLM과 RAG의 바탕입니다.
 
-- **prompt와 응답**: 글을 token으로 자르고 번호로 바꿔 모델에 넣습니다. 비용과 context window가 token 수로 정해집니다. → [tokenization](./tokenization.md)
+- **prompt와 응답**: 글을 token으로 자르고 번호로 바꿔 모델에 넣습니다. 비용과 context window가 token 수로 정해집니다. → [토큰화](./tokenization.md)
 - **검색(RAG)**: 글을 벡터로 바꿔 가까운 것을 찾고, 키워드 검색과 섞어 씁니다. → [임베딩](./embedding.md), [코사인 유사도](./cosine-similarity.md), [TF-IDF](./tf-idf.md)
 - **생성**: 다음 token의 확률을 만들어 하나씩 고릅니다. → [다음 token](./next-token.md), [언어 모델](./language-model.md)
-- **서빙과 비용**: prompt를 읽는 구간과 token을 이어 쓰는 구간의 성격이 다릅니다. → [Prefill, decode](./prefill-decode.md)
+- **서빙과 비용**: prompt를 읽는 구간과 token을 이어 쓰는 구간의 성격이 다릅니다. → [프리필과 디코드](./prefill-decode.md)
 
 ## 읽는 순서
 
@@ -20,13 +20,13 @@ LLM 에이전트의 입력과 출력은 거의 다 글이어서, 이 영역의 �
 
 | 주제 | 에이전트 개발에서 만나는 곳 |
 | --- | --- |
-| [tokenization](./tokenization.md) | token 수, 비용, context window |
+| [토큰화](./tokenization.md) | token 수, 비용, context window |
 | [임베딩](./embedding.md) | 벡터 검색, 의미 비교 |
 | [코사인 유사도](./cosine-similarity.md) | 임베딩 검색의 거리 |
 | [언어 모델](./language-model.md) | logprobs, 퍼플렉서티, n-gram(BLEU, ROUGE, 반복 억제) |
 | [다음 token](./next-token.md) | 생성, 학습 목표 |
-| [어텐션](./attention.md), [셀프 어텐션](./self-attention.md), [트랜스포머](./transformer.md), [Decoder block](./block.md) | LLM의 내부 구조 |
-| [LLM](./llm.md), [Post-training](./post-training.md), [Prefill, decode](./prefill-decode.md) | 모델 종류, 정렬, 서빙 |
+| [어텐션](./attention.md), [셀프 어텐션](./self-attention.md), [트랜스포머](./transformer.md), [디코더 블록](./block.md) | LLM의 내부 구조 |
+| [LLM](./llm.md), [포스트 트레이닝](./post-training.md), [프리필과 디코드](./prefill-decode.md) | 모델 종류, 정렬, 서빙 |
 
 아래는 LLM 이전의 방법들입니다. 직접 쓰는 일은 드물고, 키워드 검색과 평가 지표를 이해하는 정도로 필요합니다.
 
@@ -43,4 +43,4 @@ LLM 에이전트의 입력과 출력은 거의 다 글이어서, 이 영역의 �
 
 LLM의 tokenizer는 이 문제를 학습한 조각으로 풀지만, 같은 뜻의 영어보다 token을 더 쓰는 경향이 있어서 비용과 context window에 영향을 줍니다. 키워드 검색에서는 형태소 분석기로 조사를 떼는 설정을 따로 확인합니다.
 
-선수 지식은 [머신러닝](../machine-learning/)과 [신경망](../deep-learning/neural-network.md)의 기초입니다. 첫 페이지는 [tokenization](./tokenization.md)입니다.
+선수 지식은 [머신러닝](../machine-learning/)과 [신경망](../deep-learning/neural-network.md)의 기초입니다. 첫 페이지는 [토큰화](./tokenization.md)입니다.

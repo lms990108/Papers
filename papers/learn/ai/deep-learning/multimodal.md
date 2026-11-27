@@ -1,5 +1,5 @@
 ---
-title: Multimodal
+title: 멀티모달 (multimodal)
 sidebar_position: 47
 mdx:
   format: mdx
@@ -7,7 +7,7 @@ mdx:
 
 import AnyResGrid from '@site/src/components/viz/dl/d4/AnyResGrid';
 
-멀티모달 모델은 글 말고 이미지나 소리 같은 입력(입력의 종류를 modality라 부릅니다)을 언어 모델이 읽을 수 있는 token 벡터로 바꿔 글 token 옆에 세웁니다. 언어 모델 블록은 벡터를 더하고 곱할 뿐이어서, 벡터가 단어에서 왔는지 픽셀에서 왔는지 구분하지 않습니다.
+멀티모달 모델은 글 말고 이미지나 소리 같은 입력(입력의 종류를 모달리티(modality)라 부릅니다)을 언어 모델이 읽을 수 있는 token 벡터로 바꿔 글 token 옆에 세웁니다. 언어 모델 블록은 벡터를 더하고 곱할 뿐이어서, 벡터가 단어에서 왔는지 픽셀에서 왔는지 구분하지 않습니다.
 
 에이전트를 만들 때는 이런 곳에서 만납니다.
 
@@ -83,8 +83,8 @@ token이 1개에서 4개로 늘면 prefill 연산도 그만큼 커집니다. 해
 - 이미지 벡터와 문장 벡터의 길이가 같으면 [코사인 유사도](../nlp/cosine-similarity.md)를 셀 수 있습니다. 이미지 \([1, 0]\), 맞는 문장 \([1, 0]\)의 코사인은 1이고, 다른 문장 \([0, 1]\)과는 0입니다. 학습은 맞는 쌍의 코사인을 키우고 다른 쌍을 줄입니다. 이 짝 맞추기가 대조 학습(contrastive learning)이고, CLIP과 SigLIP이 이 목적으로 이미지 인코더와 문장 인코더를 함께 학습합니다. 이렇게 학습한 이미지 인코더는 이미지를 글의 의미와 맞는 벡터로 바꿉니다. 이 인코더를 vision encoder로 가져와 projector와 언어 모델을 이어 붙인 것이 VLM(vision-language model)이고, LLaVA가 CLIP 인코더를 씁니다.
 - 이미지 token 수 계산, 학습 단계, 문서·GUI 활용과 실패 패턴은 [VLM](./vlm.md)에서 다룹니다.
 - 대조 학습이 줄이는 것은 맞는 쌍과 다른 쌍의 코사인 차이이고, 언어 모델의 다음 token 오차와 다릅니다.
-- modality별로 처리를 끝낸 뒤 합치는 구성(이미지를 글로 바꿔 넘기는 것이 그 예)을 late fusion이라 부르기도 합니다. 이 말은 원래 출력 단계에서 합친다는 뜻이라 자료마다 가리키는 범위가 달라 혼동되기 쉽습니다. 처음부터 여러 modality를 한 모델에서 함께 학습한 모델은 native multimodal이라 부릅니다.
-- token이 늘면 [Prefill, decode](../nlp/prefill-decode.md)의 연산도 token 수에 비례해 늡니다. 블록이 입력에 결과를 더해 다음 블록으로 넘기는 구조(residual)는 [Decoder block](../nlp/block.md)에 있습니다.
-- [Diffusion, flow](./generation.md)의 latent도 같은 발상으로 픽셀 벡터를 줄입니다.
+- 모달리티(modality)별로 처리를 끝낸 뒤 합치는 구성(이미지를 글로 바꿔 넘기는 것이 그 예)을 late fusion이라 부르기도 합니다. 이 말은 원래 출력 단계에서 합친다는 뜻이라 자료마다 가리키는 범위가 달라 혼동되기 쉽습니다. 처음부터 여러 modality를 한 모델에서 함께 학습한 모델은 native multimodal이라 부릅니다.
+- token이 늘면 [프리필과 디코드](../nlp/prefill-decode.md)의 연산도 token 수에 비례해 늡니다. 블록이 입력에 결과를 더해 다음 블록으로 넘기는 구조(residual)는 [디코더 블록](../nlp/block.md)에 있습니다.
+- [디퓨전과 플로](./generation.md)의 latent도 같은 발상으로 픽셀 벡터를 줄입니다.
 
 </details>

@@ -1,5 +1,5 @@
 ---
-title: Diffusion, flow
+title: 디퓨전과 플로 (diffusion, flow)
 sidebar_position: 48
 mdx:
   format: mdx
@@ -70,7 +70,7 @@ CFG는 조건 없는 속도와 prompt 조건 속도를 섞어 prompt를 더 세�
 <details>
 <summary>더 깊이: 구조와 구현 세부</summary>
 
-- 걸음마다 트랜스포머 블록으로 속도나 잡음을 계산하는 구조를 DiT(diffusion transformer)라고 합니다. 입력 token이 단어가 아니라 이미지 조각이라는 점이 [Decoder block](../nlp/block.md)과 다릅니다.
+- 걸음마다 트랜스포머 블록으로 속도나 잡음을 계산하는 구조를 DiT(diffusion transformer)라고 합니다. 입력 token이 단어가 아니라 이미지 조각이라는 점이 [디코더 블록](../nlp/block.md)과 다릅니다.
 - 네트워크는 깨끗한 이미지를 직접 내지 않습니다. 0은 속도나 잡음 예측을 여러 번 적용한 뒤 도착하는 값입니다.
 - 보폭 0.5로 속도 −1이면 두 걸음에 1에서 0에 도착합니다. 보폭 0.25의 네 걸음과 도착이 같습니다.
 - 같은 이야기를 이미지 token 쪽에서 보면 [멀티모달](./multimodal.md)의 projector가 픽셀 네 칸을 길이 2의 벡터로 줄이는 것과 같은 발상입니다.

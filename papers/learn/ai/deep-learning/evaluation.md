@@ -1,5 +1,5 @@
 ---
-title: Evaluation
+title: 평가 (evaluation)
 sidebar_position: 60
 mdx:
   format: mdx
@@ -15,7 +15,7 @@ LLM 점수는 한 번의 실행 결과가 아니라 여러 번 뽑은 답을 어
 - **모델 비교와 리더보드 읽기**: 벤치마크 점수가 모델의 실제 실력인지, k와 temperature가 같은지 봅니다.
 - **자체 eval 세트와 자동 채점**: 에이전트 출력을 다른 LLM이 채점하게 할 때 심판의 편향을 만납니다.
 
-decode(모델이 token을 하나씩 이어 쓰는 구간)는 token을 확률 비율에 따라 고르기 때문에, temperature(그 고르기의 무작위성을 정하는 값)가 0보다 크면 같은 문제에서도 답이 달라집니다. → [Prefill, decode](../nlp/prefill-decode.md)
+decode(모델이 token을 하나씩 이어 쓰는 구간)는 token을 확률 비율에 따라 고르기 때문에, temperature(그 고르기의 무작위성을 정하는 값)가 0보다 크면 같은 문제에서도 답이 달라집니다. → [프리필과 디코드](../nlp/prefill-decode.md)
 
 ## 왜 필요한가
 

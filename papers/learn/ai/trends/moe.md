@@ -1,11 +1,12 @@
 ---
-title: Mixture of Experts (MoE)
+title: MoE (mixture of experts)
 sidebar_position: 2
 mdx:
   format: mdx
 ---
 
 import Quiz from '@site/src/components/viz/Quiz';
+import MoeRouteAnim from '@site/src/components/viz/trends/MoeRouteAnim';
 
 MoE는 [Transformer block](../nlp/block.md)의 FFN(token마다 같은 가중치로 변환하는 층)을 여러 벌의 expert로 바꾸고, router가 token마다 점수가 높은 k개(top-k)의 expert만 골라 계산하는 구조입니다. attention은 그대로이고, 그래서 모델의 총 파라미터(total)와 token 하나가 쓰는 파라미터(active)가 다릅니다. expert 없이 모든 파라미터를 쓰는 일반 구조는 dense라고 부릅니다.
 
@@ -38,6 +39,12 @@ w = \mathrm{softmax}(2.0,\ 1.0) = \left(\frac{e^{2}}{e^{2} + e^{1}},\ \frac{e^{1
 
 1번 expert의 출력이 \([1,\ 0]\), 2번이 \([0,\ 2]\)라고 합시다(설명용 값). 출력은 가중합 \(0.731 \times [1,\ 0] + 0.269 \times [0,\ 2] = [0.731,\ 0.538]\)이고, 고르지 않은 두 expert는 계산하지 않습니다.
 
+이 과정을 그림으로 따라가 봅니다. 위에서 아래로 읽으면 됩니다. 맨 위가 token의 벡터이고, router가 expert 4개에 점수를 하나씩 매깁니다. 그다음 점수가 높은 2개를 고르고, 고른 두 점수만 softmax로 비율을 만들고, 고른 expert만 계산해 그 비율대로 더합니다. 파랑 테두리가 이번 token이 고른 expert이고, 흐려지는 점선 expert는 이 token에서 쓰지 않는 것입니다. 그림 아래의 숫자는 FFN 파라미터 전체와 이 token이 쓰는 파라미터를 비교합니다. 여기서는 expert가 4개라서 \(2P / 4P = 50\%\)이고, 위에서 본 8개 top-2는 25%입니다. 'token B' 버튼을 누르면 점수가 \([0.5,\ -1.0,\ 2.0,\ 1.5]\)인 다른 token이 같은 expert 4개를 어떻게 다르게 고르는지 볼 수 있습니다.
+
+<MoeRouteAnim />
+
+그림에서 볼 곳은 두 가지입니다. 하나는 token A와 token B가 서로 다른 expert를 고른다는 점입니다. token B는 3번(2.0)과 4번(1.5)이 뽑히고, \(\mathrm{softmax}(2.0,\ 1.5) \approx (0.622,\ 0.378)\)입니다. 3번의 출력이 \([1,\ 1]\), 4번이 \([2,\ 0]\)이라고 하면(이것도 설명용 값) 가중합은 \(0.622 \times [1,\ 1] + 0.378 \times [2,\ 0] = [1.378,\ 0.622]\)입니다. 고르는 일은 token마다, 층마다 따로 일어납니다. 다른 하나는 탈락한 expert가 사라지는 것이 아니라는 점입니다. 이 token의 계산에서 빠질 뿐이고, 다음 token이 고를 수 있으니 파라미터는 메모리에 그대로 올라가 있어야 합니다. 아래 "기억할 것 네 가지"의 첫 항목이 이 이야기입니다.
+
 실제 모델의 수치입니다.
 
 - Mixtral 8x7B: 총 46.7B, active 12.9B입니다. \(12.9 / 46.7 \approx 28\%\)로 25%보다 큰 것은 attention과 embedding이 항상 켜져 있기 때문입니다. 이름의 8x7B는 56B가 아닙니다. expert끼리 attention과 embedding을 공유하기 때문입니다.
@@ -55,7 +62,7 @@ Mixtral을 fp16(2바이트)으로 올리면 \(46.7\text{B} \times 2 = 93.4\text{
 
 ### expert를 GPU에 나누면 all-to-all 통신이 생깁니다
 
-expert를 GPU 여러 장에 나눠 놓는 것이 expert parallelism입니다. token은 자기 expert가 있는 장으로 가서 계산한 뒤 돌아옵니다. 그래서 층마다 모든 장이 서로 token을 보내는 all-to-all이 두 번(갈 때와 돌아올 때) 생깁니다. 이 통신이 노드 사이 네트워크를 타면 느려집니다. 분산 방식 전반은 [Parallelism](../deep-learning/parallel.md)에 있습니다.
+expert를 GPU 여러 장에 나눠 놓는 것이 expert parallelism입니다. token은 자기 expert가 있는 장으로 가서 계산한 뒤 돌아옵니다. 그래서 층마다 모든 장이 서로 token을 보내는 all-to-all이 두 번(갈 때와 돌아올 때) 생깁니다. 이 통신이 노드 사이 네트워크를 타면 느려집니다. 분산 방식 전반은 [병렬화](../deep-learning/parallel.md)에 있습니다.
 
 ### 학습에서는 expert 쏠림을 막아야 합니다
 
